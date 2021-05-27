@@ -20,8 +20,10 @@ class _Board extends Component {
             return <h1>loading...</h1>
         }
         return (
-            <section className="w-100 flex space-between ps-3 ">
-                {board && board.groups.map(group => <TaskList key={group.id} board={board} group={group} updateBoard={this.onUpdate} />)}
+            <section className="board">
+                <section className="groups flex">
+                    {board && board.groups.map(group => <TaskList key={group.id} board={board} group={group} updateBoard={this.onUpdate} />)}
+                </section>
             </section>
         )
     }

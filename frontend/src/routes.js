@@ -8,19 +8,19 @@ import { TaskDetails } from './cmps/board/TaskDetails'
 
 export const routes = [
     {
-        path: '/board',
-        component: BoardList
-    },
-    {
-        path: '/',
-        component: Home,
+        path: '/board/:boardId/:taskId',
+        component: TaskDetails,
     },
     {
         path: '/board/:boardId',
         component: Board,
     },
     {
-        path: '/:boardId/:taskId',
-        component: TaskDetails,
+        path: '/board',
+        component: BoardList
+    },
+    {
+        path: '/',
+        component: Home,
     },
 ]
