@@ -27,7 +27,8 @@ function remove(boardId) {
 }
 
 function addBoard(){
-    const newBoard = storageService.post(STORAGE_KEY)
+    const newBoard = createBoard()
+    newBoard = storageService.post(STORAGE_KEY)
 
     return newBoard
 }
