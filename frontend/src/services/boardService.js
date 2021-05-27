@@ -1,16 +1,16 @@
-import { utilService } from './utilService.js'
-import { storageService } from './async-storage.service.js'
+import { utilService } from './generalService/utilService.js'
+import { storageService } from './generalService/asyncStorageService.js'
 
 window.storageService = storageService;
 
 const STORAGE_KEY = 'board'
 
-export const toyService = {
+export const boardService = {
     query,
     getById,
-    save,
     remove,
-    createToy
+    upadate,
+    add
 }
 
 
@@ -26,19 +26,18 @@ function remove(boardId) {
     return storageService.remove(STORAGE_KEY, boardId)
 }
 
-function addBoard(){
-    const newBoard = createBoard()
-    newBoard = storageService.post(STORAGE_KEY)
-
-    return newBoard
+function add(){
+    const newBoard = _createBoard()
+    const savedBoard = storageService.post(STORAGE_KEY, newBoard)
+    return savedBoard
 }
 
-function upadateBoard(board){
+function upadate(board){
         return storageService.put(STORAGE_KEY, board)
 
 }
 
-function createBoard(title = 'New Board',loggedInUser = {fullname: 'some user', _id:'u101', imgUrl='http://some-img.jpg'}) {
+function _createBoard(title = 'New Board',loggedInUser = {fullname: 'some user', _id:'u101', imgUrl:'http://some-img.jpg'}) {
     const board = {
         "_id": utilService.makeId(),
         title,
@@ -89,5 +88,5 @@ function createBoard(title = 'New Board',loggedInUser = {fullname: 'some user', 
         "activities": []
     }
         
-    return storageService.post(STORAGE_KEY, toy)
+    return board;
 }

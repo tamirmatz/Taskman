@@ -1,15 +1,28 @@
 import { boardService } from '../../services/boardService'
 
-export function loadMiniBoards() { // Action Creator
+export function query() { // Action Creator
     return async dispatch => {
-        const miniBoards = await boardService.getMiniBoards()
+        const boards = await boardService.query()
         const action = {
-            type: 'SET_MINI_BOARDS',
-            miniBoards
+            type: 'SET_BOARDS',
+            boards
         }
         dispatch(action)
     }
 }
+
+export function loadBoard(boardId) { // Action Creator
+    return async dispatch => {
+        const board = await boardService.getById(boardId)
+        const action = {
+            type: 'SET_BOARD',
+            board
+        }
+        dispatch(action)
+    }
+}
+
+
 export function remove(boardId) {
     return async dispatch => {
         try {
@@ -42,7 +55,7 @@ export function update(board) {
     }
 }
 
-export function addBoard() {
+export function add() {
     // Action Creator
     return async dispatch => {
         try {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { socketService } from '../services/socketService'
+import { socketService } from '../services/generalService/socketService'
 
 class _Chat extends Component {
   state = {

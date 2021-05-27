@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { cloudinaryService } from '../services/cloudinaryService'
+import { cloudinaryService } from '../services/generalService/cloudinaryService'
 
 export class Upload extends Component {
   state = {

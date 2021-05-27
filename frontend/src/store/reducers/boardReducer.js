@@ -1,12 +1,12 @@
 const initialState = {
-    miniBoards: [],
+    boards: [],
     board: null
 }
 
-export function boardsReducer(state = initialState, action) {
+export function boardReducer(state = initialState, action) {
     switch (action.type) {
-        case 'SET_MINI_BOARDS':
-            return { ...state, miniBoards: action.miniBoards }
+        case 'SET_BOARDS':
+            return { ...state, boards: action.boards }
         case 'SET_BOARD':
             return { ...state, board: action.board }
         case 'ADD_BOARD':
@@ -14,7 +14,7 @@ export function boardsReducer(state = initialState, action) {
         case 'UPDATE_BOARD':
             return { ...state, board: action.updateBoard }
         case 'REMOVE_BOARD':
-            return { ...state, board: null ,miniboards: miniBoards.filter(miniBoard => miniBoard._id !== action.miniBoardId)}
+            return { ...state, board: null ,boards: state.boards.filter(board => board._id !== action.boardId)}
         default:
             return state
     }

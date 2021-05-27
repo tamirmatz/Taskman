@@ -1,6 +1,6 @@
 import { reviewService } from '../../services/reviewService'
 import { userService } from '../../services/userService'
-import { socketService, SOCKET_EVENT_REVIEW_ADDED } from '../../services/socketService'
+import { socketService, SOCKET_EVENT_REVIEW_ADDED } from '../../services/generalService/socketService'
 
 
 export function loadReviews() {
