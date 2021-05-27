@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { loadReviews, addReview, removeReview } from '../store/actions/reviewActions.js'
 import { loadUsers } from '../store/actions/userActions.js'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export class Home extends Component {
   state = {
@@ -29,7 +29,7 @@ export class Home extends Component {
     return (
       <div className="home">
        Welcome Home!
-       <Link to="/boards">Boards</Link>
+       <Link to="/board">Boards</Link>
       </div>
     )
   }

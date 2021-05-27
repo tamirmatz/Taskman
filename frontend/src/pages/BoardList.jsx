@@ -5,24 +5,20 @@ import { remove, add, query } from '../store/actions/boardsAction.js';
 
 
 class _BoardList extends Component {
-    state = {
-
-    }
     componentDidMount() {
         this.props.query()
     }
 
+
     render() {
-        console.log(this.props)
         const boards = this.props.boards
         return (
             <section>
+                <h1>I am board list</h1>
                 {boards && boards.map(board => <Link key={board._id} to={`board/${board._id}`}>{board.title}</Link>)}
                 {!boards && <h1>No boards to show</h1>}
             </section>
         )
-
-
     }
 }
 

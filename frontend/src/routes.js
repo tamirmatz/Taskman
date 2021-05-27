@@ -3,7 +3,8 @@ import { LoginSignup } from './pages/LoginSignup'
 import { Chat } from './pages/Chat'
 import { UserDetails } from './pages/UserDetails'
 import { BoardList } from './pages/BoardList'
-import {Board} from './pages/Board'
+import { Board } from './pages/Board'
+import { TaskDetails } from './cmps/board/TaskDetails'
 
 export const routes = [
     {
@@ -18,5 +19,8 @@ export const routes = [
         path: '/board/:boardId',
         component: Board,
     },
-
+    {
+        path: '/:boardId/:taskId',
+        component: TaskDetails,
+    },
 ]

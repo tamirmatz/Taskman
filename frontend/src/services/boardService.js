@@ -19,7 +19,8 @@ function query() {
 }
 
 function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+    const board = storageService.get(STORAGE_KEY, boardId);
+    return board
 }
 
 function remove(boardId) {
