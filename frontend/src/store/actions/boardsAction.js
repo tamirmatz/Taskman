@@ -1,3 +1,5 @@
+import { boardService } from '../../services/boardService'
+
 export function loadMiniBoards() { // Action Creator
     return async dispatch => {
         const miniBoards = await boardService.getMiniBoards()
