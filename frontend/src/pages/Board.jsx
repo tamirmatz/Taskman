@@ -2,6 +2,8 @@ import { connect } from 'react-redux'
 import { remove, add, loadBoard, update } from '../store/actions/boardsAction.js';
 import React, { Component } from 'react'
 import { TaskList } from '../cmps/board/TaskList'
+import { Route, Switch } from 'react-router';
+import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
 
 
 class _Board extends Component {
@@ -22,12 +24,20 @@ class _Board extends Component {
         return (
             <section className="board">
                 <section className="groups flex">
+                    <Switch>
+                        <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails}></Route>
+                    </Switch>
                     {board && board.groups.map(group => <TaskList key={group.id} board={board} group={group} updateBoard={this.onUpdate} />)}
                 </section>
             </section>
         )
     }
 }
+
+// {
+//     path: '/board/:boardId/:taskId',
+//     component: TaskDetails,
+// }
 
 const mapStateToProps = state => {
     return {
