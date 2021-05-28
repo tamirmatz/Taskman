@@ -28,9 +28,19 @@ class _Board extends Component {
         if (type === 'task') {
             const sourceListIdx = boardService.getGroupIdxById(copyBoard, source.droppableId)
             const destinationListIdx = boardService.getGroupIdxById(copyBoard, destination.droppableId)
-            
+            const task = copyBoard.groups[sourceListIdx].tasks.splice(source.index, 1)
 
+            const sourceListName = copyBoard.groups[sourceListIdx].title
+            const destinationListName = copyBoard.groups[destinationListIdx].title
+            activity.txt=`has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
         }
+        else{
+
+            const list =copyBoard.lists.splice(source.index,1)
+            copyBoard.lists.splice(destination.index,0,list[0])
+            activity.txt=`has moved list ${list[0].title}`
+        }
+        this.props.update(copyBoard)
     }
 
     render() {
