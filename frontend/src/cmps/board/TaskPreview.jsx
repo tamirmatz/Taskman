@@ -16,9 +16,9 @@ export function TaskPreview({ board, index, task, updateBoard }) {
 
             >
 
-                <div className="task-preview font-s pad-20">
+                <div className="task-preview font-s pad-20 ">
                     <Link to={`/board/${board._id}/${task.id}`}>
-                        <h1>{task.title}</h1>
+                        <h1 className="c-stand pad-1 fam-1">{task.title}</h1>
                     </Link>
                 </div>
             </div>
