@@ -44,9 +44,9 @@ class _TaskDetails extends Component {
         return (
             <section className="task-details w-70 h-70 flex column bg-modal c-stand">
                 <form className="form-details">
-                    <div className="input">
-                    <label htmlFor="title"><i class="fas fa-tasks-alt"></i></label>
-                    <input type="text" value={task.title} name="title" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
+                    <div className="input-details">
+                        <label htmlFor="title"><i class="fas fa-tasks-alt font-2 c-info"></i></label>
+                        <input type="text" value={task.title} name="title" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
                     </div>
                 </form>
             </section>
