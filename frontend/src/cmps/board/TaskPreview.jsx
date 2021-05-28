@@ -1,9 +1,28 @@
 import { Link } from 'react-router-dom'
-export function TaskPreview({board,group, task, updateBoard}) {
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { Provider } from 'react-redux';
+export function TaskPreview({ board, index, task, updateBoard }) {
 
-    return <div className="task-preview font-s pad-20">
-        <Link to={`/board/${board._id}/g102/c104`}>
-            <h1>{task.title}</h1>
-            </Link>
-    </div>
+    return <Draggable
+        draggableId={task.id}
+        index={index}
+        isDragDisabled={false}
+    >
+        {(provided, snapshot) => (
+            <div
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                ref={provided.innerRef}
+
+            >
+
+                <div className="task-preview font-s pad-20">
+                    <Link to={`/board/${board._id}/${task.id}`}>
+                        <h1>{task.title}</h1>
+                    </Link>
+                </div>
+            </div>
+        )
+        }
+    </Draggable>
 }
