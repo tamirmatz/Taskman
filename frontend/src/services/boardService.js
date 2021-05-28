@@ -14,7 +14,8 @@ export const boardService = {
     getGroupById,
     getTaskById,
     getGroupIdxById,
-    addTask
+    addTask,
+    checklistPreview
 }
 
 
@@ -120,3 +121,18 @@ function _createBoard(title = 'New Board', loggedInUser = { fullname: 'some user
 
     return board;
 }
+
+function checklistPreview(task){
+    const checklists = task.checklists
+    let allTodos = 0;
+    let doneTodos = 0;
+    checklists.forEach(checkList => {
+        allTodos += checkList.todos.length;
+        checkList.todos.forEach(todo => {
+            if(todo.isDone) doneTodos++
+        })
+    });
+
+    const str = `${doneTodos}/${allTodos}`
+    return str
+} 
