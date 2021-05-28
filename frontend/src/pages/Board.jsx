@@ -36,8 +36,8 @@ class _Board extends Component {
         }
         else{
 
-            const list =copyBoard.lists.splice(source.index,1)
-            copyBoard.lists.splice(destination.index,0,list[0])
+            const list =copyBoard.groups.splice(source.index,1)
+            copyBoard.groups.splice(destination.index,0,list[0])
             activity.txt=`has moved list ${list[0].title}`
         }
         this.props.update(copyBoard)
