@@ -24,7 +24,7 @@ export function TaskPreview({ board, index, task, updateBoard }) {
                         <h1 className="c-stand pad-1 fam-1">{task.title}</h1>
                         {task.comments && <small>comments</small> }
                         {task.checklists && <small>{boardService.checklistPreview(task)}</small> }
-                        {task.dueDate && <small>dueDate</small> }
+                        {task.dueDate && <small>{Intl.DateTimeFormat('IL-il').format(task.dueDate)}</small> }
                     </Link>
                 </div>
             </div>

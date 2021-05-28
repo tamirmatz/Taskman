@@ -17,7 +17,7 @@ export function TaskList({ board, group, updateBoard, index }) {
                     }}
                 >
                     <h1>{group.title}</h1>
-                    <Droppable key={index} droppableId={group.id} type='task'>
+                    <Droppable key={index} droppableId={group.id}>
                         {(provided) => (
                             <div ref={provided.innerRef} {...provided.droppableProps}>
                                 {group.tasks.map((task, idx) => (
@@ -33,7 +33,7 @@ export function TaskList({ board, group, updateBoard, index }) {
                             </div>
                         )}
                     </Droppable>
-                    <button>Add Task</button>                    
+                    
                 </div>
             }}
         </Draggable>)
