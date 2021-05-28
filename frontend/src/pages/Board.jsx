@@ -29,24 +29,26 @@ class _Board extends Component {
             const sourceListIdx = boardService.getGroupIdxById(copyBoard, source.droppableId)
             const destinationListIdx = boardService.getGroupIdxById(copyBoard, destination.droppableId)
             const task = copyBoard.groups[sourceListIdx].tasks.splice(source.index, 1)
-
+            copyBoard.groups[destinationListIdx].tasks.splice(destination.index, 0, task[0])
             const sourceListName = copyBoard.groups[sourceListIdx].title
             const destinationListName = copyBoard.groups[destinationListIdx].title
-            activity.txt=`has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
+            activity.txt = `has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
         }
-        else{
+        else {
 
-            const list =copyBoard.groups.splice(source.index,1)
-            copyBoard.groups.splice(destination.index,0,list[0])
-            activity.txt=`has moved list ${list[0].title}`
+            const list = copyBoard.groups.splice(source.index, 1)
+            copyBoard.groups.splice(destination.index, 0, list[0])
+            activity.txt = `has moved list ${list[0].title}`
         }
+        console.log('updated board:', copyBoard)
         this.props.update(copyBoard)
     }
 
     render() {
         const board = this.props.board;
+        console.log(this.props)
         if (!board) {
-            return <h1>loading...</h1>
+            return <h1>loading...{board}</h1>
         }
         return (
             <section className="board">

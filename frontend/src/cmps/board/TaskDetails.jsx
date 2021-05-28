@@ -40,13 +40,12 @@ class _TaskDetails extends Component {
 
     render() {
         const { task, group } = this.state;
-        console.log(task, group)
         if (!task) return <h1>Loading...</h1>
         return (
             <section className="task-details w-70 h-70 flex column bg-danger c-stand">
-                <from className="form-details">
+                <form className="form-details">
                     <input type="text" value={task.title} name="title" className="w-50 input-details" onChange={this.handleChange} />
-                </from>
+                </form>
             </section>
         )
     }
