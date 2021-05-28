@@ -43,7 +43,7 @@ export function update(board) {
     // Action Creator
     return async dispatch => {
         try {
-            const updatedBoard = await boardService.upadte(board)            
+            const updatedBoard = await boardService.update(board)            
             const action = {
                 type: 'UPDATE_BOARD',
                 board: updatedBoard

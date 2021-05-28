@@ -20,12 +20,24 @@ class _TaskDetails extends Component {
         this.setState({...this.state, group: group, task: task})
     }
 
+    handleChange = ({ target }) => {
+        const field = target.name
+        const value = target.value
+        
+        this.setState(prevState => ({
+            task: {
+                ...prevState.toy,
+                [field]: value,
+            }
+        }))
+    }
+
     render() {
         const {task, group} = this.state;
         console.log(task, group)
         if(!task) return <h1>Loading...</h1>
         return (
-            <section className="task-details">
+            <section className="task-details w-50 h-70 bg-danger c-stand">
                 <h1>Task details</h1>
                 <h4>{task.title}</h4>
             </section>
