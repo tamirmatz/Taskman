@@ -24,6 +24,7 @@ export function TaskList({ board, group, updateBoard, index }) {
                                     <TaskPreview key={task.id}
                                         board={board}
                                         index={idx}
+                                        group={group.id} 
                                         updateBoard={updateBoard}
                                         task={task}
                                     />

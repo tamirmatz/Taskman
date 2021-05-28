@@ -2,7 +2,13 @@ import { connect } from 'react-redux'
 import { remove, add, loadBoard, update } from '../store/actions/boardsAction.js';
 import React, { Component } from 'react'
 import { TaskList } from '../cmps/board/TaskList'
+<<<<<<< HEAD
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+=======
+import { Route, Switch } from 'react-router';
+import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
+
+>>>>>>> 5576c4b3d2c5ade8f3a5a0ffffa4023492ef2abb
 
 class _Board extends Component {
     componentDidMount() {
@@ -15,7 +21,7 @@ class _Board extends Component {
     }
 
     onDragEnd = result => {
-        console.log('ended',result)
+        console.log('ended', result)
     }
 
     render() {
@@ -39,11 +45,11 @@ class _Board extends Component {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
-                                    {board && board.groups.map((group,idx) => <TaskList index={idx}
-                                     key={group.id} 
-                                     board={board} 
-                                     group={group} 
-                                     updateBoard={this.onUpdate} />)}
+                                    {board && board.groups.map((group, idx) => <TaskList index={idx}
+                                        key={group.id}
+                                        board={board}
+                                        group={group}
+                                        updateBoard={this.onUpdate} />)}
                                     {provided.placeholder}
                                 </ul>
 
@@ -52,10 +58,18 @@ class _Board extends Component {
                         </Droppable>
                     </DragDropContext>
                 </section>
+                <Switch>
+                    <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails}></Route>
+                </Switch>
             </section>
         )
     }
 }
+
+// {
+//     path: '/board/:boardId/:taskId',
+//     component: TaskDetails,
+// }
 
 const mapStateToProps = state => {
     return {
