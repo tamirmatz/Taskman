@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 class _AppHeader extends Component {
     render() {
         // const { loggedInUser } = this.props;
-        return <header className="main-header flex space-between c-white fam-1 ps-2">
-            <div className="logo font-6 c-white fam-3"><Link to={`/`}>Taskman</Link></div>
-            <nav className="main-nav ">
+        return <header className="app-header flex space-between center bg-info fam-1  font-2 c-white">
+            <div className="logo font-6 fam-3 ps-3"><Link to={`/`}>Taskman</Link></div>
+            <nav className="main-nav w-33 flex space-evenly c-danger">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/board">Boards</NavLink> 
                     <NavLink to="/">Login</NavLink> 
