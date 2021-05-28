@@ -13,10 +13,10 @@ class _BoardList extends Component {
     render() {
         const boards = this.props.boards
         return (
-            <section>
+            <section >
                 <h1>I am board list</h1>
-                {boards && boards.map(board => <Link key={board._id} to={`board/${board._id}`}>{board.title}</Link>)}
-                {!boards && <h1>No boards to show</h1>}
+                {boards && boards.map(board => <Link  key={board._id} to={`board/${board._id}`}>{board.title}</Link>)}
+                {!boards && <h1 >No boards to show</h1>}
             </section>
         )
     }
