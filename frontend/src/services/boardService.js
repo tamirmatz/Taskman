@@ -10,7 +10,9 @@ export const boardService = {
     getById,
     remove,
     upadate,
-    add
+    add,
+    getGroupById,
+    getTaskById
 }
 
 
@@ -37,6 +39,27 @@ function upadate(board){
         return storageService.put(STORAGE_KEY, board)
 
 }
+
+//task crud
+function getGroupById(board,groupId){
+    return board.groups.find( group => group.id === groupId);    
+}
+
+function getTaskById(group,taskId){
+    return group.tasks.find( task =>  task.id === taskId )    
+}
+
+function addTask(board,group,title){
+    const newTask = {
+        id: utilService.makeId(),
+        title: title
+    }
+
+    
+}
+
+
+//group crud
 
 function _createBoard(title = 'New Board',loggedInUser = {fullname: 'some user', _id:'u101', imgUrl:'http://some-img.jpg'}) {
     const board = {
