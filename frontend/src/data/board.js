@@ -1,4 +1,4 @@
-[
+export const boards = [
     {
     "_id": "b101",
     "title": "Robot dev proj",
