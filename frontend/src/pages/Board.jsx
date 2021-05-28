@@ -52,7 +52,7 @@ class _Board extends Component {
         }
         return (
             <section className="board">
-                <section className="groups flex">
+                <section className="flex">
                     <DragDropContext
                         onDragEnd={this.onDragEnd}
                     >
@@ -62,7 +62,7 @@ class _Board extends Component {
                         >
                             {provided => (
                                 <ul
-                                    className="clear-list flex"
+                                    className="groups clean-list flex"
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >

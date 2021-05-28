@@ -1,4 +1,4 @@
-.group-container{
+.task-list{
     background-color: #ebecf0;
     position: relative;
     -webkit-margin-end: 10px;
@@ -7,4 +7,5 @@
     width: 272px;
     min-width: 272px;
     padding: 10px 6px 10px 10px;
+    align-items: flex-start;
 }
