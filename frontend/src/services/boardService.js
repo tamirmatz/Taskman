@@ -39,6 +39,7 @@ function add() {
 }
 
 function update(board) {
+    console.log('service')
     return storageService.put(STORAGE_KEY, board)
 
 }
