@@ -16,7 +16,7 @@ export function TaskPreview({ board, index, task, updateBoard }) {
 
             >
 
-                <div className="task-preview font-s pad-20 ">
+                <div className="task-preview font-s ">
                     {/* <Link to={`/board/${board._id}/${task.id}`}> */}
                     <Link to={`/board/${board._id}/g102/c104`}>
 
