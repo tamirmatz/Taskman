@@ -2,13 +2,10 @@ import { connect } from 'react-redux'
 import { remove, add, loadBoard, update } from '../store/actions/boardsAction.js';
 import React, { Component } from 'react'
 import { TaskList } from '../cmps/board/TaskList'
-<<<<<<< HEAD
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-=======
 import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
 
->>>>>>> 5576c4b3d2c5ade8f3a5a0ffffa4023492ef2abb
 
 class _Board extends Component {
     componentDidMount() {

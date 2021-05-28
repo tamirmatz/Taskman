@@ -4,11 +4,11 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 export function TaskList({ board, group, updateBoard, index }) {
 
-    return <div className="group-container">
-        <Draggable index={index} isDragDisabled={false} draggableId={group.id}>
+    return/*  <div className="group-container"> */(
+    <Draggable index={index} isDragDisabled={false} draggableId={group.id}>
             {(provided, snapshot) => {
 
-                return <div className="task-list"
+                return <div className="task-list group-container"
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
@@ -36,8 +36,8 @@ export function TaskList({ board, group, updateBoard, index }) {
 
                 </div>
             }}
-        </Draggable>
-    </div>
+        </Draggable>)
+ /*    </div> */
 }
 
 
