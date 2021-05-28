@@ -54,7 +54,7 @@ function remove(entityType, entityId) {
 
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))
-    _saveBoardsToFile()
+    _saveBoardsToFile(entities)
 }
 
 function _makeId(length = 5) {
@@ -66,9 +66,10 @@ function _makeId(length = 5) {
     return text
 }
 
-function _saveBoardsToFile() {
+function _saveBoardsToFile(entities) {
+    console.log(fs)
     return new Promise((resolve, reject) => {
-        fs.writeFile('data/board.json', JSON.stringify(gBoards, null, 2), (err) => {
+        fs.writeFile('data/board.json', JSON.stringify(entities, null, 2), (err) => {
             if (err) {
                 console.log(err);
                 reject('Cannot write to file')
@@ -77,6 +78,15 @@ function _saveBoardsToFile() {
                 resolve()
             }
         });
+        // fs.writeFile('data/board.json', JSON.stringify(entities, null, 2), (err) => {
+        //     if (err) {
+        //         console.log(err);
+        //         reject('Cannot write to file')
+        //     } else {
+        //         console.log('Wrote Successfully!');
+        //         resolve()
+        //     }
+        // });
     })
 
 }

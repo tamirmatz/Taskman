@@ -5,7 +5,7 @@ import { TaskList } from '../cmps/board/TaskList'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
-
+import { boardService } from '.././services/boardService.js'
 
 class _Board extends Component {
     componentDidMount() {
@@ -17,8 +17,30 @@ class _Board extends Component {
         this.props.update(updateBoard)
     }
 
-    onDragEnd = result => {
-        console.log('ended', result)
+    onDragEnd = res => {
+        console.log('ended', res)
+        const { destination, source, type } = res
+        if (!destination) return
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index) return
+        const copyBoard = { ...this.props.board }
+        const activity = {}
+        if (type === 'task') {
+            const sourceListIdx = boardService.getGroupIdxById(copyBoard, source.droppableId)
+            const destinationListIdx = boardService.getGroupIdxById(copyBoard, destination.droppableId)
+            const task = copyBoard.groups[sourceListIdx].tasks.splice(source.index, 1)
+
+            const sourceListName = copyBoard.groups[sourceListIdx].title
+            const destinationListName = copyBoard.groups[destinationListIdx].title
+            activity.txt=`has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
+        }
+        else{
+
+            const list =copyBoard.lists.splice(source.index,1)
+            copyBoard.lists.splice(destination.index,0,list[0])
+            activity.txt=`has moved list ${list[0].title}`
+        }
+        this.props.update(copyBoard)
     }
 
     render() {
