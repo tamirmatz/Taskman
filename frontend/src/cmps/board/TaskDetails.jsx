@@ -26,7 +26,6 @@ class _TaskDetails extends Component {
         if(!task) return <h1>Loading...</h1>
         return (
             <section className="task-details">
-                {}
                 <h1>Task details</h1>
                 <h4>{task.title}</h4>
             </section>

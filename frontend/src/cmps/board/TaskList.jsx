@@ -33,7 +33,7 @@ export function TaskList({ board, group, updateBoard, index }) {
                             </div>
                         )}
                     </Droppable>
-
+                    <button>Add Task</button>                    
                 </div>
             }}
         </Draggable>)
