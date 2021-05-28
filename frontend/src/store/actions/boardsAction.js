@@ -40,10 +40,12 @@ export function remove(boardId) {
 
 
 export function update(board) {
+    console.log(board)
     // Action Creator
     return async dispatch => {
         try {
-            const updatedBoard = await boardService.update(board)            
+            console.log('updatedBoard')         
+            const updatedBoard = await boardService.update(board)   
             const action = {
                 type: 'UPDATE_BOARD',
                 board: updatedBoard

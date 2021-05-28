@@ -1,5 +1,6 @@
+// const fs = require('fs');
+const fs = require('fs')
 const gBoards = require('../../data/board.json')
-const fs = require('fs');
 
 
 export const storageService = {
@@ -12,6 +13,7 @@ export const storageService = {
 
 function query(entityType) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || gBoards
+    console.log('query entities', entities);
     return Promise.resolve(entities)
 }
 
@@ -37,7 +39,9 @@ function put(entityType, updatedEntity) {
         .then(entities => {
             const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
             entities.splice(idx, 1, updatedEntity)
+            console.log('updated entity', updatedEntity)
             _save(entityType, entities)
+            console.log('test');
             return updatedEntity
         })
 }
@@ -67,8 +71,10 @@ function _makeId(length = 5) {
 }
 
 function _saveBoardsToFile(entities) {
-    console.log(fs)
+    // fs = require('fs');
+    console.log('fs', fs)
     return new Promise((resolve, reject) => {
+        console.log('in saveboardstofile promise')
         fs.writeFile('data/board.json', JSON.stringify(entities, null, 2), (err) => {
             if (err) {
                 console.log(err);
