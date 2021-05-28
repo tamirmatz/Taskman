@@ -8,14 +8,11 @@ export function App() {
     <div className="app">
       <Router>
         <AppHeader />
-        <main>
+        <main className="app-main">
           <Switch>
               {routes.map(route => <Route key={route.path} component={route.component} path={route.path} />)}
             </Switch>
         </main>
-        <footer>
-          Starter
-        </footer>
       </Router>
     </div>
   )

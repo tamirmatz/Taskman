@@ -15,7 +15,8 @@
 
 
 // Components
-@import "cmps/Header";
+@import "cmps/app.scss";
+@import "cmps/app-header";
 @import "cmps/ReviewList";
 @import "cmps/taskList";
 @import "cmps/groups";
