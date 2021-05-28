@@ -5,7 +5,7 @@ import { TaskList } from '../cmps/board/TaskList'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
-import {boardService} from '.././services/boardService.js'
+import { boardService } from '.././services/boardService.js'
 
 class _Board extends Component {
     componentDidMount() {
@@ -23,10 +23,13 @@ class _Board extends Component {
         if (!destination) return
         if (destination.droppableId === source.droppableId &&
             destination.index === source.index) return
-        const copyBoard={...this.props.board}
-        const activity={}
-        if(type==='task'){
-            const sourceListIdx
+        const copyBoard = { ...this.props.board }
+        const activity = {}
+        if (type === 'task') {
+            const sourceListIdx = boardService.getGroupIdxById(copyBoard, source.droppableId)
+            const destinationListIdx = boardService.getGroupIdxById(copyBoard, destination.droppableId)
+            
+
         }
     }
 

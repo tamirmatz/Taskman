@@ -12,7 +12,8 @@ export const boardService = {
     upadate,
     add,
     getGroupById,
-    getTaskById
+    getTaskById,
+    getGroupIdxById
 }
 
 
@@ -43,6 +44,10 @@ function upadate(board){
 //task crud
 function getGroupById(board,groupId){
     return board.groups.find( group => group.id === groupId);    
+}
+
+function getGroupIdxById(board,groupId){
+    return board.groups.findIndex( group => group.id === groupId);    
 }
 
 function getTaskById(group,taskId){
