@@ -28,6 +28,7 @@ export class TaskList extends Component {
     }
 
     updateGroup = () => {
+        if (!this.state.group.title) return;
         const copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         copyBoard.groups[groupIdx] = this.state.group
@@ -47,6 +48,7 @@ export class TaskList extends Component {
     }
 
     onAddTask = () => {
+        if (!this.state.task.title) return;
         const { group } = this.props
         const copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, group.id)
