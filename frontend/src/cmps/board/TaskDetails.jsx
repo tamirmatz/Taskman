@@ -42,6 +42,7 @@ class _TaskDetails extends Component {
     };
 
     updateTask = () => {
+        if (!this.state.task.title) return;
         const copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         const taskIdx = boardService.getTaskIdxById(this.state.group, this.state.task.id)
