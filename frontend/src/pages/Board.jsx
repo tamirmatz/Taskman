@@ -37,9 +37,11 @@ class _Board extends Component {
 
     onAddGroup = () => {
         const copyBoard = { ...this.props.board };
-        this.setState({ group: { ...this.state.group, id: utilService.makeId() } })
-        copyBoard.groups.push(this.state.group)
-        this.props.update(copyBoard)
+        this.setState({ group: { ...this.state.group, id: utilService.makeId() } },()=>{
+            copyBoard.groups.push(this.state.group)
+            this.props.update(copyBoard)
+        })
+
     }
 
     onDragEnd = res => {
