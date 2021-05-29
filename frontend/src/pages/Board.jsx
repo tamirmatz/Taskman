@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
 import { boardService } from '.././services/boardService.js'
 import { utilService } from '../services/generalService/utilService.js'
-
+import { ModalWrapper } from '../cmps/shared/ModalWrapper.jsx';
 class _Board extends Component {
     state = {
         group: { title: '', id: null, tasks: [], style: {} }
@@ -67,6 +67,10 @@ class _Board extends Component {
         this.props.update(copyBoard)
     }
 
+    onCloseDetails=()=>{
+        this.props.history.push(`/board/${this.props.board._id}`)
+
+    }
     render() {
         const { board } = this.props;
         console.log('from Board, before render:',board)
@@ -111,7 +115,7 @@ class _Board extends Component {
                     </div>
                 </section>
                 <Switch>
-                    <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails}></Route>
+                    <Route path={'/board/:boardId/:groupId/:taskId'} render={(props)=><ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props}/></ModalWrapper>}></Route>
                 </Switch>
             </section>
         )

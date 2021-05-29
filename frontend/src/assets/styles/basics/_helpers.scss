@@ -132,25 +132,12 @@
 
 /* MARGIN */
 
-.marg-1{
-    margin: 1rem;
+@for $i from 1 through 5 {
+    .marg-#{$i} {
+        margin: #{$i}rem;
+    }
 }
 
-.marg-2{
-    margin: 2rem;
-}
-
-.marg-3{
-    margin: 4rem;
-}
-
-.marg-4{
-    margin: 4rem;
-}
-
-.marg-5{
-    margin: 5rem;
-}
 /* margin-bottom */
 .mb-1{
     margin-bottom: 0.3rem;
@@ -435,3 +422,13 @@ a{
     color: orange;
 }
 
+//position
+
+.pos{
+    &-abs{
+        position:absolute;
+    }
+    &-fixed{
+        position:fixed;
+    }
+}

@@ -7,10 +7,10 @@ import { Board } from './pages/Board'
 import { TaskDetails } from './cmps/board/TaskDetails'
 
 export const routes = [
-    {
+    /* {
         path: '/board/:boardId/:groupId/:taskId',
         component: TaskDetails,
-    },
+    }, */
     {
         path: '/board/:boardId',
         component: Board,

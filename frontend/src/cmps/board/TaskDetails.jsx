@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Board } from '../../pages/Board.jsx';
 import { boardService } from '../../services/boardService.js'
 import { remove, add, loadBoard, update } from '../../store/actions/boardsAction.js';
+import onClickOutside from "react-onclickoutside";
 
 
 class _TaskDetails extends Component {
@@ -35,6 +35,11 @@ class _TaskDetails extends Component {
         }))
     }
 
+    handleClickOutside = evt => {
+        // ..handling code goes here...
+        console.log('clicked outsidee biatch')
+      };
+
     updateTask = () => {
         const copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
@@ -47,10 +52,11 @@ class _TaskDetails extends Component {
 
     render() {
         const { task } = this.state;
-        console.log(task)
         if (!task) return <h1>Loading...</h1>
         return (
-            <section className="task-details w-70 h-70 flex column bg-modal c-stand">
+            
+            <section className="task-details w-70 h-70 flex column bg-modal pos-fixed c-stand">
+               
                 <form className="form-details" onSubmit={(ev) => {
                     ev.preventDefault()
                     this.updateTask()
@@ -97,4 +103,4 @@ const mapDispatchToProps = {
     loadBoard,
     update
 }
-export const TaskDetails = connect(mapStateToProps, mapDispatchToProps)(_TaskDetails)
+export const TaskDetails = connect(mapStateToProps, mapDispatchToProps)(onClickOutside(_TaskDetails))

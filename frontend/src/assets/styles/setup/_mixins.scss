@@ -24,6 +24,11 @@
     }
 }
 
+@mixin center-modal{
+    bottom: 50%;
+    right:50%;
+    transform: translate(50%,50%)
+}
 /* Media  Mixins */
 @mixin aspect-ratio($width, $height) {
     position: relative;
