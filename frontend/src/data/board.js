@@ -1,11 +1,11 @@
 export const boards = [
     {
     "_id": "b101",
-    "title": "Robot dev proj",
+    "title": "Demo Data",
     "createdAt": 1589983468418,
     "createdBy": {
-        "_id": "u101",
-        "fullname": "Abi Abambi",
+        "_id": "u104",
+        "fullname": "Tamir Matz",
         "imgUrl": "http://some-img"
     },
     "style": {},
@@ -29,11 +29,11 @@ export const boards = [
             "title": "Frontend",
             "tasks": [
                 {
-                    "id": "c101",
+                    "id": "c201",
                     "title": "Replace logo"
                 },
                 {
-                    "id": "c102",
+                    "id": "c202",
                     "title": "Add Samples"
                 }
             ],
@@ -72,7 +72,40 @@ export const boards = [
                                     "id": "212jX",
                                     "title": "To Do 1",
                                     "isDone": false
-                                }
+                                },
+                                {
+                                    "id": "200jX",
+                                    "title": "To Do 2",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "211jX",
+                                    "title": "To Do 3",
+                                    "isDone": false
+                                },
+
+                            ]
+                        },
+                        {
+                            "id": "YxzzF",
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": "101sc",
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                },
+                                {
+                                    "id": "102ka",
+                                    "title": "To Do 2",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "264sa",
+                                    "title": "To Do 3",
+                                    "isDone": false
+                                },
+
                             ]
                         }
                     ],
