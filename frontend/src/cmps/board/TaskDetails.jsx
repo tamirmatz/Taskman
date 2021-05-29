@@ -39,7 +39,6 @@ class _TaskDetails extends Component {
 
     handleClickOutside = evt => {
         // ..handling code goes here...
-        console.log('clicked outsidee biatch')
     };
 
     updateTask = () => {
@@ -47,7 +46,6 @@ class _TaskDetails extends Component {
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         const taskIdx = boardService.getTaskIdxById(this.state.group, this.state.task.id)
         copyBoard.groups[groupIdx].tasks[taskIdx] = this.state.task
-        console.log('updatedTask')
         this.props.update(copyBoard)
     }
 
@@ -57,43 +55,46 @@ class _TaskDetails extends Component {
         if (!task) return <h1>Loading...</h1>
         return (
 
-            <section className="task-details w-70 h-70 flex column bg-modal pos-fixed c-stand fam-1">
-
-                <form className="form-details" onSubmit={(ev) => {
-                    ev.preventDefault()
-                    this.updateTask()
-                }}>
-                    <div className="details-header flex row">
-                        <label htmlFor="title"><BsCardChecklist /></label>
-                        <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
-                    </div>
-                    <h3>in list {this.state.group.title}</h3>
-                </form>
-                <section className="details-section">
-                    <div className="details-section-header flex row">
-                        <GrTextAlignFull /><label>Description</label>
-                    </div>
-                    <form onSubmit={(ev) => {
+            <section className="task-details w-50 flex bg-modal pos-fixed c-stand fam-1 pad-1">
+                <div className="info-task flex column w-70">
+                    <form className="form-details flex column" onSubmit={(ev) => {
                         ev.preventDefault()
                         this.updateTask()
                     }}>
-
-                        <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
+                        <div className="details-header flex row">
+                            <label htmlFor="title" className="font-6"><BsCardChecklist /></label>
+                            <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="w-50 input-details" onChange={this.handleChange} />
+                        </div>
+                        <h3>in list {this.state.group.title}</h3>
                     </form>
-                </section>
-                {task.comments && <ul className="comments clean-list">
-                    {task.comments.map(comment => {
-                        return <li className="full-comment flex row">
-                            <img className="avatar" src={comment.byMember.imgUrl} />
-                            <div className="comment-text flex column">
-                                <h3 className="commenter-name">{comment.byMember.fullname}</h3>
-                                {comment.txt}
-                                <small>{utilService.timeAgo(comment.createdAt)}</small>
-                            </div>
-                        </li>
-                    })}
-                </ul>}
+                    <section className="details-section">
+                        <div className="details-section-header flex row">
+                            <GrTextAlignFull /><label>Description</label>
+                        </div>
+                        <form onSubmit={(ev) => {
+                            ev.preventDefault()
+                            this.updateTask()
+                        }}>
 
+                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details" onChange={this.handleChange} />
+                        </form>
+                    </section>
+                    {task.comments && <ul className="comments clean-list">
+                        {task.comments.map(comment => {
+                            return <li className="full-comment flex row">
+                                <img className="avatar" src={comment.byMember.imgUrl} />
+                                <div className="comment-text flex column">
+                                    <h3 className="commenter-name">{comment.byMember.fullname}</h3>
+                                    {comment.txt}
+                                    <small>{utilService.timeAgo(comment.createdAt)}</small>
+                                </div>
+                            </li>
+                        })}
+                    </ul>}
+                </div>
+                <div className="menu-task flex w-30">
+
+                </div>
 
             </section>
         )
