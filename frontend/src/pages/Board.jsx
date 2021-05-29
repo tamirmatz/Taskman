@@ -6,8 +6,14 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
 import { boardService } from '.././services/boardService.js'
+import { utilService } from '../services/generalService/utilService.js'
 
 class _Board extends Component {
+    state = {
+        group: { title: '', id: null, tasks: [], style: {} }
+    }
+
+
     componentDidMount() {
         const { boardId } = this.props.match.params
         this.props.loadBoard(boardId);
@@ -15,6 +21,25 @@ class _Board extends Component {
 
     onUpdate = (updateBoard) => {
         this.props.update(updateBoard)
+    }
+
+    handleChange = ({ target }) => {
+        const field = target.name
+        const value = target.value
+
+        this.setState(prevState => ({
+            group: {
+                ...prevState.group,
+                [field]: value,
+            }
+        }))
+    }
+
+    onAddGroup = () => {
+        const copyBoard = { ...this.props.board };
+        this.setState({ group: { ...this.state.group, id: utilService.makeId() } })
+        copyBoard.groups.push(this.state.group)
+        this.props.update(copyBoard)
     }
 
     onDragEnd = res => {
@@ -43,8 +68,8 @@ class _Board extends Component {
     }
 
     render() {
-        const board = this.props.board;
-        console.log(this.props)
+        const { board } = this.props;
+        console.log('from Board, before render:',board)
         if (!board) {
             return <h1>loading...{board}</h1>
         }
@@ -76,6 +101,14 @@ class _Board extends Component {
 
                         </Droppable>
                     </DragDropContext>
+                    <div className="task-list">
+                        <form onSubmit={(ev) => {
+                            ev.preventDefault()
+                            this.onAddGroup()
+                        }}>
+                            <input type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
+                        </form>
+                    </div>
                 </section>
                 <Switch>
                     <Route path={'/board/:boardId/:groupId/:taskId'} component={TaskDetails}></Route>

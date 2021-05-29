@@ -2,7 +2,8 @@
 export const utilService = {
     delay,
     getRandomInt,
-    makeId
+    formatNewTask,
+    makeId,
 }
 
 function delay(ms = 1500) {
@@ -24,4 +25,8 @@ function makeId(length = 5) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return txt;
+}
+
+function formatNewTask(task){
+    return {id: makeId(), comments: [], ...task}
 }
