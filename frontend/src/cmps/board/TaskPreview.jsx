@@ -6,11 +6,30 @@ import { BsCheckBox } from 'react-icons/bs'
 import { FaRegCommentDots } from 'react-icons/fa'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 import { GrTextAlignFull } from 'react-icons/gr'
-import {utilService} from '../../services/generalService/utilService'
+import { utilService } from '../../services/generalService/utilService'
 
 
 
 export function TaskPreview({ board, index, task, updateBoard, groupId }) {
+
+    function getStyle(style, snapshot) {
+        if (!snapshot.isDropAnimating) {
+            return style;
+        }
+        const { moveTo, curve, duration } = snapshot.dropAnimation;
+        // move to the right spot
+        const translate = `translate(${moveTo.x}px, ${moveTo.y}px)`;
+        // add a bit of turn for fun
+        const rotate = 'rotate(0.01turn)';
+
+        // patching the existing style
+        return {
+            ...style,
+            transform: `${translate} ${rotate}`,
+            // slowing down the drop because we can
+            transition: `all ${curve} 0.2s`,
+        };
+    }
 
     function onRemoveTask(taskId) {
         const group = board.groups[boardService.getGroupIdxById(board, groupId)]
@@ -28,7 +47,8 @@ export function TaskPreview({ board, index, task, updateBoard, groupId }) {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 ref={provided.innerRef}
-
+                isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
+                style={getStyle(provided.draggableProps.style, snapshot)}
             >
 
                 <div className="task-preview font-s pad-20 flex">

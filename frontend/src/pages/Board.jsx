@@ -103,13 +103,14 @@ class _Board extends Component {
                                         group={group}
                                         updateBoard={this.onUpdate} />)}
                                     {provided.placeholder}
-                                </ul>
 
+
+                                </ul>
                             )}
 
                         </Droppable>
                     </DragDropContext>
-                    <div className="task-list">
+                    <div className="task-list flex">
                         <form onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onAddGroup()

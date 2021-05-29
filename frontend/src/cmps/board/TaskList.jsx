@@ -4,10 +4,15 @@ import { Component } from 'react';
 import { boardService } from '../../services/boardService.js'
 import { utilService } from '../../services/generalService/utilService.js'
 
-const EMPTY_TASK = {title: ''}
+const EMPTY_TASK = { title: '' }
+const EMPTY_GROUP = { title: '' }
 export class TaskList extends Component {
     state = {
+        group: EMPTY_GROUP,
         task: EMPTY_TASK
+    }
+    componentDidMount(){
+        this.setState({group: this.props.group})
     }
 
     handleChange = ({ target }) => {
@@ -17,6 +22,25 @@ export class TaskList extends Component {
         this.setState(prevState => ({
             task: {
                 ...prevState.task,
+                [field]: value,
+            }
+        }))
+    }
+
+    updateGroup = () => {
+        const copyBoard = { ...this.props.board };
+        const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
+        copyBoard.groups[groupIdx] = this.state.group
+        this.props.updateBoard(copyBoard)
+    }
+
+    handleChangeGroup = ({ target }) => {
+        const field = target.name
+        const value = target.value
+
+        this.setState(prevState => ({
+            group: {
+                ...prevState.group,
                 [field]: value,
             }
         }))
@@ -33,6 +57,7 @@ export class TaskList extends Component {
 
     render() {
         const { board, group, updateBoard, index } = this.props
+
         return/*  <div className="group-container"> */(
             <Draggable index={index} isDragDisabled={false} draggableId={group.id}>
                 {(provided, snapshot) => {
@@ -44,7 +69,12 @@ export class TaskList extends Component {
                             backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
                         }}
                     >
-                        <h1>{group.title}</h1>
+                        <form className="mb-2" onSubmit={(ev) => {
+                            ev.preventDefault()
+                            this.updateGroup()
+
+                        }}>   <input className="group-title-preview preview-add-task" type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
+
                         <Droppable key={index} droppableId={group.id} type='task'>
                             {(provided) => (
                                 <div ref={provided.innerRef} {...provided.droppableProps}>
