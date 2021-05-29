@@ -18,7 +18,6 @@ class _Board extends Component {
     }
 
     onDragEnd = res => {
-        console.log('ended', res)
         const { destination, source, type } = res
         if (!destination) return
         if (destination.droppableId === source.droppableId &&
@@ -40,7 +39,6 @@ class _Board extends Component {
             copyBoard.groups.splice(destination.index, 0, list[0])
             activity.txt = `has moved list ${list[0].title}`
         }
-        console.log('updated board:', copyBoard)
         this.props.update(copyBoard)
     }
 
