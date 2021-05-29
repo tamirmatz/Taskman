@@ -14,6 +14,7 @@ export function query() { // Action Creator
 export function loadBoard(boardId) { // Action Creator
     return async dispatch => {
         const board = await boardService.getById(boardId)
+        console.log('loading board')
         const action = {
             type: 'SET_BOARD',
             board
