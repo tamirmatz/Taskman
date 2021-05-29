@@ -4,7 +4,8 @@ export const utilService = {
     getRandomInt,
     formatNewTask,
     makeId,
-    isFalse
+    isFalse,
+    formatNewGroup
 }
 
 function delay(ms = 1500) {
@@ -28,10 +29,14 @@ function makeId(length = 5) {
     return txt;
 }
 
-function isFalse(el){
+function isFalse(el) {
     return Array.isArray(el) ? !!el.length : !!el
 }
 
-function formatNewTask(task){
-    return {id: makeId(), comments: [], ...task}
+function formatNewTask(task) {
+    return { id: makeId(), comments: [], ...task }
+}
+
+function formatNewGroup(group) {
+    return { id: makeId(), style: {}, tasks: [], ...group }
 }

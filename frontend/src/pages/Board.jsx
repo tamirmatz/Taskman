@@ -8,9 +8,12 @@ import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
 import { boardService } from '.././services/boardService.js'
 import { utilService } from '../services/generalService/utilService.js'
 import { ModalWrapper } from '../cmps/shared/ModalWrapper.jsx';
+
+const EMPTY_GROUP = {title: ''}
+
 class _Board extends Component {
     state = {
-        group: { title: '', id: null, tasks: [], style: {} }
+        group: EMPTY_GROUP
     }
 
 
@@ -37,11 +40,10 @@ class _Board extends Component {
 
     onAddGroup = () => {
         const copyBoard = { ...this.props.board };
-        this.setState({ group: { ...this.state.group, id: utilService.makeId() } },()=>{
-            copyBoard.groups.push(this.state.group)
+        this.setState({ group: { ...this.state.group, id: utilService.makeId() } })
+            copyBoard.groups.push(utilService.formatNewGroup(this.state.group))
             this.props.update(copyBoard)
-        })
-
+            this.setState({ group: EMPTY_GROUP })
     }
 
     onDragEnd = res => {
