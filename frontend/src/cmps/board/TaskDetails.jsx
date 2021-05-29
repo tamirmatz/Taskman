@@ -6,6 +6,7 @@ import { remove, add, loadBoard, update } from '../../store/actions/boardsAction
 import onClickOutside from "react-onclickoutside";
 import { BsCardChecklist } from 'react-icons/bs'
 import { GrTextAlignFull } from 'react-icons/gr'
+import { utilService } from '../../services/generalService/utilService.js';
 
 class _TaskDetails extends Component {
     state = {
@@ -68,22 +69,27 @@ class _TaskDetails extends Component {
                     </div>
                     <h3>in list {this.state.group.title}</h3>
                 </form>
-                <form onSubmit={(ev) => {
-                    ev.preventDefault()
-                    this.updateTask()
-                }}>
-                    <label htmlFor="description" className="flex row"><GrTextAlignFull />Description</label>
-                    <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
-                </form>
+                <section className="details-section">
+                <div className="details-section-header flex row">
+                            <GrTextAlignFull /><label>Description</label>
+                        </div>
+                    <form onSubmit={(ev) => {
+                        ev.preventDefault()
+                        this.updateTask()
+                    }}>
+     
+                        <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
+                    </form>
+                </section>
                 {task.comments && <ul className="comments clean-list">
                     {task.comments.map(comment => {
-                        return <li className="flex column">
-                            <div className="commenter flex">
+                        return <li className="full-comment flex row">
                                 <img className="avatar" src={comment.byMember.imgUrl} />
-                                <h1 className="commenter-name">{comment.byMember.fullname}</h1>
-                            </div>
+                            <div className="comment-text flex column">
+                                <h3 className="commenter-name">{comment.byMember.fullname}</h3>
                             {comment.txt}
-                            <small>{comment.createdAt}</small>
+                            <small>{utilService.timeAgo(comment.createdAt)}</small>
+                            </div>
                         </li>
                     })}
                 </ul>}

@@ -41,7 +41,7 @@ export class TaskList extends Component {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                         style={{
-                            // backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
+                            backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
                         }}
                     >
                         <h1>{group.title}</h1>

@@ -22,7 +22,10 @@
     .details-header{
         align-items: center;
     }
-    
+    .details-section-header{
+        gap:20px;
+        align-items: center;
+    }
     .details-header input{
         margin: 10px;
     width: 600px;
@@ -30,13 +33,17 @@
  }
     .avatar{
     border-radius: 50%;
-    height: 3rem;
+    height: 2rem;
     width: auto;
 }
 
-    .commenter{
-    align-items: center;
-    h1{
+.full-comment{
+    gap:10px
+}
+
+    .comment-text{
+    justify-content: flex-start;
+    h3{
         margin:0;
     }
     }
