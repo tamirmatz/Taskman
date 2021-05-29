@@ -1,7 +1,14 @@
 .task-preview{
-    background-color:whitesmoke;
+    background-color:#fff;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 0.5rem;
+    &:hover{
+        background-color: rgba(245, 245, 245, 0.57);
+    }
+    h1{
+        margin:0;
+    }
 }
 
 small{
