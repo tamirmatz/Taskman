@@ -70,25 +70,25 @@ class _TaskDetails extends Component {
                     <h3>in list {this.state.group.title}</h3>
                 </form>
                 <section className="details-section">
-                <div className="details-section-header flex row">
-                            <GrTextAlignFull /><label>Description</label>
-                        </div>
+                    <div className="details-section-header flex row">
+                        <GrTextAlignFull /><label>Description</label>
+                    </div>
                     <form onSubmit={(ev) => {
                         ev.preventDefault()
                         this.updateTask()
                     }}>
-     
+
                         <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
                     </form>
                 </section>
                 {task.comments && <ul className="comments clean-list">
                     {task.comments.map(comment => {
                         return <li className="full-comment flex row">
-                                <img className="avatar" src={comment.byMember.imgUrl} />
+                            <img className="avatar" src={comment.byMember.imgUrl} />
                             <div className="comment-text flex column">
                                 <h3 className="commenter-name">{comment.byMember.fullname}</h3>
-                            {comment.txt}
-                            <small>{utilService.timeAgo(comment.createdAt)}</small>
+                                {comment.txt}
+                                <small>{utilService.timeAgo(comment.createdAt)}</small>
                             </div>
                         </li>
                     })}

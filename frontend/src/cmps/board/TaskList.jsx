@@ -94,8 +94,9 @@ export class TaskList extends Component {
                         <form onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onAddTask()
+                            console.log(ev)
                         }}>
-                            <input className="preview-add-task" type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
+                            <input className="preview-add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
                         </form>
                     </li>
                 }}

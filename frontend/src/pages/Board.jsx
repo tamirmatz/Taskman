@@ -9,7 +9,7 @@ import { boardService } from '.././services/boardService.js'
 import { utilService } from '../services/generalService/utilService.js'
 import { ModalWrapper } from '../cmps/shared/ModalWrapper.jsx';
 
-const EMPTY_GROUP = {title: ''}
+const EMPTY_GROUP = { title: '' }
 
 class _Board extends Component {
     state = {
@@ -41,9 +41,9 @@ class _Board extends Component {
     onAddGroup = () => {
         const copyBoard = { ...this.props.board };
         this.setState({ group: { ...this.state.group, id: utilService.makeId() } })
-            copyBoard.groups.push(utilService.formatNewGroup(this.state.group))
-            this.props.update(copyBoard)
-            this.setState({ group: EMPTY_GROUP })
+        copyBoard.groups.push(utilService.formatNewGroup(this.state.group))
+        this.props.update(copyBoard)
+        this.setState({ group: EMPTY_GROUP })
     }
 
     onDragEnd = res => {
@@ -71,13 +71,13 @@ class _Board extends Component {
         this.props.update(copyBoard)
     }
 
-    onCloseDetails=()=>{
+    onCloseDetails = () => {
         this.props.history.push(`/board/${this.props.board._id}`)
 
     }
     render() {
         const { board } = this.props;
-        console.log('from Board, before render:',board)
+        console.log('from Board, before render:', board)
         if (!board) {
             return <h1>loading...{board}</h1>
         }
@@ -103,23 +103,24 @@ class _Board extends Component {
                                         group={group}
                                         updateBoard={this.onUpdate} />)}
                                     {provided.placeholder}
-                                </ul>
 
+
+                                </ul>
                             )}
 
                         </Droppable>
                     </DragDropContext>
-                    <div className="task-list">
+                    <div className="task-list flex">
                         <form onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onAddGroup()
                         }}>
-                            <input className="preview-add-task" type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
+                            <input className="preview-add-task" value={this.state.group.title} type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
                         </form>
                     </div>
                 </section>
                 <Switch>
-                    <Route path={'/board/:boardId/:groupId/:taskId'} render={(props)=><ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props}/></ModalWrapper>}></Route>
+                    <Route path={'/board/:boardId/:groupId/:taskId'} render={(props) => <ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props} /></ModalWrapper>}></Route>
                 </Switch>
             </section>
         )
