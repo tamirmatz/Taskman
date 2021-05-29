@@ -15,7 +15,8 @@ export const boardService = {
     getTaskById,
     getGroupIdxById,
     addTask,
-    checklistPreview
+    checklistPreview,
+    getTaskIdxById
 }
 
 
@@ -53,6 +54,10 @@ function getGroupIdxById(board, groupId) {
     return board.groups.findIndex(group => group.id === groupId);
 }
 
+function getTaskIdxById(group, taskId) {
+    return group.tasks.findIndex(task => task.id === taskId);
+}
+
 function getTaskById(group, taskId) {
     return group.tasks.find(task => task.id === taskId)
 }
@@ -66,8 +71,6 @@ function addTask(board, group, title) {
 
 }
 
-
-//group crud
 
 function _createBoard(title = 'New Board', loggedInUser = { fullname: 'some user', _id: 'u101', imgUrl: 'http://some-img.jpg' }) {
     const board = {
