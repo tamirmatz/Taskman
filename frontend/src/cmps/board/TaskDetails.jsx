@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { boardService } from '../../services/boardService.js'
 import { remove, add, loadBoard, update } from '../../store/actions/boardsAction.js';
 import onClickOutside from "react-onclickoutside";
-
+import { BsCardChecklist } from 'react-icons/bs'
+import { GrTextAlignFull } from 'react-icons/gr'
 
 class _TaskDetails extends Component {
     state = {
@@ -38,7 +39,7 @@ class _TaskDetails extends Component {
     handleClickOutside = evt => {
         // ..handling code goes here...
         console.log('clicked outsidee biatch')
-      };
+    };
 
     updateTask = () => {
         const copyBoard = { ...this.props.board };
@@ -54,24 +55,25 @@ class _TaskDetails extends Component {
         const { task } = this.state;
         if (!task) return <h1>Loading...</h1>
         return (
-            
-            <section className="task-details w-70 h-70 flex column bg-modal pos-fixed c-stand">
-               
+
+            <section className="task-details w-70 h-70 flex column bg-modal pos-fixed c-stand fam-1">
+
                 <form className="form-details" onSubmit={(ev) => {
                     ev.preventDefault()
                     this.updateTask()
                 }}>
-                    <div className="input-details">
-                        <label htmlFor="title"><i class="fas fa-tasks-alt font-2 c-info"></i></label>
+                    <div className="details-header flex row">
+                        <label htmlFor="title"><BsCardChecklist /></label>
                         <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
                     </div>
+                    <h3>in list {this.state.group.title}</h3>
                 </form>
                 <form onSubmit={(ev) => {
                     ev.preventDefault()
                     this.updateTask()
                 }}>
-                    <label htmlFor="description">Description</label>
-                    <input onBlur={this.updateTask} type="text" value={task.description} name="description" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
+                    <label htmlFor="description" className="flex row"><GrTextAlignFull />Description</label>
+                    <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-50 input-details fas fa-tasks-alt" onChange={this.handleChange} />
                 </form>
                 {task.comments && <ul className="comments clean-list">
                     {task.comments.map(comment => {
