@@ -114,7 +114,7 @@ class _Board extends Component {
                             ev.preventDefault()
                             this.onAddGroup()
                         }}>
-                            <input type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
+                            <input className="preview-add-task" type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
                         </form>
                     </div>
                 </section>
