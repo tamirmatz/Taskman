@@ -11,8 +11,8 @@ export class TaskList extends Component {
         group: EMPTY_GROUP,
         task: EMPTY_TASK
     }
-    componentDidMount(){
-        this.setState({group: this.props.group})
+    componentDidMount() {
+        this.setState({ group: this.props.group })
     }
 
     handleChange = ({ target }) => {
@@ -73,7 +73,7 @@ export class TaskList extends Component {
                             ev.preventDefault()
                             this.updateGroup()
 
-                        }}>   <input className="group-title-preview preview-add-task" type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
+                        }}>   <input className="group-title-preview preview-add-task" onBlur={this.updateGroup} type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
 
                         <Droppable key={index} droppableId={group.id} type='task'>
                             {(provided) => (
