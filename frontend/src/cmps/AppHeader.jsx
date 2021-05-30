@@ -9,7 +9,7 @@ class _AppHeader extends Component {
             <div className="logo font-5 ps-2"><Link to={`/`}><span className="logo-span">T</span>askman</Link></div>
             <nav className="main-nav w-20 flex space-evenly c-danger">
                     <NavLink to="/board">Boards</NavLink> 
-                    <NavLink to="/">Login</NavLink> 
+                    <NavLink to="/login">Login</NavLink> 
             </nav>
         </header>
     }
