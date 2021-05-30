@@ -1,20 +1,23 @@
-.task-list{
+.group{
     background-color: #ebecf0;
     position: relative;
     -webkit-margin-end: 10px;
-    margin-inline-end: 10px;
+    max-height: 100%;
     border-radius: 4px;
-    width: 272px;
+    width: 22%;
     min-width: 272px;
-    padding: 10px 10px 10px 10px;
-    align-items: flex-start;
+    padding: 10px;
     form > *{
         margin: 0;
     }
-    
 }
 
-.preview-add-task{
+.task-list{
+    overflow-y: auto;
+    max-height: 20rem;
+}
+
+.add-task{
     background-color: transparent;
     border: transparent;
     width: 256px;
@@ -25,7 +28,7 @@
     }
 }
 
-.group-title-preview{
+.group-title{
     font-size: 1.2rem;
     font-weight: bold;
 }
