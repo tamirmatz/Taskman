@@ -90,7 +90,7 @@ export class TaskPreview extends Component {
 
 
                             <h1 className="c-stand pad-07 fam-1">{task.title}</h1>
-                            <div className="flex wrap row font-1 fam-1">
+                            <div className="flex wrap row font-1 fam-1 w-100">
                                 {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
                                 {utilService.isFalse(task.checklists) && <div className="flex row center">
                                     <BsCheckBox />
@@ -98,7 +98,9 @@ export class TaskPreview extends Component {
                                 </div>}
                                 {task.dueDate && <div className="flex row center">
                                     <AiOutlineClockCircle />
-                                    <small>{utilService.timeAgo(task.dueDate)}</small>
+                                    <small>
+                                        {utilService.timeAgo(task.dueDate)}
+                                    </small>
                                 </div>}
                                 {task.description && <small className="flex center"><GrTextAlignFull /></small>}
                             </div>
