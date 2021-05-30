@@ -78,7 +78,7 @@ class _LoginSignup extends Component {
   }
   render() {
     let signupSection = (
-      <form className="sign-up" onSubmit={this.doSignup}>
+      <form className="flex column sign-up" onSubmit={this.doSignup}>
         <h2>Signup</h2>
         <input
           type="text"
@@ -109,7 +109,7 @@ class _LoginSignup extends Component {
       </form>
     )
     let loginSection = (
-      <form className="sign-in" onSubmit={this.doLogin}>
+      <form className="sign-in center" onSubmit={this.doLogin}>
         <h2>Login</h2>
         <select
           name="username"
