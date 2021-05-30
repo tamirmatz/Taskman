@@ -78,19 +78,19 @@ export class TaskPreview extends Component {
                                             console.log(label)
 
                                             if (label)
-                                                return <div className={`preview-label font-5 ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
+                                                return <div className={`preview-label font-s flex center bold fam-1 content-center pad-xs ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
                                                     {this.state.isLabelOpen && label.title}
                                                 </div>
                                         })}</div>}
                             </div>
-                            <span className="cur-pointer" onClick={() => { this.onRemoveTask(task.id) }}>X</span>
+                            <span className="cur-pointer fam-1 bold" onClick={() => { this.onRemoveTask(task.id) }}>X</span>
                         </div>
 
                         <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
 
 
                             <h1 className="c-stand pad-07 fam-1">{task.title}</h1>
-                            <div className="flex row">
+                            <div className="flex wrap row font-1 fam-1">
                                 {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
                                 {utilService.isFalse(task.checklists) && <div className="flex row center">
                                     <BsCheckBox />
