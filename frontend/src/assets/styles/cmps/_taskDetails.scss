@@ -56,3 +56,22 @@
     }
 
 }
+
+
+.btn-action{
+    display: flex;
+    align-items: center;
+    justify-content:baseline;
+    gap: 0.5rem;
+    background: rgb(216, 216, 216);
+    padding: 2px 1rem;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.btn-action:hover{
+    background: rgb(202, 202, 202);
+
+}

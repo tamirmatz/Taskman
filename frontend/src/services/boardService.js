@@ -128,6 +128,7 @@ function _createBoard(title = 'New Board', loggedInUser = { fullname: 'some user
 
 function checklistPreview(task){
     const checklists = task.checklists
+    let isDone = false
     let allTodos = 0;
     let doneTodos = 0;
     checklists.forEach(checkList => {
@@ -136,7 +137,8 @@ function checklistPreview(task){
             if(todo.isDone) doneTodos++
         })
     });
-
+    if(doneTodos === allTodos) isDone = true;
     const str = `${doneTodos}/${allTodos}`
-    return str
+    const res = {str,isDone}
+    return res
 } 
