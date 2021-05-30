@@ -2,10 +2,8 @@
     background-color: #ebecf0;
     position: relative;
     -webkit-margin-end: 10px;
-    max-height: 100%;
+    max-height: 90vh;
     border-radius: 4px;
-    width: 22%;
-    min-width: 272px;
     padding: 10px;
     form > *{
         margin: 0;
@@ -14,7 +12,7 @@
 
 .task-list{
     overflow-y: auto;
-    max-height: 20rem;
+    max-height: 70vh;
 }
 
 .add-task{
@@ -31,4 +29,8 @@
 .group-title{
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+.add-group{
+    
 }

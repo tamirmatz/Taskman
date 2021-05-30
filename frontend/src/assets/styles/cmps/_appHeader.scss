@@ -31,26 +31,19 @@
 //     }
     
 // }
-
-
-header{
-    background-color: #333;
-    justify-content: center;
-    align-items: center;
+.app-header{
+    height: 7vh;
+    background: #333;
 }
 
-.main-nav{
-    padding: 0.8rem 0;
-}
-
-.main-nav a{
-    margin: 10px;
-    color: whitesmoke;
+.app-header a{
+    color: #fff;
 }
 
 .logo{
     color: whitesmoke;
 }
+
 .main-nav a:hover{
     color: #919191;
 }

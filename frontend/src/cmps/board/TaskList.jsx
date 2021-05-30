@@ -63,7 +63,7 @@ export class TaskList extends Component {
         return/*  <div className="group-container"> */(
             <Draggable index={index} isDragDisabled={false} draggableId={group.id}>
                 {(provided, snapshot) => {
-                    return <li className="group"
+                    return <li className="group pad-4"
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
@@ -98,7 +98,7 @@ export class TaskList extends Component {
                                 this.onAddTask()
                                 console.log(ev)
                             }}>
-                                <input className="preview-add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
+                                <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
                             </form>
                         </div>
                     </li>

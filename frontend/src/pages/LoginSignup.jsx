@@ -78,7 +78,7 @@ class _LoginSignup extends Component {
   }
   render() {
     let signupSection = (
-      <form className="frm" onSubmit={this.doSignup}>
+      <form className="sign-up" onSubmit={this.doSignup}>
         <h2>Signup</h2>
         <input
           type="text"
@@ -109,7 +109,7 @@ class _LoginSignup extends Component {
       </form>
     )
     let loginSection = (
-      <form className="frm" onSubmit={this.doLogin}>
+      <form className="sign-in" onSubmit={this.doLogin}>
         <h2>Login</h2>
         <select
           name="username"
@@ -142,8 +142,8 @@ class _LoginSignup extends Component {
 
     const { loggedInUser } = this.props
     return (
-      <div className="login">
-        <h1>
+      <div className="login-sign-up flex column center">
+        <h1 className="">
           Login / Signup
         </h1>
         <p>{this.state.msg}</p>
@@ -158,7 +158,7 @@ class _LoginSignup extends Component {
         {!loggedInUser && loginSection}
         {!loggedInUser && signupSection}
 
-        <hr />
+        {/* <hr />
         <section className="admin">
           <details>
             <summary>Admin</summary>
@@ -180,7 +180,7 @@ class _LoginSignup extends Component {
               ))}
             </ul>}
           </details>
-        </section>
+        </section> */}
       </div>
     )
   }
