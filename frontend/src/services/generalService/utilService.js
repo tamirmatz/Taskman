@@ -72,7 +72,7 @@ const MONTH_NAMES = [
     }
   
     // 10. January 2017. at 10:20
-    return `${ day }. ${ month } ${ year }. at ${ hours }:${ minutes }`;
+    return `${ hours }:${ minutes } ${ day } ${ month.slice(0,3) }`;
   }
   
   
@@ -109,5 +109,6 @@ const MONTH_NAMES = [
       return getFormattedDate(date, false, true); // 10. January at 10:20
     }
   
+    
     return getFormattedDate(date); // 10. January 2017. at 10:20
   }
