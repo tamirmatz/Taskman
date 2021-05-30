@@ -54,21 +54,22 @@ class _TaskDetails extends Component {
         const { task } = this.state;
         if (!task) return <h1>Loading...</h1>
         return (
-
-            <section className="task-details w-50 flex bg-modal pos-fixed c-stand fam-1 pad-1">
-                <div className="info-task flex column w-70">
-                    <form className="form-details flex column" onSubmit={(ev) => {
+            <section className="task-details w-50 h-100 flex bg-modal pos-fixed c-stand fam-1 pad-1">
+                <div className="info-task flex column w-70 h-100 content-start">
+                    {/* Title */}
+                    <form className="task-title flex column w-100 content-start pb-2" onSubmit={(ev) => {
                         ev.preventDefault()
                         this.updateTask()
                     }}>
-                        <div className="details-header flex row">
+                        <div className="task-title flex row w-100">
                             <label htmlFor="title" className="font-6"><BsCardChecklist /></label>
-                            <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="w-50 input-details" onChange={this.handleChange} />
+                            <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details" onChange={this.handleChange} />
                         </div>
-                        <h3>in list {this.state.group.title}</h3>
+                        <h3 className="fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
                     </form>
-                    <section className="details-section">
-                        <div className="details-section-header flex row">
+                    {/* DESC */}
+                    <section className="desc-section ">
+                        <div className="desc-header flex row">
                             <GrTextAlignFull /><label>Description</label>
                         </div>
                         <form onSubmit={(ev) => {
