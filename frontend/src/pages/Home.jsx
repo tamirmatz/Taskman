@@ -35,7 +35,6 @@ export class Home extends Component {
               <h2 className="fam-1">The <span className="main-color">easiest</span> way. </h2>
               <Link to="/board/606056b5f2a2af09afd9f2fb"><button class="btn-hover color-3">Try it now!</button></Link>
           </div>
-          {/* <img src="/src/img/home/main-img.svg"/> */}
           <img className="main-img w-50" src={MainImg}/>
         </div>
        {/*  */}
