@@ -63,7 +63,7 @@ export function TaskPreview({ board, index, task, updateBoard, groupId }) {
                             </div>}
                             {task.dueDate && <div className="flex row center">
                                 <AiOutlineClockCircle />
-                                <small>{Intl.DateTimeFormat('IL-il').format(task.dueDate)}</small>
+                                <small>{utilService.timeAgo(task.dueDate)}</small>
                             </div>}
                             {task.description && <small className="flex center"><GrTextAlignFull /></small>}
                         </div>
