@@ -11,8 +11,8 @@ export class TaskList extends Component {
         group: EMPTY_GROUP,
         task: EMPTY_TASK
     }
-    componentDidMount(){
-        this.setState({group: this.props.group})
+    componentDidMount() {
+        this.setState({ group: this.props.group })
     }
 
     handleChange = ({ target }) => {
@@ -28,6 +28,7 @@ export class TaskList extends Component {
     }
 
     updateGroup = () => {
+        if (!this.state.group.title) return;
         const copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         copyBoard.groups[groupIdx] = this.state.group
@@ -47,6 +48,7 @@ export class TaskList extends Component {
     }
 
     onAddTask = () => {
+        if (!this.state.task.title) return;
         const { group } = this.props
         const copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, group.id)
@@ -73,7 +75,7 @@ export class TaskList extends Component {
                             ev.preventDefault()
                             this.updateGroup()
 
-                        }}>   <input className="group-title-preview preview-add-task" type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
+                        }}>   <input className="group-title-preview preview-add-task" onBlur={this.updateGroup} type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
 
                         <Droppable key={index} droppableId={group.id} type='task'>
                             {(provided) => (
