@@ -8,6 +8,7 @@ import { BsCardChecklist } from 'react-icons/bs'
 import { GrTextAlignFull } from 'react-icons/gr'
 import { utilService } from '../../services/generalService/utilService.js';
 
+
 class _TaskDetails extends Component {
     state = {
         group: null,
