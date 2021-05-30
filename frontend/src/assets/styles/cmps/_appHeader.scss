@@ -33,17 +33,27 @@
 // }
 .app-header{
     height: 7vh;
-    background: #333;
+    background: #fefefe;
+    border-bottom: 2px solid var(--spanColor);
 }
 
 .app-header a{
-    color: #fff;
+    color: #333;
 }
 
 .logo{
     color: whitesmoke;
+    font-size: 1.8rem;
 }
 
+.logo-span{
+    font-family: 'Faster One', cursive;
+    color: var(--spanColor);
+}
+.main-nav a{
+    color: #333;
+    font-size: 1rem;
+}
 .main-nav a:hover{
     color: #919191;
 }

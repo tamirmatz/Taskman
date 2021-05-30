@@ -57,6 +57,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&display=swap');
 /* Flex */
 .flex{
     display: flex;
@@ -184,6 +185,11 @@
 /* PADDING */
 
 /* GLOBAL-PADDING */
+
+.pad-xs{
+    padding: 4px;
+}
+
 .pad-05{
     padding: 0.5rem;
 }
@@ -392,6 +398,10 @@
 
 .font-6{
     font-size: 2rem;
+}
+
+.font-xl{
+    font-size: 5rem;
 }
 
 .c-white{
