@@ -63,7 +63,7 @@ export class TaskList extends Component {
         return/*  <div className="group-container"> */(
             <Draggable index={index} isDragDisabled={false} draggableId={group.id}>
                 {(provided, snapshot) => {
-                    return <li className="task-list"
+                    return <li className="group"
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
@@ -75,31 +75,32 @@ export class TaskList extends Component {
                             ev.preventDefault()
                             this.updateGroup()
 
-                        }}>   <input className="group-title-preview preview-add-task" onBlur={this.updateGroup} type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
-
-                        <Droppable key={index} droppableId={group.id} type='task'>
-                            {(provided) => (
-                                <div ref={provided.innerRef} {...provided.droppableProps}>
-                                    {group.tasks.map((task, idx) => (
-                                        <TaskPreview key={task.id}
-                                            board={board}
-                                            index={idx}
-                                            groupId={group.id}
-                                            updateBoard={updateBoard}
-                                            task={task}
-                                        />
-                                    ))}
-                                    {provided.placeholder}
-                                </div>
-                            )}
-                        </Droppable>
-                        <form onSubmit={(ev) => {
-                            ev.preventDefault()
-                            this.onAddTask()
-                            console.log(ev)
-                        }}>
-                            <input className="preview-add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
-                        </form>
+                        }}>   <input className="group-title add-task" onBlur={this.updateGroup} type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
+                        <div className="task-list">
+                            <Droppable key={index} droppableId={group.id} type='task'>
+                                {(provided) => (
+                                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                                        {group.tasks.map((task, idx) => (
+                                            <TaskPreview key={task.id}
+                                                board={board}
+                                                index={idx}
+                                                groupId={group.id}
+                                                updateBoard={updateBoard}
+                                                task={task}
+                                            />
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                            <form onSubmit={(ev) => {
+                                ev.preventDefault()
+                                this.onAddTask()
+                                console.log(ev)
+                            }}>
+                                <input className="preview-add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
+                            </form>
+                        </div>
                     </li>
                 }}
             </Draggable>)
