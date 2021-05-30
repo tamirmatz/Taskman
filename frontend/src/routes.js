@@ -4,6 +4,7 @@ import { Chat } from './pages/Chat'
 import { UserDetails } from './pages/UserDetails'
 import { BoardList } from './pages/BoardList'
 import { Board } from './pages/Board'
+import { Login } from './pages/LoginSignup'
 import { TaskDetails } from './cmps/board/TaskDetails'
 
 export const routes = [
@@ -14,6 +15,10 @@ export const routes = [
     {
         path: '/board/:boardId',
         component: Board,
+    },
+    {
+        path: '/login',
+        component: LoginSignup,
     },
     {
         path: '/board',
