@@ -1,8 +1,21 @@
-.login-sign-up{
-    text-align: center;
-}
-
 .login-sign-up button{
     background-color: #b36ae4;
     cursor: pointer;
+    width: 256px;
+    height: 36px;
+    &:hover{
+        background-color:#b36ae4b8;
+        transition: .3s;
+    }
+}
+
+.login-sign-up input{
+    background-color: transparent;
+    width: 256px;
+    height: 36px;
+    &:hover{
+        background-color: rgba(194, 194, 194, 0.523);
+        transition: .3s;
+    }
+    margin: .3rem;
 }
