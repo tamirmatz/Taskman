@@ -110,12 +110,12 @@ class _Board extends Component {
 
                         </Droppable>
                     </DragDropContext>
-                    <div className="task-list add-group flex">
+                    <div className="group add-group flex">
                         <form onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onAddGroup()
                         }}>
-                            <input className="preview-add-task" value={this.state.group.title} type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
+                            <input className="add-task" value={this.state.group.title} type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
                         </form>
                     </div>
                 </section>

@@ -18,7 +18,7 @@ export class TaskPreview extends Component {
     }
 
     toggleLabels = () => {
-        this.setState({isLabelOpen: !this.state.isLabelOpen})
+        this.setState({ isLabelOpen: !this.state.isLabelOpen })
     }
 
     getStyle = (style, snapshot) => {
@@ -64,29 +64,31 @@ export class TaskPreview extends Component {
 
                     <div className="task-preview font-s pad-20 flex column">
                         {/* <Link to={`/board/${board._id}/${task.id}`}> */}
-                        <div className="flex row space-between center">
-                            {utilService.isFalse(task.labelIds) && 
-                            <div className="labels-container wrap flex" onClick={(ev) => {
-                                ev.stopPropagation();
-                                  }}>
-                                {task.labelIds.map(labelId => {
+                        <div className="flex row space-between center w-90">
+                            <div className="label-task-prev">
+                                {utilService.isFalse(task.labelIds) &&
+                                    <div className="labels-container wrap flex" onClick={(ev) => {
+                                        ev.stopPropagation();
+                                    }}>
+                                        {task.labelIds.map(labelId => {
 
-                                const label = board.labels.find(label => {
-                                    return label.id === labelId;
-                                })
-                                console.log(label)
+                                            const label = board.labels.find(label => {
+                                                return label.id === labelId;
+                                            })
+                                            console.log(label)
 
-                                if (label)
-                                    return <div className={`preview-label font-5 ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
-                                        {this.state.isLabelOpen && label.title}
-                                    </div>
-                            })}</div>}
-                            <span className="cur-pointer" onClick={() => {this.onRemoveTask(task.id) }}>X</span>
+                                            if (label)
+                                                return <div className={`preview-label font-5 ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
+                                                    {this.state.isLabelOpen && label.title}
+                                                </div>
+                                        })}</div>}
                             </div>
-                            
+                            <span className="cur-pointer" onClick={() => { this.onRemoveTask(task.id) }}>X</span>
+                        </div>
+
                         <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
-                            
-                            
+
+
                             <h1 className="c-stand pad-07 fam-1">{task.title}</h1>
                             <div className="flex row">
                                 {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
