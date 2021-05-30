@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+#root{
+    --spanColor: #9931fb;
+    --mainColor: #353b48;
+    --secondaryColor: #74b9ff;
+}
+
 ::selection {
     background-color: $clr1;
     color: $clr6;
@@ -36,6 +42,7 @@ img {
 
 a {
     text-decoration: none;
+    color: #333;
 }
 
 
