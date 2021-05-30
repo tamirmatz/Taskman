@@ -69,7 +69,7 @@ export class TaskList extends Component {
                             backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
                         }}
                     >
-                        <form className="mb-2" onSubmit={(ev) => {
+                        <form className="mb-06" onSubmit={(ev) => {
                             ev.preventDefault()
                             this.updateGroup()
 
