@@ -110,7 +110,7 @@ class _Board extends Component {
 
                         </Droppable>
                     </DragDropContext>
-                    <div className="task-list flex">
+                    <div className="task-list add-group flex">
                         <form onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onAddGroup()
