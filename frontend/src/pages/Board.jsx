@@ -82,7 +82,7 @@ class _Board extends Component {
             return <h1>loading...{board}</h1>
         }
         return (
-            <section className="board">
+            <section className="board animate__animated animate__fadeInRight">
                 <section className="flex">
                     <DragDropContext
                         onDragEnd={this.onDragEnd}
