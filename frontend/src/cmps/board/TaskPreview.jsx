@@ -14,7 +14,7 @@ import React, { Component } from 'react'
 // export function TaskPreview({ board, index, task, updateBoard, groupId }) {
 export class TaskPreview extends Component {
     state = {
-        isLabelOpen: false
+        isLabelOpen: false    
     }
 
     toggleLabels = () => {
@@ -92,9 +92,9 @@ export class TaskPreview extends Component {
                             <h1 className="c-stand pad-07 fam-1">{task.title}</h1>
                             <div className="flex wrap row font-1 fam-1 w-100">
                                 {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
-                                {utilService.isFalse(task.checklists) && <div className="flex row center">
+                                {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev" }`}>
                                     <BsCheckBox />
-                                    <small>{boardService.checklistPreview(task)}</small>
+                                    <small>{boardService.checklistPreview(task).str}</small>
                                 </div>}
                                 {task.dueDate && <div className="flex row center">
                                     <AiOutlineClockCircle />
