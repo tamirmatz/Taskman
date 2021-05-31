@@ -61,14 +61,14 @@ export class TaskList extends Component {
         const { board, group, updateBoard, index } = this.props
 
         return/*  <div className="group-container"> */(
-            <Draggable index={index} isDragDisabled={false} draggableId={group.id}>
+            <Draggable key={group.id} index={index} isDragDisabled={false} draggableId={group.id}>
                 {(provided, snapshot) => {
                     return <li className="group pad-4"
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                         style={{
-                            backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
+                            // backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
                         }}
                     >
                         <form className="mb-06" onSubmit={(ev) => {
@@ -77,17 +77,17 @@ export class TaskList extends Component {
 
                         }}>   <input className="group-title add-task" onBlur={this.updateGroup} type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
                         <div className="task-list">
-                            <Droppable key={index} droppableId={group.id} type='task'>
+                            <Droppable key={index} key={group.id} droppableId={group.id} type='task'>
                                 {(provided) => (
                                     <div ref={provided.innerRef} {...provided.droppableProps}>
                                         {group.tasks.map((task, idx) => (
-                                            <TaskPreview key={task.id}
-                                                board={board}
-                                                index={idx}
-                                                groupId={group.id}
-                                                updateBoard={updateBoard}
-                                                task={task}
-                                            />
+                                                <TaskPreview key={task.id}
+                                                    board={board}
+                                                    index={idx}
+                                                    groupId={group.id}
+                                                    updateBoard={updateBoard}
+                                                    task={task}
+                                                />
                                         ))}
                                         {provided.placeholder}
                                     </div>

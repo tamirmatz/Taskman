@@ -20,7 +20,7 @@ export function loadUsers() {
 export function removeUser(userId) {
   return async dispatch => {
     try {
-      await userService.remove(userId)
+      // await userService.remove(userId)
       dispatch({ type: 'REMOVE_USER', userId })
     } catch (err) {
       console.log('UserActions: err in removeUser', err)
@@ -32,7 +32,19 @@ export function removeUser(userId) {
 export function login(userCreds) {
   return async dispatch => {
     try {
-      const user = await userService.login(userCreds)
+      // const user = await userService.login(userCreds)
+      const user = {
+        "_id": "u101",
+        "fullname": "Abi Abambi",
+        "username": "abi@ababmi.com",
+        "password": "aBambi123",
+        "imgUrl": "http://some-img.jpg",
+        "mentions": [{
+          "id": "m101",
+          "boardId": "m101",
+          "taskId": "t101"
+        }]
+      }
       dispatch({ type: 'SET_USER', user })
     } catch (err) {
       console.log('UserActions: err in login', err)
@@ -52,7 +64,7 @@ export function signup(userCreds) {
 export function logout() {
   return async dispatch => {
     try {
-      await userService.logout()
+      // await userService.logout()
       dispatch({ type: 'SET_USER', user: null })
     } catch (err) {
       console.log('UserActions: err in logout', err)

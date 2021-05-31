@@ -52,13 +52,14 @@ export class TaskPreview extends Component {
             draggableId={task.id}
             index={index}
             isDragDisabled={false}
+            key={task.id}
         >
             {(provided, snapshot) => (
                 <div
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
-                    isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
+                    // isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
                     style={this.getStyle(provided.draggableProps.style, snapshot)}
                 >
 
@@ -75,10 +76,9 @@ export class TaskPreview extends Component {
                                             const label = board.labels.find(label => {
                                                 return label.id === labelId;
                                             })
-                                            console.log(label)
 
                                             if (label)
-                                                return <div className={`preview-label font-s flex center bold fam-1 content-center pad-xs ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
+                                                return <div key={labelId} className={`preview-label font-s flex center bold fam-1 content-center pad-xs ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
                                                     {this.state.isLabelOpen && label.title}
                                                 </div>
                                         })}</div>}

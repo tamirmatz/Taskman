@@ -3023,7 +3023,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004801/WhatsApp_Image_2021-03-29_at_10.58.38_stxbec.jpg"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t109",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -3038,7 +3038,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004801/WhatsApp_Image_2021-03-29_at_10.58.38_stxbec.jpg"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t110",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -3053,7 +3053,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004801/WhatsApp_Image_2021-03-29_at_10.58.38_stxbec.jpg"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t111",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -3068,7 +3068,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004801/WhatsApp_Image_2021-03-29_at_10.58.38_stxbec.jpg"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t112",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -6788,7 +6788,7 @@ export const boards = [{
                       "imgUrl": "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t113",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -6803,7 +6803,7 @@ export const boards = [{
                       "imgUrl": "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t114",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -6818,7 +6818,7 @@ export const boards = [{
                       "imgUrl": "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t115",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
