@@ -1,6 +1,6 @@
 .group{
     width: 272px;
-    margin: 0 4px
+    margin: 0 4px;
 }
 
 .group-title{
@@ -10,8 +10,9 @@
 }
 
 .task-list{
-    overflow-y: auto;
+    overflow-y: auto;    
     max-height: 70vh;
+    overflow-x: hidden;
 }
 
 .add-task{
@@ -32,4 +33,15 @@
 
 .group-menu{
     font-family: 'trellicons';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 4px;
+    height: 100%;
+}
+
+.group-menu:hover{
+    background: rgb(129, 129, 129);
+    color: red
 }

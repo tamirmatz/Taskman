@@ -18,6 +18,9 @@ export class TaskPreview extends Component {
     }
 
     toggleLabels = () => {
+        document.querySelectorAll('.preview-label').forEach(label => {
+            label.classList.toggle('label-open');
+        });;
         this.setState({ isLabelOpen: !this.state.isLabelOpen })
     }
 
@@ -34,6 +37,7 @@ export class TaskPreview extends Component {
         // patching the existing style
         return {
             ...style,
+            background: '#fff',
             transform: `${translate} ${rotate}`,
             // slowing down the drop because we can
             transition: `all ${curve} 0.2s`,
@@ -78,7 +82,7 @@ export class TaskPreview extends Component {
                                                     })
 
                                                     if (label)
-                                                        return <div className={`preview-label font-s flex center bold fam-1 content-center pad-xs ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
+                                                        return <div className={`preview-label ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
                                                             {this.state.isLabelOpen && label.title}
                                                         </div>
                                                 })}</div>}
@@ -90,7 +94,7 @@ export class TaskPreview extends Component {
 
 
                                     <h1 className="task-title fam-1 font-m">{task.title}</h1>
-                                    <div className="flex content-start ps-1 gap-xs font-1 fam-1">
+                                    <div className="flex w-100 content-start  gap-xs font-s fam-1 c-stand">
                                         {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
                                         {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev"}`}>
                                             <BsCheckBox />
