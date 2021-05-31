@@ -33,7 +33,7 @@ function connectSockets(http, session) {
             // logger.debug('Session ID is', socket.handshake.sessionID)
             socket.myTopic = topic
         })
-        socket.on('chat newMsg', msg => {
+        socket.on('update newMsg', msg => {
             console.log('Msg', msg);
             // emits to all sockets:
             // gIo.emit('chat addMsg', msg)

@@ -8,6 +8,7 @@ import {MiniBoard} from '../cmps/board/MiniBoard'
 class _BoardList extends Component {
     componentDidMount() {
         this.props.query()
+        
     }
 
 

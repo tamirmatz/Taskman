@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
 import { boardService } from '.././services/boardService.js'
 import { utilService } from '../services/generalService/utilService.js'
+import { socketService } from '../services/generalService/socketService.js'
 import { ModalWrapper } from '../cmps/shared/ModalWrapper.jsx';
 
 const EMPTY_GROUP = { title: '' }
@@ -20,10 +21,19 @@ class _Board extends Component {
     componentDidMount() {
         const { boardId } = this.props.match.params
         this.props.loadBoard(boardId);
+
     }
 
+    componentWillUnmount() {
+        // socketService.off('update board', this.props.update)
+        // socketService.terminate()
+    }
+
+
     onUpdate = (updateBoard) => {
+        console.log(updateBoard)
         this.props.update(updateBoard)
+        
     }
 
     handleChange = ({ target }) => {
@@ -84,6 +94,9 @@ class _Board extends Component {
         return (
             <section className="board animate__animated animate__fadeInRight">
                 <section className="flex">
+                    <div className="board-navbar w-100">
+
+                    </div>
                     <DragDropContext
                         onDragEnd={this.onDragEnd}
                     >
@@ -93,7 +106,7 @@ class _Board extends Component {
                         >
                             {provided => (
                                 <ul
-                                    className="groups clean-list flex"
+                                    className="groups clean-list flex pad-0"
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >

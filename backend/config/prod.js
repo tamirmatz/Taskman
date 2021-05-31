@@ -1,4 +1,4 @@
 module.exports = {
-  dbURL: 'mongodb+srv://puki:puki123@cluster0.oaihw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-  dbName: 'camar21_db',
+  dbURL: 'mongodb+srv://databaseuser:wTykcfe44PbN9R7g@cluster0.zyfvv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  dbName: 'taskman_db',
 }

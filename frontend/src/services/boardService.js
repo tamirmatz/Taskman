@@ -1,9 +1,8 @@
 import { utilService } from './generalService/utilService.js'
 import { storageService } from './generalService/asyncStorageService.js'
+import {httpService} from '../services/generalService/httpService.js'
 
 window.storageService = storageService;
-
-const STORAGE_KEY = 'board'
 
 export const boardService = {
     query,
@@ -14,34 +13,43 @@ export const boardService = {
     getGroupById,
     getTaskById,
     getGroupIdxById,
-    addTask,
     checklistPreview,
     getTaskIdxById
 }
 
 
 function query() {
-    return storageService.query(STORAGE_KEY)
+    // return storageService.query(STORAGE_KEY)
+    return httpService.get('board')
 }
 
 function getById(boardId) {
-    const board = storageService.get(STORAGE_KEY, boardId);
-    return board
+    // const board = storageService.get(STORAGE_KEY, boardId);
+    // return board
+    return httpService.get(`board/${boardId}`)
+
 }
 
 function remove(boardId) {
-    return storageService.remove(STORAGE_KEY, boardId)
+    return httpService.delete(`board/${boardId}`)
 }
 
-function add() {
-    const newBoard = _createBoard()
-    const savedBoard = storageService.post(STORAGE_KEY, newBoard)
-    return savedBoard
+async function add() {
+    // const newBoard = _createBoard()
+    // const savedBoard = storageService.post(STORAGE_KEY, newBoard)
+    // return savedBoard
+    const board = {title: 'new' ,style:{}}
+    const res = await httpService.post(`board`, board)
+    return res
 }
 
-function update(board) {
-    console.log('service')
-    return storageService.put(STORAGE_KEY, board)
+async function update(board) {
+    // return storageService.put(STORAGE_KEY, board)
+    console.log('boardId', board);
+    board.activities = []
+    
+    const res = await httpService.put(`board/${board._id}`, board)
+    return res
 
 }
 
@@ -62,71 +70,7 @@ function getTaskById(group, taskId) {
     return group.tasks.find(task => task.id === taskId)
 }
 
-function addTask(board, group, title) {
-    const newTask = {
-        id: utilService.makeId(),
-        title: title
-    }
-
-
-}
-
-
-function _createBoard(title = 'New Board', loggedInUser = { fullname: 'some user', _id: 'u101', imgUrl: 'http://some-img.jpg' }) {
-    const board = {
-        "_id": utilService.makeId(),
-        title,
-        "createdAt": Date.now(),
-        "createdBy": {
-            "_id": loggedInUser._id,
-            "fullname": loggedInUser.fullname,
-            "imgUrl": loggedInUser.imgUrl
-        },
-        "style": {},
-        "labels": [
-            {
-                "id": "l101",
-                "title": "Done",
-                "color": "#61bd4f"
-            },
-            {
-                "id": "l101",
-                "title": "Todo",
-                "color": "green"
-            }
-        ],
-        "members": [
-            {
-                "_id": loggedInUser._id,
-                "fullname": loggedInUser.fullname,
-                "imgUrl": loggedInUser.imgUrl
-            }
-        ],
-        "groups": [
-            {
-                "id": utilService.makeId(),
-                "title": "Group 1",
-                "tasks": [
-                    {
-                        "id": "c101",
-                        "title": "Replace logo"
-                    },
-                    {
-                        "id": "c102",
-                        "title": "Add Samples"
-                    }
-                ],
-                "checklists": [],
-                "style": {}
-            },
-        ],
-        "activities": []
-    }
-
-    return board;
-}
-
-function checklistPreview(task){
+function checklistPreview(task) {
     const checklists = task.checklists
     let isDone = false
     let allTodos = 0;
@@ -134,11 +78,11 @@ function checklistPreview(task){
     checklists.forEach(checkList => {
         allTodos += checkList.todos.length;
         checkList.todos.forEach(todo => {
-            if(todo.isDone) doneTodos++
+            if (todo.isDone) doneTodos++
         })
     });
-    if(doneTodos === allTodos) isDone = true;
+    if (doneTodos === allTodos) isDone = true;
     const str = `${doneTodos}/${allTodos}`
-    const res = {str,isDone}
+    const res = { str, isDone }
     return res
-} 
+}

@@ -6,7 +6,6 @@ module.exports = {
     getCollection
 }
 
-
 var dbConn = null
 
 async function getCollection(collectionName) {
