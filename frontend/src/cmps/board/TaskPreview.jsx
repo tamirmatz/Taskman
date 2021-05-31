@@ -89,8 +89,8 @@ export class TaskPreview extends Component {
                         <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
 
 
-                            <h1 className="c-stand pad-07 fam-1">{task.title}</h1>
-                            <div className="flex wrap row font-1 fam-1 w-100">
+                            <h1 className=" w-100 flex  content-start c-stand pad-07 fam-1">{task.title}</h1>
+                            <div className="flex content-start ps-1 gap-xs font-1 fam-1">
                                 {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
                                 {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev" }`}>
                                     <BsCheckBox />

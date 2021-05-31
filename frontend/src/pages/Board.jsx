@@ -84,6 +84,9 @@ class _Board extends Component {
         return (
             <section className="board animate__animated animate__fadeInRight">
                 <section className="flex">
+                    <div className="board-navbar w-100">
+
+                    </div>
                     <DragDropContext
                         onDragEnd={this.onDragEnd}
                     >
@@ -93,7 +96,7 @@ class _Board extends Component {
                         >
                             {provided => (
                                 <ul
-                                    className="groups clean-list flex"
+                                    className="groups clean-list flex pad-0"
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >

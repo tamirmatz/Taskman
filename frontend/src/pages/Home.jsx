@@ -36,7 +36,7 @@ export class Home extends Component {
               <div className="c-stand ps-2 font-xl"><span className="logo-span">T</span>askman</div>
               <h1 className="fam-1">Task management</h1>
               <h2 className="fam-1">The <span className="main-color">easiest</span> way. </h2>
-              <Link to="/board/606056b5f2a2af09afd9f2fb"><button class="btn-hover color-3">Try it now!</button></Link>
+              <Link to="/board/606056b5f2a2af09afd9f2fb"><button className="btn-hover color-3">Try it now!</button></Link>
           </div>
           <img className="main-img w-50" src={MainImg}/>
         </div>
