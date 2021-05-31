@@ -65,8 +65,8 @@ export class TaskList extends Component {
                 {(provided, snapshot) => {
                     return <li className="group pad-4"
                         {...provided.draggableProps}
-                        {...provided.dragHandleProps}
                         ref={provided.innerRef}
+                        {...provided.dragHandleProps}
                         style={{
                             // backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
                         }}
