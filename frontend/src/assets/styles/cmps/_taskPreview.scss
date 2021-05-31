@@ -1,7 +1,7 @@
 .wrap-list-task{
     margin: 0 4px;
     padding: 0 4px;
-    margin-bottom: 8px
+    margin-bottom: 8px;
 }
 .wrap-task-prev{
     background: #fff;
@@ -9,6 +9,7 @@
 .task-preview{
     width: 256px;
     padding: 6px 8px 2px;
+    white-space: normal;
 }
 
 .task-preview:hover{
@@ -48,6 +49,34 @@
 }
 
 .task-title{
+    display: block;
+    line-height: 20px;
     margin: 0 0 4px;
     width: 232px;
+}
+
+
+// TASK-LIST-SCROLLER
+/*  Scroll Helper   */
+.task-list::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.task-list::-webkit-scrollbar-track {
+    width: 12px;
+    box-shadow: inset 0 0 5px rgb(211, 210, 210); 
+    background-color: #fd2121;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+
+    width: 12px;
+    border-radius: 2px;
+    background-color: #ffffff;
+    background-image: linear-gradient(-86deg, #342d41 100%, #a33838 100%);
+}
+
+.task-list::-webkit-scrollbar-thumb:hover {
+    background-image: linear-gradient(-86deg, #4508d4 100%, #ffffff 0%);
 }
