@@ -34,7 +34,7 @@ export class BoardNavbar extends Component {
                         ev.preventDefault()
                         this.onChangeBoardName(ev)
                     }}>
-                        <input type="text" name="title" value={this.state.title} onBlur={ this.onChangeBoardName } />
+                        <input type="text" className="app-input font-w2 font-m lh-20 " name="title" onChange={this.handleChange} value={this.state.title} onBlur={ this.onChangeBoardName } />
                     </form></li>
                     <li className="btn-board">Visiblity</li>
                     <li className="btn-board"><MembersBoard /></li>

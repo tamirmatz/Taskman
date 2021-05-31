@@ -72,7 +72,7 @@ const MONTH_NAMES = [
     }
   
     // 10. January 2017. at 10:20
-    return `${ hours }:${ minutes } ${ day } ${ month.slice(0,3) }`;
+    return `${ month.slice(0,3) } ${ day }`;
   }
   
   
