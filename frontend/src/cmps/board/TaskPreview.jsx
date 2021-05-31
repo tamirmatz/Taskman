@@ -14,7 +14,7 @@ import React, { Component } from 'react'
 // export function TaskPreview({ board, index, task, updateBoard, groupId }) {
 export class TaskPreview extends Component {
     state = {
-        isLabelOpen: false    
+        isLabelOpen: false
     }
 
     toggleLabels = () => {
@@ -61,49 +61,52 @@ export class TaskPreview extends Component {
                     isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
                     style={this.getStyle(provided.draggableProps.style, snapshot)}
                 >
+                    <div className="wrap-list-task br-3">
+                        <div className="wrap-task-prev">
+                            <div className="task-preview flex column">
+                                {/* <Link to={`/board/${board._id}/${task.id}`}> */}
+                                <div className="flex row space-between center w-100">
+                                    <div className="label-task-prev">
+                                        {utilService.isFalse(task.labelIds) &&
+                                            <div className="labels-container wrap flex" onClick={(ev) => {
+                                                ev.stopPropagation();
+                                            }}>
+                                                {task.labelIds.map(labelId => {
 
-                    <div className="task-preview font-s pad-20 flex column">
-                        {/* <Link to={`/board/${board._id}/${task.id}`}> */}
-                        <div className="flex row space-between center w-90">
-                            <div className="label-task-prev">
-                                {utilService.isFalse(task.labelIds) &&
-                                    <div className="labels-container wrap flex" onClick={(ev) => {
-                                        ev.stopPropagation();
-                                    }}>
-                                        {task.labelIds.map(labelId => {
+                                                    const label = board.labels.find(label => {
+                                                        return label.id === labelId;
+                                                    })
 
-                                            const label = board.labels.find(label => {
-                                                return label.id === labelId;
-                                            })
+                                                    if (label)
+                                                        return <div className={`preview-label font-s flex center bold fam-1 content-center pad-xs ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
+                                                            {this.state.isLabelOpen && label.title}
+                                                        </div>
+                                                })}</div>}
+                                    </div>
+                                    <span className="cur-pointer fam-1 bold" onClick={() => { this.onRemoveTask(task.id) }}>X</span>
+                                </div>
 
-                                            if (label)
-                                                return <div className={`preview-label font-s flex center bold fam-1 content-center pad-xs ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
-                                                    {this.state.isLabelOpen && label.title}
-                                                </div>
-                                        })}</div>}
+                                <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
+
+
+                                    <h1 className="task-title fam-1 font-m">{task.title}</h1>
+                                    <div className="flex content-start ps-1 gap-xs font-1 fam-1">
+                                        {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
+                                        {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev"}`}>
+                                            <BsCheckBox />
+                                            <small>{boardService.checklistPreview(task).str}</small>
+                                        </div>}
+                                        {task.dueDate && <div className="flex row center">
+                                            <AiOutlineClockCircle />
+                                            <small>
+                                                {utilService.timeAgo(task.dueDate)}
+                                            </small>
+                                        </div>}
+                                        {task.description && <small className="flex center"><GrTextAlignFull /></small>}
+                                    </div>
+                                </Link>
                             </div>
-                            <span className="cur-pointer fam-1 bold" onClick={() => { this.onRemoveTask(task.id) }}>X</span>
                         </div>
-
-                        <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
-
-
-                            <h1 className=" w-100 flex  content-start c-stand pad-07 fam-1">{task.title}</h1>
-                            <div className="flex content-start ps-1 gap-xs font-1 fam-1">
-                                {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
-                                {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev" }`}>
-                                    <BsCheckBox />
-                                    <small>{boardService.checklistPreview(task).str}</small>
-                                </div>}
-                                {task.dueDate && <div className="flex row center">
-                                    <AiOutlineClockCircle />
-                                    <small>
-                                        {utilService.timeAgo(task.dueDate)}
-                                    </small>
-                                </div>}
-                                {task.description && <small className="flex center"><GrTextAlignFull /></small>}
-                            </div>
-                        </Link>
                     </div>
                 </div>
             )

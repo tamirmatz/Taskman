@@ -56,6 +56,9 @@ class _TaskDetails extends Component {
         this.props.update(copyBoard)
     }
 
+    updateTaskState = (task) => {
+        this.setState({task})
+    }
 
     render() {
         const { task } = this.state;
@@ -89,7 +92,7 @@ class _TaskDetails extends Component {
                     </section>
                     {utilService.isFalse(task.checklists)&& <ul className="todos clean-list">
                         {task.checklists.map((checklist,idx)=> {
-                            return <CheckList idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} />
+                            return <CheckList idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                         </ul>}
                     {task.comments && <ul className="comments clean-list">

@@ -4,9 +4,11 @@
 
 #root{
     --spanColor: #9931fb;
-    --mainColor: #353b48;
-    --secondaryColor: #9931fb;
+    --secondaryColor: #909091;
+    --inputColor: #ebecf0;
 }
+
+
 
 ::selection {
     background-color: $clr1;
@@ -55,3 +57,4 @@ a {
     backdrop-filter: blur(3px);
     background-color: rgba($color: #000000, $alpha: 0.6)
 }
+

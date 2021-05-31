@@ -1,14 +1,13 @@
+.wrap-list-task{
+    margin: 0 4px;
+    padding: 0 4px;
+    margin-bottom: 8px
+}
+.wrap-task-prev{
+    background: #fff;
+}
 .task-preview{
-    background-color:#fff;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    &:hover{
-        background-color: rgba(245, 245, 245, 0.57);
-    }
-    h1{
-        margin:0;
-    }
+    padding: 6px 8px 2px;
 }
 
 small{
@@ -38,3 +37,7 @@ small{
     padding: 2px;
 }
 
+.task-title{
+    margin: 0 0 4px;
+    width: 232px;
+}

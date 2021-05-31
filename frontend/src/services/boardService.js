@@ -45,7 +45,6 @@ async function add() {
 
 async function update(board) {
     // return storageService.put(STORAGE_KEY, board)
-    console.log('boardId', board);
     board.activities = []
     
     const res = await httpService.put(`board/${board._id}`, board)
@@ -83,6 +82,7 @@ function checklistPreview(task) {
     });
     if (doneTodos === allTodos) isDone = true;
     const str = `${doneTodos}/${allTodos}`
-    const res = { str, isDone }
+    const precent = (doneTodos / allTodos) * 100 
+    const res = { str, isDone,precent }
     return res
 }

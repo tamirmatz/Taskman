@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Component } from 'react';
 import { boardService } from '../../services/boardService.js'
 import { utilService } from '../../services/generalService/utilService.js'
-
+import { HiOutlineMenuAlt4 } from 'react-icons/hi'
 const EMPTY_TASK = { title: '' }
 const EMPTY_GROUP = { title: '' }
 export class TaskList extends Component {
@@ -60,10 +60,10 @@ export class TaskList extends Component {
     render() {
         const { board, group, updateBoard, index } = this.props
 
-        return/*  <div className="group-container"> */(
+        return (
             <Draggable index={index} isDragDisabled={false} draggableId={group.id}>
                 {(provided, snapshot) => {
-                    return <li className="group pad-4"
+                    return <li className="group br-3"
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
@@ -71,12 +71,17 @@ export class TaskList extends Component {
                             backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
                         }}
                     >
-                        <form className="mb-06" onSubmit={(ev) => {
+                        <form className="" onSubmit={(ev) => {
                             ev.preventDefault()
                             this.updateGroup()
 
-                        }}>   <input className="group-title add-task" onBlur={this.updateGroup} type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} /></form>
-                        <div className="task-list">
+                        }}>
+                            <div className="group-title w-100 flex center space-between pb-2">
+                                <input className="app-input font-w2 font-m lh-20 " onBlur={this.updateGroup} type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} />
+                                <div className="group-menu">...</div>
+                            </div>
+                        </form>
+                        <div className="task-list flex column center content-center">
                             <Droppable key={index} droppableId={group.id} type='task'>
                                 {(provided) => (
                                     <div ref={provided.innerRef} {...provided.droppableProps}>

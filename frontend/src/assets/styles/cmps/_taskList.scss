@@ -1,13 +1,12 @@
 .group{
-    background-color: #ebecf0;
+    width: 272px;
+    margin: 0 4px
+}
+
+.group-title{
+    padding: 10px 8px;
     position: relative;
-    -webkit-margin-end: 10px;
-    max-height: 90vh;
-    border-radius: 4px;
-    padding: 10px;
-    form > *{
-        margin: 0;
-    }
+    min-height: 20px;
 }
 
 .task-list{
@@ -26,11 +25,11 @@
     }
 }
 
-.group-title{
-    font-size: 1.2rem;
-    font-weight: bold;
-}
 
 .add-group{
     
+}
+
+.group-menu{
+    font-family: 'trellicons';
 }

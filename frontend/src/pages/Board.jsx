@@ -4,7 +4,7 @@ import { loading } from '../store/actions/systemActions';
 
 import React, { Component } from 'react'
 import { TaskList } from '../cmps/board/TaskList'
-import { BoardNavbar } from '../cmps/board/BoardNavbar'
+import { BoardNavbar } from '../cmps/board/boardNavbar/BoardNavbar'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
