@@ -15,9 +15,6 @@ export function query() { // Action Creator
 export function loadBoard(boardId) { // Action Creator
     return async dispatch => {
         const board = await boardService.getById(boardId)
-        // socketService.setup()
-        // socketService.off('update board', update)
-        // socketService.on('update board', update)
         console.log('loading board')
         const action = {
             type: 'SET_BOARD',
@@ -49,7 +46,7 @@ export function update(board) {
     return async dispatch => {
         try {      
             const updatedBoard = await boardService.update(board)
-            // socketService.emit('update board', updatedBoard)
+            socketService.emit('update board')
             const action = {
                 type: 'UPDATE_BOARD',
                 updatedBoard

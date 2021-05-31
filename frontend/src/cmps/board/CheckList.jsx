@@ -58,7 +58,7 @@ export class CheckList extends Component {
                     <input onBlur={this.props.updateTask} type="text" value={checklist.title} name="title" className="input-details" onChange={this.handleChangeCheckList} />
                     <button>Delete</button>
                 </div>
-                <CheckListStatus task={this.props.task}/>
+                <CheckListStatus checklist={checklist}/>
                 <ul>
                     {checklist.todos.map((todo, idx) => {
                         return <li className="flex">
@@ -66,7 +66,7 @@ export class CheckList extends Component {
                                 this.handleChangeTodos(ev, idx)
                             }
                             } />
-                            <input className={todo.isDone && "done-todo"} type="text" name="txt" className="input-details" value={todo.txt} onChange={(ev) => {
+                            <input className={`input-details ${todo.isDone && "done-todo"}`} type="text" name="txt" value={todo.txt} onChange={(ev) => {
                                 this.handleChangeTodos(ev, idx)
                             }} />
                             <button onClick={() => {

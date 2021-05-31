@@ -14,7 +14,8 @@ export const boardService = {
     getTaskById,
     getGroupIdxById,
     checklistPreview,
-    getTaskIdxById
+    getTaskIdxById,
+    checklistPrecent
 }
 
 
@@ -82,7 +83,15 @@ function checklistPreview(task) {
     });
     if (doneTodos === allTodos) isDone = true;
     const str = `${doneTodos}/${allTodos}`
-    const precent = (doneTodos / allTodos) * 100 
-    const res = { str, isDone,precent }
+    const res = { str, isDone}
     return res
+}
+
+function checklistPrecent(checklist){
+    let doneTodos = 0;
+    checklist.todos.forEach(todo => {
+        if(todo.isDone) doneTodos++
+    })
+    const precent = (doneTodos / checklist.length) * 100 
+    return precent
 }

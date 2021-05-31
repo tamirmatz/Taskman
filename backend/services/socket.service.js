@@ -24,14 +24,15 @@ function connectSockets(http, session) {
                 gSocketBySessionIdMap[socket.handshake.sessionID] = null
             }
         })
-        socket.on('chat topic', topic => {
-            if (socket.myTopic === topic) return;
-            if (socket.myTopic) {
-                socket.leave(socket.myTopic)
+        socket.on('add member', boardId => {
+            if (socket.board === boardId) return;
+            if (socket.board) {
+                socket.leave(socket.board)
             }
-            socket.join(topic)
+            console.log('member joined,', boardId)
+            socket.join(boardId)
             // logger.debug('Session ID is', socket.handshake.sessionID)
-            socket.myTopic = topic
+            socket.board = boardId
         })
         socket.on('update newMsg', msg => {
             console.log('Msg', msg);
@@ -65,6 +66,7 @@ function broadcast({ type, data, room = null }) {
     if (!sessionId) return logger.debug('Shoudnt happen, no sessionId in asyncLocalStorage store')
     const excludedSocket = gSocketBySessionIdMap[sessionId]
     if (!excludedSocket) return logger.debug('Shouldnt happen, No socket in map')
+    console.log('sessionId: ', sessionId)
     if (room) excludedSocket.broadcast.to(room).emit(type, data)
     else excludedSocket.broadcast.emit(type, data)
 }

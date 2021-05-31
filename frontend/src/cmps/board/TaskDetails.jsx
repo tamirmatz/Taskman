@@ -60,6 +60,12 @@ class _TaskDetails extends Component {
         this.setState({task})
     }
 
+    onAddCheckList = (task) => {
+        task.checklists.push({id: utilService.makeId(), title: 'Checklist',todos: []})
+        this.setState({task})
+        this.updateTask()
+    }
+
     render() {
         const { task } = this.state;
         if (!task) return <h1>Loading...</h1>
@@ -116,7 +122,7 @@ class _TaskDetails extends Component {
                             <li className="btn-action "><MdLabelOutline />Labels</li>
                             <li className="btn-action"><FiUsers />Members</li>
                             <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
-                            <li className="btn-action"><AiOutlineCheckSquare />Checklist</li>
+                            <li onClick={()=> {this.onAddCheckList(task)}} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
                             <li className="btn-action"><BsImage />Image</li>
                             <li className="btn-action"><BsArrowRight />Move</li>
                             <li className="btn-action"><BiCopy />Copy</li>

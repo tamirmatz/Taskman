@@ -1,5 +1,5 @@
 const boardService = require('./board.service')
-
+const socketService = require('../../services/socket.service')
 async function getBoards(req, res) {
     try {
         const boards = await boardService.query()
@@ -44,7 +44,9 @@ async function updateBoard(req, res){
     try{
         const board = req.body
         const updatedBoard = await boardService.update(board)
-        socketService.broadcast({ type: 'board-updated', data: board, to: updatedBoard._id })
+        console.log('updatedBoard',updatedBoard)
+        socketService.broadcast({ type: 'board updated', room: updatedBoard._id })
+        res.send(updatedBoard)
 
     } catch (err) {
         res.status(500).send({ err: 'Failed to update board' })
