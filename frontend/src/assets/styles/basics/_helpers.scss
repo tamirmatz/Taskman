@@ -309,6 +309,9 @@
     padding-bottom: 2rem;
 }
 
+.br-3{
+    border-radius: 3px;
+}
 /* PADDING-SIDE */
 .ps-1{
     padding: 0 1rem;
@@ -464,7 +467,7 @@
 }
 
 .font-m{
-    font-size: 0.9rem;
+    font-size: 14px;
 }
 
 .font-1{
@@ -493,6 +496,16 @@
 
 .font-xl{
     font-size: 5rem;
+}
+
+// _________________________________________
+// font-wight
+font-w1{
+    font-weight: 400;
+}
+
+font-w2{
+    font-weight: 600;
 }
 
 .c-white{
@@ -542,6 +555,8 @@
 .bg-main{
     background: #9931fb;
 }
+
+
 /* POINTER */
 .cur-pointer{
    cursor: pointer; 
@@ -611,3 +626,6 @@ a{
 
 
 
+.lh-20{
+    line-height: 20px;
+}
