@@ -11,7 +11,7 @@
 
 .task-list{
     overflow-y: auto;    
-    max-height: 70vh;
+    max-height: 60vh;
     overflow-x: hidden;
 }
 
@@ -41,11 +41,27 @@
     height: 100%;
 }
 
-.group-menu:hover{
-    background: rgb(129, 129, 129);
-    color: red
-}
-
 
 // TASK-LIST-SCROLLER
 /*  Scroll Helper   */
+.task-list::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+  
+  /* Track */
+.task-list::-webkit-scrollbar-track {
+    background: rgba(173, 173, 173, 0.692);
+    border-radius: 8px;
+
+}
+
+/* Handle */
+.task-list::-webkit-scrollbar-thumb {
+    background: rgba(102, 102, 102, 0.356);
+    border-radius: 8px;
+}
+
+/* Handle on hover */
+.task-list::-webkit-scrollbar-thumb:hover {
+}

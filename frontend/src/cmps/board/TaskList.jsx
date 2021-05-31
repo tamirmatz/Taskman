@@ -81,30 +81,33 @@ export class TaskList extends Component {
                                 <div className="group-menu">...</div>
                             </div>
                         </form>
-                        <div className="task-list flex column center content-center">
-                            <Droppable key={index} droppableId={group.id} type='task'>
-                                {(provided) => (
-                                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                                        {group.tasks.map((task, idx) => (
-                                            <TaskPreview key={task.id}
-                                                board={board}
-                                                index={idx}
-                                                groupId={group.id}
-                                                updateBoard={updateBoard}
-                                                task={task}
-                                            />
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <form onSubmit={(ev) => {
-                                ev.preventDefault()
-                                this.onAddTask()
-                                console.log(ev)
-                            }}>
-                                <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
-                            </form>
+                        <div className="wrap-task-list">
+
+                            <div className="task-list flex column center content-center">
+                                <Droppable key={index} droppableId={group.id} type='task'>
+                                    {(provided) => (
+                                        <div ref={provided.innerRef} {...provided.droppableProps}>
+                                            {group.tasks.map((task, idx) => (
+                                                <TaskPreview key={task.id}
+                                                    board={board}
+                                                    index={idx}
+                                                    groupId={group.id}
+                                                    updateBoard={updateBoard}
+                                                    task={task}
+                                                />
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                                <form onSubmit={(ev) => {
+                                    ev.preventDefault()
+                                    this.onAddTask()
+                                    console.log(ev)
+                                }}>
+                                    <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
+                                </form>
+                            </div>
                         </div>
                     </li>
                 }}
