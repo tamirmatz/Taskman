@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import {
   loadUsers,
   removeUser,
@@ -49,13 +48,15 @@ class _LoginSignup extends Component {
 
   doLogin = async ev => {
     ev.preventDefault()
-    const { username, password } = this.state.loginCred
-    if (!username) {
-      return this.setState({ msg: 'Please enter user/password' })
-    }
-    const userCreds = { username, password }
+    // const { username, password } = this.state.loginCred
+    // if (!username) {
+    //   return this.setState({ msg: 'Please enter user/password' })
+    // }
+    // const userCreds = { username, password }
     try {
-      this.props.login(userCreds)
+      this.props.login()
+      this.props.history.push('/board')
+
       this.setState({ loginCred: { username: '', password: '' } })
     } catch (err) {
       this.setState({ msg: 'Login failed, try again.' })
@@ -75,6 +76,11 @@ class _LoginSignup extends Component {
 
   removeUser = userId => {
     this.props.removeUser(userId)
+  }
+
+  doLogout = () => {
+    this.props.logout()
+    this.props.history.push('/')
   }
   render() {
     let signupSection = (
@@ -151,7 +157,7 @@ class _LoginSignup extends Component {
           <div>
             <h3>
               Welcome {loggedInUser.fullname}
-              <button onClick={this.props.logout}>Logout</button>
+              <button onClick={() => {this.doLogout()}}>Logout</button>
             </h3>
           </div>
         )}
@@ -198,7 +204,7 @@ const mapDispatchToProps = {
   logout,
   signup,
   removeUser,
-  loadUsers
+  loadUsers,
 }
 
 export const LoginSignup = connect(mapStateToProps, mapDispatchToProps)(_LoginSignup)

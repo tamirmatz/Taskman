@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
 import { remove, add, loadBoard, update } from '../store/actions/boardsAction.js';
+import { loading } from '../store/actions/systemActions';
+
 import React, { Component } from 'react'
 import { TaskList } from '../cmps/board/TaskList'
+import { BoardNavbar } from '../cmps/board/BoardNavbar'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
@@ -87,51 +90,52 @@ class _Board extends Component {
     }
     render() {
         const { board } = this.props;
-        console.log('from Board, before render:', board)
         if (!board) {
-            return <h1>loading...{board}</h1>
+            return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
         }
+        // loading ui
+        this.props.loading();
+        // if(this.props.isLoading) return <h1 className="w-100 h-100 flex center content-center">Loading...</h1>
+        if (this.props.isLoading) return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
+
+
         return (
-            <section className="board animate__animated animate__fadeInRight">
-                <section className="flex">
-                    <div className="board-navbar w-100">
-
-                    </div>
-                    <DragDropContext
-                        onDragEnd={this.onDragEnd}
+            <section className="board w-100 pad-0 animate__animated animate__fadeInRight marg-03">
+                <BoardNavbar board={board}/>
+                <DragDropContext
+                    onDragEnd={this.onDragEnd}
+                >
+                    <Droppable droppableId={'all-columns'}
+                        direction="horizontal"
+                        type="list"
                     >
-                        <Droppable droppableId={'all-columns'}
-                            direction="horizontal"
-                            type="list"
-                        >
-                            {provided => (
-                                <ul
-                                    className="groups clean-list flex pad-0"
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}
-                                >
-                                    {board && board.groups.map((group, idx) => <TaskList index={idx}
-                                        key={group.id}
-                                        board={board}
-                                        group={group}
-                                        updateBoard={this.onUpdate} />)}
-                                    {provided.placeholder}
+                        {provided => (
+                            <ul
+                                className="groups clean-list flex "
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            >
+                                {board && board.groups.map((group, idx) => <TaskList index={idx}
+                                    key={group.id}
+                                    board={board}
+                                    group={group}
+                                    updateBoard={this.onUpdate} />)}
+                                {provided.placeholder}
 
 
-                                </ul>
-                            )}
+                            </ul>
+                        )}
 
-                        </Droppable>
-                    </DragDropContext>
-                    <div className="group add-group flex">
-                        <form onSubmit={(ev) => {
-                            ev.preventDefault()
-                            this.onAddGroup()
-                        }}>
-                            <input className="add-task" value={this.state.group.title} type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
-                        </form>
-                    </div>
-                </section>
+                    </Droppable>
+                </DragDropContext>
+                <div className="group add-group flex">
+                    <form onSubmit={(ev) => {
+                        ev.preventDefault()
+                        this.onAddGroup()
+                    }}>
+                        <input className="add-task" value={this.state.group.title} type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
+                    </form>
+                </div>
                 <Switch>
                     <Route path={'/board/:boardId/:groupId/:taskId'} render={(props) => <ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props} /></ModalWrapper>}></Route>
                 </Switch>
@@ -147,13 +151,15 @@ class _Board extends Component {
 
 const mapStateToProps = state => {
     return {
-        board: state.boardModule.board
+        board: state.boardModule.board,
+        isLoading: state.systemModule.isLoading
     }
 }
 const mapDispatchToProps = {
     remove,
     add,
     loadBoard,
-    update
+    update,
+    loading
 }
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)

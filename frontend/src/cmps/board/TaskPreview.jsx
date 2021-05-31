@@ -75,6 +75,7 @@ export class TaskPreview extends Component {
                                             const label = board.labels.find(label => {
                                                 return label.id === labelId;
                                             })
+
                                             if (label)
                                                 return <div className={`preview-label font-s flex center bold fam-1 content-center pad-xs ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
                                                     {this.state.isLabelOpen && label.title}

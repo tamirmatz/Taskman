@@ -5,16 +5,20 @@
 @import "setup/typography";
 
 // Basics
+@import "basics/reset";
 @import "basics/helpers";
 @import "basics/layout";
 @import "basics/base";
 @import "basics/links";
 @import "basics/forms";
+@import "basics/loading";
 
 
 
 
 // Components
+@import "cmps/userPreview";
+@import "cmps/board-navbar";
 @import "cmps/miniBoard";
 @import "cmps/board";
 @import "cmps/taskDetails";

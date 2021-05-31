@@ -45,7 +45,6 @@ export function remove(boardId) {
 
 
 export function update(board) {
-    console.log(board)
     // Action Creator
     return async dispatch => {
         try {      

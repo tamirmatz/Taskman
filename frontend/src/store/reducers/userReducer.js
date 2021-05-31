@@ -1,8 +1,19 @@
 let localLoggedinUser = null
 if (sessionStorage.loggedinUser) localLoggedinUser = JSON.parse(sessionStorage.loggedinUser)
-
+const defUser = {
+  "_id": "u101",
+  "fullname": "Abi Abambi",
+  "username": "abi@ababmi.com",
+  "password": "aBambi123",
+  "imgUrl": "http://some-img.jpg",
+  "mentions": [{
+    "id": "m101",
+    "boardId": "m101",
+    "taskId": "t101"
+  }]
+}
 const initialState = {
-  loggedInUser: localLoggedinUser,
+  loggedInUser: defUser,
   users: []
 }
 
@@ -17,8 +28,6 @@ export function userReducer(state = initialState, action = {}) {
       }
     case 'SET_USERS':
       return { ...state, users: action.users }
-    case 'SET_SCORE':
-      return { ...state, loggedInUser: { ...state.loggedInUser, score: action.score } }
     default:
       return state
   }

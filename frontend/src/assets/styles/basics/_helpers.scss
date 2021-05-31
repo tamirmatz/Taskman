@@ -138,6 +138,13 @@
         margin: #{$i}rem;
     }
 }
+.marg-0{
+    margin: 0rem;
+}
+
+.marg-03{
+    margin: 0.3rem;
+}
 
 .marg-05{
     margin: 0.5rem;
@@ -145,6 +152,36 @@
 
 .marg-1{
     margin: 1rem;
+}
+
+
+// .margin-top
+
+.mt-0{
+    margin: 0rem;
+}
+.mt-03{
+    margin-top: 0.3rem;
+}
+
+.mt-06{
+    margin-top: 0.6rem;
+}
+
+.mt-1{
+    margin-top: 1rem;
+}
+.mt-2{
+    margin-top: 2rem;
+}
+.mt-3{
+    margin-top: 3rem;
+}
+.mt-4{
+    margin-top: 4rem;
+}
+.mt-5{
+    margin-top: 5rem;
 }
 
 /* margin-bottom */
@@ -180,6 +217,44 @@
 
 .m-center{
     margin: 0 auto;
+}
+
+
+// margin-side
+
+/* MARGIN-SIDE */
+.ms-xs{
+    margin: 0 0.3rem;
+}
+
+.ms-s{
+    margin: 0 0.5rem;
+}
+
+.ms-m{
+    margin: 0 0.5rem;
+}
+
+.ms-1{
+    margin: 0 1rem;
+}
+
+.ms-2{
+    margin: 0 2rem;
+}
+.ms-3{
+    margin: 0 3rem;
+}
+.ms-4{
+    margin: 0 4rem;
+}
+
+.ms-5{
+    margin: 0 5rem;
+}
+
+.ms-6{
+    margin: 0 6rem;
 }
 
 /* PADDING */
@@ -464,7 +539,9 @@
     background: #3498db;
 }
 
-
+.bg-main{
+    background: #9931fb;
+}
 /* POINTER */
 .cur-pointer{
    cursor: pointer; 
