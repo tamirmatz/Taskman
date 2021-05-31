@@ -41,6 +41,7 @@ class _Board extends Component {
         }))
     }
 
+
     onAddGroup = () => {
         const copyBoard = { ...this.props.board };
         this.setState({ group: { ...this.state.group, id: utilService.makeId() } })
@@ -50,6 +51,7 @@ class _Board extends Component {
     }
 
     onDragEnd = res => {
+        console.log()
         const { destination, source, type } = res
         if (!destination) return
         if (destination.droppableId === source.droppableId &&
@@ -66,10 +68,11 @@ class _Board extends Component {
             activity.txt = `has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
         }
         else {
-
+            console.log('before',copyBoard)
             const list = copyBoard.groups.splice(source.index, 1)
             copyBoard.groups.splice(destination.index, 0, list[0])
             activity.txt = `has moved list ${list[0].title}`
+            console.log('after',copyBoard)
         }
         this.props.update(copyBoard)
     }
@@ -91,12 +94,12 @@ class _Board extends Component {
 
         return (
             <section className="board w-100 pad-0 animate__animated animate__fadeInRight marg-03">
-                <BoardNavbar board={board} />
+                <BoardNavbar board={board} updateBoard={this.onUpdate} />
                 <DragDropContext
                     onDragEnd={this.onDragEnd}
                 >
-                    <Droppable droppableId={'all-columns'}
-                        direction="horizontal"
+                    <Droppable isCombineEnabled droppableId={'all-columns'}
+                        // direction="horizontal"
                         type="list"
 
                     >
