@@ -10,8 +10,7 @@ export const userService = {
     getById,
     remove,
     update,
-    getLoggedinUser,
-    increaseScore
+    getLoggedinUser
 }
 
 window.userService = userService
@@ -38,13 +37,6 @@ async function update(user) {
     user = await httpService.put(`user/${user._id}`, user)
     // Handle case in which admin updates other user's details
     if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
-}
-
-async function increaseScore(by = SCORE_FOR_REVIEW) {
-    const user = getLoggedinUser()
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
 }
 
 async function login(userCred) {

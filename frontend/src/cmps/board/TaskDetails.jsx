@@ -10,9 +10,8 @@ import { MdLabelOutline } from 'react-icons/md'
 import { AiOutlineClockCircle, AiOutlineCheckSquare, AiOutlineDelete } from 'react-icons/ai'
 import { BiCopy } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
-
-
 import { utilService } from '../../services/generalService/utilService.js';
+import {CheckList} from './CheckList'
 
 
 class _TaskDetails extends Component {
@@ -57,6 +56,15 @@ class _TaskDetails extends Component {
         this.props.update(copyBoard)
     }
 
+    updateTaskState = (task) => {
+        this.setState({task})
+    }
+
+    onAddCheckList = (task) => {
+        task.checklists.push({id: utilService.makeId(), title: 'Checklist',todos: []})
+        this.setState({task})
+        this.updateTask()
+    }
 
     render() {
         const { task } = this.state;
@@ -88,6 +96,11 @@ class _TaskDetails extends Component {
                             <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details" onChange={this.handleChange} />
                         </form>
                     </section>
+                    {utilService.isFalse(task.checklists)&& <ul className="todos clean-list">
+                        {task.checklists.map((checklist,idx)=> {
+                            return <CheckList idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                        })}
+                        </ul>}
                     {task.comments && <ul className="comments clean-list">
                         {task.comments.map(comment => {
                             return <li className="full-comment flex row">
@@ -109,7 +122,7 @@ class _TaskDetails extends Component {
                             <li className="btn-action "><MdLabelOutline />Labels</li>
                             <li className="btn-action"><FiUsers />Members</li>
                             <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
-                            <li className="btn-action"><AiOutlineCheckSquare />Checklist</li>
+                            <li onClick={()=> {this.onAddCheckList(task)}} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
                             <li className="btn-action"><BsImage />Image</li>
                             <li className="btn-action"><BsArrowRight />Move</li>
                             <li className="btn-action"><BiCopy />Copy</li>
