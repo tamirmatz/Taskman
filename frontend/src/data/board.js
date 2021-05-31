@@ -401,7 +401,7 @@ export const boards = [{
                 "title": "QA",
                 "tasks": [
                       {
-                            "id": "Z4wVF",
+                            "id": "Z324wVF",
                             "title": "Upload to heroku\n",
                             "style": {
                                   "bgColor": ""
@@ -878,7 +878,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004422/Screenshot_20210329-104830_julcsb.jpg"
                 },
                 "task": {
-                      "id": "Z4wVF",
+                      "id": "Z4w42VF",
                       "title": "upload to heroku\n"
                 }
           },
@@ -893,7 +893,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004422/Screenshot_20210329-104830_julcsb.jpg"
                 },
                 "task": {
-                      "id": "Z4wVF",
+                      "id": "Z4wV32F",
                       "title": "upload to heroku\n"
                 }
           },
@@ -908,7 +908,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004422/Screenshot_20210329-104830_julcsb.jpg"
                 },
                 "task": {
-                      "id": "Z4wVF",
+                      "id": "Z4wV324F",
                       "title": "upload to heroku\n"
                 }
           },
@@ -1553,7 +1553,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004422/Screenshot_20210329-104830_julcsb.jpg"
                 },
                 "task": {
-                      "id": "Z4wVF",
+                      "id": "43sdgfg23",
                       "title": "upload to heroku\n"
                 }
           },
@@ -1568,7 +1568,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004422/Screenshot_20210329-104830_julcsb.jpg"
                 },
                 "task": {
-                      "id": "Z4wVF",
+                      "id": "Zfeg44wVF",
                       "title": "upload to heroku\n"
                 }
           },
@@ -1613,7 +1613,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004422/Screenshot_20210329-104830_julcsb.jpg"
                 },
                 "task": {
-                      "id": "Z4wVF",
+                      "id": "Z4wVFfgge5",
                       "title": "upload to heroku\n"
                 }
           },
@@ -3023,7 +3023,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004801/WhatsApp_Image_2021-03-29_at_10.58.38_stxbec.jpg"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t109",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -3038,7 +3038,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004801/WhatsApp_Image_2021-03-29_at_10.58.38_stxbec.jpg"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t110",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -3053,7 +3053,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004801/WhatsApp_Image_2021-03-29_at_10.58.38_stxbec.jpg"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t111",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -3068,7 +3068,7 @@ export const boards = [{
                       "imgUrl": "https://res.cloudinary.com/dorshaul/image/upload/v1617004801/WhatsApp_Image_2021-03-29_at_10.58.38_stxbec.jpg"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t112",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -6788,7 +6788,7 @@ export const boards = [{
                       "imgUrl": "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t113",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -6803,7 +6803,7 @@ export const boards = [{
                       "imgUrl": "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t114",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
@@ -6818,7 +6818,7 @@ export const boards = [{
                       "imgUrl": "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
                 },
                 "task": {
-                      "id": "t108",
+                      "id": "t115",
                       "title": "the icon in task details need to be change to svg"
                 }
           },
