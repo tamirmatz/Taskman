@@ -100,6 +100,7 @@ export class TaskList extends Component {
                                         </div>
                                     )}
                                 </Droppable>
+                            </div>
                                 <form onSubmit={(ev) => {
                                     ev.preventDefault()
                                     this.onAddTask()
@@ -107,7 +108,6 @@ export class TaskList extends Component {
                                 }}>
                                     <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
                                 </form>
-                            </div>
                         </div>
                     </li>
                 }}
