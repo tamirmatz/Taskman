@@ -90,42 +90,45 @@ class _Board extends Component {
 
 
         return (
-            <section className="board w-100 pad-0 animate__animated animate__fadeInRight marg-03">
-                <BoardNavbar board={board}/>
-                <DragDropContext
-                    onDragEnd={this.onDragEnd}
-                >
-                    <Droppable droppableId={'all-columns'}
-                        direction="horizontal"
-                        type="list"
+            <section className="board flex column w-100 animate__animated animate__fadeInRight ">
+                <BoardNavbar board={board} />
+                <div className="board-list flex w-100 ">
+                    <DragDropContext
+                        onDragEnd={this.onDragEnd}
                     >
-                        {provided => (
-                            <ul
-                                className="groups clean-list flex "
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                {board && board.groups.map((group, idx) => <TaskList index={idx}
-                                    key={group.id}
-                                    board={board}
-                                    group={group}
-                                    updateBoard={this.onUpdate} />)}
-                                {provided.placeholder}
+                        <Droppable droppableId={'all-columns'}
+                            direction="horizontal"
+                            type="list"
+                        >
+                            {provided => (
+                                <ul
+                                    className="groups clean-list flex "
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                    {board && board.groups.map((group, idx) => <TaskList index={idx}
+                                        key={group.id}
+                                        board={board}
+                                        group={group}
+                                        updateBoard={this.onUpdate} />)}
+                                    {provided.placeholder}
 
 
-                            </ul>
-                        )}
+                                </ul>
+                            )}
 
-                    </Droppable>
-                </DragDropContext>
-                <div className="group add-group flex">
-                    <form onSubmit={(ev) => {
-                        ev.preventDefault()
-                        this.onAddGroup()
-                    }}>
-                        <input className="add-task" value={this.state.group.title} type="text" placeholder="+ Add a group" name="title" onChange={this.handleChange} />
-                    </form>
+                        </Droppable>
+                    </DragDropContext>
+                    <div className="group add-group flex">
+                        <form onSubmit={(ev) => {
+                            ev.preventDefault()
+                            this.onAddGroup()
+                        }}>
+                            <input className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
+                        </form>
+                    </div>
                 </div>
+
                 <Switch>
                     <Route path={'/board/:boardId/:groupId/:taskId'} render={(props) => <ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props} /></ModalWrapper>}></Route>
                 </Switch>
