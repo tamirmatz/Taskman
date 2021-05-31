@@ -10,6 +10,7 @@ import { Route, Switch } from 'react-router';
 import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
 import { boardService } from '.././services/boardService.js'
 import { utilService } from '../services/generalService/utilService.js'
+import { socketService } from '../services/generalService/socketService.js'
 import { ModalWrapper } from '../cmps/shared/ModalWrapper.jsx';
 
 const EMPTY_GROUP = { title: '' }
@@ -23,9 +24,21 @@ class _Board extends Component {
     componentDidMount() {
         const { boardId } = this.props.match.params
         this.props.loadBoard(boardId);
+        socketService.setup()
+        socketService.on('board updated', ()=>{
+            console.log('recieved update')
+            this.props.loadBoard()})
+        socketService.emit('add member',boardId)
     }
 
+    componentWillUnmount() {
+        socketService.off('board updated', this.props.loadBoard)
+        socketService.terminate()
+    }
+
+
     onUpdate = (updateBoard) => {
+        console.log(updateBoard)
         this.props.update(updateBoard)
     }
 

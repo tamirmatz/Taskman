@@ -1,4 +1,5 @@
 import { boardService } from '../../services/boardService'
+import { socketService } from '../../services/generalService/socketService'
 
 export function query() { // Action Creator
     return async dispatch => {
@@ -14,6 +15,7 @@ export function query() { // Action Creator
 export function loadBoard(boardId) { // Action Creator
     return async dispatch => {
         const board = await boardService.getById(boardId)
+        console.log('loading board')
         const action = {
             type: 'SET_BOARD',
             board
@@ -44,7 +46,7 @@ export function update(board) {
     return async dispatch => {
         try {      
             const updatedBoard = await boardService.update(board)
-            console.log(updatedBoard)   
+            socketService.emit('update board')
             const action = {
                 type: 'UPDATE_BOARD',
                 updatedBoard
