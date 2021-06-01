@@ -61,7 +61,7 @@ export class TaskList extends Component {
         const { board, group, updateBoard, index } = this.props
 
         return (
-            <Draggable index={index} isDragDisabled={false} draggableId={group.id}>
+            <Draggable index={index} isDragDisabled={false} draggableId={group.id} >
                 {(provided, snapshot) => {
                     return <li className="group br-3"
                         {...provided.draggableProps}
@@ -86,7 +86,7 @@ export class TaskList extends Component {
                             <div className="task-list flex column center content-center">
                                 <Droppable key={index} droppableId={group.id} type='task'>
                                     {(provided) => (
-                                        <div ref={provided.innerRef} {...provided.droppableProps}>
+                                        <div ref={provided.innerRef} {...provided.droppableProps} {...provided.dragHandleProps}>
                                             {group.tasks.map((task, idx) => (
                                                 <TaskPreview key={task.id}
                                                     board={board}
@@ -101,13 +101,13 @@ export class TaskList extends Component {
                                     )}
                                 </Droppable>
                             </div>
-                                <form onSubmit={(ev) => {
-                                    ev.preventDefault()
-                                    this.onAddTask()
-                                    console.log(ev)
-                                }}>
-                                    <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
-                                </form>
+                            <form onSubmit={(ev) => {
+                                ev.preventDefault()
+                                this.onAddTask()
+                                console.log(ev)
+                            }}>
+                                <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
+                            </form>
                         </div>
                     </li>
                 }}

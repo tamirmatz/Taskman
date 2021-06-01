@@ -57,14 +57,15 @@ export class TaskPreview extends Component {
             draggableId={task.id}
             index={index}
             isDragDisabled={false}
+            key={task.id}
         >
             {(provided, snapshot) => (
                 <div
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
-                    isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
-                    style={this.getStyle(provided.draggableProps.style, snapshot)}
+                    // isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
+                    // style={this.getStyle(provided.draggableProps.style, snapshot)}
                 >
                     <div className="wrap-list-task br-3">
                         <div className="wrap-task-prev">
@@ -83,7 +84,7 @@ export class TaskPreview extends Component {
                                                     })
 
                                                     if (label)
-                                                        return <div className={`preview-label ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
+                                                        return <div key={label.id} className={`preview-label ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
                                                             {this.state.isLabelOpen && label.title}
                                                         </div>
                                                 })}</div>}

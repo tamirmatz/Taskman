@@ -25,10 +25,11 @@ class _Board extends Component {
         const { boardId } = this.props.match.params
         this.props.loadBoard(boardId);
         socketService.setup()
-        socketService.on('board updated', ()=>{
+        socketService.on('board updated', () => {
             console.log('recieved update')
-            this.props.loadBoard()})
-        socketService.emit('add member',boardId)
+            this.props.loadBoard()
+        })
+        socketService.emit('add member', boardId)
     }
 
     componentWillUnmount() {
@@ -81,11 +82,11 @@ class _Board extends Component {
             activity.txt = `has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
         }
         else {
-            console.log('before',copyBoard)
+            console.log('before', copyBoard)
             const list = copyBoard.groups.splice(source.index, 1)
             copyBoard.groups.splice(destination.index, 0, list[0])
             activity.txt = `has moved list ${list[0].title}`
-            console.log('after',copyBoard)
+            console.log('after', copyBoard)
         }
         this.props.update(copyBoard)
     }
@@ -106,49 +107,49 @@ class _Board extends Component {
 
 
         return (
-            <section className="board flex column w-100 animate__animated animate__fadeInRight ">
-                <BoardNavbar board={board} updateBoard={this.onUpdate} />
-                <div className="board-list flex w-100 ">
-                    <DragDropContext
-                        onDragEnd={this.onDragEnd}
+            <DragDropContext
+                onDragEnd={this.onDragEnd}
+            >
+                <section className="board flex column w-100 animate__animated animate__fadeInRight ">
+                    <BoardNavbar board={board} updateBoard={this.onUpdate} />
+                    <Droppable droppableId={'all-columns'}
+                        direction="horizontal"
+                        type="TaskList"
                     >
-                        <Droppable droppableId={'all-columns'}
-                            direction="horizontal"
-                            type="list"
-                        >
-                            {provided => (
+                        {provided => (
+                            <div className="board-list flex w-100 "
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            >
                                 <ul
                                     className="groups clean-list flex "
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}
+
                                 >
                                     {board && board.groups.map((group, idx) => <TaskList index={idx}
                                         key={group.id}
                                         board={board}
                                         group={group}
                                         updateBoard={this.onUpdate} />)}
-                                    {provided.placeholder}
-
-
                                 </ul>
-                            )}
 
-                        </Droppable>
-                    </DragDropContext>
-                    <div className="group add-group flex">
-                        <form onSubmit={(ev) => {
-                            ev.preventDefault()
-                            this.onAddGroup()
-                        }}>
-                            <input className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
-                        </form>
-                    </div>
-                </div>
+                                <div className="group add-group flex">
+                                    <form onSubmit={(ev) => {
+                                        ev.preventDefault()
+                                        this.onAddGroup()
+                                    }}>
+                                        <input className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
+                                    </form>
+                                </div>
+                                        {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
 
-                <Switch>
-                    <Route path={'/board/:boardId/:groupId/:taskId'} render={(props) => <ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props} /></ModalWrapper>}></Route>
-                </Switch>
-            </section>
+                    <Switch>
+                        <Route path={'/board/:boardId/:groupId/:taskId'} render={(props) => <ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props} /></ModalWrapper>}></Route>
+                    </Switch>
+                </section>
+            </DragDropContext>
         )
     }
 }
