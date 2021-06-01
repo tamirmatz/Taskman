@@ -30,9 +30,10 @@ export class TaskList extends Component {
     updateGroup = () => {
         if (!this.state.group.title) return;
         const copyBoard = { ...this.props.board };
+        this.props.updateBoard(copyBoard)
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         copyBoard.groups[groupIdx] = this.state.group
-        this.props.updateBoard(copyBoard)
+        console.log(copyBoard)
     }
 
     handleChangeGroup = ({ target }) => {
@@ -96,6 +97,7 @@ export class TaskList extends Component {
                                                     task={task}
                                                 />
                                             ))}
+                                            {!utilService.isFalse(group.tasks) && <h1 className="task-title fam-1 font-m">No tasks to show</h1>}
                                             {provided.placeholder}
                                         </div>
                                     )}

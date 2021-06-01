@@ -80,15 +80,15 @@ class _Board extends Component {
             const sourceListName = copyBoard.groups[sourceListIdx].title
             const destinationListName = copyBoard.groups[destinationListIdx].title
             activity.txt = `has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
+            console.log(activity.txt)
         }
         else {
-            console.log('before', copyBoard)
             const list = copyBoard.groups.splice(source.index, 1)
             copyBoard.groups.splice(destination.index, 0, list[0])
             activity.txt = `has moved list ${list[0].title}`
-            console.log('after', copyBoard)
         }
         this.props.update(copyBoard)
+        console.log('Moved and updated!',copyBoard)
     }
 
     onCloseDetails = () => {
