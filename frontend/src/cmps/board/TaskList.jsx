@@ -108,7 +108,7 @@ export class TaskList extends Component {
                                 this.onAddTask()
                                 console.log(ev)
                             }}>
-                                <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a task" name="title" onChange={this.handleChange} />
+                                <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add another card" name="title" onChange={this.handleChange} />
                             </form>
                         </div>
                     </li>

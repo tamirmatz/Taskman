@@ -18,14 +18,17 @@
 }
 
 .add-task{
+    padding-left: 20px;
+    font-size: 14px;
     background-color: transparent;
     border: transparent;
-    width: 256px;
-    height: 36px;
+    width: 272px;
+    height: 38px;
     &:hover{
         background-color: rgba(194, 194, 194, 0.523);
         transition: .3s;
     }
+    margin:0 auto;
 }
 
 
@@ -41,6 +44,7 @@
     position: relative;
     bottom: 4px;
     height: 100%;
+    cursor: pointer;
 }
 
 
