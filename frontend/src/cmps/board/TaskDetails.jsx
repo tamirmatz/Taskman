@@ -61,6 +61,9 @@ class _TaskDetails extends Component {
     }
 
     onAddCheckList = (task) => {
+        if(!task.checklists){
+            task.checklists = [];
+        }
         task.checklists.push({id: utilService.makeId(), title: 'Checklist',todos: []})
         this.setState({task})
         this.updateTask()
@@ -68,11 +71,20 @@ class _TaskDetails extends Component {
     onRemoveCheckList = (ChecklistIdx) =>{
         console.log('here',ChecklistIdx)
         const {task} = this.state
-        console.log('before',task.checklists )
-        task.checklists.splice(ChecklistIdx,1)
-        console.log('after',task.checklists )
-        this.setState({task})
-        this.updateTask()
+        const removed = task.checklists.splice(ChecklistIdx,1)
+        console.log('removed',removed )
+        this.setState({task}, this.updateTask)
+    }
+
+    onDeleteTask = () => {
+        const {boardId} = this.props.match.params;
+        const copyboard = this.props.board
+        console.log('copyboard',copyboard)
+        const {task,group} = this.state
+        group.tasks.splice(boardService.getTaskIdxById(group,task.id),1)
+        copyboard.groups[boardService.getGroupIdxById(copyboard, group.id)] = group
+        this.props.update(copyboard)
+        this.props.history.push(`/board/${boardId}`)
     }
 
     render() {
@@ -107,6 +119,7 @@ class _TaskDetails extends Component {
                     </section>
                     {utilService.isFalse(task.checklists)&& <ul className="todos clean-list">
                         {task.checklists.map((checklist,idx)=> {
+                            console.log('checklists',task.checklists)
                             return <CheckList onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                         </ul>}
@@ -135,7 +148,7 @@ class _TaskDetails extends Component {
                             <li className="btn-action"><BsImage />Image</li>
                             <li className="btn-action"><BsArrowRight />Move</li>
                             <li className="btn-action"><BiCopy />Copy</li>
-                            <li className="btn-action"><AiOutlineDelete />Delete</li>
+                            <li onClick={()=> {this.onDeleteTask()}} className="btn-action"><AiOutlineDelete />Delete</li>
                         </ul>
                     </div>
                 </div>

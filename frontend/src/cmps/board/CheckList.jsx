@@ -49,7 +49,7 @@ export class CheckList extends Component {
 
     render() {
         const { checklist } = this.state
-        if (!checklist) return <div>loading...</div>
+        // if (!checklist) return <div>loading...</div>
         return (
             <li>
                 <div className="flex space-between center">
