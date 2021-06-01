@@ -25,14 +25,14 @@
     .task-title{
         align-items: center;
         background: inherit;
+        display: inline-block;
     }
     .desc-header{
         gap:20px;
         align-items: center;
     }
     .task-title input{
-        margin: 10px;
-        width: 600px;
+        width: 50%;
         font-size: 30px;
  }
     .avatar{
@@ -67,7 +67,8 @@
     padding: 2px 1rem;
     border-radius: 4px;
     margin-bottom: 4px;
-    width: 100%;
+    width: 132px;
+    height: 30px;
     cursor: pointer;
 }
 
