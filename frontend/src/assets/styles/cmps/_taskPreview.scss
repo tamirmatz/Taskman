@@ -7,9 +7,12 @@
     background: #fff;
 }
 .task-preview{
+    box-shadow: 0 1px 0 #091e4240;
     width: 256px;
     padding: 6px 8px 2px;
     white-space: normal;
+    border-radius: 3px;
+    word-wrap: break-word;
 }
 
 .task-preview:hover{
@@ -49,6 +52,7 @@
 }
 
 .task-title{
+    font-size: 14px;
     display: block;
     line-height: 20px;
     margin: 0 0 4px;
