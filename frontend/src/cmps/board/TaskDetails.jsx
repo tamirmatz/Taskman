@@ -11,7 +11,7 @@ import { AiOutlineClockCircle, AiOutlineCheckSquare, AiOutlineDelete } from 'rea
 import { BiCopy } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
 import { utilService } from '../../services/generalService/utilService.js';
-import {CheckList} from './CheckList'
+import { CheckList } from './CheckList'
 
 
 class _TaskDetails extends Component {
@@ -57,17 +57,27 @@ class _TaskDetails extends Component {
     }
 
     updateTaskState = (task) => {
-        this.setState({task})
+        this.setState({ task })
     }
 
     onAddCheckList = (task) => {
-        if(!task.checklists){
+        if (!task.checklists) {
             task.checklists = [];
         }
-        task.checklists.push({id: utilService.makeId(), title: 'Checklist',todos: []})
-        this.setState({task})
+        task.checklists.push({ id: utilService.makeId(), title: 'Checklist', todos: [] })
+        this.setState({ task })
         this.updateTask()
     }
+<<<<<<< HEAD
+    onRemoveCheckList = (ChecklistIdx) => {
+        console.log('here', ChecklistIdx)
+        const { task } = this.state
+        console.log('before', task.checklists)
+        task.checklists.splice(ChecklistIdx, 1)
+        console.log('after', task.checklists)
+        this.setState({ task }, this.updateTask)
+        // this.updateTask()
+=======
     onRemoveCheckList = (ChecklistIdx) =>{
         console.log('here',ChecklistIdx)
         const {task} = this.state
@@ -85,6 +95,7 @@ class _TaskDetails extends Component {
         copyboard.groups[boardService.getGroupIdxById(copyboard, group.id)] = group
         this.props.update(copyboard)
         this.props.history.push(`/board/${boardId}`)
+>>>>>>> 30f6d1937c09fbac707785655fcd3cb4ff73eac5
     }
 
     render() {
@@ -92,15 +103,16 @@ class _TaskDetails extends Component {
         if (!task) return <h1>Loading...</h1>
         return (
             <section className="task-details w-50 h-100 flex bg-modal pos-fixed c-stand fam-1 pad-1">
-                <div className="info-task flex column w-70 h-100 content-start">
+                <div className="info-task flex column w-70  h-100 content-start">
                     {/* Title */}
-                    <form className="task-title flex column w-100 content-start pb-2" onSubmit={(ev) => {
+                    <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
                         ev.preventDefault()
                         this.updateTask()
                     }}>
-                        <div className="task-title flex row w-100">
-                            <label htmlFor="title" className="font-6"><BsCardChecklist /></label>
-                            <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details" onChange={this.handleChange} />
+                        <div className="task-title flex center h-33">
+                            <label htmlFor="title" className="font-6 flex center"><BsCardChecklist />
+                                <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details " onChange={this.handleChange} />
+                            </label>
                         </div>
                         <h3 className="fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
                     </form>
@@ -122,7 +134,7 @@ class _TaskDetails extends Component {
                             console.log('checklists',task.checklists)
                             return <CheckList onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
-                        </ul>}
+                    </ul>}
                     {task.comments && <ul className="comments clean-list">
                         {task.comments.map(comment => {
                             return <li className="full-comment flex row">
@@ -139,12 +151,12 @@ class _TaskDetails extends Component {
                 <div className="menu-task flex column w-40 content-start right">
                     <div className="close-details fam-2 font-1 bold pad-1">X</div>
                     <div className="details-action flex column center pad-1 w-80">
-                        <label htmlFor="actions" className="font-m">ACTIONS</label>
-                        <ul className="action-menu flex column w-100 clean-list font-m pad-0">
-                            <li className="btn-action "><MdLabelOutline />Labels</li>
+                        <label htmlFor="actions" className="font-m pb-3">ACTIONS</label>
+                        <ul className="action-menu flex column w-100 clean-list font-m pad-0 fw-2">
+                            <li className="btn-action w-100 "><MdLabelOutline />Labels</li>
                             <li className="btn-action"><FiUsers />Members</li>
                             <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
-                            <li onClick={()=> {this.onAddCheckList(task)}} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
+                            <li onClick={() => { this.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
                             <li className="btn-action"><BsImage />Image</li>
                             <li className="btn-action"><BsArrowRight />Move</li>
                             <li className="btn-action"><BiCopy />Copy</li>
