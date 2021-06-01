@@ -1,4 +1,4 @@
-import { boardService } from '../../services/boardService.js'
+import { boardService } from '../../../services/boardService.js'
 import React, { Component } from 'react'
 
 export class CheckListStatus extends Component {

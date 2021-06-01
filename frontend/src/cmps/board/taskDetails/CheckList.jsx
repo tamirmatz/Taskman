@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { utilService } from '../../services/generalService/utilService'
+import { utilService } from '../../../services/generalService/utilService'
 import {CheckListStatus} from './CheckListStatus'
 
 export class CheckList extends Component {
