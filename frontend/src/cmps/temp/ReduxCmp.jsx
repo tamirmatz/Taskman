@@ -21,7 +21,8 @@ class _ extends Component {
 }
 const mapStateToProps = state => {
     return {
-        loggedInUser: state.userModule.loggedInUser
+        loggedInUser: state.userModule.loggedInUser,
+        board: state.boardModule.board
     }
 }
 const mapDispatchToProps = {

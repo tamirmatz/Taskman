@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { utilService } from '../../../services/generalService/utilService'
-import {CheckListStatus} from './CheckListStatus'
+import { CheckListStatus } from './CheckListStatus'
+import { RiDeleteBin6Line } from 'react-icons/ri'
+import { BsCheckBox } from 'react-icons/bs'
+
 
 export class CheckList extends Component {
     state = {
@@ -53,34 +56,39 @@ export class CheckList extends Component {
         return (
             <li>
                 <div className="flex space-between center">
-                    {/* <h1>{checklist.title}</h1> */}
-                    <label htmlFor="title" className="font-6"></label>
-                    <input onBlur={this.props.updateTask} type="text" value={checklist.title} name="title" className="input-details" onChange={this.handleChangeCheckList} />
-                    <button onClick={() => {this.props.onRemoveCheckList(this.props.idx)}}>Delete</button>
+                    <div className="flex center desc-header">
+                        <BsCheckBox />
+                        <input onBlur={this.props.updateTask} type="text" value={checklist.title} name="title" className="input-details desc-header" onChange={this.handleChangeCheckList} />
+                    </div>
+                    <button onClick={() => { this.props.onRemoveCheckList(this.props.idx) }}>Delete</button>
                 </div>
-                {checklist.todos.length > 0 &&<CheckListStatus checklist={checklist}/>} 
-                <ul>
-                    {checklist.todos.map((todo, idx) => {
-                        return <li className="flex">
-                            <input type="checkbox" name="isDone" checked={todo.isDone} onChange={(ev) => {
-                                this.handleChangeTodos(ev, idx)
-                            }
-                            } />
-                            <input className={`input-details ${todo.isDone && "done-todo"}`} type="text" name="txt" value={todo.txt} onChange={(ev) => {
-                                this.handleChangeTodos(ev, idx)
-                            }} />
-                            <button onClick={() => {
-                                this.handleChangeTodos({}, idx, true)
-                            }}>X</button>
-                        </li>
-                    })}
-                    <form onSubmit={(ev) => {
-                        ev.preventDefault()
-                        this.handleChangeTodos(ev, -1)
-                    }}>
-                        <input type="text" className="input-details" placeholder="+ Add Todo" />
-                    </form>
-                </ul>
+                <div className="content-gap">
+                    {checklist.todos.length > 0 && <CheckListStatus checklist={checklist} />}
+                    <ul className="todo-list">
+                        {checklist.todos.map((todo, idx) => {
+                            return <li className="flex space-between">
+                                <div>
+                                    <input type="checkbox" name="isDone" checked={todo.isDone} onChange={(ev) => {
+                                        this.handleChangeTodos(ev, idx)
+                                    }
+                                    } />
+                                    <input className={`input-details ${todo.isDone && "done-todo"}`} type="text" name="txt" value={todo.txt} onChange={(ev) => {
+                                        this.handleChangeTodos(ev, idx)
+                                    }} />
+                                </div>
+                                <span className="" onClick={() => {
+                                    this.handleChangeTodos({}, idx, true)
+                                }}><RiDeleteBin6Line className="trash-todo"/></span>
+                            </li>
+                        })}
+                        <form onSubmit={(ev) => {
+                            ev.preventDefault()
+                            this.handleChangeTodos(ev, -1)
+                        }}>
+                            <input type="text" className="input-details" placeholder="+ Add Todo" />
+                        </form>
+                    </ul>
+                </div>
             </li>
         )
     }
