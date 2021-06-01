@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import { boardService } from '../../../services/boardService.js'
 import { remove, add, loadBoard, update } from '../../../store/actions/boardsAction.js';
 import onClickOutside from "react-onclickoutside";
-import { BsCardChecklist, BsImage, BsArrowRight } from 'react-icons/bs'
+import { BsCardChecklist} from 'react-icons/bs'
 import { GrTextAlignFull } from 'react-icons/gr'
-import { MdLabelOutline } from 'react-icons/md'
-import { AiOutlineClockCircle, AiOutlineCheckSquare, AiOutlineDelete } from 'react-icons/ai'
-import { BiCopy } from 'react-icons/bi'
-import { FiUsers } from 'react-icons/fi'
+
 import { utilService } from '../../../services/generalService/utilService.js';
-import { CheckList } from './CheckList'
+import { CheckList } from './CheckList';
+import {ActionList} from './action/ActionList';
+// import {TaskTitle} from '../taskDetails/TaskTitle';
+
 
 
 class _TaskDetails extends Component {
@@ -137,23 +137,7 @@ class _TaskDetails extends Component {
                         })}
                     </ul>}
                 </div>
-                <div className="menu-task flex column w-40 content-start right">
-                    <div className="close-details fam-2 font-1 bold pad-1">X</div>
-                    <div className="details-action flex column center pad-1 w-80">
-                        <label htmlFor="actions" className="font-m pb-3">ACTIONS</label>
-                        <ul className="action-menu flex column w-100 clean-list font-m pad-0 fw-2">
-                            <li className="btn-action w-100 "><MdLabelOutline />Labels</li>
-                            <li className="btn-action"><FiUsers />Members</li>
-                            <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
-                            <li onClick={() => { this.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
-                            <li className="btn-action"><BsImage />Image</li>
-                            <li className="btn-action"><BsArrowRight />Move</li>
-                            <li className="btn-action"><BiCopy />Copy</li>
-                            <li onClick={()=> {this.onDeleteTask()}} className="btn-action"><AiOutlineDelete />Delete</li>
-                        </ul>
-                    </div>
-                </div>
-
+                 <ActionList task={task}/>           
             </section>
         )
     }
