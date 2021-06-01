@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { remove, add, loadBoard, update } from '../store/actions/boardsAction.js';
-import { loading } from '../store/actions/systemActions';
+import { loading } from '../store/actions/systemAction';
 
 import React, { Component } from 'react'
 import { TaskList } from '../cmps/board/TaskList'
@@ -101,7 +101,7 @@ class _Board extends Component {
             return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
         }
         // loading ui
-        this.props.loading();
+        // this.props.loading();
         // if(this.props.isLoading) return <h1 className="w-100 h-100 flex center content-center">Loading...</h1>
         if (this.props.isLoading) return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
 
@@ -171,6 +171,6 @@ const mapDispatchToProps = {
     add,
     loadBoard,
     update,
-    loading
+    // loading
 }
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)
