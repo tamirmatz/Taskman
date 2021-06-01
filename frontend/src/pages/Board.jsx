@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { remove, add, loadBoard, update } from '../store/actions/boardsAction.js';
-import { loading } from '../store/actions/systemActions';
+import { loading } from '../store/actions/systemAction';
 
 import React, { Component } from 'react'
 import { TaskList } from '../cmps/board/TaskList'
@@ -101,7 +101,7 @@ class _Board extends Component {
             return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
         }
         // loading ui
-        this.props.loading();
+        // this.props.loading();
         // if(this.props.isLoading) return <h1 className="w-100 h-100 flex center content-center">Loading...</h1>
         if (this.props.isLoading) return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
 
@@ -112,38 +112,39 @@ class _Board extends Component {
             >
                 <section className="board flex column w-100 animate__animated animate__fadeInRight ">
                     <BoardNavbar board={board} updateBoard={this.onUpdate} />
-                    <Droppable droppableId={'all-columns'}
-                        direction="horizontal"
-                        type="TaskList"
+
+                    <div className="board-list flex w-100 "
+
                     >
-                        {provided => (
-                            <div className="board-list flex w-100 "
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
+                        <Droppable droppableId="all-groups"
+                            direction="horizontal"
+                            type="TaskList"
+                        >
+                            {provided => (
                                 <ul
                                     className="groups clean-list flex "
-
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
                                 >
                                     {board && board.groups.map((group, idx) => <TaskList index={idx}
                                         key={group.id}
                                         board={board}
                                         group={group}
                                         updateBoard={this.onUpdate} />)}
+                                    {provided.placeholder}
                                 </ul>
 
-                                <div className="group add-group flex">
-                                    <form onSubmit={(ev) => {
-                                        ev.preventDefault()
-                                        this.onAddGroup()
-                                    }}>
-                                        <input className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
-                                    </form>
-                                </div>
-                                        {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
+                            )}
+                        </Droppable>
+                        <div className="group add-group flex">
+                            <form onSubmit={(ev) => {
+                                ev.preventDefault()
+                                this.onAddGroup()
+                            }}>
+                                <input className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
+                            </form>
+                        </div>
+                    </div>
 
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'} render={(props) => <ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props} /></ModalWrapper>}></Route>
@@ -170,6 +171,6 @@ const mapDispatchToProps = {
     add,
     loadBoard,
     update,
-    loading
+    // loading
 }
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)

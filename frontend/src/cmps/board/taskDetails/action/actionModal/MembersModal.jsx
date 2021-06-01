@@ -24,6 +24,8 @@ class _MembersModal extends Component {
         // this.props.history.push(`/board/${boardId}/${groupId}/${taskId}`)
     }
     render() {
+        console.log(this.props.board)
+        const members = this.props.board.members
         return <div className="members-wrap-modal d-none p-abs flex">
             <ModalAction onClick={(event) => { this.onCloseLabel(event) }}>
                 <div className="action-modal members-modal p-abs flex column pad-1">
@@ -33,9 +35,12 @@ class _MembersModal extends Component {
                     </div>
                     <div className="action-content">
                         <ul>
-                            <li>Avi</li>
-                            <li>MOR</li>
-                            <li>TALIA</li>
+                            {members.map(member => {
+                                return <li className="flex center">
+                                    <img src={member.imgUrl} className="avatar"/>
+                                    <p>{member.fullname} ({member.username})</p>
+                                </li>
+                            })}
                         </ul>
                     </div>
                 </div>

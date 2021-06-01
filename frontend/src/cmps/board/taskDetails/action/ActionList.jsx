@@ -52,7 +52,7 @@ class _ActionList extends Component {
                             <MembersModal/>
                         </div>
                         <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
-                        <li onClick={() => { this.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
+                        <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
                         <li className="btn-action"><BsImage />Image</li>
                         <li className="btn-action"><BsArrowRight />Move</li>
                         <li className="btn-action"><BiCopy />Copy</li>

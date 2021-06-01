@@ -67,9 +67,9 @@ export class TaskList extends Component {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                        style={{
-                            backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
-                        }}
+                        // style={{
+                        //     backgroundColor: snapshot.isDraggingOver ? 'lightblue' : '#EBECF0'
+                        // }}
                     >
                         <form className="" onSubmit={(ev) => {
                             ev.preventDefault()

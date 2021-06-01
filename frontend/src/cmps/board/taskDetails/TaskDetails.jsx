@@ -120,8 +120,7 @@ class _TaskDetails extends Component {
                     </section>
                     {utilService.isFalse(task.checklists)&& <ul className="todos clean-list">
                         {task.checklists.map((checklist,idx)=> {
-                            console.log('checklists',task.checklists)
-                            return <CheckList onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                            return <CheckList onRemoveCheckList={this.onRemoveCheckList} key={idx} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                     </ul>}
                     {task.comments && <ul className="comments clean-list">
@@ -137,7 +136,7 @@ class _TaskDetails extends Component {
                         })}
                     </ul>}
                 </div>
-                 <ActionList task={task}/>           
+                 <ActionList task={task} onAddCheckList={this.onAddCheckList}/>           
             </section>
         )
     }
@@ -154,4 +153,4 @@ const mapDispatchToProps = {
     loadBoard,
     update
 }
-export const TaskDetails = connect(mapStateToProps, mapDispatchToProps)(onClickOutside(_TaskDetails))
+export const TaskDetails = connect(mapStateToProps, mapDispatchToProps)(_TaskDetails)
