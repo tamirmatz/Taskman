@@ -61,6 +61,9 @@ class _TaskDetails extends Component {
     }
 
     onAddCheckList = (task) => {
+        if(!task.checklists){
+            task.checklists = [];
+        }
         task.checklists.push({id: utilService.makeId(), title: 'Checklist',todos: []})
         this.setState({task})
         this.updateTask()
@@ -71,8 +74,8 @@ class _TaskDetails extends Component {
         console.log('before',task.checklists )
         task.checklists.splice(ChecklistIdx,1)
         console.log('after',task.checklists )
-        this.setState({task})
-        this.updateTask()
+        this.setState({task}, this.updateTask)
+        // this.updateTask()
     }
 
     render() {
