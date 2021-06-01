@@ -6,8 +6,8 @@ import { AiOutlineClockCircle, AiOutlineCheckSquare, AiOutlineDelete } from 'rea
 import { BiCopy } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
 import { BsImage, BsArrowRight } from 'react-icons/bs'
-import { LabelModal} from './actionModal/LabelModal';
-import { MembersModal} from './actionModal/MembersModal'
+import { LabelModal } from './actionModal/LabelModal';
+import { MembersModal } from './actionModal/MembersModal'
 
 
 class _ActionList extends Component {
@@ -23,15 +23,6 @@ class _ActionList extends Component {
     }
 
     componentDidUpdate(prevProps) {
-
-    }
-
-    openLabel = () => {
-        document.querySelector('.label-wrap-modal').classList.toggle('d-none')
-    }
-
-    openMembers = () => {
-        document.querySelector('.members-wrap-modal').classList.toggle('d-none')
     }
 
     render() {
@@ -43,14 +34,17 @@ class _ActionList extends Component {
                 <div className="details-action flex column center pad-1 w-80">
                     <label htmlFor="actions" className="font-m pb-3">ACTIONS</label>
                     <ul className="action-menu flex column w-100 clean-list font-m pad-0 fw-2">
-                        <div className="label-wrap">
-                            <li className="btn-action w-100 " onClick={this.openLabel}><MdLabelOutline />Labels</li>
-                            <LabelModal/>
-                        </div>
-                        <div className="label-wrap">
-                            <li className="btn-action w-100 " onClick={this.openMembers}><FiUsers />Members</li>
-                            <MembersModal/>
-                        </div>
+
+                        <li className="label-wrap">
+                            <li className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</li>
+                            <LabelModal toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
+
+                        <li className="members-wrap">
+                            <li className="btn-action w-100 " onClick={() => {this.props.toggleModal('members-wrap-modal')}}><FiUsers />Members</li>
+                            <MembersModal isMemberChecked={this.props.isMemberChecked} onAddMemberToTask={this.props.onAddMemberToTask} toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
+
                         <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
                         <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
                         <li className="btn-action"><BsImage />Image</li>
