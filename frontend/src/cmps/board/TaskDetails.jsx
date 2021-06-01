@@ -68,6 +68,7 @@ class _TaskDetails extends Component {
         this.setState({ task })
         this.updateTask()
     }
+<<<<<<< HEAD
     onRemoveCheckList = (ChecklistIdx) => {
         console.log('here', ChecklistIdx)
         const { task } = this.state
@@ -76,6 +77,25 @@ class _TaskDetails extends Component {
         console.log('after', task.checklists)
         this.setState({ task }, this.updateTask)
         // this.updateTask()
+=======
+    onRemoveCheckList = (ChecklistIdx) =>{
+        console.log('here',ChecklistIdx)
+        const {task} = this.state
+        const removed = task.checklists.splice(ChecklistIdx,1)
+        console.log('removed',removed )
+        this.setState({task}, this.updateTask)
+    }
+
+    onDeleteTask = () => {
+        const {boardId} = this.props.match.params;
+        const copyboard = this.props.board
+        console.log('copyboard',copyboard)
+        const {task,group} = this.state
+        group.tasks.splice(boardService.getTaskIdxById(group,task.id),1)
+        copyboard.groups[boardService.getGroupIdxById(copyboard, group.id)] = group
+        this.props.update(copyboard)
+        this.props.history.push(`/board/${boardId}`)
+>>>>>>> 30f6d1937c09fbac707785655fcd3cb4ff73eac5
     }
 
     render() {
@@ -109,8 +129,9 @@ class _TaskDetails extends Component {
                             <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details" onChange={this.handleChange} />
                         </form>
                     </section>
-                    {utilService.isFalse(task.checklists) && <ul className="todos clean-list">
-                        {task.checklists.map((checklist, idx) => {
+                    {utilService.isFalse(task.checklists)&& <ul className="todos clean-list">
+                        {task.checklists.map((checklist,idx)=> {
+                            console.log('checklists',task.checklists)
                             return <CheckList onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                     </ul>}
@@ -139,7 +160,7 @@ class _TaskDetails extends Component {
                             <li className="btn-action"><BsImage />Image</li>
                             <li className="btn-action"><BsArrowRight />Move</li>
                             <li className="btn-action"><BiCopy />Copy</li>
-                            <li className="btn-action"><AiOutlineDelete />Delete</li>
+                            <li onClick={()=> {this.onDeleteTask()}} className="btn-action"><AiOutlineDelete />Delete</li>
                         </ul>
                     </div>
                 </div>
