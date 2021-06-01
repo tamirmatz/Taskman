@@ -57,23 +57,22 @@ export class TaskPreview extends Component {
             draggableId={task.id}
             index={index}
             isDragDisabled={false}
-            key={task.id}
         >
             {(provided, snapshot) => (
                 <div
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
-                    // isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
-                    // style={this.getStyle(provided.draggableProps.style, snapshot)}
+                // isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
+                // style={this.getStyle(provided.draggableProps.style, snapshot)}
                 >
                     <div className="wrap-list-task br-3">
                         <div className="wrap-task-prev">
                             <div className="task-preview flex column">
                                 {/* <Link to={`/board/${board._id}/${task.id}`}> */}
-                                <div className="flex row space-between center w-100">
-                                    <div className="label-task-prev">
-                                        {utilService.isFalse(task.labelIds) &&
+                                {utilService.isFalse(task.labelIds) &&
+                                    <div className="flex row space-between center w-100">
+                                        <div className="label-task-prev">
                                             <div className="labels-container wrap flex" onClick={(ev) => {
                                                 ev.stopPropagation();
                                             }}>
@@ -87,10 +86,11 @@ export class TaskPreview extends Component {
                                                         return <div key={label.id} className={`preview-label ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
                                                             {this.state.isLabelOpen && label.title}
                                                         </div>
-                                                })}</div>}
+                                                })}</div>
+                                        </div>
+                                        <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
                                     </div>
-                                    <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose/></span>
-                                </div>
+                                }
 
                                 <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
 
