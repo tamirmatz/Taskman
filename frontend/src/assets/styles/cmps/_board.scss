@@ -51,13 +51,13 @@
   
   /* Track */
 .board-list::-webkit-scrollbar-track {
-    background: rgba(102, 102, 102, 0.356);
+    background: rgba(0,0,0,.15);
     border-radius: 12px;
 }
 
 /* Handle */
 .board-list::-webkit-scrollbar-thumb {
-    background: rgb(240, 240, 240);
+    background: rgba(240, 240, 240, 0.438);
     border-radius: 12px;
 }
 
