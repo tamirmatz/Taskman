@@ -4,8 +4,9 @@ import { Provider } from 'react-redux';
 import { boardService } from '../../services/boardService.js'
 import { BsCheckBox } from 'react-icons/bs'
 import { FaRegCommentDots } from 'react-icons/fa'
-import { AiOutlineClockCircle } from 'react-icons/ai'
+import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
 import { GrTextAlignFull } from 'react-icons/gr'
+
 import { utilService } from '../../services/generalService/utilService'
 import React, { Component } from 'react'
 
@@ -87,7 +88,7 @@ export class TaskPreview extends Component {
                                                         </div>
                                                 })}</div>}
                                     </div>
-                                    <span className="cur-pointer fam-1 bold" onClick={() => { this.onRemoveTask(task.id) }}>X</span>
+                                    <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose/></span>
                                 </div>
 
                                 <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
