@@ -8,7 +8,7 @@ class _MembersBoard extends Component {
         const members = this.props.board.members;
         return (
             <section className="members-board flex space-between">
-                {members.map( member => <UserPreview user={member}/>)}
+                {members.map( (member,idx) =>  <UserPreview user={member} key ={idx}/>)}
             </section>
         )
     }
