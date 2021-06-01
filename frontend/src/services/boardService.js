@@ -81,7 +81,7 @@ function checklistPreview(task) {
             if (todo.isDone) doneTodos++
         })
     });
-    if (doneTodos === allTodos) isDone = true;
+    if (doneTodos === allTodos && allTodos) isDone = true;
     const str = `${doneTodos}/${allTodos}`
     const res = { str, isDone}
     return res

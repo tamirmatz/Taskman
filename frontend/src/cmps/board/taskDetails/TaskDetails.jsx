@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { boardService } from '../../services/boardService.js'
-import { remove, add, loadBoard, update } from '../../store/actions/boardsAction.js';
+import { boardService } from '../../../services/boardService.js'
+import { remove, add, loadBoard, update } from '../../../store/actions/boardsAction.js';
 import onClickOutside from "react-onclickoutside";
 import { BsCardChecklist, BsImage, BsArrowRight } from 'react-icons/bs'
 import { GrTextAlignFull } from 'react-icons/gr'
@@ -10,7 +10,7 @@ import { MdLabelOutline } from 'react-icons/md'
 import { AiOutlineClockCircle, AiOutlineCheckSquare, AiOutlineDelete } from 'react-icons/ai'
 import { BiCopy } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
-import { utilService } from '../../services/generalService/utilService.js';
+import { utilService } from '../../../services/generalService/utilService.js';
 import { CheckList } from './CheckList'
 
 
@@ -92,21 +92,21 @@ class _TaskDetails extends Component {
         if (!task) return <h1>Loading...</h1>
         return (
             <section className="task-details w-50 h-100 flex bg-modal pos-fixed c-stand fam-1 pad-1">
-                <div className="info-task flex column w-70  h-100 content-start">
+                <div className="info-task flex column w-70 h-100 content-start">
                     {/* Title */}
                     <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
                         ev.preventDefault()
                         this.updateTask()
                     }}>
                         <div className="task-title flex center h-33">
-                            <label htmlFor="title" className="font-6 flex center"><BsCardChecklist />
+                            <label htmlFor="title" className="font-6 flex center"><BsCardChecklist className="ico"/>
                                 <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details " onChange={this.handleChange} />
                             </label>
                         </div>
-                        <h3 className="fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
+                        <h3 className="content-gap fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
                     </form>
                     {/* DESC */}
-                    <section className="desc-section ">
+                    <section className="desc-section">
                         <div className="desc-header flex row">
                             <GrTextAlignFull /><label>Description</label>
                         </div>
@@ -115,7 +115,7 @@ class _TaskDetails extends Component {
                             this.updateTask()
                         }}>
 
-                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details" onChange={this.handleChange} />
+                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details content-gap" onChange={this.handleChange} />
                         </form>
                     </section>
                     {utilService.isFalse(task.checklists)&& <ul className="todos clean-list">
