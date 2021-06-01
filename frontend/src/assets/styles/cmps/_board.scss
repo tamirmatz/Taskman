@@ -52,11 +52,13 @@
   /* Track */
 .board-list::-webkit-scrollbar-track {
     background: rgba(102, 102, 102, 0.356);
+    border-radius: 12px;
 }
 
 /* Handle */
 .board-list::-webkit-scrollbar-thumb {
-background: rgb(240, 240, 240);
+    background: rgb(240, 240, 240);
+    border-radius: 12px;
 }
 
 /* Handle on hover */
