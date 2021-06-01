@@ -112,7 +112,7 @@ class _Board extends Component {
             >
                 <section className="board flex column w-100 animate__animated animate__fadeInRight ">
                     <BoardNavbar board={board} updateBoard={this.onUpdate} />
-                    <Droppable droppableId={'all-columns'}
+                    <Droppable droppableId="all-groups"
                         direction="horizontal"
                         type="TaskList"
                     >
