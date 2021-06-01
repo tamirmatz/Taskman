@@ -9,7 +9,6 @@
         background: inherit;
         border: none;
         resize: none;
-        font-size: 1rem;
         &:focus{
             outline: none;
             border: 1px solid rgb(70, 155, 211);
@@ -28,7 +27,7 @@
         display: inline-block;
     }
     .desc-header{
-        gap:20px;
+        gap:15px;
         align-items: center;
     }
     .task-title input{
@@ -75,4 +74,11 @@
 .btn-action:hover{
     background: rgb(202, 202, 202);
 
+}
+
+.details-header{
+    font-size: 1.5rem;
+}
+.content-gap{
+    margin-left: 40px;
 }
