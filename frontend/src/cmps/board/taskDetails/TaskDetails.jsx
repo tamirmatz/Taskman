@@ -73,7 +73,7 @@ class _TaskDetails extends Component {
         const {task} = this.state
         const removed = task.checklists.splice(ChecklistIdx,1)
         console.log('removed',removed )
-        this.setState({task}, this.updateTask)
+        this.setState({task: {...task}}, this.updateTask)
     }
 
     onDeleteTask = () => {
