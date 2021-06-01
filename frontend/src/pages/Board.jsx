@@ -112,38 +112,39 @@ class _Board extends Component {
             >
                 <section className="board flex column w-100 animate__animated animate__fadeInRight ">
                     <BoardNavbar board={board} updateBoard={this.onUpdate} />
-                    <Droppable droppableId="all-groups"
-                        direction="horizontal"
-                        type="TaskList"
+
+                    <div className="board-list flex w-100 "
+
                     >
-                        {provided => (
-                            <div className="board-list flex w-100 "
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
+                        <Droppable droppableId="all-groups"
+                            direction="horizontal"
+                            type="TaskList"
+                        >
+                            {provided => (
                                 <ul
                                     className="groups clean-list flex "
-
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
                                 >
                                     {board && board.groups.map((group, idx) => <TaskList index={idx}
                                         key={group.id}
                                         board={board}
                                         group={group}
                                         updateBoard={this.onUpdate} />)}
+                                    {provided.placeholder}
                                 </ul>
 
-                                <div className="group add-group flex">
-                                    <form onSubmit={(ev) => {
-                                        ev.preventDefault()
-                                        this.onAddGroup()
-                                    }}>
-                                        <input className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
-                                    </form>
-                                </div>
-                                        {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
+                            )}
+                        </Droppable>
+                        <div className="group add-group flex">
+                            <form onSubmit={(ev) => {
+                                ev.preventDefault()
+                                this.onAddGroup()
+                            }}>
+                                <input className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
+                            </form>
+                        </div>
+                    </div>
 
                     <Switch>
                         <Route path={'/board/:boardId/:groupId/:taskId'} render={(props) => <ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props} /></ModalWrapper>}></Route>
