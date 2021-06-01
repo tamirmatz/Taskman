@@ -68,16 +68,6 @@ class _TaskDetails extends Component {
         this.setState({ task })
         this.updateTask()
     }
-<<<<<<< HEAD
-    onRemoveCheckList = (ChecklistIdx) => {
-        console.log('here', ChecklistIdx)
-        const { task } = this.state
-        console.log('before', task.checklists)
-        task.checklists.splice(ChecklistIdx, 1)
-        console.log('after', task.checklists)
-        this.setState({ task }, this.updateTask)
-        // this.updateTask()
-=======
     onRemoveCheckList = (ChecklistIdx) =>{
         console.log('here',ChecklistIdx)
         const {task} = this.state
@@ -95,7 +85,6 @@ class _TaskDetails extends Component {
         copyboard.groups[boardService.getGroupIdxById(copyboard, group.id)] = group
         this.props.update(copyboard)
         this.props.history.push(`/board/${boardId}`)
->>>>>>> 30f6d1937c09fbac707785655fcd3cb4ff73eac5
     }
 
     render() {
