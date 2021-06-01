@@ -17,19 +17,14 @@ class _MembersModal extends Component {
     componentDidUpdate(prevProps) {
 
     }
-    onCloseLabel = (ev) => {
-        document.querySelector('.members-wrap-modal').classList.toggle('d-none')
 
-        // const { boardId, taskId, groupId } = this.props.match.params;
-        // this.props.history.push(`/board/${boardId}/${groupId}/${taskId}`)
-    }
     render() {
-        return <div className="members-wrap-modal d-none p-abs flex">
-            <ModalAction onClick={(event) => { this.onCloseLabel(event) }}>
-                <div className="action-modal members-modal p-abs flex column pad-1">
+        return <div className="action-modal members-wrap-modal d-none p-abs flex">
+            <ModalAction>
+                <div className="members-modal p-abs flex column pad-1">
                         <div className="header-modal font-1 fam-1 fw-2 flex center content-end gap-5 w-70">
                             <h1 className="fam-1 font-1 ">Members</h1>
-                            <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onCloseLabel() }}><AiOutlineClose /></span>
+                            <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.props.toggleModal('members-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
                     <div className="action-content">
                         <ul>
