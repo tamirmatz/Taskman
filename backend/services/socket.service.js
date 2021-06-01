@@ -7,7 +7,13 @@ var gIo = null
 var gSocketBySessionIdMap = {}
 
 function connectSockets(http, session) {
-    gIo = require('socket.io')(http);
+    gIo = require('socket.io')(http, {
+        cors: {
+            origin: 'http://localhost:3000',
+            methods: ["GET","POST","PUT","DELETE"],
+            credentials: true
+        }
+    });
 
     const sharedSession = require('express-socket.io-session');
 
@@ -34,12 +40,16 @@ function connectSockets(http, session) {
             // logger.debug('Session ID is', socket.handshake.sessionID)
             socket.board = boardId
         })
+        socket.on('update board', () => {
+            console.log('emitted update board',socket.board)
+            socket.to(socket.board).emit('updated board', 'data')
+        })
         socket.on('update newMsg', msg => {
             console.log('Msg', msg);
             // emits to all sockets:
             // gIo.emit('chat addMsg', msg)
             // emits only to sockets in the same room
-            gIo.to(socket.myTopic).emit('chat addMsg', msg)
+            socket.to(socket.myTopic).emit('chat addMsg', msg)
         })
         socket.on('user-watch', userId => {
             socket.join(userId)

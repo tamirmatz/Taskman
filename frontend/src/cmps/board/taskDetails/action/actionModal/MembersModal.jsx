@@ -19,9 +19,9 @@ class _MembersModal extends Component {
     }
     onCloseLabel = (ev) => {
         document.querySelector('.members-wrap-modal').classList.toggle('d-none')
-
-        // const { boardId, taskId, groupId } = this.props.match.params;
-        // this.props.history.push(`/board/${boardId}/${groupId}/${taskId}`)
+    }
+    onAddMemberToTask = () => {
+        
     }
     render() {
         console.log(this.props.board)
@@ -36,7 +36,7 @@ class _MembersModal extends Component {
                     <div className="action-content">
                         <ul>
                             {members.map(member => {
-                                return <li className="flex center">
+                                return <li onClick={this.onAddMemberToTask} className="flex center">
                                     <img src={member.imgUrl} className="avatar"/>
                                     <p>{member.fullname} ({member.username})</p>
                                 </li>
