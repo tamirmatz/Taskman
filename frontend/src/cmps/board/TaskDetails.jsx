@@ -65,6 +65,15 @@ class _TaskDetails extends Component {
         this.setState({task})
         this.updateTask()
     }
+    onRemoveCheckList = (ChecklistIdx) =>{
+        console.log('here',ChecklistIdx)
+        const {task} = this.state
+        console.log('before',task.checklists )
+        task.checklists.splice(ChecklistIdx,1)
+        console.log('after',task.checklists )
+        this.setState({task})
+        this.updateTask()
+    }
 
     render() {
         const { task } = this.state;
@@ -98,7 +107,7 @@ class _TaskDetails extends Component {
                     </section>
                     {utilService.isFalse(task.checklists)&& <ul className="todos clean-list">
                         {task.checklists.map((checklist,idx)=> {
-                            return <CheckList idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                            return <CheckList onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                         </ul>}
                     {task.comments && <ul className="comments clean-list">

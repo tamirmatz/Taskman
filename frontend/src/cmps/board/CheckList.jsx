@@ -56,9 +56,9 @@ export class CheckList extends Component {
                     {/* <h1>{checklist.title}</h1> */}
                     <label htmlFor="title" className="font-6"></label>
                     <input onBlur={this.props.updateTask} type="text" value={checklist.title} name="title" className="input-details" onChange={this.handleChangeCheckList} />
-                    <button>Delete</button>
+                    <button onClick={() => {this.props.onRemoveCheckList(this.props.idx)}}>Delete</button>
                 </div>
-                <CheckListStatus checklist={checklist}/>
+                {checklist.todos.length > 0 &&<CheckListStatus checklist={checklist}/>} 
                 <ul>
                     {checklist.todos.map((todo, idx) => {
                         return <li className="flex">

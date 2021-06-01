@@ -92,6 +92,8 @@ function checklistPrecent(checklist){
     checklist.todos.forEach(todo => {
         if(todo.isDone) doneTodos++
     })
-    const precent = (doneTodos / checklist.length) * 100 
+    const precent = (doneTodos / checklist.todos.length) * 100 
+    console.log('doneTodos',checklist.todos.length);
+    
     return precent
 }
