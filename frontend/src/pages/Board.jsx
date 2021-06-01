@@ -107,7 +107,7 @@ class _Board extends Component {
 
         return (
             <section className="board flex column w-100 animate__animated animate__fadeInRight ">
-                <BoardNavbar board={board} />
+                <BoardNavbar board={board} updateBoard={this.onUpdate} />
                 <div className="board-list flex w-100 ">
                     <DragDropContext
                         onDragEnd={this.onDragEnd}
