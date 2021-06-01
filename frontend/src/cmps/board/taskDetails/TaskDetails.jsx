@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { boardService } from '../../services/boardService.js'
-import { remove, add, loadBoard, update } from '../../store/actions/boardsAction.js';
+import { boardService } from '../../../services/boardService.js'
+import { remove, add, loadBoard, update } from '../../../store/actions/boardsAction.js';
 import onClickOutside from "react-onclickoutside";
 import { BsCardChecklist, BsImage, BsArrowRight } from 'react-icons/bs'
 import { GrTextAlignFull } from 'react-icons/gr'
@@ -10,7 +10,7 @@ import { MdLabelOutline } from 'react-icons/md'
 import { AiOutlineClockCircle, AiOutlineCheckSquare, AiOutlineDelete } from 'react-icons/ai'
 import { BiCopy } from 'react-icons/bi'
 import { FiUsers } from 'react-icons/fi'
-import { utilService } from '../../services/generalService/utilService.js';
+import { utilService } from '../../../services/generalService/utilService.js';
 import { CheckList } from './CheckList'
 
 
@@ -92,7 +92,7 @@ class _TaskDetails extends Component {
         if (!task) return <h1>Loading...</h1>
         return (
             <section className="task-details w-50 h-100 flex bg-modal pos-fixed c-stand fam-1 pad-1">
-                <div className="info-task flex column w-70  h-100 content-start">
+                <div className="info-task flex column w-70 h-100 content-start">
                     {/* Title */}
                     <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
                         ev.preventDefault()

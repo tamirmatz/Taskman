@@ -7,7 +7,7 @@ import { TaskList } from '../cmps/board/TaskList'
 import { BoardNavbar } from '../cmps/board/boardNavbar/BoardNavbar'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Route, Switch } from 'react-router';
-import { TaskDetails } from '../cmps/board/TaskDetails.jsx';
+import { TaskDetails } from '../cmps/board/taskDetails/TaskDetails';
 import { boardService } from '.././services/boardService.js'
 import { utilService } from '../services/generalService/utilService.js'
 import { socketService } from '../services/generalService/socketService.js'
