@@ -41,8 +41,10 @@ async function remove(boardId) {
 
 async function add(board,loggedInUser) {
     try {
-        const boardToAdd = _createInittialBoard(board)
+        const boardToAdd = _createInittialBoard(board,loggedInUser)
+        console.log(boardToAdd)
         const collection = await dbService.getCollection('board')
+        console.log()
         collection.insertOne(boardToAdd)
         return boardToAdd
     } catch (err) {
@@ -67,55 +69,45 @@ async function update(board) {
 
 
 
-function _createInittialBoard(newBoard) {
+function _createInittialBoard({title,style},loggedInUser) {
     const board = {
-    //     "_id": utilService.makeId(),
-    //     title,
-    //     "createdAt": Date.now(),
-    //     "createdBy": {
-    //         "_id": loggedInUser._id,
-    //         "fullname": loggedInUser.fullname,
-    //         "imgUrl": loggedInUser.imgUrl
-    //     },
-    //     "style": {},
-    //     "labels": [
-    //         {
-    //             "id": "l101",
-    //             "title": "Done",
-    //             "color": "#61bd4f"
-    //         },
-    //         {
-    //             "id": "l101",
-    //             "title": "Todo",
-    //             "color": "green"
-    //         }
-    //     ],
-    //     "members": [
-    //         {
-    //             "_id": loggedInUser._id,
-    //             "fullname": loggedInUser.fullname,
-    //             "imgUrl": loggedInUser.imgUrl
-    //         }
-    //     ],
-    //     "groups": [
-    //         {
-    //             "id": utilService.makeId(),
-    //             "title": "Group 1",
-    //             "tasks": [
-    //                 {
-    //                     "id": "c101",
-    //                     "title": "Replace logo"
-    //                 },
-    //                 {
-    //                     "id": "c102",
-    //                     "title": "Add Samples"
-    //                 }
-    //             ],
-    //             "checklists": [],
-    //             "style": {}
-    //         },
-    //     ],
-    //     "activities": []
+        // "_id": utilService.makeId(),
+        title,
+        "createdAt": Date.now(),
+        "createdBy": {
+            "_id": loggedInUser._id,
+            "fullname": loggedInUser.fullname,
+            "imgUrl": loggedInUser.imgUrl
+        },
+        "style": style.background,
+        "labels": [
+        ],
+        "members": [
+            {
+                "_id": loggedInUser._id,
+                "fullname": loggedInUser.fullname,
+                "imgUrl": loggedInUser.imgUrl
+            }
+        ],
+        "groups": [
+            {
+                "id": utilService.makeId(),
+                "title": "Group 1",
+                "tasks": [
+                    {
+                        "id": "c101",
+                        "title": "Replace logo"
+                    },
+                    {
+                        "id": "c102",
+                        "title": "Add Samples"
+                    }
+                ],
+                "checklists": [],
+                "style": {}
+            },
+        ],
+        "activities": []
     }
 
     return board;
