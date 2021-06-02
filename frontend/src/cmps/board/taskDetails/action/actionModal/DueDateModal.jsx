@@ -22,9 +22,9 @@ class _DueDateModal extends Component {
         return <div className="action-modal duedate-wrap-modal d-none p-abs flex">
             <ModalAction>
                 <div className="duedate-modal p-abs flex column pad-1">
-                    <div className="header-modal font-1 fam-1 fw-2 flex center content-end gap-5 w-70">
-                        <h1 className="fam-1 font-1 ">DueDate</h1>
-                        <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClose /></span>
+                <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 mb-1">
+                        <h1 className="fam-1 font-1">DueDate</h1>
+                        <span className="cur-pointer fam-1 font-1 bold" onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
                     <div className="action-content">
                         <ul>

@@ -9,6 +9,7 @@
     width: 22rem;
     height: 17rem;
     background-color: #fff;
+    border-radius: 4px;
 }
 
 .label-modal{
@@ -26,10 +27,11 @@
     height: 17rem;
 }
 
-.action-title{
-
-}
 
 .action-content{
     
+}
+
+.header-modal{
+    border-bottom: 1px solid #333;
 }

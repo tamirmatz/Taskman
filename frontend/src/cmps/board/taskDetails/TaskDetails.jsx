@@ -152,11 +152,11 @@ class _TaskDetails extends Component {
                         this.updateTask()
                     }}>
                         <div className="task-title flex center h-33">
-                            <label htmlFor="title" className="font-6 flex center"><BsCardChecklist className="ico" />
-                                <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details " onChange={this.handleChange} />
+                            <label htmlFor="title" className="font-6 flex center w-100"><BsCardChecklist className="ico" />
+                                <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details title-task-input" onChange={this.handleChange} />
                             </label>
                         </div>
-                        <h3 className="content-gap fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
+                        <h3 className="fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
                     </form>
                     <section className="flex">
                         <div className="task-members">
