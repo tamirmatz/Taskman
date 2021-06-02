@@ -7,10 +7,6 @@ import { LabelTask } from '../LabelTask'
 
 
 class _LabelModal extends Component {
-    state = {
-        
-    }
-
     componentDidMount() {
 
     }
