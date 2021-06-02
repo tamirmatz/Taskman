@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 import { Provider } from 'react-redux';
 import { boardService } from '../../services/boardService.js'
 import { BsCheckBox } from 'react-icons/bs'
@@ -17,6 +17,7 @@ export class TaskPreview extends Component {
     state = {
         isLabelOpen: false
     }
+
 
     toggleLabels = () => {
         document.querySelectorAll('.preview-label').forEach(label => {
@@ -56,66 +57,71 @@ export class TaskPreview extends Component {
         return <Draggable
             draggableId={task.id}
             index={index}
-            isDragDisabled={false}
+        // isDragDisabled={false}
         >
-            {(provided, snapshot) => (
-                <div
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                // isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
-                // style={this.getStyle(provided.draggableProps.style, snapshot)}
-                >
-                    <div className="wrap-list-task br-3">
-                        <div className="wrap-task-prev">
-                            <div className="task-preview flex column">
-                                {/* <Link to={`/board/${board._id}/${task.id}`}> */}
-                                {utilService.isFalse(task.labelIds) &&
-                                    <div className="flex row space-between center w-100">
-                                        <div className="label-task-prev">
-                                            <div className="labels-container wrap flex" onClick={(ev) => {
-                                                ev.stopPropagation();
-                                            }}>
-                                                {task.labelIds.map(labelId => {
+            {(provided, snapshot) => {
+                if (snapshot.isDragging) {
 
-                                                    const label = board.labels.find(label => {
-                                                        return label.id === labelId;
-                                                    })
+                }
+                return (
+                    <div
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                        isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
+                        style={this.getStyle(provided.draggableProps.style, snapshot)}
+                    >
+                        <div className="wrap-list-task br-3">
+                            <div className="wrap-task-prev">
+                                <div className="task-preview flex column">
+                                    {/* <Link to={`/board/${board._id}/${task.id}`}> */}
+                                    {utilService.isFalse(task.labelIds) &&
+                                        <div className="flex row space-between center w-100">
+                                            <div className="label-task-prev">
+                                                <div className="labels-container wrap flex" onClick={(ev) => {
+                                                    ev.stopPropagation();
+                                                }}>
+                                                    {task.labelIds.map(labelId => {
 
-                                                    if (label)
-                                                        return <div key={label.id} className={`preview-label ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
-                                                            {this.state.isLabelOpen && label.title}
-                                                        </div>
-                                                })}</div>
+                                                        const label = board.labels.find(label => {
+                                                            return label.id === labelId;
+                                                        })
+
+                                                        if (label)
+                                                            return <div key={label.id} className={`preview-label ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
+                                                                {this.state.isLabelOpen && label.title}
+                                                            </div>
+                                                    })}</div>
+                                            </div>
+                                            <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
                                         </div>
-                                        <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
-                                    </div>
-                                }
+                                    }
 
-                                <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
+                                    <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
 
 
-                                    <h1 className="task-title fam-1 font-m">{task.title}</h1>
-                                    <div className="task-mini-details flex w-100 content-start  gap-xs fam-1 c-stand">
-                                        {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
-                                        {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev"}`}>
-                                            <BsCheckBox />
-                                            <small>{boardService.checklistPreview(task).str}</small>
-                                        </div>}
-                                        {task.dueDate && <div className="flex row center">
-                                            <AiOutlineClockCircle />
-                                            <small>
-                                                {utilService.timeAgo(task.dueDate)}
-                                            </small>
-                                        </div>}
-                                        {task.description && <small className="flex center"><GrTextAlignFull /></small>}
-                                    </div>
-                                </Link>
+                                        <h1 className="task-title fam-1 font-m">{task.title}</h1>
+                                        <div className="task-mini-details flex w-100 content-start  gap-xs fam-1 c-stand">
+                                            {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
+                                            {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev"}`}>
+                                                <BsCheckBox />
+                                                <small>{boardService.checklistPreview(task).str}</small>
+                                            </div>}
+                                            {task.dueDate && <div className="flex row center">
+                                                <AiOutlineClockCircle />
+                                                <small>
+                                                    {utilService.timeAgo(task.dueDate)}
+                                                </small>
+                                            </div>}
+                                            {task.description && <small className="flex center"><GrTextAlignFull /></small>}
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )
+                )
+            }
             }
         </Draggable>
     }

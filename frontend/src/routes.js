@@ -5,13 +5,12 @@ import { UserDetails } from './pages/UserDetails'
 import { BoardList } from './pages/BoardList'
 import { Board } from './pages/Board'
 import { Login } from './pages/LoginSignup'
-import { TaskDetails } from './cmps/board/taskDetails/TaskDetails'
 
 export const routes = [
-    /* {
-        path: '/board/:boardId/:groupId/:taskId',
-        component: TaskDetails,
-    }, */
+    {
+        path: '/user/:userId',
+        component: UserDetails,
+    }, 
     {
         path: '/board/:boardId',
         component: Board,
