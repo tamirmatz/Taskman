@@ -30,15 +30,15 @@ class _TaskDetails extends Component {
         this.setState({ ...this.state, group, task })
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props !== prevProps) {
-            const { boardId, taskId, groupId } = this.props.match.params;
-            const board = { ...this.props.board };
-            const group = boardService.getGroupById(board, groupId);
-            const task = boardService.getTaskById(group, taskId);
-            this.setState({ ...this.state, group, task })
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props !== prevProps) {
+    //         const { boardId, taskId, groupId } = this.props.match.params;
+    //         const board = { ...this.props.board };
+    //         const group = boardService.getGroupById(board, groupId);
+    //         const task = boardService.getTaskById(group, taskId);
+    //         this.setState({ ...this.state, group, task })
+    //     }
+    // }
 
     handleChange = ({ target }) => {
         const field = target.name
@@ -74,13 +74,13 @@ class _TaskDetails extends Component {
             task.checklists = [];
         }
         task.checklists.push({ id: utilService.makeId(), title: 'Checklist', todos: [] })
-        this.setState({ task })
-        this.updateTask()
+        this.setState({ task }, this.updateTask)
+
     }
-    onRemoveCheckList = (ChecklistIdx) => {
+    onRemoveCheckList = (checklistIdx) => {
         const { task } = this.state
-        const removed = task.checklists.splice(ChecklistIdx, 1)
-        this.setState({ task: { ...task } }, this.updateTask)
+        task.checklists.splice(checklistIdx, 1)
+        this.setState({ task }, this.updateTask)
     }
 
     onDeleteTask = () => {
@@ -103,9 +103,9 @@ class _TaskDetails extends Component {
         this.updateTask()
     }
 
-    onSaveDueDate = (date) =>{
-        const {task} = this.state;
-        task.dueDate = {date,isDone:false}
+    onSaveDueDate = (date) => {
+        const { task } = this.state;
+        task.dueDate = date
         this.updateTask()
     }
 
@@ -120,8 +120,8 @@ class _TaskDetails extends Component {
 
     isDueDateDone = (val) => {
         const { task } = this.state;
-        console.log('val',val)
-
+        task.isDone = val
+        this.updateTask()
     }
 
     toggleModal = (className) => {
@@ -148,6 +148,7 @@ class _TaskDetails extends Component {
         const { task } = this.state;
         const { board } = this.props
         if (!task) return <h1>Loading...</h1>
+        console.log('checklist', task.checklists)
         return (
             <section className="task-details w-50 flex bg-modal pos-fixed c-stand fam-1 pad-1">
                 <div className="info-task flex column w-70 h-100 content-start">
@@ -168,7 +169,7 @@ class _TaskDetails extends Component {
                             {task.members.length > 0 && <h3 className="font-m">members</h3>}
                             <ul className="flex center">
                                 {task.members.map(member => {
-                                    return <UserPreview user={member} />
+                                    return <UserPreview key={member._id} user={member} />
                                 })}
                                 {task.members.length > 0 && <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="user-preview flex center content-center font-m">+</span>}
                             </ul>
@@ -188,8 +189,12 @@ class _TaskDetails extends Component {
                             </ul>
                         </div>
                         {task.dueDate && <div className="task-duedate flex center">
-                            <input onChange={(ev) => {this.isDueDateDone(ev.target.value)}} type="checkbox" />
-                              <p>{task.dueDate}</p> 
+                            <div className="flex center">
+                                <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} type="checkbox" />
+                                <p>{task.dueDate}</p>
+                                {console.log(task.dueDate)}
+                                {task.isDone && <div className="complete-duedate">complete</div>}
+                            </div>
                         </div>}
                     </section>
                     <section className="desc-section">
@@ -206,7 +211,7 @@ class _TaskDetails extends Component {
                     </section>
                     {utilService.isFalse(task.checklists) && <ul className="todos clean-list">
                         {task.checklists.map((checklist, idx) => {
-                            return <CheckList key={checklist.id} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                            return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                     </ul>}
                     <section className="comment-section">
@@ -235,7 +240,7 @@ class _TaskDetails extends Component {
                         </ul>}
                     </section>
                 </div>
-                <ActionList onDeleteTask={this.onDeleteTask} toggleModal={this.toggleModal} isMemberChecked={this.isMemberChecked} onAddMemberToTask={this.onAddMemberToTask} task={task} group={this.state.group} onAddCheckList={this.onAddCheckList} />
+                <ActionList onSaveDueDate={this.onSaveDueDate} onDeleteTask={this.onDeleteTask} toggleModal={this.toggleModal} isMemberChecked={this.isMemberChecked} onAddMemberToTask={this.onAddMemberToTask} task={task} group={this.state.group} onAddCheckList={this.onAddCheckList} />
             </section>
         )
     }

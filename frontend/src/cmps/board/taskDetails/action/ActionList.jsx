@@ -47,7 +47,7 @@ class _ActionList extends Component {
                         </ul>
 
                         <li className="duedate-wrap">
-                            <li className="btn-action w-100 " onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClockCircle />DueDate</li>
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClockCircle />DueDate</div>
                             <DueDateModal onSaveDueDate={this.props.onSaveDueDate} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
 
