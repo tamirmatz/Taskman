@@ -155,10 +155,6 @@ class _Board extends Component {
     }
 }
 
-// {
-//     path: '/board/:boardId/:taskId',
-//     component: TaskDetails,
-// }
 
 const mapStateToProps = state => {
     return {

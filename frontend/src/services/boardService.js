@@ -15,7 +15,8 @@ export const boardService = {
     getGroupIdxById,
     checklistPreview,
     getTaskIdxById,
-    checklistPrecent
+    checklistPrecent,
+    updateTaskAtBoard
 }
 
 
@@ -93,7 +94,26 @@ function checklistPrecent(checklist){
         if(todo.isDone) doneTodos++
     })
     const precent = (doneTodos / checklist.todos.length) * 100 
-    console.log('doneTodos',checklist.todos.length);
     
     return precent
+}
+
+function _updateTaskAtGroup(group, updateTask){
+    const idx = group.tasks.findIndex( task => {
+        task.id = updateTask.id;
+    })
+    group.tasks.splice(idx, 1, updateTask);
+    return group;
+}
+
+function _updateGroupAtBoard( board ,updateGroup){
+    const idx = getGroupIdxById(board, updateGroup.id)
+    board.groups[idx] = updateGroup;
+    return board;
+}
+
+function updateTaskAtBoard(board,group, updateTask){
+    const updateGroup =  _updateTaskAtGroup(group, updateTask);
+    const updateBoard = _updateGroupAtBoard(board, updateGroup);
+    return updateBoard;
 }

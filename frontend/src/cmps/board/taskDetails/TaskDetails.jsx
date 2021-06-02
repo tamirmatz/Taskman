@@ -21,14 +21,22 @@ class _TaskDetails extends Component {
         onFocus: false
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         const { boardId, taskId, groupId } = this.props.match.params;
-        console.log(boardId)
-        await this.props.loadBoard(boardId);
-        const copyBoard = { ...this.props.board };
-        const group = boardService.getGroupById(copyBoard, groupId);
+        const board = { ...this.props.board };
+        const group = boardService.getGroupById(board, groupId);
         const task = boardService.getTaskById(group, taskId);
         this.setState({ ...this.state, group, task })
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props !== prevProps){
+            const { boardId, taskId, groupId } = this.props.match.params;
+            const board = { ...this.props.board };
+            const group = boardService.getGroupById(board, groupId);
+            const task = boardService.getTaskById(group, taskId);
+            this.setState({ ...this.state, group, task })
+        }
     }
 
     handleChange = ({ target }) => {
@@ -69,17 +77,14 @@ class _TaskDetails extends Component {
         this.updateTask()
     }
     onRemoveCheckList = (ChecklistIdx) => {
-        console.log('here', ChecklistIdx)
         const { task } = this.state
         const removed = task.checklists.splice(ChecklistIdx, 1)
-        console.log('removed', removed)
         this.setState({ task: { ...task } }, this.updateTask)
     }
 
     onDeleteTask = () => {
         const { boardId } = this.props.match.params;
         const copyboard = this.props.board
-        console.log('copyboard', copyboard)
         const { task, group } = this.state
         group.tasks.splice(boardService.getTaskIdxById(group, task.id), 1)
         copyboard.groups[boardService.getGroupIdxById(copyboard, group.id)] = group
@@ -109,8 +114,6 @@ class _TaskDetails extends Component {
     toggleModal = (className) => {
         const modals = document.querySelectorAll('.action-modal');
         const currModal = document.querySelector(`.${className}`);
-        console.log(modals);
-        console.log(currModal);
         if (modals) {
             modals.forEach(
                 el => el.classList.add('d-none'));
@@ -118,6 +121,14 @@ class _TaskDetails extends Component {
         if (currModal) {
             currModal.classList.remove('d-none');
         }
+    }
+
+    onAddLabelTask = (labelId) =>{
+        const task = this.state;
+        if(!task.labels){
+            task.labels = [];
+        }
+        task.labels.push(labelId);
     }
 
     render() {
