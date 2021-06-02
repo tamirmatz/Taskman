@@ -30,6 +30,8 @@ class _TaskDetails extends Component {
         this.setState({ ...this.state, group, task })
     }
 
+    //Destroyed the check list! don't use it! -tamir&naav- <3
+
     // componentDidUpdate(prevProps) {
     //     if (this.props !== prevProps) {
     //         const { boardId, taskId, groupId } = this.props.match.params;
@@ -190,7 +192,7 @@ class _TaskDetails extends Component {
                         </div>
                         {task.dueDate && <div className="task-duedate flex center">
                             <div className="flex center">
-                                <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} type="checkbox" />
+                                <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} checked={task.isDone} type="checkbox" />
                                 <p>{task.dueDate}</p>
                                 {console.log(task.dueDate)}
                                 {task.isDone && <div className="complete-duedate">complete</div>}
