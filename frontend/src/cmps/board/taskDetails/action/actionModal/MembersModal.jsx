@@ -30,8 +30,8 @@ class _MembersModal extends Component {
                     </div>
                     <div className="action-content">
                         <ul>
-                            {members.map(member => {
-                                return <li key={member._id} onClick={() => { this.props.onAddMemberToTask(member) }} className="flex space-between member-modal center">
+                            {members.map((member, idx)  => {
+                                return <li key={idx} onClick={() => { this.props.onAddMemberToTask(member) }} className="flex space-between member-modal center">
                                     <div className="flex center gap-xs">
                                         {/* <img src={member.imgUrl} className="avatar" /> */}
                                         <UserPreview user={member}/>
