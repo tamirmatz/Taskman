@@ -31,7 +31,7 @@ class _TaskDetails extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props !== prevProps){
+        if (this.props !== prevProps) {
             const { boardId, taskId, groupId } = this.props.match.params;
             const board = { ...this.props.board };
             const group = boardService.getGroupById(board, groupId);
@@ -103,9 +103,9 @@ class _TaskDetails extends Component {
         this.updateTask()
     }
 
-    onSaveDueDate = (date) =>{
+    onSaveDueDate = (date) => {
         console.log(this.state)
-        const {task} = this.state;
+        const { task } = this.state;
         task.dueDate = date
         this.updateTask()
     }
@@ -131,9 +131,9 @@ class _TaskDetails extends Component {
         }
     }
 
-    onAddLabelTask = (labelId) =>{
+    onAddLabelTask = (labelId) => {
         const task = this.state;
-        if(!task.labels){
+        if (!task.labels) {
             task.labels = [];
         }
         task.labels.push(labelId);
@@ -156,15 +156,16 @@ class _TaskDetails extends Component {
                                 <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details title-task-input" onChange={this.handleChange} />
                             </label>
                         </div>
-                        <h3 className="fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
+                        <h3 className="fam-1 font-2 left-self h-20 center pb-2">in list {this.state.group.title}</h3>
                     </form>
-                    <section className="flex">
+                    <section className="flex wrap">
                         <div className="task-members">
+                            {task.members.length > 0 && <h3 className="font-m">members</h3>}
                             <ul className="flex center">
                                 {task.members.map(member => {
-                                    return <UserPreview user={member}/>
+                                    return <UserPreview user={member} />
                                 })}
-                                {task.members.length > 0 && <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="avatar">+</span>}
+                                {task.members.length > 0 && <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="user-preview flex center content-center font-m">+</span>}
                             </ul>
                         </div>
                         <div className="task-labels flex center">
@@ -183,7 +184,7 @@ class _TaskDetails extends Component {
                         </div>
                         <div className="task-duedate flex center">
                             <input type="checkbox" />
-                            {task.dueDate &&  <p>{task.dueDate}</p> }
+                            {task.dueDate && <p>{task.dueDate}</p>}
                         </div>
                     </section>
                     <section className="desc-section">

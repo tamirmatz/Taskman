@@ -27,11 +27,20 @@
     color: var(--spanColor);
 }
 .main-nav a{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+a.btn-boards:hover{
+    color: #fff;
+}
+
+
+.btn-boards{
+    height: 100%;
+    padding: 0 8px;
+    transition: 0.3s;
+}
+
+a.btn-boards:hover{
     color: #333;
-    font-size: 1rem;
 }
-.main-nav a:hover{
-    color: #919191;
-}
-
-
