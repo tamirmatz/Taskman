@@ -30,21 +30,22 @@ export function removeUser(userId) {
 
 
 export function login(userCreds) {
+  console.log(userCreds)
   return async dispatch => {
     try {
-      // const user = await userService.login(userCreds)
-      const user = {
-        "_id": "u101",
-        "fullname": "Abi Abambi",
-        "username": "abi@ababmi.com",
-        "password": "aBambi123",
-        "imgUrl": "http://some-img.jpg",
-        "mentions": [{
-          "id": "m101",
-          "boardId": "m101",
-          "taskId": "t101"
-        }]
-      }
+      const user = await userService.login(userCreds)
+      // const user = {
+      //   "_id": "u101",
+      //   "fullname": "Abi Abambi",
+      //   "username": "abi@ababmi.com",
+      //   "password": "aBambi123",
+      //   "imgUrl": "http://some-img.jpg",
+      //   "mentions": [{
+      //     "id": "m101",
+      //     "boardId": "m101",
+      //     "taskId": "t101"
+      //   }]
+      // }
       dispatch({ type: 'SET_USER', user })
     } catch (err) {
       console.log('UserActions: err in login', err)
