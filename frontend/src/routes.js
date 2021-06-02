@@ -4,7 +4,6 @@ import { UserDetails } from './pages/UserDetails'
 import { BoardList } from './pages/BoardList'
 import { Board } from './pages/Board'
 import { Login } from './pages/Login'
-import { Signup } from './pages/Signup'
 
 export const routes = [
     {
@@ -14,10 +13,6 @@ export const routes = [
     {
         path: '/board/:boardId',
         component: Board,
-    },
-    {
-        path: '/signup',
-        component: Signup,
     },
     {
         path: '/login',

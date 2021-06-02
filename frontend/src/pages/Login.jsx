@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {Upload} from '../cmps/Upload'
 import {
   loadUsers,
   removeUser,
@@ -106,6 +107,7 @@ class _Login extends Component {
           autoComplete="username"
         />
         <br />
+        <Upload/>
         <button>Signup</button>
       </form>
     )
