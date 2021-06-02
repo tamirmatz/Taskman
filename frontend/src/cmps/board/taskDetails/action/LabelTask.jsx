@@ -9,7 +9,7 @@ import { boardService } from '../../../../services/boardService';
 class _LabelTask extends Component {
     state = {
         isDisable: true,
-        title: 'null',
+        title: this.props.label.title ? this.props.label.title:'',
         task: null,
         group: null
     }
@@ -22,7 +22,7 @@ class _LabelTask extends Component {
         this.setState({ ...this.state, task: task, group: group });
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if (this.props !== prevProps) {
             const { boardId, taskId, groupId } = this.props.match.params;
             const board = { ...this.props.board };
@@ -30,6 +30,7 @@ class _LabelTask extends Component {
             const task = boardService.getTaskById(group, taskId);
             this.setState({ ...this.state, task: task, group: group });
         }
+
     }
 
     toggleLabel(labelId) {
@@ -91,10 +92,12 @@ class _LabelTask extends Component {
                 <input
                     type="text"
                     name="title"
+                    value={this.state.title}
                     style={{ background: `${label.color}` }}
                     className={`label-input label-${label.id} ${this.state.isDisable} ${className} cur-pointer`}
                     onChange={this.handleChange}
                     onClick={() => this.toggleLabel(label.id)}
+                    maxLength = {13}
                 />
                 <span onClick={() => { this.toggleDisable() }} className="edit-label"><FiEdit2 /> </span>
             </div>

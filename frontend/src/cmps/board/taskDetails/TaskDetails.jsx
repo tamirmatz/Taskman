@@ -167,7 +167,7 @@ class _TaskDetails extends Component {
                                         return label.id === labelId;
                                     })
                                     if (label)
-                                        return <div key={label.id} className={`details-label ${this.state.isLabelOpen && "label-open"} flex center`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}>
+                                        return <div key={label.id} className={`details-label bold ${this.state.isLabelOpen && "label-open"} flex center`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}>
                                             {label.title}
                                         </div>
                                 })}

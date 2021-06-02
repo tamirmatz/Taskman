@@ -38,13 +38,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 1rem;
-    width: 56px;
+    height: 1.3rem;
+    min-width: 80px;
+    max-width: 100%;
     font-size: 12px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     line-height: 16px;
     padding: 0 8px;
-    max-width: 198px;
 }
 
 .check-list-done-prev{
