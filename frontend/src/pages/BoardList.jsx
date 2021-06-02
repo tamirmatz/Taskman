@@ -17,7 +17,16 @@ class _BoardList extends Component {
         newBoard: {
             title: '',
             backgroundId: 0,
-            backgrounds: [p1, p2, p3, p4, p5, p6, p7]
+            backgrounds: [
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671389/backrounds/0_jflqwf.jpg',
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671416/backrounds/1_gavwov.jpg',
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671401/backrounds/2_gstip0.jpg',
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671395/backrounds/3_mqwgkk.jpg',
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671404/backrounds/4_ly2zj7.jpg',
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671550/backrounds/5_g7oe20.jpg',
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671430/backrounds/6_mi6wun.jpg',
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg'
+            ]
         }
     }
     componentDidMount() {
@@ -26,19 +35,20 @@ class _BoardList extends Component {
     }
 
     onCreateBoard = () => {
-        const { title, backgrounds,backgroundId } = this.state.newBoard
+        const { title, backgrounds, backgroundId } = this.state.newBoard
         this.props.add(title, backgrounds[backgroundId])
+        this.props.history.push(`/board/${this.props.boards[this.props.boards.length-1]._id}`)
     }
 
     changeImg = (num) => {
         const { backgroundId, backgrounds } = this.state.newBoard
-        if (backgroundId + num === backgrounds.length||backgroundId + num === -1) num = 0
+        if (backgroundId + num === backgrounds.length || backgroundId + num === -1) num = 0
         this.setState(prevState => ({
             newBoard: {
                 ...prevState.newBoard,
                 backgroundId: backgroundId + num,
             }
-        }),console.log(this.state.newBoard.backgroundId))
+        }), console.log(this.state.newBoard.backgroundId))
     }
 
     handleChange = ({ target }) => {
@@ -60,9 +70,12 @@ class _BoardList extends Component {
             <section className=" w-100 flex column center content-center pad-3">
                 <h1 className="fam-1">Choose Your Board List</h1>
                 <div className="boards-gallary flex h-40 w-100">
-                    {boards && boards.map(board => <Link key={board._id} to={`board/${board._id}`}><MiniBoard title={board.title} /></Link>)}
+                    {boards && boards.map(board => <Link key={board._id} to={`board/${board._id}`}><MiniBoard board={board} /></Link>)}
                     <section className="miniBoard flex center content-center" style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
-                        <form onSubmit={this.onCreateBoard}>
+                        <form onSubmit={(ev)=>{
+                            ev.preventDefault()
+                            this.onCreateBoard()
+                            }}>
                             <input type="text" name="title" onChange={this.handleChange} placeholder="Board title..." />
                             <button>Create board</button>
                             <span onClick={() => { this.changeImg(-1) }}>{'<'}</span><span onClick={() => { this.changeImg(1) }}>{'>'}</span>

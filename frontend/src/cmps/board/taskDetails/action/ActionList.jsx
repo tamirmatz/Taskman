@@ -9,6 +9,8 @@ import { BsImage, BsArrowRight } from 'react-icons/bs'
 import { LabelModal } from './actionModal/LabelModal';
 import { MembersModal } from './actionModal/MembersModal'
 import { DueDateModal } from './actionModal/DueDateModal'
+import { MoveMdodal } from './actionModal/MoveModal'
+import { CopyModal } from './actionModal/CopyModal'
 
 
 class _ActionList extends Component {
@@ -53,8 +55,14 @@ class _ActionList extends Component {
 
                         <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
                         <li className="btn-action"><BsImage />Image</li>
-                        <li className="btn-action"><BsArrowRight />Move</li>
-                        <li className="btn-action"><BiCopy />Copy</li>
+                        <li className="move-wrap">
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('move-wrap-modal') }}><BsArrowRight />Move</div>
+                            <MoveMdodal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
+                        <li className="copy-wrap">
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy />Copy</div>
+                            <CopyModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
                         <li onClick={() => { this.props.onDeleteTask() }} className="btn-action"><AiOutlineDelete />Delete</li>
                     </ul>
                 </div>
