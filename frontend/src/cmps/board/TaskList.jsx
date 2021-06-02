@@ -6,6 +6,7 @@ import { utilService } from '../../services/generalService/utilService.js'
 import { HiOutlineMenuAlt4 } from 'react-icons/hi'
 const EMPTY_TASK = { title: '' }
 const EMPTY_GROUP = { title: '' }
+
 export class TaskList extends Component {
     state = {
         group: EMPTY_GROUP,

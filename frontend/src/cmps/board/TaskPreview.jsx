@@ -6,26 +6,17 @@ import { BsCheckBox } from 'react-icons/bs'
 import { FaRegCommentDots } from 'react-icons/fa'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
 import { GrTextAlignFull } from 'react-icons/gr'
-
+import { connect } from 'react-redux'
 import { utilService } from '../../services/generalService/utilService'
 import React, { Component } from 'react'
 import { UserPreview } from './UserPreview.jsx';
 
+import { toggleLabel } from '../../store/actions/systemAction.js';
+
 
 
 // export function TaskPreview({ board, index, task, updateBoard, groupId }) {
-export class TaskPreview extends Component {
-    state = {
-        isLabelOpen: false
-    }
-
-
-    toggleLabels = () => {
-        document.querySelectorAll('.preview-label').forEach(label => {
-            label.classList.toggle('label-open');
-        });;
-        this.setState({ isLabelOpen: !this.state.isLabelOpen })
-    }
+class _TaskPreview extends Component {
 
     getStyle = (style, snapshot) => {
         if (!snapshot.isDropAnimating) {
@@ -55,6 +46,7 @@ export class TaskPreview extends Component {
     }
     render() {
         const { board, index, task, updateBoard, groupId } = this.props
+        const isLabelOpen = this.props.isLabelOpen;
         return <Draggable
             draggableId={task.id}
             index={index}
@@ -82,17 +74,24 @@ export class TaskPreview extends Component {
                                                 <div className="labels-container wrap flex" onClick={(ev) => {
                                                     ev.stopPropagation();
                                                 }}>
-                                                    {task.labelIds.map(labelId => {
+                                                    {
+                                                        task.labelIds.map(labelId => {
+                                                            const label = board.labels.find(label => {
+                                                                return label.id === labelId;
+                                                            })
 
-                                                        const label = board.labels.find(label => {
-                                                            return label.id === labelId;
-                                                        })
-
-                                                        if (label)
-                                                            return <div key={label.id} className={`preview-label ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
-                                                                {this.state.isLabelOpen && label.title}
-                                                            </div>
-                                                    })}</div>
+                                                            if (label) {
+                                                                return <div
+                                                                    key={label.id}
+                                                                    className={`preview-label ${isLabelOpen && "label-open"}`}
+                                                                    onClick={() => this.props.toggleLabel(!isLabelOpen)}
+                                                                    style={{ backgroundColor: label.color }}
+                                                                >
+                                                                    {this.props.isLabelOpen && label.title}
+                                                                </div>
+                                                            }
+                                                        })}
+                                                </div>
                                             </div>
                                             <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
                                         </div>
@@ -103,7 +102,7 @@ export class TaskPreview extends Component {
 
                                         <h1 className="task-title fam-1 font-m">{task.title}</h1>
                                         <div className="task-mini-details flex w-100 content-start  gap-xs fam-1 c-stand">
-                                            {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member=>{return <UserPreview user={member}/>}).splice(0,3)}</small>}
+                                            {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member => { return <UserPreview user={member} /> }).splice(0, 3)}</small>}
                                             {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
                                             {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev"}`}>
                                                 <BsCheckBox />
@@ -128,3 +127,15 @@ export class TaskPreview extends Component {
         </Draggable>
     }
 }
+
+
+const mapStateToProps = state => {
+    return {
+        board: state.boardModule.board,
+        isLabelOpen : state.systemModule.isLabelsOpen
+    }
+}
+const mapDispatchToProps = {
+    toggleLabel
+}
+export const TaskPreview = connect(mapStateToProps, mapDispatchToProps)(_TaskPreview)
