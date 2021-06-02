@@ -20,16 +20,19 @@ li.btn-board{
     padding: 0.3rem;
 }
 
-.app-input{
+input.app-input{
     background: inherit;
     border: none;
     outline: none;
+    border-radius: 6px;
+    color: #fff;
 }
 
 .app-input:focus{
     background: #fff;
     border: none;
     outline: none;
+    border-radius: 6px;
 }
 
 .app-hover{

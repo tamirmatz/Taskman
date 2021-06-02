@@ -19,6 +19,7 @@ class _MembersModal extends Component {
     }
 
     render() {
+        console.log('params', this.props)
         const { members } = this.props.board;
         return <div className="action-modal members-wrap-modal d-none p-abs flex">
             <ModalAction>

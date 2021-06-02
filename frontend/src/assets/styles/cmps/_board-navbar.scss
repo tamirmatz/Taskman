@@ -1,8 +1,14 @@
 .board-navbar{
     height: 3rem;
+    background: rgba(255, 255, 255, 0.493);
+    border-radius: 4px;
 }
 
 .left-bar{
     gap: 10px;
    
+}
+
+.board-navbar input{
+    font-size: 1.2rem;
 }
