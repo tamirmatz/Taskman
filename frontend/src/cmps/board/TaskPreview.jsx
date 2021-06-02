@@ -58,7 +58,7 @@ class _TaskPreview extends Component {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                        isDragging={snapshot.isDragging && !snapshot.isDropAnimating ? 'true' : 'false'}
+                        isdragging={snapshot.isDragging && !snapshot.isDropAnimating ? 'true' : 'false'}
                         style={this.getStyle(provided.draggableProps.style, snapshot)}
                     >
                         <div className="wrap-list-task br-3">
