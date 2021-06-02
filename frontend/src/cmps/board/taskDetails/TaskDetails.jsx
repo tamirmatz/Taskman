@@ -10,6 +10,7 @@ import { GrTextAlignFull } from 'react-icons/gr'
 import { utilService } from '../../../services/generalService/utilService.js';
 import { CheckList } from './CheckList';
 import { ActionList } from './action/ActionList';
+import { UserPreview } from '../UserPreview.jsx';
 // import {TaskTitle} from '../taskDetails/TaskTitle';
 
 
@@ -154,7 +155,7 @@ class _TaskDetails extends Component {
                         <div className="task-members">
                             <ul className="flex center">
                                 {task.members.map(member => {
-                                    return <img src={member.imgUrl} className="avatar" />
+                                    return <UserPreview user={member}/>
                                 })}
                                 {task.members.length > 0 && <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="avatar">+</span>}
                             </ul>
