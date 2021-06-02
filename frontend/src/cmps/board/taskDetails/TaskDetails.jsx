@@ -31,7 +31,7 @@ class _TaskDetails extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props !== prevProps){
+        if (this.props !== prevProps) {
             const { boardId, taskId, groupId } = this.props.match.params;
             const board = { ...this.props.board };
             const group = boardService.getGroupById(board, groupId);
@@ -103,6 +103,12 @@ class _TaskDetails extends Component {
         this.updateTask()
     }
 
+    onSaveDueDate = (date) =>{
+        const {task} = this.state;
+        task.dueDate = {date,isDone:false}
+        this.updateTask()
+    }
+
     isMemberChecked = (memberCheck) => {
         const { task } = this.state;
         const memberIdx = task.members.findIndex(member => member._id === memberCheck._id)
@@ -110,6 +116,12 @@ class _TaskDetails extends Component {
             return 'checked'
         }
         else return ''
+    }
+
+    isDueDateDone = (val) => {
+        const { task } = this.state;
+        console.log('val',val)
+
     }
 
     toggleModal = (className) => {
@@ -124,9 +136,9 @@ class _TaskDetails extends Component {
         }
     }
 
-    onAddLabelTask = (labelId) =>{
+    onAddLabelTask = (labelId) => {
         const task = this.state;
-        if(!task.labels){
+        if (!task.labels) {
             task.labels = [];
         }
         task.labels.push(labelId);
@@ -137,7 +149,7 @@ class _TaskDetails extends Component {
         const { board } = this.props
         if (!task) return <h1>Loading...</h1>
         return (
-            <section className="task-details w-50 h-100 flex bg-modal pos-fixed c-stand fam-1 pad-1">
+            <section className="task-details w-50 flex bg-modal pos-fixed c-stand fam-1 pad-1">
                 <div className="info-task flex column w-70 h-100 content-start">
                     {/* Title */}
                     <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
@@ -145,35 +157,40 @@ class _TaskDetails extends Component {
                         this.updateTask()
                     }}>
                         <div className="task-title flex center h-33">
-                            <label htmlFor="title" className="font-6 flex center"><BsCardChecklist className="ico" />
-                                <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details " onChange={this.handleChange} />
+                            <label htmlFor="title" className="font-6 flex center w-100"><BsCardChecklist className="ico" />
+                                <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details title-task-input" onChange={this.handleChange} />
                             </label>
                         </div>
-                        <h3 className="content-gap fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
+                        <h3 className="fam-1 font-2 left-self h-20 center pb-2">in list {this.state.group.title}</h3>
                     </form>
-                    <section className="flex">
+                    <section className="flex wrap">
                         <div className="task-members">
+                            {task.members.length > 0 && <h3 className="font-m">members</h3>}
                             <ul className="flex center">
                                 {task.members.map(member => {
-                                    return <UserPreview user={member}/>
+                                    return <UserPreview user={member} />
                                 })}
-                                {task.members.length > 0 && <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="avatar">+</span>}
+                                {task.members.length > 0 && <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="user-preview flex center content-center font-m">+</span>}
                             </ul>
                         </div>
-                        <div className="task-labels">
+                        <div className="task-labels flex center">
                             <ul className="flex center">
                                 {task.labelIds && task.labelIds.map(labelId => {
                                     const label = board.labels.find(label => {
                                         return label.id === labelId;
                                     })
                                     if (label)
-                                        return <div key={label.id} className={`details-label ${this.state.isLabelOpen && "label-open"}`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}>
+                                        return <div key={label.id} className={`details-label bold ${this.state.isLabelOpen && "label-open"} flex center`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}>
                                             {label.title}
                                         </div>
                                 })}
                                 {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal') }} className="avatar">+</span>}
                             </ul>
                         </div>
+                        {task.dueDate && <div className="task-duedate flex center">
+                            <input onChange={(ev) => {this.isDueDateDone(ev.target.value)}} type="checkbox" />
+                              <p>{task.dueDate}</p> 
+                        </div>}
                     </section>
                     <section className="desc-section">
                         <div className="desc-header flex row">
@@ -189,7 +206,7 @@ class _TaskDetails extends Component {
                     </section>
                     {utilService.isFalse(task.checklists) && <ul className="todos clean-list">
                         {task.checklists.map((checklist, idx) => {
-                            return <CheckList onRemoveCheckList={this.onRemoveCheckList} key={idx} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                            return <CheckList key={checklist.id} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                     </ul>}
                     <section className="comment-section">

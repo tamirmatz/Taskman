@@ -8,6 +8,7 @@ import { FiUsers } from 'react-icons/fi'
 import { BsImage, BsArrowRight } from 'react-icons/bs'
 import { LabelModal } from './actionModal/LabelModal';
 import { MembersModal } from './actionModal/MembersModal'
+import { DueDateModal } from './actionModal/DueDateModal'
 
 
 class _ActionList extends Component {
@@ -45,7 +46,11 @@ class _ActionList extends Component {
                             <MembersModal isMemberChecked={this.props.isMemberChecked} onAddMemberToTask={this.props.onAddMemberToTask} toggleModal={() => { this.props.toggleModal() }} />
                         </ul>
 
-                        <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
+                        <li className="duedate-wrap">
+                            <li className="btn-action w-100 " onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClockCircle />DueDate</li>
+                            <DueDateModal onSaveDueDate={this.props.onSaveDueDate} toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
+
                         <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
                         <li className="btn-action"><BsImage />Image</li>
                         <li className="btn-action"><BsArrowRight />Move</li>
@@ -61,7 +66,6 @@ class _ActionList extends Component {
 const mapStateToProps = state => {
     return {
         board: state.boardModule.board,
-
     }
 }
 const mapDispatchToProps = {

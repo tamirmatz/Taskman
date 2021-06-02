@@ -1,8 +1,9 @@
 
 .task-details{
     @include center-modal;
-    height: 100%;
-    top: -16rem;
+    position: absolute;
+    min-height: 80% ;
+    max-height: 70rem;
     border-radius: 4px;
     input.input-details,textarea{
         border-radius: 5px;
@@ -31,7 +32,8 @@
         align-items: center;
     }
     .task-title input{
-        width: 50%;
+        padding-inline-start: 8px;
+        width: 100%;
         font-size: 30px;
  }
     .avatar{
@@ -88,18 +90,27 @@
     border: none;
     margin-bottom: 8px;
     width: 95%;
-    height: 1.6rem;
+    height: 1.5rem;
     border-radius: 4px;
     .true{
         pointer-events: none;
     }
+
 }
 
 span.edit-label{
     cursor: pointer;
 }
 
+input.label-input{
+    color: #fff;
+    font-size: 1rem;
+}
+
 .details-label{
+    display: flex;
+    align-items: center;
+    justify-self: center;
     min-width: 40px;
     height: 32px;
     padding: 0 12px;
@@ -109,3 +120,15 @@ span.edit-label{
     margin-right: 4px;
 
 }
+
+.border{
+    border: 2px solid rgba(44, 44, 44, 0.925);
+}
+
+input.label-input.true.border.cur-pointer {
+    color: #fff;
+    padding: 3px 4px ;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+

@@ -7,7 +7,7 @@ export class CheckListStatus extends Component {
         console.log('precent',this.props.checklist)
         return (
             <div className="mail-status flex center">
-                <span class="checklist-progress-percentage">{Math.round(precent)}%</span>
+                <span className="checklist-progress-percentage">{Math.round(precent)}%</span>
                 <div className="bar-container">
                     <div className={`bar-proccess ${precent === 100 && "done-proccess"}`} style={{width: `${precent}%`}}></div>
                 </div>

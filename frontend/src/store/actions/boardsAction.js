@@ -23,6 +23,18 @@ export function loadBoard(boardId) { // Action Creator
     }
 }
 
+export function setBoard(board) { 
+    return async dispatch => {
+        const action = {
+            type: 'SET_BOARD',
+            board
+        }
+        dispatch(action)
+    }
+}
+
+
+
 
 export function remove(boardId) {
     return async dispatch => {
@@ -45,7 +57,7 @@ export function update(board) {
     return async dispatch => {
         try {      
             const updatedBoard = await boardService.update(board)
-            socketService.emit('update board')
+            socketService.emit('update board',updatedBoard)
             const action = {
                 type: 'UPDATE_BOARD',
                 updatedBoard

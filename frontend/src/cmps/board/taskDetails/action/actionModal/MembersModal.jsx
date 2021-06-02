@@ -24,14 +24,14 @@ class _MembersModal extends Component {
         return <div className="action-modal members-wrap-modal d-none p-abs flex">
             <ModalAction>
                 <div className="members-modal p-abs flex column pad-1">
-                    <div className="header-modal font-1 fam-1 fw-2 flex center content-end gap-5 w-70">
-                        <h1 className="fam-1 font-1 ">Members</h1>
-                        <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.props.toggleModal('members-wrap-modal') }}><AiOutlineClose /></span>
+                <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 mb-1">
+                        <h1 className="fam-1 font-1">Members</h1>
+                        <span className="cur-pointer fam-1 font-1 bold" onClick={() => { this.props.toggleModal('members-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
                     <div className="action-content">
                         <ul>
-                            {members.map(member => {
-                                return <li onClick={() => { this.props.onAddMemberToTask(member) }} className="flex space-between member-modal center">
+                            {members.map((member, idx)  => {
+                                return <li key={idx} onClick={() => { this.props.onAddMemberToTask(member) }} className="flex space-between member-modal center">
                                     <div className="flex center gap-xs">
                                         {/* <img src={member.imgUrl} className="avatar" /> */}
                                         <UserPreview user={member}/>

@@ -6,26 +6,17 @@ import { BsCheckBox } from 'react-icons/bs'
 import { FaRegCommentDots } from 'react-icons/fa'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
 import { GrTextAlignFull } from 'react-icons/gr'
-
+import { connect } from 'react-redux'
 import { utilService } from '../../services/generalService/utilService'
 import React, { Component } from 'react'
 import { UserPreview } from './UserPreview.jsx';
 
+import { toggleLabel } from '../../store/actions/systemAction.js';
+
 
 
 // export function TaskPreview({ board, index, task, updateBoard, groupId }) {
-export class TaskPreview extends Component {
-    state = {
-        isLabelOpen: false
-    }
-
-
-    toggleLabels = () => {
-        document.querySelectorAll('.preview-label').forEach(label => {
-            label.classList.toggle('label-open');
-        });;
-        this.setState({ isLabelOpen: !this.state.isLabelOpen })
-    }
+class _TaskPreview extends Component {
 
     getStyle = (style, snapshot) => {
         if (!snapshot.isDropAnimating) {
@@ -55,22 +46,19 @@ export class TaskPreview extends Component {
     }
     render() {
         const { board, index, task, updateBoard, groupId } = this.props
+        const isLabelOpen = this.props.isLabelOpen;
         return <Draggable
             draggableId={task.id}
             index={index}
         // isDragDisabled={false}
         >
             {(provided, snapshot) => {
-                if (snapshot.isDragging) {
-
-                }
                 return (
                     <div
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                        isdragging={snapshot.isDragging && !snapshot.isDropAnimating
-                            ? 'true' : 'false'}
+                        isDragging={snapshot.isDragging && !snapshot.isDropAnimating ? 'true' : 'false'}
                         style={this.getStyle(provided.draggableProps.style, snapshot)}
                     >
                         <div className="wrap-list-task br-3">
@@ -83,17 +71,24 @@ export class TaskPreview extends Component {
                                                 <div className="labels-container wrap flex" onClick={(ev) => {
                                                     ev.stopPropagation();
                                                 }}>
-                                                    {task.labelIds.map(labelId => {
+                                                    {
+                                                        task.labelIds.map(labelId => {
+                                                            const label = board.labels.find(label => {
+                                                                return label.id === labelId;
+                                                            })
 
-                                                        const label = board.labels.find(label => {
-                                                            return label.id === labelId;
-                                                        })
-
-                                                        if (label)
-                                                            return <div key={label.id} className={`preview-label ${this.state.isLabelOpen && "label-open"}`} onClick={this.toggleLabels} style={{ backgroundColor: label.color }}>
-                                                                {this.state.isLabelOpen && label.title}
-                                                            </div>
-                                                    })}</div>
+                                                            if (label) {
+                                                                return <div
+                                                                    key={label.id}
+                                                                    className={`preview-label ${isLabelOpen && "label-open"}`}
+                                                                    onClick={() => this.props.toggleLabel(!isLabelOpen)}
+                                                                    style={{ backgroundColor: label.color }}
+                                                                >
+                                                                    {this.props.isLabelOpen && label.title}
+                                                                </div>
+                                                            }
+                                                        })}
+                                                </div>
                                             </div>
                                             <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
                                         </div>
@@ -113,7 +108,7 @@ export class TaskPreview extends Component {
                                             {task.dueDate && <div className="flex row center">
                                                 <AiOutlineClockCircle />
                                                 <small>
-                                                    {utilService.timeAgo(task.dueDate)}
+                                                    {task.dueDate}
                                                 </small>
                                             </div>}
                                             {task.description && <small className="flex center"><GrTextAlignFull /></small>}
@@ -129,3 +124,15 @@ export class TaskPreview extends Component {
         </Draggable>
     }
 }
+
+
+const mapStateToProps = state => {
+    return {
+        board: state.boardModule.board,
+        isLabelOpen : state.systemModule.isLabelsOpen
+    }
+}
+const mapDispatchToProps = {
+    toggleLabel
+}
+export const TaskPreview = connect(mapStateToProps, mapDispatchToProps)(_TaskPreview)

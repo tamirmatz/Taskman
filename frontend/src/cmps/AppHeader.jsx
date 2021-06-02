@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {UserPreview} from '../cmps/board/UserPreview' 
+import { RiCheckboxMultipleBlankLine } from 'react-icons/ri'
+
 
 class _AppHeader extends Component {
     state = {
@@ -39,8 +41,8 @@ class _AppHeader extends Component {
 
         return <header className={className}>
             {loggedInUser && (
-                <nav className="main-nav w-20 flex space-evenly c-danger">
-                    <NavLink to="/board" className="btn-board">Boards</NavLink>
+                <nav className="main-nav w-20 flex center space-between c-danger h-100">
+                    <NavLink to="/board" className="btn-board btn-boards flex center gap-xs w-40"><RiCheckboxMultipleBlankLine/>Boards</NavLink>
                     <NavLink to="/login" className="btn-board">Jump to...</NavLink>
                 </nav>
             )}
