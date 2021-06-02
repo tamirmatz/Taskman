@@ -44,6 +44,11 @@ class _TaskPreview extends Component {
         board.groups[boardService.getGroupIdxById(board, groupId)].tasks.splice(boardService.getTaskIdxById(group, taskId), 1)
         updateBoard({ ...board })
     }
+
+    dueDateDonePreview = (task) => {
+        if(task.isDone) return 'done-preview'
+        else return ''
+     }
     render() {
         const { board, index, task, updateBoard, groupId } = this.props
         const isLabelOpen = this.props.isLabelOpen;
@@ -99,13 +104,13 @@ class _TaskPreview extends Component {
 
                                         <h1 className="task-title fam-1 font-m">{task.title}</h1>
                                         <div className="task-mini-details flex w-100 content-start  gap-xs fam-1 c-stand">
-                                            {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member => { return <UserPreview key={member._id} user={member} /> }).splice(0, 3)}</small>}
+                                            {/* {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member => { return <UserPreview key={member._id} user={member} /> }).splice(0, 3)}</small>} */}
                                             {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
-                                            {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev"}`}>
+                                            {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "done-preview"}`}>
                                                 <BsCheckBox />
                                                 <small>{boardService.checklistPreview(task).str}</small>
                                             </div>}
-                                            {task.dueDate && <div className="flex row center">
+                                            {task.dueDate && <div className={`flex row center ${this.dueDateDonePreview(task)}`}>
                                                 <AiOutlineClockCircle />
                                                 <small>
                                                     {task.dueDate}

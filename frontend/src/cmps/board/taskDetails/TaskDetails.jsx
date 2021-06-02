@@ -146,9 +146,23 @@ class _TaskDetails extends Component {
         task.labels.push(labelId);
     }
 
+    onSendComment = (txt) => {
+        const {loggedInUser } = this.props
+        const {task} = this.state;
+        console.log('txt')
+        task.comments.unshift({id: utilService.makeId() ,txt,createdAt:Date.now(),byMember:loggedInUser})
+        this.updateTask()
+    }
+
+    onRemoveComment = (commentIdx) => {
+        const {task} = this.state;
+        task.comments.splice(commentIdx,1)
+        this.updateTask()
+    }
+
     render() {
         const { task } = this.state;
-        const { board } = this.props
+        const { board, loggedInUser } = this.props
         if (!task) return <h1>Loading...</h1>
         console.log('checklist', task.checklists)
         return (
@@ -217,26 +231,29 @@ class _TaskDetails extends Component {
                         })}
                     </ul>}
                     <section className="comment-section">
-                        {/* <div className="new-comment">
-                            <div className="task-memeber-img">
-                                <img src="" />
-                                <form>
-                                    <div class="comment-box">
-                                        <textarea class="comment-textarea" placeholder="Write a comment..." name="txt">
-                                        </textarea>
-                                    </div>
+                        <div className="new-comment">
+                            <div className="task-memeber-img flex center">
+                                <img className="avatar" src={loggedInUser.imgUrl} />
+                                <form onSubmit={(ev) =>{
+                                    ev.preventDefault()
+                                    this.onSendComment(ev.target[0].value)
+                                }}>
+                                    <input class="comment-textarea" placeholder="Write a comment..." name="txt">
+                                    </input>
+                                    <button>Send</button>
                                 </form>
                             </div>
-                        </div> */}
-                        {task.comments && <ul className="comments clean-list">
-                            {task.comments.map(comment => {
+                        </div>
+                        {task.comments && <ul className="comments clean-list"> {console.log(task.comments)} 
+                            {task.comments.map((comment,idx) => {
                                 return <li className="full-comment flex row">
-                                    <img className="avatar" src={comment.byMember.imgUrl} />
+                                    <UserPreview user={comment.byMember}/>
                                     <div className="comment-text flex column">
                                         <h3 className="commenter-name">{comment.byMember.fullname}</h3>
                                         {comment.txt}
                                         <small>{utilService.timeAgo(comment.createdAt)}</small>
                                     </div>
+                                    <button onClick={() => {this.onRemoveComment(idx)}}>X</button>
                                 </li>
                             })}
                         </ul>}
@@ -250,6 +267,7 @@ class _TaskDetails extends Component {
 
 const mapStateToProps = state => {
     return {
+        loggedInUser: state.userModule.loggedInUser,
         board: state.boardModule.board
     }
 }
