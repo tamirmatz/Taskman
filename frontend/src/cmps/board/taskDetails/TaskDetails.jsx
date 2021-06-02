@@ -136,7 +136,7 @@ class _TaskDetails extends Component {
         const { board } = this.props
         if (!task) return <h1>Loading...</h1>
         return (
-            <section className="task-details w-50 h-100 flex bg-modal pos-fixed c-stand fam-1 pad-1">
+            <section className="task-details w-50 flex bg-modal pos-fixed c-stand fam-1 pad-1">
                 <div className="info-task flex column w-70 h-100 content-start">
                     {/* Title */}
                     <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
@@ -159,14 +159,14 @@ class _TaskDetails extends Component {
                                 {task.members.length > 0 && <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="avatar">+</span>}
                             </ul>
                         </div>
-                        <div className="task-labels">
+                        <div className="task-labels flex center">
                             <ul className="flex center">
                                 {task.labelIds && task.labelIds.map(labelId => {
                                     const label = board.labels.find(label => {
                                         return label.id === labelId;
                                     })
                                     if (label)
-                                        return <div key={label.id} className={`details-label ${this.state.isLabelOpen && "label-open"}`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}>
+                                        return <div key={label.id} className={`details-label ${this.state.isLabelOpen && "label-open"} flex center`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}>
                                             {label.title}
                                         </div>
                                 })}
