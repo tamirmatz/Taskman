@@ -3,16 +3,51 @@ import { MdKeyboardArrowDown } from 'react-icons/md'
 import { RiDashboardLine } from 'react-icons/ri'
 import { AiOutlineStar } from 'react-icons/ai'
 import { Component } from 'react';
-
+import { BoardMembersModal } from './BoardMembersModal'
 
 
 
 export class BoardNavbar extends Component {
     state = {
-        title: this.props.board.title
+        title: this.props.board.title,
+        members: this.props.board.members
+    }
+
+
+    onAddMemberToBoard = (addedMember) => {
+        const { members } = this.state
+        const memberIdx = members.findIndex(member => member._id === addedMember._id)
+        if (memberIdx !== -1) {
+            members.splice(memberIdx, 1)
+        }
+        else members.push(addedMember)
+        const copyBoard = { ...this.props.board }
+        copyBoard.members = members
+        console.log(members)
+        this.props.updateBoard(copyBoard)
+    }
+
+    isMemberChecked = (memberCheck) => {
+        const memberIdx = this.state.members.findIndex(member => member._id === memberCheck._id)
+        if (memberIdx !== -1) {
+            return 'checked'
+        }
+        else return ''
+    }
+
+    toggleModal = (className) => {
+        const modals = document.querySelectorAll('.action-modal');
+        const currModal = document.querySelector(`.${className}`);
+        if (modals) {
+            modals.forEach(
+                el => el.classList.add('d-none'));
+        }
+        if (currModal) {
+            currModal.classList.remove('d-none');
+        }
     }
     onChangeBoardName = () => {
-        const board =this.props.board
+        const board = this.props.board
         board.title = this.state.title
         this.props.updateBoard(board)
     }
@@ -20,7 +55,7 @@ export class BoardNavbar extends Component {
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
-        this.setState({[field]:value})
+        this.setState({ [field]: value })
     }
     render() {
         const { board, onUpdate } = this.props
@@ -34,11 +69,14 @@ export class BoardNavbar extends Component {
                         ev.preventDefault()
                         this.onChangeBoardName(ev)
                     }}>
-                        <input type="text" className="app-input nav-board-input font-w2 font-m lh-20 " name="title" onChange={this.handleChange} value={this.state.title} onBlur={ this.onChangeBoardName } />
+                        <input type="text" className="app-input nav-board-input font-w2 font-m lh-20 " name="title" onChange={this.handleChange} value={this.state.title} onBlur={this.onChangeBoardName} />
                     </form></li>
                     <li className="btn-board">Visiblity</li>
-                    <li className="btn-board"><MembersBoard /></li>
-                    <li className="btn-board">invite</li>
+                    <li className="members-wrap">
+                        <li className="btn-board " onClick={() => { this.toggleModal('board-members-wrap-modal') }}>Invite</li>
+                        <BoardMembersModal users={this.props.users} isMemberChecked={this.isMemberChecked} onAddMemberToBoard={this.onAddMemberToBoard} toggleModal={() => { this.toggleModal() }} />
+                    </li>
+                    <li className="btn-board" ><MembersBoard /></li>
                 </ul>
                 <ul className="right-bar flex center">
                     <li className="btn-board">Show-menu</li>

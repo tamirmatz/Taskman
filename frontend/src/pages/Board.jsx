@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { remove, add, loadBoard, update } from '../store/actions/boardsAction.js';
 import { loading } from '../store/actions/systemAction';
-
+import { loadUsers } from '../store/actions/userActions.js'
 import React, { Component } from 'react'
 import { TaskList } from '../cmps/board/TaskList'
 import { BoardNavbar } from '../cmps/board/boardNavbar/BoardNavbar'
@@ -24,6 +24,7 @@ class _Board extends Component {
     componentDidMount() {
         const { boardId } = this.props.match.params
         this.props.loadBoard(boardId);
+        this.props.loadUsers();
         socketService.setup()
         socketService.on('updated board', () => {
             console.log('recieved update')
@@ -88,7 +89,7 @@ class _Board extends Component {
             activity.txt = `has moved list ${list[0].title}`
         }
         this.props.update(copyBoard)
-        console.log('Moved and updated!',copyBoard)
+        console.log('Moved and updated!', copyBoard)
     }
 
     onCloseDetails = () => {
@@ -111,7 +112,7 @@ class _Board extends Component {
                 onDragEnd={this.onDragEnd}
             >
                 <section className="board flex column w-100 animate__animated animate__fadeInRight ">
-                    <BoardNavbar board={board} updateBoard={this.onUpdate} />
+                    <BoardNavbar users={this.props.users} board={board} updateBoard={this.onUpdate} />
 
                     <div className="board-list flex w-100 "
 
@@ -159,7 +160,8 @@ class _Board extends Component {
 const mapStateToProps = state => {
     return {
         board: state.boardModule.board,
-        isLoading: state.systemModule.isLoading
+        isLoading: state.systemModule.isLoading,
+        users: state.userModule.users
     }
 }
 const mapDispatchToProps = {
@@ -167,6 +169,7 @@ const mapDispatchToProps = {
     add,
     loadBoard,
     update,
+    loadUsers
     // loading
 }
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)
