@@ -1,6 +1,7 @@
 
 export function UserPreview({user}) {
     const prevName = sliceFullName(user.fullname)
+    if(user.imgUrl==='http://some-img.jpg') user.imgUrl=''
     return (
             <div className="user-preview flex center content-center font-m ">
                 {!user.imgUrl && prevName}
