@@ -50,7 +50,7 @@ class _ActionList extends Component {
                         <li className="btn-action"><BsImage />Image</li>
                         <li className="btn-action"><BsArrowRight />Move</li>
                         <li className="btn-action"><BiCopy />Copy</li>
-                        <li onClick={() => { this.onDeleteTask() }} className="btn-action"><AiOutlineDelete />Delete</li>
+                        <li onClick={() => { this.props.onDeleteTask() }} className="btn-action"><AiOutlineDelete />Delete</li>
                     </ul>
                 </div>
             </div>
