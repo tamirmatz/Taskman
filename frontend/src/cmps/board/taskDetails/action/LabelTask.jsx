@@ -13,11 +13,12 @@ import { boardService } from '../../../../services/boardService';
 
 class _LabelTask extends Component {
     state = {
-        isDisable : true
+        isDisable: true,
+        title: ''
     }
 
     componentDidMount() {
-
+        
     }
 
     componentDidUpdate(prevProps) {
@@ -25,42 +26,42 @@ class _LabelTask extends Component {
     }
 
     toggleLabel(labelId) {
-        debugger
-        const {taskId, groupId } = this.props.match.params;
+        const { taskId, groupId } = this.props.match.params;
         const board = this.props.board;
-        const group = boardService.getGroupById(board,groupId); 
-        const task =  boardService.getTaskById(group,taskId);
-        if(!task.labelIds){
+        const group = boardService.getGroupById(board, groupId);
+        const task = boardService.getTaskById(group, taskId);
+        if (!task.labelIds) {
             task.labelIds = []
         }
-        const labelIdx =task.labelIds.findIndex( currLabelId => currLabelId === labelId);
-        if(labelIdx !== -1){
-            task.labelIds.splice(labelIdx,1)
-        }
-       else task.labelIds.push(labelId)
-        const updateBoard = boardService.updateTaskAtBoard(board,groupId, task);
+        const labelIdx = task.labelIds.findIndex(currLabelId => currLabelId === labelId);
+        if (labelIdx > -1) {
+            task.labelIds.splice(labelIdx, 1)
+        }else task.labelIds.push(labelId)
+
+
+        const updateBoard = boardService.updateTaskAtBoard(board, group, task);
         this.props.update(updateBoard)
     }
 
-    toggleDisable(){
+    toggleDisable() {
         this.setState({
-            isDisable : !this.state.isDisable
+            isDisable: !this.state.isDisable
         })
     }
 
     render() {
         const { label } = this.props;
-        
+
         return (
             <div className="label flex gap-2" data-label={label.id}>
                 <input
                     type="text"
                     style={{ background: `${label.color}` }}
                     className={`label-input label-${label.id} ${this.state.isDisable} c-pointer`}
-                    onChange={() => { console.log('aa'); }}
+                    onChange={() => { }}
                     onClick={() => this.toggleLabel(label.id)}
                 />
-                <span onClick={()=>{this.toggleDisable()}} className="edit-label"><FiEdit2 /> </span>
+                <span onClick={() => { this.toggleDisable() }} className="edit-label"><FiEdit2 /> </span>
             </div>
         )
     }
