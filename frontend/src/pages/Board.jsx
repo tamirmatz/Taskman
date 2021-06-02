@@ -17,9 +17,8 @@ const EMPTY_GROUP = { title: '' }
 
 class _Board extends Component {
     state = {
-        group: EMPTY_GROUP
+        group: EMPTY_GROUP,
     }
-
 
     componentDidMount() {
         const { boardId } = this.props.match.params
