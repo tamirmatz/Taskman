@@ -84,7 +84,10 @@ export class TaskList extends Component {
                             <div className="task-list flex column center content-center">
                                 <Droppable key={index} droppableId={group.id} type='task'>
                                     {(provided) => (
-                                        <div className="task-list-droppable" ref={provided.innerRef} {...provided.droppableProps} {...provided.dragHandleProps}>
+                                        <div className="task-list-droppable"
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps}
+                                            {...provided.dragHandleProps}>
                                             {group.tasks.map((task, idx) => (
                                                 <TaskPreview key={task.id}
                                                     board={board}

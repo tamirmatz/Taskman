@@ -218,7 +218,7 @@ class _TaskDetails extends Component {
                         </ul>}
                     </section>
                 </div>
-                <ActionList onDeleteTask={this.onDeleteTask} toggleModal={this.toggleModal} isMemberChecked={this.isMemberChecked} onAddMemberToTask={this.onAddMemberToTask} task={task} onAddCheckList={this.onAddCheckList} />
+                <ActionList onDeleteTask={this.onDeleteTask} toggleModal={this.toggleModal} isMemberChecked={this.isMemberChecked} onAddMemberToTask={this.onAddMemberToTask} task={task} group={this.state.group} onAddCheckList={this.onAddCheckList} />
             </section>
         )
     }

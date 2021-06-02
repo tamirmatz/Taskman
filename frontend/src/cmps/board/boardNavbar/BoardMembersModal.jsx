@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ModalAction } from '../../shared/ModalAction';
 import { AiOutlineClose } from 'react-icons/ai'
 import { UserPreview } from '../UserPreview';
+import { MembersBoard } from '../MembersBoard';
 
 
 
@@ -32,7 +33,7 @@ class _BoardMembersModal extends Component {
                     <div className="action-content">
                         <ul>
                             {members.map(member => {
-                                return <li onClick={() => { this.props.onAddMemberToBoard(member) }} className="flex space-between member-modal center">
+                                return <li key={member._id} onClick={() => { this.props.onAddMemberToBoard(member) }} className="flex space-between member-modal center">
                                     <div className="flex center gap-xs">
                                         <UserPreview user={member}/>
                                         <p>{member.fullname} ({member.username})</p>

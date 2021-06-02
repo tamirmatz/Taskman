@@ -57,11 +57,11 @@ export function update(board) {
     }
 }
 
-export function add() {
+export function add(title, background) {
     // Action Creator
     return async dispatch => {
         try {
-            const newBoard = await boardService.add()            
+            const newBoard = await boardService.add(title,background)          
             const action = {
                 type: 'ADD_BOARD',
                 board: newBoard

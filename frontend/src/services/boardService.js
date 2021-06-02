@@ -36,11 +36,13 @@ function remove(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
 
-async function add() {
+async function add(title, background) {
+    console.log(title,background)
     // const newBoard = _createBoard()
     // const savedBoard = storageService.post(STORAGE_KEY, newBoard)
     // return savedBoard
-    const board = {title: 'new' ,style:{}}
+    const board = {title ,style:{background}}
+    console.log(board)
     const res = await httpService.post(`board`, board)
     return res
 }

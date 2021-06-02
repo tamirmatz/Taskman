@@ -32,6 +32,7 @@ async function addBoard(req, res){
     try{
         const board = req.body
         const {loggedInUser} = req.session
+        console.log(board,loggedInUser)
         const addedBoard = await boardService.add(board,loggedInUser)
         socketService.broadcast({ type: 'board-added', data: board, to: addedBoard._id })
 

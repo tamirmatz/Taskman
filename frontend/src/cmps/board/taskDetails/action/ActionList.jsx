@@ -40,10 +40,10 @@ class _ActionList extends Component {
                             <LabelModal toggleModal={() => { this.props.toggleModal() }} />
                         </li>
 
-                        <li className="members-wrap">
+                        <ul className="members-wrap">
                             <li className="btn-action w-100 " onClick={() => {this.props.toggleModal('members-wrap-modal')}}><FiUsers />Members</li>
                             <MembersModal isMemberChecked={this.props.isMemberChecked} onAddMemberToTask={this.props.onAddMemberToTask} toggleModal={() => { this.props.toggleModal() }} />
-                        </li>
+                        </ul>
 
                         <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
                         <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
