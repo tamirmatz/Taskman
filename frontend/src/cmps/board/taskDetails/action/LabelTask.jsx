@@ -81,6 +81,7 @@ class _LabelTask extends Component {
 
     render() {
         const { label } = this.props;
+        console.log(label)
         const { task } = this.state;
         let className;
         if (task) {

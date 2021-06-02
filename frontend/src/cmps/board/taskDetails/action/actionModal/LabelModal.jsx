@@ -16,6 +16,7 @@ class _LabelModal extends Component {
     }
     render() {
         const labels = this.props.board.labels;
+        console.log(labels)
         return <div className="action-modal label-wrap-modal d-none p-abs flex">
             <ModalAction>
                 <div className="label-modal p-abs flex column pad-1">

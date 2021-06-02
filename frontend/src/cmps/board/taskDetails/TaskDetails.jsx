@@ -30,6 +30,8 @@ class _TaskDetails extends Component {
         this.setState({ ...this.state, group, task })
     }
 
+    //Destroyed the check list! don't use it! -tamir&naav- <3
+
     // componentDidUpdate(prevProps) {
     //     if (this.props !== prevProps) {
     //         const { boardId, taskId, groupId } = this.props.match.params;
