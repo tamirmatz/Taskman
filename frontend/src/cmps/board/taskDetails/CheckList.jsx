@@ -66,7 +66,7 @@ export class CheckList extends Component {
                     {checklist.todos.length > 0 && <CheckListStatus checklist={checklist} />}
                     <ul className="todo-list">
                         {checklist.todos.map((todo, idx) => {
-                            return <li className="flex space-between">
+                            return <li key={todo.id} className="flex space-between">
                                 <div>
                                     <input type="checkbox" name="isDone" checked={todo.isDone} onChange={(ev) => {
                                         this.handleChangeTodos(ev, idx)
