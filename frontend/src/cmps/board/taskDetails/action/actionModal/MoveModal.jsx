@@ -29,7 +29,9 @@ class _MoveMdodal extends Component {
                     <div className="action-content">
                         <form onSubmit={this.moveTask}>
                         <select onChange={this.handleChange}>
-                            {}
+                            {this.props.board.groups.map((group,idx)=>{
+                                return group.id!==this.props.group.id && <option key={group.id}>{group.title}</option>
+                            })}
                         </select>
 
                         </form>
@@ -42,7 +44,6 @@ class _MoveMdodal extends Component {
 }
 const mapStateToProps = state => {
     return {
-        loggedInUser: state.userModule.loggedInUser,
         board: state.boardModule.board
     }
 }
