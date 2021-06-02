@@ -48,11 +48,6 @@ class _LoginSignup extends Component {
 
   doLogin = async ev => {
     ev.preventDefault()
-    // const { username, password } = this.state.loginCred
-    // if (!username) {
-    //   return this.setState({ msg: 'Please enter user/password' })
-    // }
-    // const userCreds = { username, password }
     try {
       this.props.login()
       this.props.history.push('/board')
@@ -115,8 +110,7 @@ class _LoginSignup extends Component {
       </form>
     )
     let loginSection = (
-      <form className="sign-in center" onSubmit={this.doLogin}>
-        <h2>Login</h2>
+      <form className="login flex space-between center" onSubmit={this.doLogin}>
         <select
           name="username"
           value={this.state.loginCred.username}
@@ -148,11 +142,9 @@ class _LoginSignup extends Component {
 
     const { loggedInUser } = this.props
     return (
-      <div className="login-sign-up flex column center">
-        <h1 className="">
-          Login / Signup
-        </h1>
-        <p>{this.state.msg}</p>
+      <div className="login-sign-up h-100 w-100 flex column center content-center">
+        {/* <p>{this.state.msg}</p> */}
+        
         {loggedInUser && (
           <div>
             <h3>
@@ -163,30 +155,6 @@ class _LoginSignup extends Component {
         )}
         {!loggedInUser && loginSection}
         {!loggedInUser && signupSection}
-
-        {/* <hr />
-        <section className="admin">
-          <details>
-            <summary>Admin</summary>
-            <button onClick={this.props.loadUsers}>Refresh Users</button>
-            {this.props.isLoading && 'Loading...'}
-            {this.props.users && <ul>
-
-              {this.props.users.map(user => (
-                <li key={user._id}>
-                  <pre>{JSON.stringify(user, null, 2)}</pre>
-                  <button
-                    onClick={() => {
-                      this.removeUser(user._id)
-                    }}
-                  >
-                    Remove {user.username}
-                  </button>
-                </li>
-              ))}
-            </ul>}
-          </details>
-        </section> */}
       </div>
     )
   }
