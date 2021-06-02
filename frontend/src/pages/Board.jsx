@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { remove, add, loadBoard, update } from '../store/actions/boardsAction.js';
+import { remove, add, loadBoard, update, setBoard } from '../store/actions/boardsAction.js';
 import { loading } from '../store/actions/systemAction';
 import { loadUsers } from '../store/actions/userActions.js'
 import React, { Component } from 'react'
@@ -25,15 +25,15 @@ class _Board extends Component {
         this.props.loadBoard(boardId);
         this.props.loadUsers();
         socketService.setup()
-        socketService.on('updated board', () => {
-            console.log('recieved update')
-            this.props.loadBoard()
+        socketService.on('updated board', (board) => {
+            if (boardId !== board._id) return
+            this.props.setBoard(board)
         })
         socketService.emit('add member', boardId)
     }
 
     componentWillUnmount() {
-        socketService.off('updated board', this.props.loadBoard)
+        socketService.off('updated board', this.props.setBoard)
         socketService.terminate()
     }
 
@@ -70,7 +70,7 @@ class _Board extends Component {
         if (!destination) return
         if (destination.droppableId === source.droppableId &&
             destination.index === source.index) return
-        const copyBoard = { ...this.props.board }
+        const copyBoard = JSON.parse(JSON.stringify(this.props.board))
         const activity = {}
         if (type === 'task') {
             const sourceListIdx = boardService.getGroupIdxById(copyBoard, source.droppableId)
@@ -116,9 +116,9 @@ class _Board extends Component {
                     <div className="board-list flex w-100 "
 
                     >
-                        <Droppable droppableId="all-groups"
+                        <Droppable droppableId={board._id}
                             direction="horizontal"
-                            type="TaskList"
+                            type="group"
                         >
                             {provided => (
                                 <ul
@@ -168,7 +168,8 @@ const mapDispatchToProps = {
     add,
     loadBoard,
     update,
-    loadUsers
+    loadUsers,
+    setBoard
     // loading
 }
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)

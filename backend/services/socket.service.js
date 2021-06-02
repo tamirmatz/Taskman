@@ -10,7 +10,7 @@ function connectSockets(http, session) {
     gIo = require('socket.io')(http, {
         cors: {
             origin: 'http://localhost:3000',
-            methods: ["GET","POST","PUT","DELETE"],
+            methods: ["GET", "POST", "PUT", "DELETE"],
             credentials: true
         }
     });
@@ -31,18 +31,24 @@ function connectSockets(http, session) {
             }
         })
         socket.on('add member', boardId => {
-            if (socket.board === boardId) return;
-            if (socket.board) {
-                socket.leave(socket.board)
+
+            if (socket.boardId === boardId) return;
+            if (socket.boardId) {
+                socket.leave(socket.boardId)
             }
             console.log('member joined,', boardId)
             socket.join(boardId)
             // logger.debug('Session ID is', socket.handshake.sessionID)
-            socket.board = boardId
+            socket.boardId = boardId
+            // console.log(gSocketMap);
+            console.log(socket.boardId);
         })
-        socket.on('update board', () => {
-            console.log('emitted update board',socket.board)
-            socket.to(socket.board).emit('updated board', 'data')
+        socket.on('update board', (board) => {         
+            // gIo.sockets.in(socket.boardId).emit('updated board', board)
+            // gIo.emit('updated board', board)
+            console.log('here emit ',socket.boardId);
+            // socket.to(socket.boardId).emit('updated board', board)
+            socket.broadcast.emit('updated board', board)
         })
         socket.on('update newMsg', msg => {
             console.log('Msg', msg);
