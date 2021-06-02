@@ -50,7 +50,7 @@ class _Login extends Component {
   doLogin = async ev => {
     ev.preventDefault()
     try {
-      this.props.login()
+      this.props.login({username:this.state.loginCred.username,password:this.state.loginCred.password})
       this.props.history.push('/board')
 
       this.setState({ loginCred: { username: '', password: '' } })
