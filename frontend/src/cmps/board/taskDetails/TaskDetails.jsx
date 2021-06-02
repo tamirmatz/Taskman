@@ -104,9 +104,8 @@ class _TaskDetails extends Component {
     }
 
     onSaveDueDate = (date) =>{
-        console.log(this.state)
         const {task} = this.state;
-        task.dueDate = date
+        task.dueDate = {date,isDone:false}
         this.updateTask()
     }
 
@@ -117,6 +116,12 @@ class _TaskDetails extends Component {
             return 'checked'
         }
         else return ''
+    }
+
+    isDueDateDone = (val) => {
+        const { task } = this.state;
+        console.log('val',val)
+
     }
 
     toggleModal = (className) => {
@@ -181,10 +186,10 @@ class _TaskDetails extends Component {
                                 {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal') }} className="avatar">+</span>}
                             </ul>
                         </div>
-                        <div className="task-duedate flex center">
-                            <input type="checkbox" />
-                            {task.dueDate &&  <p>{task.dueDate}</p> }
-                        </div>
+                        {task.dueDate && <div className="task-duedate flex center">
+                            <input onChange={(ev) => {this.isDueDateDone(ev.target.value)}} type="checkbox" />
+                              <p>{task.dueDate}</p> 
+                        </div>}
                     </section>
                     <section className="desc-section">
                         <div className="desc-header flex row">

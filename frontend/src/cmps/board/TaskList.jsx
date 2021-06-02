@@ -62,7 +62,7 @@ export class TaskList extends Component {
         const { board, group, updateBoard, index } = this.props
 
         return (
-            <Draggable index={index} isDragDisabled={false} draggableId={group.id} >
+            <Draggable index={index} draggableId={group.id} >
                 {(provided, snapshot) => {
                     return <li className="group br-3"
                         {...provided.draggableProps}
@@ -82,9 +82,14 @@ export class TaskList extends Component {
                         <div className="wrap-task-list">
 
                             <div className="task-list flex column center content-center">
-                                <Droppable key={index} droppableId={group.id} type='task'>
+                                <Droppable  
+                                droppableId={group.id} 
+                                type='task'>
                                     {(provided) => (
-                                        <div className="task-list-droppable" ref={provided.innerRef} {...provided.droppableProps} {...provided.dragHandleProps}>
+                                        <div className="task-list-droppable" 
+                                        ref={provided.innerRef} 
+                                        {...provided.droppableProps} 
+                                        >
                                             {group.tasks.map((task, idx) => (
                                                 <TaskPreview key={task.id}
                                                     board={board}

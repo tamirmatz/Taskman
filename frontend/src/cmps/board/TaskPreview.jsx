@@ -61,15 +61,12 @@ export class TaskPreview extends Component {
         // isDragDisabled={false}
         >
             {(provided, snapshot) => {
-                if (snapshot.isDragging) {
-
-                }
                 return (
                     <div
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                        isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
+                        isDragging={snapshot.isDragging && !snapshot.isDropAnimating ? 'true' : 'false'}
                         style={this.getStyle(provided.draggableProps.style, snapshot)}
                     >
                         <div className="wrap-list-task br-3">
@@ -103,7 +100,7 @@ export class TaskPreview extends Component {
 
                                         <h1 className="task-title fam-1 font-m">{task.title}</h1>
                                         <div className="task-mini-details flex w-100 content-start  gap-xs fam-1 c-stand">
-                                            {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member=>{return <UserPreview user={member}/>}).splice(0,3)}</small>}
+                                            {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member => { return <UserPreview user={member} /> }).splice(0, 3)}</small>}
                                             {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
                                             {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "check-list-done-prev"}`}>
                                                 <BsCheckBox />
@@ -112,7 +109,7 @@ export class TaskPreview extends Component {
                                             {task.dueDate && <div className="flex row center">
                                                 <AiOutlineClockCircle />
                                                 <small>
-                                                    {utilService.timeAgo(task.dueDate)}
+                                                    {task.dueDate}
                                                 </small>
                                             </div>}
                                             {task.description && <small className="flex center"><GrTextAlignFull /></small>}
