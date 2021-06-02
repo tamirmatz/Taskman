@@ -192,7 +192,7 @@ class _TaskDetails extends Component {
                         </div>
                         {task.dueDate && <div className="task-duedate flex center">
                             <div className="flex center">
-                                <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} type="checkbox" />
+                                <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} checked={task.isDone} type="checkbox" />
                                 <p>{task.dueDate}</p>
                                 {console.log(task.dueDate)}
                                 {task.isDone && <div className="complete-duedate">complete</div>}
