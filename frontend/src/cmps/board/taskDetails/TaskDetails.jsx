@@ -102,6 +102,13 @@ class _TaskDetails extends Component {
         this.updateTask()
     }
 
+    onSaveDueDate = (date) =>{
+        console.log(this.state)
+        const {task} = this.state;
+        task.dueDate = date
+        this.updateTask()
+    }
+
     isMemberChecked = (memberCheck) => {
         const { task } = this.state;
         const memberIdx = task.members.findIndex(member => member._id === memberCheck._id)
@@ -173,6 +180,10 @@ class _TaskDetails extends Component {
                                 {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal') }} className="avatar">+</span>}
                             </ul>
                         </div>
+                        <div className="task-duedate flex center">
+                            <input type="checkbox" />
+                            {task.dueDate &&  <p>{task.dueDate}</p> }
+                        </div>
                     </section>
                     <section className="desc-section">
                         <div className="desc-header flex row">
@@ -217,7 +228,7 @@ class _TaskDetails extends Component {
                         </ul>}
                     </section>
                 </div>
-                <ActionList onDeleteTask={this.onDeleteTask} toggleModal={this.toggleModal} isMemberChecked={this.isMemberChecked} onAddMemberToTask={this.onAddMemberToTask} task={task} onAddCheckList={this.onAddCheckList} />
+                <ActionList onSaveDueDate={this.onSaveDueDate} onDeleteTask={this.onDeleteTask} toggleModal={this.toggleModal} isMemberChecked={this.isMemberChecked} onAddMemberToTask={this.onAddMemberToTask} task={task} onAddCheckList={this.onAddCheckList} />
             </section>
         )
     }
