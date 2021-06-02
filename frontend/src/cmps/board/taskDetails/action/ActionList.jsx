@@ -23,24 +23,7 @@ class _ActionList extends Component {
     }
 
     componentDidUpdate(prevProps) {
-
     }
-
-    toggleModal = (className) => {
-        const modals = document.querySelectorAll('.action-modal');
-        const currModal = document.querySelector(`.${className}`);
-        console.log(modals);
-        console.log(currModal);
-        if (modals) {
-            modals.forEach(
-                el => el.classList.add('d-none'));
-        }
-        if (currModal) {
-            currModal.classList.remove('d-none');
-        }
-
-    }
-
 
     render() {
         const { task } = this.state
@@ -53,17 +36,17 @@ class _ActionList extends Component {
                     <ul className="action-menu flex column w-100 clean-list font-m pad-0 fw-2">
 
                         <li className="label-wrap">
-                            <li className="btn-action w-100 " onClick={() => { this.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</li>
-                            <LabelModal toggleModal={() => { this.toggleModal() }} />
+                            <li className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</li>
+                            <LabelModal toggleModal={() => { this.props.toggleModal() }} />
                         </li>
 
                         <li className="members-wrap">
-                            <li className="btn-action w-100 " onClick={() => {this.toggleModal('members-wrap-modal')}}><FiUsers />Members</li>
-                            <MembersModal toggleModal={() => { this.toggleModal() }} />
+                            <li className="btn-action w-100 " onClick={() => {this.props.toggleModal('members-wrap-modal')}}><FiUsers />Members</li>
+                            <MembersModal isMemberChecked={this.props.isMemberChecked} onAddMemberToTask={this.props.onAddMemberToTask} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
 
                         <li className="btn-action"><AiOutlineClockCircle />Due Date</li>
-                        <li onClick={() => { this.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
+                        <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
                         <li className="btn-action"><BsImage />Image</li>
                         <li className="btn-action"><BsArrowRight />Move</li>
                         <li className="btn-action"><BiCopy />Copy</li>

@@ -18,7 +18,7 @@ class _TaskDetails extends Component {
     state = {
         group: null,
         task: null,
-        onFocus: false,
+        onFocus: false
     }
 
     async componentDidMount() {
@@ -73,7 +73,7 @@ class _TaskDetails extends Component {
         const {task} = this.state
         const removed = task.checklists.splice(ChecklistIdx,1)
         console.log('removed',removed )
-        this.setState({task}, this.updateTask)
+        this.setState({task: {...task}}, this.updateTask)
     }
 
     onDeleteTask = () => {
@@ -85,6 +85,39 @@ class _TaskDetails extends Component {
         copyboard.groups[boardService.getGroupIdxById(copyboard, group.id)] = group
         this.props.update(copyboard)
         this.props.history.push(`/board/${boardId}`)
+    }
+
+    onAddMemberToTask = (addedMember) => {
+        const { task } = this.state;
+        const memberIdx=task.members.findIndex(member => member._id ===addedMember._id)
+        if(memberIdx !== -1){
+            task.members.splice(memberIdx,1)
+        }
+       else task.members.push(addedMember)
+        this.updateTask()
+    }
+
+    isMemberChecked = (memberCheck) => {
+        const { task } = this.state;
+        const memberIdx=task.members.findIndex(member => member._id ===memberCheck._id)
+        if(memberIdx !== -1){
+            return 'checked'
+        }
+       else return ''
+    }
+
+    toggleModal = (className) => {
+        const modals = document.querySelectorAll('.action-modal');
+        const currModal = document.querySelector(`.${className}`);
+        console.log(modals);
+        console.log(currModal);
+        if (modals) {
+            modals.forEach(
+                el => el.classList.add('d-none'));
+        }
+        if (currModal) {
+            currModal.classList.remove('d-none');
+        }
     }
 
     render() {
@@ -105,7 +138,16 @@ class _TaskDetails extends Component {
                         </div>
                         <h3 className="content-gap fam-1 font-2 left-self h-20 center pb-4">in list {this.state.group.title}</h3>
                     </form>
-                    {/* DESC */}
+                    <section>
+                        <div className="task-members">
+                            <ul className="flex center">
+                                {task.members.map(member => {
+                                    return <img src={member.imgUrl} className="avatar"/>
+                                })}
+                            <span onClick={()=>{this.toggleModal('members-wrap-modal')}} className="avatar">+</span>
+                            </ul>
+                        </div>
+                    </section>
                     <section className="desc-section">
                         <div className="desc-header flex row">
                             <GrTextAlignFull /><label>Description</label>
@@ -136,7 +178,7 @@ class _TaskDetails extends Component {
                         })}
                     </ul>}
                 </div>
-                 <ActionList task={task}/>           
+                 <ActionList toggleModal={this.toggleModal} isMemberChecked={this.isMemberChecked} onAddMemberToTask={this.onAddMemberToTask} task={task} onAddCheckList={this.onAddCheckList}/>           
             </section>
         )
     }

@@ -13,10 +13,12 @@
     white-space: normal;
     border-radius: 3px;
     word-wrap: break-word;
+    color: rgb(53, 53, 53)
 }
 
 .task-preview:hover{
-    background: rgba(216, 216, 216, 0.479);
+    background: rgba(235, 235, 235, 0.534);
+    color: #091e42
 }
 
 .preview-label{
@@ -57,5 +59,9 @@
     line-height: 20px;
     margin: 0 0 4px;
     width: 232px;
+}
+
+.task-mini-details{
+    font-size: 12px;
 }
 

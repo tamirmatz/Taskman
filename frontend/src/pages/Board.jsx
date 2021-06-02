@@ -25,7 +25,7 @@ class _Board extends Component {
         const { boardId } = this.props.match.params
         this.props.loadBoard(boardId);
         socketService.setup()
-        socketService.on('board updated', () => {
+        socketService.on('updated board', () => {
             console.log('recieved update')
             this.props.loadBoard()
         })
@@ -33,7 +33,7 @@ class _Board extends Component {
     }
 
     componentWillUnmount() {
-        socketService.off('board updated', this.props.loadBoard)
+        socketService.off('updated board', this.props.loadBoard)
         socketService.terminate()
     }
 
