@@ -109,8 +109,6 @@ class _TaskDetails extends Component {
     toggleModal = (className) => {
         const modals = document.querySelectorAll('.action-modal');
         const currModal = document.querySelector(`.${className}`);
-        console.log(modals);
-        console.log(currModal);
         if (modals) {
             modals.forEach(
                 el => el.classList.add('d-none'));
@@ -120,8 +118,17 @@ class _TaskDetails extends Component {
         }
     }
 
+    onAddLabelTask = (labelId) =>{
+        const task = this.state;
+        if(!task.labels){
+            task.labels = [];
+        }
+        task.labels.push(labelId);
+    }
+
     render() {
         const { task } = this.state;
+        console.log(task);
         if (!task) return <h1>Loading...</h1>
         return (
             <section className="task-details w-50 h-100 flex bg-modal pos-fixed c-stand fam-1 pad-1">
