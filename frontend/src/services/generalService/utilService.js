@@ -52,7 +52,7 @@ const MONTH_NAMES = [
   function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
     const newDate = new Date(date)
     const month = MONTH_NAMES[newDate.getMonth()];
-    const day = newDate.getDay();
+    const day = newDate.getUTCDate();
     return `${ month.slice(0,3) } ${ day }`;
   }
   
