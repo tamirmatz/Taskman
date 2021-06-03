@@ -56,7 +56,7 @@ class _MoveMdodal extends Component {
                                     return group.id !== this.props.group.id && <option value={idx} key={group.id}>{group.title}</option>
                                 })}
                             </select>
-                            <button>Move</button>
+                            <button className="btn-copy-move">Move</button>
                         </form>
                     </div>
                 </div>

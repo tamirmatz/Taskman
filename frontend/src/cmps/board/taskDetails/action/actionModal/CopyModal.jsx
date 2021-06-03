@@ -56,7 +56,7 @@ class _CopyModal extends Component {
                                     return group.id !== this.props.group.id && <option value={idx} key={group.id}>{group.title}</option>
                                 })}
                             </select>
-                            <button>Copy</button>
+                            <button className="btn-copy-move">Copy</button>
                         </form>
                     </div>
                 </div>

@@ -19,7 +19,8 @@ class _TaskDetails extends Component {
     state = {
         group: null,
         task: null,
-        onFocus: false
+        onFocus: false,
+        overlay: false
     }
 
     componentDidMount() {
@@ -30,6 +31,8 @@ class _TaskDetails extends Component {
         this.addClassName();
         this.setState({ ...this.state, group, task })
     }
+
+
 
     //Destroyed the check list! don't use it! -tamir&naav- <3
 
@@ -141,6 +144,26 @@ class _TaskDetails extends Component {
             currModal.classList.remove('d-none');
         }
     }
+    openOverlay = (className) => {
+        this.setState({ ...this.state, overlay: 'details-overlay' });
+    }
+
+
+    closeOverlay = (ev) => {
+        if(!ev.target.classList.contains('btn-action') && !ev.target.classList.contains('btn-act') ){
+            if ( ev.target.offsetParent !==undefined && ev.target.offsetParent.classList[0] !== undefined && ev.target.offsetParent.classList[0] === 'task-details') {
+                const modals = document.querySelectorAll('.action-modal');
+                if (modals) {
+                    modals.forEach(
+                        el => el.classList.add('d-none'));
+                }
+                this.setState({ ...this.state, overlay: '' });
+
+            }
+        }
+        // this.setState({ ...this.state, overlay: '' });
+        // if(ev.target.classList.contain('btn-action'))
+    }
 
     onAddLabelTask = (labelId) => {
         const task = this.state;
@@ -168,7 +191,8 @@ class _TaskDetails extends Component {
         const { board, loggedInUser } = this.props
         if (!task) return <h1>Loading...</h1>
         return (
-            <section className="task-details w-50 flex bg-modal c-stand fam-1 pad-1">
+            <section className={`task-details w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
+                onClick={(ev) => { this.closeOverlay(ev) }}>
                 <div className="info-task flex column w-70 h-100 content-start">
                     {/* Title */}
                     <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
@@ -176,9 +200,9 @@ class _TaskDetails extends Component {
                         this.updateTask()
                     }}>
                         <div className="task-title flex center h-33">
-                            <label 
-                            htmlFor="title" 
-                            className="font-3 flex center w-100">
+                            <label
+                                htmlFor="title"
+                                className="font-3 flex center w-100">
                                 <BsCardChecklist />
                                 <input
                                     onBlur={this.updateTask}
@@ -191,7 +215,7 @@ class _TaskDetails extends Component {
                             </label>
                         </div>
                         <h3 className="task-list-title fam-1 font-2 left-self h-20 center">in list{' '}
-                        <span className="t-decor">{this.state.group.title}</span>
+                            <span className="t-decor">{this.state.group.title}</span>
                         </h3>
                     </form>
 
@@ -203,7 +227,7 @@ class _TaskDetails extends Component {
                                     return <UserPreview key={member._id} user={member} />
                                 })}
                                 {task.members.length > 0 &&
-                                    <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="user-preview flex center content-center font-m bg-btn">+</span>}
+                                    <span onClick={() => { this.toggleModal('members-wrap-modal'); this.openOverlay()}} className="btn-act  user-preview flex center content-center font-m bg-btn cur-pointer ">+</span>}
                             </ul>
                         </div>
                         <div className="task-labels flex column center wrap">
@@ -224,7 +248,7 @@ class _TaskDetails extends Component {
                                         )
                                     }
                                 })}
-                                {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal') }} className="avatar">+</span>}
+                                {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal'); ; this.openOverlay(); }} className="details-label bold flex center pad-xs mb-03 bg-btn btn-act cur-pointer">+</span>}
                             </ul>
                         </div>
                         {task.dueDate && <div className="task-duedate flex center column">
@@ -249,7 +273,7 @@ class _TaskDetails extends Component {
                             <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details content-gap" onChange={this.handleChange} />
                         </form>
                     </section>
-                    {utilService.isFalse(task.checklists) && <ul className="todos clean-list">
+                    {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3">
                         {task.checklists.map((checklist, idx) => {
                             return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
@@ -263,7 +287,7 @@ class _TaskDetails extends Component {
                                     ev.preventDefault()
                                     this.onSendComment(ev.target[0].value)
                                 }}>
-                                    <input class="comment-textarea" placeholder="Write a comment..." name="txt">
+                                    <input className="comment-textarea" placeholder="Write a comment..." name="txt">
                                     </input>
                                     <button>Send</button>
                                 </form>
@@ -286,6 +310,7 @@ class _TaskDetails extends Component {
                     </section>
                 </div>
                 <ActionList
+                    openOverlay={() => { this.openOverlay() }}
                     onSaveDueDate={this.onSaveDueDate}
                     onDeleteTask={this.onDeleteTask}
                     toggleModal={this.toggleModal}
