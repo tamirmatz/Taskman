@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { ModalAction } from '../../../../shared/ModalAction';
 import { AiOutlineClose } from 'react-icons/ai'
+import { remove, add, loadBoard, update, setBoard } from '../../../../../store/actions/boardsAction.js';
+import { boardService } from '../../../../../services/boardService.js'
 
 class _GroupModal extends Component {
     state = {
@@ -20,8 +22,11 @@ class _GroupModal extends Component {
 
     }
 
-    removeList = () => {
-
+    removeList = (groupId) => {
+        const copyBoard = { ...this.props.board }
+        const groupIdx = boardService.getGroupIdxById(copyBoard, groupId)
+        copyBoard.groups.splice(groupIdx,1)
+        this.props.update(copyBoard)
     }
     render() {
         const group = this.state.group;
@@ -38,7 +43,7 @@ class _GroupModal extends Component {
                         <ul className="flex column space-between">
                             <ul >
                                 <li onClick={() => { this.AddTask() }} className="font-2 fam-1 pad-1 li-btn flex center">Add Task...</li>
-                                <li onClick={() => { this.removeList() }} className="font-2 fam-1 pad-1 flex center li-btn">Remove List...</li>
+                                <li onClick={() => { this.removeList(groupId) }} className="font-2 fam-1 pad-1 flex center li-btn">Remove List...</li>
                                 <h1>Label of color!!!</h1>
                             </ul>
                         </ul>
@@ -56,7 +61,7 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = {
-
+    update
 }
 
 
