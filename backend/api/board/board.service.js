@@ -40,9 +40,10 @@ async function remove(boardId) {
 }
 
 async function add(board,loggedInUser) {
+    console.log('in add')
     try {
         const boardToAdd = _createInittialBoard(board,loggedInUser)
-        console.log(boardToAdd)
+        console.log('board to add',boardToAdd)
         const collection = await dbService.getCollection('board')
         console.log()
         collection.insertOne(boardToAdd)
@@ -70,42 +71,28 @@ async function update(board) {
 
 
 function _createInittialBoard({title,style},loggedInUser) {
+    console.log('in create board')
     const board = {
         // "_id": utilService.makeId(),
         title,
         "createdAt": Date.now(),
         "createdBy": {
-            "_id": loggedInUser._id,
-            "fullname": loggedInUser.fullname,
-            "imgUrl": loggedInUser.imgUrl
+            "_id": "gsdg52345",
+            "fullname": "Guest Guest",
+            "imgUrl": ""
         },
         "style": style.background,
         "labels": [
         ],
         "members": [
             {
-                "_id": loggedInUser._id,
-                "fullname": loggedInUser.fullname,
-                "imgUrl": loggedInUser.imgUrl
+                "_id": "gsdg52345",
+                "fullname": "Guest Guest",
+                "imgUrl": ""
             }
         ],
         "groups": [
-            {
-                "id": utilService.makeId(),
-                "title": "Group 1",
-                "tasks": [
-                    {
-                        "id": "c101",
-                        "title": "Replace logo"
-                    },
-                    {
-                        "id": "c102",
-                        "title": "Add Samples"
-                    }
-                ],
-                "checklists": [],
-                "style": {}
-            },
+          
         ],
         "activities": []
     }

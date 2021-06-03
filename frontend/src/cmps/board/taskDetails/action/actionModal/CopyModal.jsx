@@ -5,11 +5,12 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { LabelTask } from '../LabelTask'
 import { update } from '../../../../../store/actions/boardsAction';
 import { boardService } from '../../../../../services/boardService'
+import { utilService } from '../../../../../services/generalService/utilService';
 
 
-class _MoveMdodal extends Component {
+class _CopyModal extends Component {
     state = {
-        moveTo: null
+        copyTo: null
     }
 
     componentDidMount() {
@@ -20,43 +21,42 @@ class _MoveMdodal extends Component {
 
     }
 
-    moveTask = () => {
-        if (this.state.moveTo !== this.props.group.id) {
+    copyTask = () => {
+        if (this.state.copyTo !== this.props.group.id) {
             const copyBoard = { ...this.props.board }
-            copyBoard.groups[boardService.getGroupIdxById(copyBoard, this.props.group.id)].tasks.splice(
-                boardService.getTaskIdxById(this.props.group, this.props.task.id), 1)
-            copyBoard.groups[this.state.moveTo].tasks.push(this.props.task)
+            const task ={...this.props.task}
+            task.id = utilService.makeId()
+            copyBoard.groups[this.state.copyTo].tasks.push(task)
             this.props.update(copyBoard)
         }
-        // this.props.history.push(`/board/${copyBoard._id}`)
     }
 
     handleChange = ({ target }) => {
         console.log(target.value)
-        this.setState({ moveTo: target.value })
+        this.setState({ copyTo: target.value })
     }
     render() {
-        return <div className="action-modal move-wrap-modal d-none p-abs flex">
+        return <div className="action-modal copy-wrap-modal d-none p-abs flex">
             <ModalAction>
                 <div className="label-modal p-abs flex column pad-1">
                     <div className="header-modal font-1 fam-1 fw-2 flex center content-end gap-5 w-70">
-                        <h1 className="fam-1 font-1 ">Move to</h1>
-                        <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.props.toggleModal('move-wrap-modal') }}><AiOutlineClose /></span>
+                        <h1 className="fam-1 font-1 ">Copy to</h1>
+                        <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
                     <div className="action-content">
                         <form onSubmit={(ev) => {
-                            this.moveTask()
+                            this.copyTask()
                             ev.preventDefault()
                         }}>
                             <select onChange={this.handleChange}>
-                                {this.props.board.groups.map((group, idx) => {
+                                {this.props.board.groups.map((group) => {
                                     return group.id === this.props.group.id && <option key={group.id} value={group.id}>{group.title}</option>
                                 })}
                                 {this.props.board.groups.map((group, idx) => {
                                     return group.id !== this.props.group.id && <option value={idx} key={group.id}>{group.title}</option>
                                 })}
                             </select>
-                            <button>Move</button>
+                            <button>Copy</button>
                         </form>
                     </div>
                 </div>
@@ -75,4 +75,4 @@ const mapDispatchToProps = {
 }
 
 
-export const MoveMdodal = connect(mapStateToProps, mapDispatchToProps)(_MoveMdodal)
+export const CopyModal = connect(mapStateToProps, mapDispatchToProps)(_CopyModal)
