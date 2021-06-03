@@ -29,7 +29,7 @@ class _DueDateModal extends Component {
                     </div>
                     <div className="action-content">
                         <ul>
-                            <input onChange={(ev) => { this.props.onSaveDueDate(utilService.hideYearDate(ev.target.value)) }} type="date" name="date"  className="input-date fam-1"/>
+                            <input onChange={(ev) => { this.props.onSaveDueDate(ev.target.valueAsNumber)}} type="date" name="date"  className="input-date fam-1"/>
                         </ul>
                     </div>
                 </div>
