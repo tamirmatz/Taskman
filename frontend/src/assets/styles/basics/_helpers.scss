@@ -507,6 +507,10 @@ font-w2{
     color: #3498db;
 }
 
+.c-lead{
+    color: #5e6c84;
+}
+
 //BACKGROUND
 .bg-white{
     background: #fff;
@@ -571,7 +575,7 @@ font-w2{
     color: var(--spanColor);
 }
 .fw-1{
-    font-weight: 400;
+    font-weight: 500;
 }
 .fw-2{
     font-weight: 600;
@@ -643,4 +647,6 @@ a{
     pointer-events: none;
  }
 
- 
+ .t-decor{
+    text-decoration: underline;;
+ }

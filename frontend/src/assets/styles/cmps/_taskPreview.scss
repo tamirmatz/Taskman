@@ -22,8 +22,12 @@
 }
 
 .preview-label{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     float: left;
-    width: 40px;
+    min-width: 40px;
     height: 8px;
     border-radius: 4px;
     text-align: center;
@@ -31,17 +35,21 @@
     margin: 0 4px 4px 0;
     color: #fff;
     font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     cursor:pointer;
 }
 
+
 .label-open{
-    display: flex;
+    width: auto;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     height: 1.3rem;
-    min-width: 80px;
-    max-width: 100%;
     font-size: 12px;
+    max-width: 70px;
+
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     line-height: 16px;
     padding: 0 8px;

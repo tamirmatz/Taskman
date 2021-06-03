@@ -42,7 +42,7 @@ class _TaskDetails extends Component {
     //         this.setState({ ...this.state, group, task })
     //     }
     // }
-    addClassName(){
+    addClassName() {
         document.querySelector('.board').classList.add('max-screen');
     };
 
@@ -153,7 +153,6 @@ class _TaskDetails extends Component {
     onSendComment = (txt) => {
         const { loggedInUser } = this.props
         const { task } = this.state;
-        console.log('txt')
         task.comments.unshift({ id: utilService.makeId(), txt, createdAt: Date.now(), byMember: loggedInUser })
         this.updateTask()
     }
@@ -168,7 +167,6 @@ class _TaskDetails extends Component {
         const { task } = this.state;
         const { board, loggedInUser } = this.props
         if (!task) return <h1>Loading...</h1>
-        console.log('checklist', task.checklists)
         return (
             <section className="task-details w-50 flex bg-modal c-stand fam-1 pad-1">
                 <div className="info-task flex column w-70 h-100 content-start">
@@ -178,7 +176,10 @@ class _TaskDetails extends Component {
                         this.updateTask()
                     }}>
                         <div className="task-title flex center h-33">
-                            <label htmlFor="title" className="font-6 flex center w-100"><BsCardChecklist className="ico" />
+                            <label 
+                            htmlFor="title" 
+                            className="font-3 flex center w-100">
+                                <BsCardChecklist />
                                 <input
                                     onBlur={this.updateTask}
                                     type="text"
@@ -189,12 +190,14 @@ class _TaskDetails extends Component {
                                 />
                             </label>
                         </div>
-                        <h3 className="fam-1 font-2 left-self h-20 center">in list {this.state.group.title}</h3>
+                        <h3 className="task-list-title fam-1 font-2 left-self h-20 center">in list{' '}
+                        <span className="t-decor">{this.state.group.title}</span>
+                        </h3>
                     </form>
 
-                    <section className="flex wrap gap-xs center">
+                    <section className="info-task flex wrap gap-1 center mb-1">
                         <div className="task-members">
-                            {task.members.length > 0 && <h3 className="font-m fam-1">Members</h3>}
+                            {task.members.length > 0 && <h3 className="font-s fw-1 fam-1 left-self c-lead">MEMBERS</h3>}
                             <ul className="flex center gap-xs">
                                 {task.members.map(member => {
                                     return <UserPreview key={member._id} user={member} />
@@ -203,33 +206,39 @@ class _TaskDetails extends Component {
                                     <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="user-preview flex center content-center font-m bg-btn">+</span>}
                             </ul>
                         </div>
-                        <div className="task-labels flex column center">
-                            {task.labelIds.length > 0 && <h3 className="font-m fam-1 left-self">Labels</h3>}
-                            <ul className="flex center">
+                        <div className="task-labels flex column center wrap">
+                            {(task.labelIds && task.labelIds.length > 0) && <h3 className="font-s fw-1 fam-1 left-self c-lead">LABELS</h3>}
+                            <ul className="flex center wrap">
                                 {task.labelIds && task.labelIds.map(labelId => {
                                     const label = board.labels.find(label => {
                                         return label.id === labelId;
                                     })
-                                    if (label)
-                                        return <div key={label.id} className={`details-label bold ${this.state.isLabelOpen && "label-open"} flex center`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}>
-                                            {label.title}
-                                        </div>
+                                    if (label) {
+                                        return (
+                                            <div
+                                                key={label.id}
+                                                className={`details-label bold flex center pad-xs mb-03`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}
+                                            >
+                                                {label.title}
+                                            </div>
+                                        )
+                                    }
                                 })}
                                 {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal') }} className="avatar">+</span>}
                             </ul>
                         </div>
-                        {task.dueDate && <div className="task-duedate flex center">
-                            <div className="flex center">
+                        {task.dueDate && <div className="task-duedate flex center column">
+                            <h3 className="font-s fw-1 fam-1 left-self c-lead">DUE DATE</h3>
+                            <div className="flex">
                                 <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} checked={task.isDone} type="checkbox" />
                                 <p>{task.dueDate}</p>
-                                {console.log(task.dueDate)}
                                 {task.isDone && <div className="complete-duedate">complete</div>}
                             </div>
                         </div>}
                     </section>
 
                     <section className="desc-section">
-                        <div className="desc-header flex row">
+                        <div className="desc-header flex row mb-1">
                             <GrTextAlignFull /><label>Description</label>
                         </div>
                         <form onSubmit={(ev) => {
@@ -261,7 +270,7 @@ class _TaskDetails extends Component {
                             </div>
                         </div>
 
-                        {task.comments && <ul className="comments clean-list"> {console.log(task.comments)}
+                        {task.comments && <ul className="comments clean-list">
                             {task.comments.map((comment, idx) => {
                                 return <li className="full-comment flex row">
                                     <UserPreview user={comment.byMember} />

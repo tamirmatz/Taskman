@@ -63,7 +63,7 @@ class _ActionList extends Component {
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy />Copy</div>
                             <CopyModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
-                        <li onClick={() => { this.props.onDeleteTask() }} className="btn-action"><AiOutlineDelete />Delete</li>
+                        <li onClick={() => { this.props.onDeleteTask() }} className="btn-action btn-delete"><AiOutlineDelete />Delete</li>
                     </ul>
                 </div>
             </div>

@@ -56,8 +56,10 @@ class _Board extends Component {
         }))
     }
 
-    removeClassName(){
-        document.querySelector('.board').classList.remove('max-screen');
+    removeClassName() {
+        if (document.querySelector('.board')){
+            document.querySelector('.board').classList.remove('max-screen');
+        }
     };
 
     onAddGroup = () => {
