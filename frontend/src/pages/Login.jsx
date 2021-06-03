@@ -119,8 +119,8 @@ class _Login extends Component {
       </form>
     )
     let loginSection = (
-      <form className="login flex column  w-100" onSubmit={this.doLogin}>
-        <h2 className="fam-1 font-3 fw-2">Login</h2>
+      <form className="login flex column  w-100 h-80 space-between" onSubmit={this.doLogin}>
+        <h2 className="fam-1 font-3 fw-2 mb-1">Login</h2>
 
         <select
           name="username"
@@ -148,7 +148,7 @@ class _Login extends Component {
           placeholder="Password"
         />
         <br /> */}
-        <div className="flex space-between">
+        <div className="flex space-between mt-3">
           <button className="login-btn">Login</button>
           <button className="login-btn" onClick={() => this.toggleLogin()}>Sign-in</button>
         </div>
