@@ -87,12 +87,15 @@ class _TaskDetails extends Component {
             task.checklists = [];
         }
         task.checklists.push({ id: utilService.makeId(), title: 'Checklist', todos: [] })
-        this.setState({ task }, this.updateTask)
+        this.setState({ task }, ()=>{
+            this.updateTask()})
 
     }
     onRemoveCheckList = (checklistIdx) => {
-        const { task } = this.state
+        const { task } = {...this.state}
+        // const task = JSON.parse(JSON.stringify(this.state.task))
         task.checklists.splice(checklistIdx, 1)
+        // this.setState({task})
         this.setState({ task }, this.updateTask)
     }
 
@@ -279,7 +282,7 @@ class _TaskDetails extends Component {
                     </section>
                     {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3 ">
                         {task.checklists.map((checklist, idx) => {
-                            return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                            return <CheckList key={checklist.id} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                     </ul>}
 
