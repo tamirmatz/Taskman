@@ -63,7 +63,7 @@ class _ActionList extends Component {
                         <li className="btn-action"><BsImage />Image</li>
                         <li className="move-wrap">
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('move-wrap-modal') }}><BsArrowRight />Move</div>
-                            <MoveMdodal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
+                            <MoveMdodal moveTask={this.props.moveTask} group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
                         <li className="copy-wrap">
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy />Copy</div>

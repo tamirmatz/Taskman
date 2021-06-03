@@ -15,8 +15,6 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 
 // import {TaskTitle} from '../taskDetails/TaskTitle';
 
-
-
 class _TaskDetails extends Component {
     state = {
         group: null,
@@ -33,21 +31,6 @@ class _TaskDetails extends Component {
         this.addClassName();
         this.setState({ ...this.state, group, task })
     }
-
-
-
-    //Destroyed the check list! don't use it! -tamir&naav- <3
-
-    // componentDidUpdate(prevProps) {
-    //     if (this.props !== prevProps) {
-    //         const { boardId, taskId, groupId } = this.props.match.params;
-    //         const board = { ...this.props.board };
-    //         const group = boardService.getGroupById(board, groupId);
-    //         const task = boardService.getTaskById(group, taskId);
-    //         this.setState({ ...this.state, group, task })
-    //     }
-    // }
-
 
     addClassName() {
         document.querySelector('.board').classList.add('max-screen');
@@ -193,6 +176,18 @@ class _TaskDetails extends Component {
         this.updateTask()
     }
 
+    moveTask = (moveTo) => {
+        if (moveTo !== this.state.group.id) {
+            const copyBoard = { ...this.props.board }
+            copyBoard.groups[boardService.getGroupIdxById(copyBoard, this.state.group.id)].tasks.splice(
+                boardService.getTaskIdxById(this.state.group, this.state.task.id), 1)
+            copyBoard.groups[moveTo].tasks.push(this.state.task)
+            this.setState({group: copyBoard.groups[moveTo]})
+            this.props.update(copyBoard)
+        }
+        // this.props.history.push(`/board/${copyBoard._id}`)
+    }
+
     render() {
         const { task } = this.state;
         const { board, loggedInUser } = this.props
@@ -331,6 +326,7 @@ class _TaskDetails extends Component {
                     task={task}
                     group={this.state.group}
                     onAddCheckList={this.onAddCheckList}
+                    moveTask ={this.moveTask}
                 />
             </section>
         )
