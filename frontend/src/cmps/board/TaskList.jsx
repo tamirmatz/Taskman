@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Component } from 'react';
 import { boardService } from '../../services/boardService.js'
 import { utilService } from '../../services/generalService/utilService.js'
-import { HiOutlineMenuAlt4 } from 'react-icons/hi'
+import { GroupModal } from './taskDetails/action/actionModal/GroupModal'
 const EMPTY_TASK = { title: '' }
 const EMPTY_GROUP = { title: '' }
 
@@ -59,6 +59,18 @@ export class TaskList extends Component {
         this.setState({ task: EMPTY_TASK })
     }
 
+    toggleModal = (className) => {
+        const modals = document.querySelectorAll('.action-modal');
+        const currModal = document.querySelector(`.${className}`);
+        if (modals) {
+            modals.forEach(
+                el => el.classList.add('d-none'));
+        }
+        if (currModal) {
+            currModal.classList.remove('d-none');
+        }
+    }
+
     render() {
         const { board, group, updateBoard, index } = this.props
 
@@ -84,7 +96,21 @@ export class TaskList extends Component {
                                     name="title"
                                     onChange={this.handleChangeGroup}
                                 />
-                                <div className="group-menu">...</div>
+                                <div className="group-menu" >
+                                    <div className="btn" onMouseDown={(ev) => {
+                                            console.log(ev);
+                                            if(ev.button == 0){
+                                                console.log('aa');
+                                                this.toggleModal(`${this.state.group.id}`)
+                                            }
+                                        }
+                                    }
+                                    >...</div>
+                                    <GroupModal
+                                     toggleModal={() => {this.toggleModal()}} 
+                                     group={group}
+                                     />
+                                </div>
                             </div>
                         </form>
                         <div className="wrap-task-list">

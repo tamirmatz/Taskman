@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { ModalAction } from '../../shared/ModalAction';
 import { AiOutlineClose } from 'react-icons/ai'
 import { UserPreview } from '../UserPreview';
-import { MembersBoard } from '../MembersBoard';
 
 
 
@@ -22,12 +21,12 @@ class _BoardMembersModal extends Component {
 
     render() {
         const members  = this.props.users;
-        return <div className="action-modal c-stand board-members-wrap-modal d-none p-abs flex">
+        return <div className="action-modal board-members-wrap-modal d-none p-abs flex">
             <ModalAction>
-                <div className="members-modal p-abs flex column pad-1">
-                    <div className="header-modal font-1 fam-1 fw-2 flex center content-end gap-5 w-70">
+                <div className="board-members-modal p-abs flex column pad-1 bg-white c-stand z-1 br-3 mt-1">
+                    <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 mb-1">
                         <h1 className="fam-1 font-1 ">Members</h1>
-                        <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.props.toggleModal('board-members-wrap-modal') }}><AiOutlineClose /></span>
+                        <span className="cur-pointer fam-1 font-m bold" onClick={() => { this.props.toggleModal('board-members-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
                     <div className="action-content">
                         <ul>
