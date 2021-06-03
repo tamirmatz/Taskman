@@ -45,6 +45,8 @@ class _TaskDetails extends Component {
     //         this.setState({ ...this.state, group, task })
     //     }
     // }
+
+    
     addClassName() {
         document.querySelector('.board').classList.add('max-screen');
     };
@@ -270,10 +272,10 @@ class _TaskDetails extends Component {
                             this.updateTask()
                         }}>
 
-                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details content-gap" onChange={this.handleChange} />
+                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details margin-content" onChange={this.handleChange} />
                         </form>
                     </section>
-                    {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3">
+                    {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3 ">
                         {task.checklists.map((checklist, idx) => {
                             return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
