@@ -6,11 +6,13 @@ import { remove, add, loadBoard, update } from '../../../store/actions/boardsAct
 import onClickOutside from "react-onclickoutside";
 import { BsCardChecklist } from 'react-icons/bs'
 import { GrTextAlignFull } from 'react-icons/gr'
-
+import { FaRegCommentDots } from 'react-icons/fa'
 import { utilService } from '../../../services/generalService/utilService.js';
 import { CheckList } from './CheckList';
 import { ActionList } from './action/ActionList';
 import { UserPreview } from '../UserPreview.jsx';
+import { RiDeleteBin6Line } from 'react-icons/ri'
+
 // import {TaskTitle} from '../taskDetails/TaskTitle';
 
 
@@ -46,7 +48,7 @@ class _TaskDetails extends Component {
     //     }
     // }
 
-    
+
     addClassName() {
         document.querySelector('.board').classList.add('max-screen');
     };
@@ -152,8 +154,8 @@ class _TaskDetails extends Component {
 
 
     closeOverlay = (ev) => {
-        if(!ev.target.classList.contains('btn-action') && !ev.target.classList.contains('btn-act') ){
-            if ( ev.target.offsetParent !==undefined && ev.target.offsetParent.classList[0] !== undefined && ev.target.offsetParent.classList[0] === 'task-details') {
+        if (!ev.target.classList.contains('btn-action') && !ev.target.classList.contains('btn-act')) {
+            if (ev.target.offsetParent !== undefined && ev.target.offsetParent.classList[0] !== undefined && ev.target.offsetParent.classList[0] === 'task-details') {
                 const modals = document.querySelectorAll('.action-modal');
                 if (modals) {
                     modals.forEach(
@@ -229,7 +231,7 @@ class _TaskDetails extends Component {
                                     return <UserPreview key={member._id} user={member} />
                                 })}
                                 {task.members.length > 0 &&
-                                    <span onClick={() => { this.toggleModal('members-wrap-modal'); this.openOverlay()}} className="btn-act  user-preview flex center content-center font-m bg-btn cur-pointer ">+</span>}
+                                    <span onClick={() => { this.toggleModal('members-wrap-modal'); this.openOverlay() }} className="btn-act  user-preview flex center content-center font-m bg-btn cur-pointer ">+</span>}
                             </ul>
                         </div>
                         <div className="task-labels flex column center wrap">
@@ -250,7 +252,7 @@ class _TaskDetails extends Component {
                                         )
                                     }
                                 })}
-                                {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal'); ; this.openOverlay(); }} className="details-label bold flex center pad-xs mb-03 bg-btn btn-act cur-pointer">+</span>}
+                                {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal'); this.openOverlay(); }} className="details-label bold flex center pad-xs mb-03 bg-btn btn-act cur-pointer">+</span>}
                             </ul>
                         </div>
                         {task.dueDate && <div className="task-duedate flex center column">
@@ -282,30 +284,35 @@ class _TaskDetails extends Component {
                     </ul>}
 
                     <section className="comment-section">
-                        <div className="new-comment">
-                            <div className="task-memeber-img flex center">
-                                <img className="avatar" src={loggedInUser.imgUrl} />
+                        <div className="desc-header flex row mb-1">
+                            <FaRegCommentDots /><label>Comments</label>
+                        </div>
+                        <div className="new-comment flex center content-gap">
+                                <UserPreview user={loggedInUser} />
                                 <form onSubmit={(ev) => {
                                     ev.preventDefault()
                                     this.onSendComment(ev.target[0].value)
                                 }}>
-                                    <input className="comment-textarea" placeholder="Write a comment..." name="txt">
+                                    <input className="comment-input" placeholder="Write a comment..." name="txt">
                                     </input>
-                                    <button>Send</button>
+                                    <button className="btn-send-comment">Send</button>
                                 </form>
-                            </div>
                         </div>
-
+                                
                         {task.comments && <ul className="comments clean-list">
                             {task.comments.map((comment, idx) => {
-                                return <li className="full-comment flex row">
-                                    <UserPreview user={comment.byMember} />
-                                    <div className="comment-text flex column">
-                                        <h3 className="commenter-name">{comment.byMember.fullname}</h3>
-                                        {comment.txt}
+                                return <li className="full-comment flex column">
+                                    <div className="flex space-between">
+                                        <div className="content-gap flex center"> 
+                                        <UserPreview user={comment.byMember} />
+                                        <div className="commenter-name">{comment.byMember.fullname}</div>
                                         <small>{utilService.timeAgo(comment.createdAt)}</small>
+                                        </div>
+                                    <div className='btn-del-comment' onClick={() => { this.onRemoveComment(idx) }}><RiDeleteBin6Line/></div>
                                     </div>
-                                    <button onClick={() => { this.onRemoveComment(idx) }}>X</button>
+                                    <div className="comment-gap">
+                                        <p className="comment-txt ">{comment.txt}</p>
+                                    </div>
                                 </li>
                             })}
                         </ul>}
