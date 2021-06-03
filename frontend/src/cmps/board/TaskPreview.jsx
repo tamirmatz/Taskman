@@ -70,10 +70,9 @@ class _TaskPreview extends Component {
                             <div className="wrap-task-prev">
                                 <div className="task-preview flex column">
                                     {/* <Link to={`/board/${board._id}/${task.id}`}> */}
+                                    <span className="cur-pointer fam-1 font-s bold flex d-none " onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
                                     {utilService.isFalse(task.labelIds) &&
-                                        <div className="flex row space-between center w-100">
-                                            <div className="label-task-prev">
-                                                <div className="labels-container wrap flex" onClick={(ev) => {
+                                                <div className="labels-container flex  wrap" onClick={(ev) => {
                                                     ev.stopPropagation();
                                                 }}>
                                                     {
@@ -85,7 +84,7 @@ class _TaskPreview extends Component {
                                                             if (label) {
                                                                 return <div
                                                                     key={label.id}
-                                                                    className={`preview-label ${isLabelOpen && "label-open"}`}
+                                                                    className={`preview-label flex  ${isLabelOpen && "label-open"}`}
                                                                     onClick={() => this.props.toggleLabel(!isLabelOpen)}
                                                                     style={{ backgroundColor: label.color }}
                                                                 >
@@ -93,9 +92,7 @@ class _TaskPreview extends Component {
                                                                 </div>
                                                             }
                                                         })}
-                                                </div>
-                                            </div>
-                                            <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
+
                                         </div>
                                     }
 

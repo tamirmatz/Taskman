@@ -76,20 +76,27 @@ export class TaskList extends Component {
 
                         }}>
                             <div className="group-title w-100 flex center space-between pb-2">
-                                <input className="app-input font-w2 font-m lh-20 " onBlur={this.updateGroup} type="text" value={this.state.group.title} name="title" onChange={this.handleChangeGroup} />
+                                <input
+                                    className="app-input font-w2 font-m lh-20 "
+                                    onBlur={this.updateGroup}
+                                    type="text"
+                                    value={this.state.group.title}
+                                    name="title"
+                                    onChange={this.handleChangeGroup}
+                                />
                                 <div className="group-menu">...</div>
                             </div>
                         </form>
                         <div className="wrap-task-list">
 
                             <div className="task-list flex column center content-center">
-                                <Droppable  
-                                droppableId={group.id} 
-                                type='task'>
+                                <Droppable
+                                    droppableId={group.id}
+                                    type='task'>
                                     {(provided) => (
-                                        <div className="task-list-droppable" 
-                                        ref={provided.innerRef} 
-                                        {...provided.droppableProps} 
+                                        <div className="task-list-droppable"
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps}
                                         >
                                             {group.tasks.map((task, idx) => (
                                                 <TaskPreview key={task.id}

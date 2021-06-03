@@ -69,12 +69,28 @@ export class BoardNavbar extends Component {
                         ev.preventDefault()
                         this.onChangeBoardName(ev)
                     }}>
-                        <input type="text" className="app-input nav-board-input font-w2 font-m lh-20 " name="title" onChange={this.handleChange} value={this.state.title} onBlur={this.onChangeBoardName} />
+                        <input type="text"
+                            className="app-input nav-board-input bold font-m lh-20 c-white"
+                            name="title"
+                            onChange={this.handleChange}
+                            value={this.state.title}
+                            onBlur={this.onChangeBoardName}
+                            maxLength = {13}
+                        />
                     </form></li>
                     <li className="btn-board">Visiblity</li>
                     <ul className="members-wrap">
-                        <li className="btn-board " onClick={() => { this.toggleModal('board-members-wrap-modal') }}>Invite</li>
-                        <BoardMembersModal users={this.props.users} isMemberChecked={this.isMemberChecked} onAddMemberToBoard={this.onAddMemberToBoard} toggleModal={() => { this.toggleModal() }} />
+                        <li
+                            className="btn-board "
+                            onClick={() => { this.toggleModal('board-members-wrap-modal') }}>
+                            Invite
+                        </li>
+                        <BoardMembersModal
+                            users={this.props.users}
+                            isMemberChecked={this.isMemberChecked}
+                            onAddMemberToBoard={this.onAddMemberToBoard}
+                            toggleModal={() => { this.toggleModal() }}
+                        />
                     </ul>
                     <li className="btn-board" ><MembersBoard /></li>
                 </ul>

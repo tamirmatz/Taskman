@@ -11,6 +11,8 @@ import { MembersModal } from './actionModal/MembersModal'
 import { DueDateModal } from './actionModal/DueDateModal'
 import { MoveMdodal } from './actionModal/MoveModal'
 import { CopyModal } from './actionModal/CopyModal'
+import { withRouter } from "react-router";
+
 
 
 class _ActionList extends Component {
@@ -28,23 +30,27 @@ class _ActionList extends Component {
     componentDidUpdate(prevProps) {
     }
 
+    closeDetails = () =>{
+        const boardId = this.props.match.params.boradId;
+        this.props.history.push(`/board/${boardId}`)
+    }
     render() {
         const { task } = this.state
         if (!task) return <h1>Loading...</h1>
         return (
             <div className="menu-task flex column w-40 content-start right">
-                <div className="close-details fam-2 font-1 bold pad-1">X</div>
+                <div className="close-details fam-2 font-1 bold pad-1 cur-pointer" onClick={() => this.closeDetails()}>X</div>
                 <div className="details-action flex column center pad-1 w-80">
                     <label htmlFor="actions" className="font-m pb-3">ACTIONS</label>
                     <ul className="action-menu flex column w-100 clean-list font-m pad-0 fw-2">
 
-                        <li className="label-wrap">
+                        <li className="label-wrap" onClick={() => this.props.openOverlay('label-wrap-modal')}>
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</div>
                             <LabelModal toggleModal={() => { this.props.toggleModal() }} />
                         </li>
 
                         <ul className="members-wrap">
-                            <li className="btn-action w-100 " onClick={() => {this.props.toggleModal('members-wrap-modal')}}><FiUsers />Members</li>
+                            <li className="btn-action w-100 " onClick={() => { this.props.toggleModal('members-wrap-modal') }}><FiUsers />Members</li>
                             <MembersModal isMemberChecked={this.props.isMemberChecked} onAddMemberToTask={this.props.onAddMemberToTask} toggleModal={() => { this.props.toggleModal() }} />
                         </ul>
 
@@ -63,7 +69,7 @@ class _ActionList extends Component {
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy />Copy</div>
                             <CopyModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
-                        <li onClick={() => { this.props.onDeleteTask() }} className="btn-action"><AiOutlineDelete />Delete</li>
+                        <li onClick={() => { this.props.onDeleteTask() }} className="btn-action btn-delete"><AiOutlineDelete />Delete</li>
                     </ul>
                 </div>
             </div>
@@ -81,4 +87,4 @@ const mapDispatchToProps = {
 }
 
 
-export const ActionList = connect(mapStateToProps, mapDispatchToProps)(_ActionList)
+export const ActionList = connect(mapStateToProps, mapDispatchToProps)(withRouter(_ActionList));

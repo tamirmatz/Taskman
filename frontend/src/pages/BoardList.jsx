@@ -11,6 +11,7 @@ import p4 from '../assets/img/background/4.jpg'
 import p5 from '../assets/img/background/5.jpg'
 import p6 from '../assets/img/background/6.jpg'
 import p7 from '../assets/img/background/7.jpg'
+import { Board } from './Board.jsx';
 
 class _BoardList extends Component {
     state = {
@@ -66,12 +67,13 @@ class _BoardList extends Component {
 
     render() {
         const boards = this.props.boards
+        console.log(boards);
         return (
             <section className=" w-100 flex column center content-center pad-3">
                 <h1 className="fam-1">Choose Your Board List</h1>
-                <div className="boards-gallary flex h-40 w-100">
+                <div className="boards-gallary flex h-40 w-100 gap-2">
                     {boards && boards.map(board => <Link key={board._id} to={`board/${board._id}`}><MiniBoard board={board} /></Link>)}
-                    <section className="miniBoard flex center content-center" style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
+                    <section className={"miniBoard flex center content-center" } style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
                         <form onSubmit={(ev)=>{
                             ev.preventDefault()
                             this.onCreateBoard()

@@ -1,37 +1,104 @@
-.action-overlay{
-    // position: absolute;
-    // width: 22rem;
-    // height: 17rem;
-    // background-color: #fff;
+.details-overlay{
+    position: relative;
+    background-color: #e6e6e6;
+    z-index: 10;
 }
 
 .action-modal{
-    width: 22rem;
-    height: 17rem;
+    min-height: 8rem;
     background-color: #fff;
     border-radius: 4px;
 }
 
+.label-wrap-modal{
+    width: 22rem;
+    height: 19rem;
+}
+
 .label-modal{
+    width: 22rem;
+    height: 100%;
+}
+
+.members-wrap-modal{
     width: 22rem;
     height: 17rem;
 }
 
 .members-modal{
     width: 22rem;
-    height: 17rem;
+    height: 100%;
+}
+
+.duedate-wrap-modal{
+    width: 22rem;
+    height: 12rem;
 }
 
 .duedate-modal{
     width: 22rem;
-    height: 17rem;
+    height: 100%;
 }
 
-
-.action-content{
-    
+.move-wrap-modal{
+    position: absolute;
+    top: 17rem;
+    right: -13rem;
+    width: 15rem;
+    height: 14rem;
 }
+
+.copy-wrap-modal{
+    position: absolute;
+    top: 14rem;
+    right: -13rem;
+    width: 15rem;
+    height: 14rem;
+}
+
+.copy-modal{
+    width: 15rem;
+    height: 14rem;
+}
+
 
 .header-modal{
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--spanColor);
+}
+
+.input-date{
+    width: 100%;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 12px;
+    color: #333
+}
+
+.input-date::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border: none
+}
+
+li.btn-delete:hover{
+    background: rgba(240, 80, 80, 0.541);
+}
+
+.btn-copy-move{
+    margin-top: 12px;
+    background: #fff;
+    border: 2px solid #333;
+    color: #333;
+    padding: 2px 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-copy-move:hover{
+    border: 2px solid var(--spanColor);
+
+
 }

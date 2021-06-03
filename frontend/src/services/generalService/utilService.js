@@ -6,7 +6,9 @@ export const utilService = {
     makeId,
     isFalse,
     formatNewGroup,
-    timeAgo
+    getFormattedDate,
+    timeAgo,
+    hideYearDate
 }
 
 function delay(ms = 1500) {
@@ -49,7 +51,7 @@ const MONTH_NAMES = [
   
   
   function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
-    const day = date.getDate();
+    const day = date.getDay();
     const month = MONTH_NAMES[date.getMonth()];
     const year = date.getFullYear();
     const hours = date.getHours();
@@ -111,4 +113,8 @@ const MONTH_NAMES = [
   
     
     return getFormattedDate(date); // 10. January 2017. at 10:20
+  }
+
+  function hideYearDate(date){
+    console.log(date);
   }

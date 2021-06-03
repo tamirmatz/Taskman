@@ -24,7 +24,7 @@ class _CopyModal extends Component {
     copyTask = () => {
         if (this.state.copyTo !== this.props.group.id) {
             const copyBoard = { ...this.props.board }
-            const task ={...this.props.task}
+            const task = { ...this.props.task }
             task.id = utilService.makeId()
             copyBoard.groups[this.state.copyTo].tasks.push(task)
             this.props.update(copyBoard)
@@ -38,10 +38,10 @@ class _CopyModal extends Component {
     render() {
         return <div className="action-modal copy-wrap-modal d-none p-abs flex">
             <ModalAction>
-                <div className="label-modal p-abs flex column pad-1">
-                    <div className="header-modal font-1 fam-1 fw-2 flex center content-end gap-5 w-70">
-                        <h1 className="fam-1 font-1 ">Copy to</h1>
-                        <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><AiOutlineClose /></span>
+                <div className="copy-modal p-abs flex column pad-1">
+                    <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 mb-1">
+                        <h1 className="fam-1 font-1">Copy</h1>
+                        <span className="cur-pointer fam-1 font-1 bold" onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
                     <div className="action-content">
                         <form onSubmit={(ev) => {
@@ -56,7 +56,7 @@ class _CopyModal extends Component {
                                     return group.id !== this.props.group.id && <option value={idx} key={group.id}>{group.title}</option>
                                 })}
                             </select>
-                            <button>Copy</button>
+                            <button className="btn-copy-move">Copy</button>
                         </form>
                     </div>
                 </div>
