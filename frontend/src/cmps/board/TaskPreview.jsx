@@ -110,7 +110,7 @@ class _TaskPreview extends Component {
                                             {task.dueDate && <div className={`flex row center ${this.dueDateDonePreview(task)}`}>
                                                 <AiOutlineClockCircle />
                                                 <small>
-                                                    {task.dueDate}
+                                                    { utilService.getFormattedDate(task.dueDate) }
                                                 </small>
                                             </div>}
                                             {task.description && <small className="flex center"><GrTextAlignFull /></small>}

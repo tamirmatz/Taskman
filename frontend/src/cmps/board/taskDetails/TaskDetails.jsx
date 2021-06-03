@@ -257,7 +257,7 @@ class _TaskDetails extends Component {
                             <h3 className="font-s fw-1 fam-1 left-self c-lead">DUE DATE</h3>
                             <div className="flex">
                                 <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} checked={task.isDone} type="checkbox" />
-                                <p>{task.dueDate}</p>
+                                <p>{Intl.DateTimeFormat('IL-il').format(task.dueDate)}</p>
                                 {task.isDone && <div className="complete-duedate">complete</div>}
                             </div>
                         </div>}
