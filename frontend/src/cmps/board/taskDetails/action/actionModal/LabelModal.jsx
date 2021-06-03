@@ -25,7 +25,7 @@ class _LabelModal extends Component {
                     </div>
                     <div className="action-content">
                         <ul>
-                            {labels.map((label, idx) => <LabelTask key={idx} label={label} />)}
+                            {labels.map(label => <LabelTask key={label.id} label={label} />)}
                         </ul>
                     </div>
                 </div>
