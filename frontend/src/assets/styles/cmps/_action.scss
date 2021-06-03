@@ -5,9 +5,32 @@
 }
 
 .action-modal{
-    min-height: 20rem;
+    min-height: 8rem;
     background-color: #fff;
     border-radius: 4px;
+}
+
+.board-members-modal{
+    width: 20rem;
+}
+
+.group-wrap-modal{
+    position: absolute;
+    top: -11px;
+    width: 22rem;
+    height: 15rem;
+    background: rgb(255, 255, 255);
+    margin-inline-start: 24.5rem ;
+    z-index: 5;
+    border-radius: 8px;
+
+}
+
+.group-modal{
+    width: 22rem;
+    height: 100%;
+    border: rgb(159, 42, 255) 4px solid;
+    border-radius: 8px;
 }
 
 .label-wrap-modal{

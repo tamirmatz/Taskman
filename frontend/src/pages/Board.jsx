@@ -56,8 +56,10 @@ class _Board extends Component {
         }))
     }
 
+
+
     removeClassName() {
-        if (document.querySelector('.board')){
+        if (document.querySelector('.board')) {
             document.querySelector('.board').classList.remove('max-screen');
         }
     };
@@ -71,7 +73,6 @@ class _Board extends Component {
     }
 
     onDragEnd = res => {
-        console.log()
         const { destination, source, type } = res
         if (!destination) return
         if (destination.droppableId === source.droppableId &&
@@ -132,11 +133,14 @@ class _Board extends Component {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
-                                    {board && board.groups.map((group, idx) => <TaskList index={idx}
-                                        key={group.id}
-                                        board={board}
-                                        group={group}
-                                        updateBoard={this.onUpdate} />)}
+                                    {board && board.groups.map((group, idx) =>
+                                        <TaskList
+                                            index={idx}
+                                            key={group.id}
+                                            board={board}
+                                            group={group}
+                                            updateBoard={this.onUpdate} 
+                                        />)}
                                     {provided.placeholder}
                                 </ul>
 
