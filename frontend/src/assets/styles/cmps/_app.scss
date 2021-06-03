@@ -1,13 +1,15 @@
 .app{
-    height: 100vh;
     -webkit-text-size-adjust: 100%;
-    // overflow-y: auto;
 }
 
 .app-main{  
-    height: 93vh;
+    min-height: 93vh;
     padding: 0;
-    // overflow-y: hidden;
+    overflow-y: auto;
+}
+
+.max-screen{
+    min-height: 150vh;
 }
 
 

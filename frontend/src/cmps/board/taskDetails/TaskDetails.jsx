@@ -27,6 +27,7 @@ class _TaskDetails extends Component {
         const board = { ...this.props.board };
         const group = boardService.getGroupById(board, groupId);
         const task = boardService.getTaskById(group, taskId);
+        this.addClassName();
         this.setState({ ...this.state, group, task })
     }
 
@@ -41,6 +42,9 @@ class _TaskDetails extends Component {
     //         this.setState({ ...this.state, group, task })
     //     }
     // }
+    addClassName(){
+        document.querySelector('.board').classList.add('max-screen');
+    };
 
     handleChange = ({ target }) => {
         const field = target.name
@@ -147,16 +151,16 @@ class _TaskDetails extends Component {
     }
 
     onSendComment = (txt) => {
-        const {loggedInUser } = this.props
-        const {task} = this.state;
+        const { loggedInUser } = this.props
+        const { task } = this.state;
         console.log('txt')
-        task.comments.unshift({id: utilService.makeId() ,txt,createdAt:Date.now(),byMember:loggedInUser})
+        task.comments.unshift({ id: utilService.makeId(), txt, createdAt: Date.now(), byMember: loggedInUser })
         this.updateTask()
     }
 
     onRemoveComment = (commentIdx) => {
-        const {task} = this.state;
-        task.comments.splice(commentIdx,1)
+        const { task } = this.state;
+        task.comments.splice(commentIdx, 1)
         this.updateTask()
     }
 
@@ -166,7 +170,7 @@ class _TaskDetails extends Component {
         if (!task) return <h1>Loading...</h1>
         console.log('checklist', task.checklists)
         return (
-            <section className="task-details w-50 flex bg-modal pos-fixed c-stand fam-1 pad-1">
+            <section className="task-details w-50 flex bg-modal c-stand fam-1 pad-1">
                 <div className="info-task flex column w-70 h-100 content-start">
                     {/* Title */}
                     <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
@@ -175,22 +179,32 @@ class _TaskDetails extends Component {
                     }}>
                         <div className="task-title flex center h-33">
                             <label htmlFor="title" className="font-6 flex center w-100"><BsCardChecklist className="ico" />
-                                <input onBlur={this.updateTask} type="text" value={task.title} name="title" className="input-details title-task-input" onChange={this.handleChange} />
+                                <input
+                                    onBlur={this.updateTask}
+                                    type="text"
+                                    value={task.title}
+                                    name="title"
+                                    className="input-details title-task-input"
+                                    onChange={this.handleChange}
+                                />
                             </label>
                         </div>
-                        <h3 className="fam-1 font-2 left-self h-20 center pb-2">in list {this.state.group.title}</h3>
+                        <h3 className="fam-1 font-2 left-self h-20 center">in list {this.state.group.title}</h3>
                     </form>
-                    <section className="flex wrap">
+
+                    <section className="flex wrap gap-xs center">
                         <div className="task-members">
-                            {task.members.length > 0 && <h3 className="font-m">members</h3>}
-                            <ul className="flex center">
+                            {task.members.length > 0 && <h3 className="font-m fam-1">Members</h3>}
+                            <ul className="flex center gap-xs">
                                 {task.members.map(member => {
                                     return <UserPreview key={member._id} user={member} />
                                 })}
-                                {task.members.length > 0 && <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="user-preview flex center content-center font-m">+</span>}
+                                {task.members.length > 0 &&
+                                    <span onClick={() => { this.toggleModal('members-wrap-modal') }} className="user-preview flex center content-center font-m bg-btn">+</span>}
                             </ul>
                         </div>
-                        <div className="task-labels flex center">
+                        <div className="task-labels flex column center">
+                            {task.labelIds.length > 0 && <h3 className="font-m fam-1 left-self">Labels</h3>}
                             <ul className="flex center">
                                 {task.labelIds && task.labelIds.map(labelId => {
                                     const label = board.labels.find(label => {
@@ -213,6 +227,7 @@ class _TaskDetails extends Component {
                             </div>
                         </div>}
                     </section>
+
                     <section className="desc-section">
                         <div className="desc-header flex row">
                             <GrTextAlignFull /><label>Description</label>
@@ -230,11 +245,12 @@ class _TaskDetails extends Component {
                             return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                     </ul>}
+
                     <section className="comment-section">
                         <div className="new-comment">
                             <div className="task-memeber-img flex center">
                                 <img className="avatar" src={loggedInUser.imgUrl} />
-                                <form onSubmit={(ev) =>{
+                                <form onSubmit={(ev) => {
                                     ev.preventDefault()
                                     this.onSendComment(ev.target[0].value)
                                 }}>
@@ -244,22 +260,32 @@ class _TaskDetails extends Component {
                                 </form>
                             </div>
                         </div>
-                        {task.comments && <ul className="comments clean-list"> {console.log(task.comments)} 
-                            {task.comments.map((comment,idx) => {
+
+                        {task.comments && <ul className="comments clean-list"> {console.log(task.comments)}
+                            {task.comments.map((comment, idx) => {
                                 return <li className="full-comment flex row">
-                                    <UserPreview user={comment.byMember}/>
+                                    <UserPreview user={comment.byMember} />
                                     <div className="comment-text flex column">
                                         <h3 className="commenter-name">{comment.byMember.fullname}</h3>
                                         {comment.txt}
                                         <small>{utilService.timeAgo(comment.createdAt)}</small>
                                     </div>
-                                    <button onClick={() => {this.onRemoveComment(idx)}}>X</button>
+                                    <button onClick={() => { this.onRemoveComment(idx) }}>X</button>
                                 </li>
                             })}
                         </ul>}
                     </section>
                 </div>
-                <ActionList onSaveDueDate={this.onSaveDueDate} onDeleteTask={this.onDeleteTask} toggleModal={this.toggleModal} isMemberChecked={this.isMemberChecked} onAddMemberToTask={this.onAddMemberToTask} task={task} group={this.state.group} onAddCheckList={this.onAddCheckList} />
+                <ActionList
+                    onSaveDueDate={this.onSaveDueDate}
+                    onDeleteTask={this.onDeleteTask}
+                    toggleModal={this.toggleModal}
+                    isMemberChecked={this.isMemberChecked}
+                    onAddMemberToTask={this.onAddMemberToTask}
+                    task={task}
+                    group={this.state.group}
+                    onAddCheckList={this.onAddCheckList}
+                />
             </section>
         )
     }
