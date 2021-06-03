@@ -16,7 +16,7 @@
 
 .group-wrap-modal{
     position: absolute;
-    top: -11px;
+    top: -9px;
     width: 22rem;
     height: 15rem;
     background: rgb(255, 255, 255);
@@ -29,7 +29,7 @@
 .group-modal{
     width: 22rem;
     height: 100%;
-    border: rgb(159, 42, 255) 4px solid;
+    border: #333 4px solid;
     border-radius: 8px;
 }
 
@@ -124,4 +124,8 @@ li.btn-delete:hover{
     border: 2px solid var(--spanColor);
 
 
+}
+
+.li-btn:hover{
+    background: #9f9f9f;
 }

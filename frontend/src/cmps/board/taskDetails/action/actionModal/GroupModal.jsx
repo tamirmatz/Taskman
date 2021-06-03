@@ -4,17 +4,28 @@ import { ModalAction } from '../../../../shared/ModalAction';
 import { AiOutlineClose } from 'react-icons/ai'
 
 class _GroupModal extends Component {
+    state = {
+        group: null
+    }
 
     componentDidMount() {
-
+        this.setState({ group: this.props.group })
     }
 
     componentDidUpdate(prevProps) {
 
     }
 
+    addTask = () => {
+
+    }
+
+    removeList = () => {
+
+    }
     render() {
-        const group = this.props.group;
+        const group = this.state.group;
+        if (!group) return <h1>Loading...</h1>
         const groupId = group.id;
         return <div className={`action-modal group-wrap-modal ${groupId} d-none p-abs flex`}>
             <ModalAction>
@@ -24,8 +35,12 @@ class _GroupModal extends Component {
                         <span className="cur-pointer fam-1 font-m bold" onClick={() => { this.props.toggleModal(`${groupId}`) }}><AiOutlineClose /></span>
                     </div>
                     <div className="action-content">
-                        <ul>
-                            <li>action list</li>
+                        <ul className="flex column space-between">
+                            <ul >
+                                <li onClick={() => { this.AddTask() }} className="font-2 fam-1 pad-1 li-btn flex center">Add Task...</li>
+                                <li onClick={() => { this.removeList() }} className="font-2 fam-1 pad-1 flex center li-btn">Remove List...</li>
+                                <h1>Label of color!!!</h1>
+                            </ul>
                         </ul>
                     </div>
                 </div>
