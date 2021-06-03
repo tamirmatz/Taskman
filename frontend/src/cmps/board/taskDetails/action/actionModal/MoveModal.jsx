@@ -20,22 +20,24 @@ class _MoveModal extends Component {
 
     }
 
-    moveTask = () => {
-        if (this.state.moveTo !== this.props.group.id) {
-            const copyBoard = { ...this.props.board }
-            copyBoard.groups[boardService.getGroupIdxById(copyBoard, this.props.group.id)].tasks.splice(
-                boardService.getTaskIdxById(this.props.group, this.props.task.id), 1)
-            copyBoard.groups[this.state.moveTo].tasks.push(this.props.task)
-            this.props.update(copyBoard)
-        }
-        // this.props.history.push(`/board/${copyBoard._id}`)
-    }
+    
+    // moveTask = () => {
+    //     if (this.state.moveTo !== this.props.group.id) {
+    //         const copyBoard = { ...this.props.board }
+    //         copyBoard.groups[boardService.getGroupIdxById(copyBoard, this.props.group.id)].tasks.splice(
+    //             boardService.getTaskIdxById(this.props.group, this.props.task.id), 1)
+    //         copyBoard.groups[this.state.moveTo].tasks.push(this.props.task)
+    //         this.props.update(copyBoard)
+    //     }
+    //     // this.props.history.push(`/board/${copyBoard._id}`)
+    // }
 
     handleChange = ({ target }) => {
         console.log(target.value)
         this.setState({ moveTo: target.value })
     }
     render() {
+        const {moveTask} = this.props
         return <div className="action-modal move-wrap-modal d-none p-abs flex">
             <ModalAction>
                 <div className="move-modal w-100 p-abs flex column pad-1">
@@ -45,7 +47,7 @@ class _MoveModal extends Component {
                     </div>
                     <div className="action-content w-100">
                         <form onSubmit={(ev) => {
-                            this.moveTask()
+                            moveTask(this.state.moveTo)
                             ev.preventDefault()
                         }}>
                             <select onChange={this.handleChange}>

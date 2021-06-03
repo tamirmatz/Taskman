@@ -15,8 +15,6 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 
 // import {TaskTitle} from '../taskDetails/TaskTitle';
 
-
-
 class _TaskDetails extends Component {
     state = {
         group: null,
@@ -33,21 +31,6 @@ class _TaskDetails extends Component {
         this.addClassName();
         this.setState({ ...this.state, group, task })
     }
-
-
-
-    //Destroyed the check list! don't use it! -tamir&naav- <3
-
-    // componentDidUpdate(prevProps) {
-    //     if (this.props !== prevProps) {
-    //         const { boardId, taskId, groupId } = this.props.match.params;
-    //         const board = { ...this.props.board };
-    //         const group = boardService.getGroupById(board, groupId);
-    //         const task = boardService.getTaskById(group, taskId);
-    //         this.setState({ ...this.state, group, task })
-    //     }
-    // }
-
 
     addClassName() {
         document.querySelector('.board').classList.add('max-screen');
@@ -87,12 +70,15 @@ class _TaskDetails extends Component {
             task.checklists = [];
         }
         task.checklists.push({ id: utilService.makeId(), title: 'Checklist', todos: [] })
-        this.setState({ task }, this.updateTask)
+        this.setState({ task }, ()=>{
+            this.updateTask()})
 
     }
     onRemoveCheckList = (checklistIdx) => {
-        const { task } = this.state
+        const { task } = {...this.state}
+        // const task = JSON.parse(JSON.stringify(this.state.task))
         task.checklists.splice(checklistIdx, 1)
+        // this.setState({task})
         this.setState({ task }, this.updateTask)
     }
 
@@ -190,6 +176,18 @@ class _TaskDetails extends Component {
         this.updateTask()
     }
 
+    moveTask = (moveTo) => {
+        if (moveTo !== this.state.group.id) {
+            const copyBoard = { ...this.props.board }
+            copyBoard.groups[boardService.getGroupIdxById(copyBoard, this.state.group.id)].tasks.splice(
+                boardService.getTaskIdxById(this.state.group, this.state.task.id), 1)
+            copyBoard.groups[moveTo].tasks.push(this.state.task)
+            this.setState({group: copyBoard.groups[moveTo]})
+            this.props.update(copyBoard)
+        }
+        // this.props.history.push(`/board/${copyBoard._id}`)
+    }
+
     render() {
         const { task } = this.state;
         const { board, loggedInUser } = this.props
@@ -279,7 +277,7 @@ class _TaskDetails extends Component {
                     </section>
                     {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3 ">
                         {task.checklists.map((checklist, idx) => {
-                            return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                            return <CheckList key={checklist.id} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                     </ul>}
 
@@ -328,6 +326,7 @@ class _TaskDetails extends Component {
                     task={task}
                     group={this.state.group}
                     onAddCheckList={this.onAddCheckList}
+                    moveTask ={this.moveTask}
                 />
             </section>
         )

@@ -17,7 +17,7 @@ function uploadImg(ev) {
     .then(res => res.json())
     .then(res => {
       console.log(res)
-
+      /* res is an object with scure_url which will be the image src */
       return res
     })
     .catch(err => console.error(err))
