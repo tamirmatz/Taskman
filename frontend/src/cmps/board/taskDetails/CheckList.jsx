@@ -60,9 +60,9 @@ export class CheckList extends Component {
                         <BsCheckBox />
                         <input onBlur={this.props.updateTask} type="text" value={checklist.title} name="title" className="input-details fam-1 font-m fw-2" onChange={this.handleChangeCheckList} />
                     </div>
-                    <div onClick={() => { this.props.onRemoveCheckList(this.props.idx) }} className="btn-del-chacklist font-m">Delete</div>
+                    <div onClick={() => { this.props.onRemoveCheckList(this.props.idx) }} className="btn-del-chacklist font-m cur-pointer">Delete</div>
                 </div>
-                <div className="content-gap ">
+                <div className="margin-content">
                     {checklist.todos.length > 0 && <CheckListStatus checklist={checklist} />}
                     <ul className="todo-list">
                         {checklist.todos.map((todo, idx) => {

@@ -16,8 +16,12 @@
         letter-spacing: .2px;
         font-weight: 500;
 }
+.margin-content{
+    margin-inline-start: 2rem;
+}
 .task-details{
     position: absolute;
+    min-width: 600px;
     top: 3rem;
     margin: 0 auto;
     border-radius: 4px;

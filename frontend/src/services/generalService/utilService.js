@@ -116,5 +116,5 @@ const MONTH_NAMES = [
   }
 
   function hideYearDate(date){
-    console.log(date);
+    return '22/Jan'
   }
