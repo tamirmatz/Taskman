@@ -6,7 +6,9 @@ export const utilService = {
     makeId,
     isFalse,
     formatNewGroup,
-    timeAgo
+    getFormattedDate,
+    timeAgo,
+    hideYearDate
 }
 
 function delay(ms = 1500) {
@@ -49,30 +51,30 @@ const MONTH_NAMES = [
   
   
   function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
-    const day = date.getDate();
+    const day = date.getDay();
     const month = MONTH_NAMES[date.getMonth()];
     const year = date.getFullYear();
     const hours = date.getHours();
     let minutes = date.getMinutes();
-  
-    if (minutes < 10) {
-      // Adding leading zero to minutes
-      minutes = `0${ minutes }`;
-    }
-  
-    if (prefomattedDate) {
-      // Today at 10:20
-      // Yesterday at 10:20
-      return `${ prefomattedDate } at ${ hours }:${ minutes }`;
-    }
-  
-    if (hideYear) {
-      // 10. January at 10:20
-      return `${ day }. ${ month } at ${ hours }:${ minutes }`;
-    }
-  
-    // 10. January 2017. at 10:20
     return `${ month.slice(0,3) } ${ day }`;
+    // if (minutes < 10) {
+    //   // Adding leading zero to minutes
+    //   minutes = `0${ minutes }`;
+    // }
+  
+    // if (prefomattedDate) {
+    //   // Today at 10:20
+    //   // Yesterday at 10:20
+    //   return `${ prefomattedDate } at ${ hours }:${ minutes }`;
+    // }
+  
+    // if (hideYear) {
+    //   // 10. January at 10:20
+    //   return `${ day }. ${ month } at ${ hours }:${ minutes }`;
+    // }
+  
+    // // 10. January 2017. at 10:20
+    // return `${ month.slice(0,3) } ${ day }`;
   }
   
   
@@ -111,4 +113,9 @@ const MONTH_NAMES = [
   
     
     return getFormattedDate(date); // 10. January 2017. at 10:20
+  }
+
+  function hideYearDate(date){
+    console.log(date);
+    return '22/Jan'
   }

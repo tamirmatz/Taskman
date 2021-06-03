@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { ModalAction } from '../../../../shared/ModalAction';
 import { AiOutlineClose } from 'react-icons/ai'
+import {utilService} from '../../../../../services/generalService/utilService'
 
 
 
@@ -28,7 +29,7 @@ class _DueDateModal extends Component {
                     </div>
                     <div className="action-content">
                         <ul>
-                            <input onChange={(ev) => { this.props.onSaveDueDate(ev.target.value) }} type="date" />
+                            <input onChange={(ev) => { this.props.onSaveDueDate(utilService.hideYearDate(ev.target.valueAsNumber)) }} type="date" name="date"  className="input-date fam-1"/>
                         </ul>
                     </div>
                 </div>

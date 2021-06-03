@@ -30,6 +30,7 @@ class _Board extends Component {
             this.props.setBoard(board)
         })
         socketService.emit('add member', boardId)
+        this.removeClassName();
     }
 
     componentWillUnmount() {
@@ -55,6 +56,11 @@ class _Board extends Component {
         }))
     }
 
+    removeClassName() {
+        if (document.querySelector('.board')){
+            document.querySelector('.board').classList.remove('max-screen');
+        }
+    };
 
     onAddGroup = () => {
         const copyBoard = { ...this.props.board };
@@ -147,7 +153,12 @@ class _Board extends Component {
                     </div>
 
                     <Switch>
-                        <Route path={'/board/:boardId/:groupId/:taskId'} render={(props) => <ModalWrapper onClick={this.onCloseDetails}><TaskDetails {...props} /></ModalWrapper>}></Route>
+                        <Route
+                            path={'/board/:boardId/:groupId/:taskId'}
+                            render={(props) => <ModalWrapper onClick={this.onCloseDetails}>
+                                <TaskDetails {...props} />
+                            </ModalWrapper>}>
+                        </Route>
                     </Switch>
                 </section>
             </DragDropContext>

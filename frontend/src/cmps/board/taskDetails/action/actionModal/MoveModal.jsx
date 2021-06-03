@@ -38,12 +38,12 @@ class _MoveMdodal extends Component {
     render() {
         return <div className="action-modal move-wrap-modal d-none p-abs flex">
             <ModalAction>
-                <div className="label-modal p-abs flex column pad-1">
-                    <div className="header-modal font-1 fam-1 fw-2 flex center content-end gap-5 w-70">
+                <div className="move-modal w-100 p-abs flex column pad-1">
+                    <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 mb-1">
                         <h1 className="fam-1 font-1 ">Move to</h1>
                         <span className="cur-pointer fam-1 font-s bold" onClick={() => { this.props.toggleModal('move-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
-                    <div className="action-content">
+                    <div className="action-content w-100">
                         <form onSubmit={(ev) => {
                             this.moveTask()
                             ev.preventDefault()
@@ -56,7 +56,7 @@ class _MoveMdodal extends Component {
                                     return group.id !== this.props.group.id && <option value={idx} key={group.id}>{group.title}</option>
                                 })}
                             </select>
-                            <button>Move</button>
+                            <button className="btn-copy-move">Move</button>
                         </form>
                     </div>
                 </div>

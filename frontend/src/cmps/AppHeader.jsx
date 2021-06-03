@@ -47,7 +47,6 @@ class _AppHeader extends Component {
                 </nav>
             )}
             <div className="logo font-5 ps-2"><Link to={`/`}><span className="logo-span">T</span>askman</Link></div>
-            { }
             <nav className="main-nav w-20 flex space-evenly c-danger">
                 {loggedInUser && (
                     <nav className="main-nav w-20 flex center space-evenly c-danger gap-1">

@@ -33,9 +33,9 @@ export class Home extends Component {
       <div className="home-page flex column fam-1 ">
         <div className="flex row-reverse mt-5 space-evenly ">
           <div className="align-center flex column ">
-              <div className="c-stand ps-2 font-xl"><span className="logo-span">T</span>askman</div>
-              <h1 className="fam-1">Task management</h1>
-              <h2 className="fam-1">The <span className="main-color">easiest</span> way. </h2>
+              <div className="c-stand  marg-2 ps-2 font-xl"><span className="logo-span">T</span>askman</div>
+              <h1 className="fam-1 fs30 bold ">Task management</h1>
+              <h2 className="fam-1 fs30 bold">The <span className="main-color">easiest</span> way. </h2>
               <Link to="/board/60b3d35bf2ba7731f23403a5"><button class="btn-hover color-3">Try it now!</button></Link>
           </div>
           <img className="main-img w-50" src={MainImg}/>
@@ -43,7 +43,7 @@ export class Home extends Component {
         <div className="features flex row space-between">
           <div className="feature flex column">
             <div className="feature-txt flex column">
-            <h3 className="fam-1">All the tools your team needs</h3>
+            <h3 className="fam-1 bold">All the tools your team needs</h3>
             <span>Organize and assign tasks.</span>
             <span>With lists, teams see immediately what they need to do,</span>
             <span>which tasks are a priority, and when work is due.</span>
@@ -52,7 +52,7 @@ export class Home extends Component {
           </div>
           <div className="feature flex column">
             <div className="feature-txt flex column">
-            <h3 className="fam-1">Manage your time wisely</h3>
+            <h3 className="fam-1 bold">Manage your time wisely</h3>
             <span>Instantly see which projects are on track,</span>
             <span>which ones are falling behind,</span>
             <span>and what every team member is working on at a glance.</span>
@@ -61,7 +61,7 @@ export class Home extends Component {
           </div>
           <div className="feature flex column">
             <div className="feature-txt flex column">
-            <h3 className="fam-1">Organize anything with anyone, anywhere</h3>
+            <h3 className="fam-1 bold">Organize anything with anyone, anywhere</h3>
             <span>Choose the project view that suits your style,</span>
             <span> and collaborate no matter where you are.</span>
             </div>
