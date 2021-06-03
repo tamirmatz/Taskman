@@ -19,6 +19,7 @@ class _BoardList extends Component {
             title: '',
             backgroundId: 0,
             backgrounds: [
+                'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg',
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671389/backrounds/0_jflqwf.jpg',
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671416/backrounds/1_gavwov.jpg',
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671401/backrounds/2_gstip0.jpg',
@@ -26,7 +27,8 @@ class _BoardList extends Component {
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671404/backrounds/4_ly2zj7.jpg',
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671550/backrounds/5_g7oe20.jpg',
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671430/backrounds/6_mi6wun.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg'
+                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg',
+
             ]
         }
     }
@@ -70,16 +72,22 @@ class _BoardList extends Component {
         return (
             <section className=" w-100 flex column center content-center pad-3">
                 <h1 className="fam-1">Choose Your Board List</h1>
-                <div className="boards-gallary flex h-40 w-100 gap-2">
+                <div className="boards-gallary flex h-40 w-100 gap-2 wrap">
                     {boards && boards.map(board => <Link key={board._id} to={`board/${board._id}`}><MiniBoard board={board} /></Link>)}
-                    <section className={"miniBoard flex center content-center" } style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
-                        <form onSubmit={(ev)=>{
+                    <section className={"miniBoard flex center content-center"} style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
+                        <form className="add-board" onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onCreateBoard()
-                            }}>
+                        }}>
                             <input type="text" name="title" onChange={this.handleChange} placeholder="Board title..." />
-                            <button>Create board</button>
-                            <span onClick={() => { this.changeImg(-1) }}>{'<'}</span><span onClick={() => { this.changeImg(1) }}>{'>'}</span>
+                       
+
+                                <div className="change-img-container flex space-between">
+
+                                    <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
+                                    <button>Create board</button>
+                                    <span className="change-img" onClick={() => { this.changeImg(1) }}>{'>'}</span>
+                                </div>
                         </form>
                     </section>
                     {!boards && <h1 >No boards to show</h1>}
