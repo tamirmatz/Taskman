@@ -9,7 +9,7 @@ import { BsImage, BsArrowRight } from 'react-icons/bs'
 import { LabelModal } from './actionModal/LabelModal';
 import { MembersModal } from './actionModal/MembersModal'
 import { DueDateModal } from './actionModal/DueDateModal'
-import { MoveMdodal } from './actionModal/MoveModal'
+import { MoveModal } from './actionModal/MoveModal'
 import { CopyModal } from './actionModal/CopyModal'
 import { withRouter } from "react-router";
 
@@ -46,7 +46,7 @@ class _ActionList extends Component {
 
                         <li className="label-wrap" onClick={() => this.props.openOverlay('label-wrap-modal')}>
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</div>
-                            <LabelModal toggleModal={() => { this.props.toggleModal() }} />
+                            <LabelModal toggleModal={() => { this.props.toggleModal() }} updateState= {() => {this.props.updateState()}}/>
                         </li>
 
                         <ul className="members-wrap">
@@ -63,7 +63,7 @@ class _ActionList extends Component {
                         <li className="btn-action"><BsImage />Image</li>
                         <li className="move-wrap">
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('move-wrap-modal') }}><BsArrowRight />Move</div>
-                            <MoveMdodal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
+                            <MoveModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
                         <li className="copy-wrap">
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy />Copy</div>

@@ -7,7 +7,7 @@ import { update } from '../../../../../store/actions/boardsAction';
 import { boardService } from '../../../../../services/boardService'
 
 
-class _MoveMdodal extends Component {
+class _MoveModal extends Component {
     state = {
         moveTo: null
     }
@@ -75,4 +75,4 @@ const mapDispatchToProps = {
 }
 
 
-export const MoveMdodal = connect(mapStateToProps, mapDispatchToProps)(_MoveMdodal)
+export const MoveModal = connect(mapStateToProps, mapDispatchToProps)(_MoveModal)
