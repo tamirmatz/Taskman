@@ -84,7 +84,7 @@ class _Login extends Component {
   }
   render() {
     let signupSection = (
-      <form className="flex column sign-up" onSubmit={this.doSignup}>
+      <form className="flex column sign-up space-between" onSubmit={this.doSignup}>
         <h2 className="fam-1 font-3 fw-2">Signup</h2>
         <input
           type="text"
