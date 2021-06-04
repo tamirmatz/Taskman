@@ -37,7 +37,7 @@ class _BoardList extends Component {
 
     }
     componentDidUpdate(){
-        this.props.query()
+        // this.props.query()
     }
 
     onCreateBoard = () => {
@@ -85,8 +85,7 @@ class _BoardList extends Component {
                             <input type="text" name="title" onChange={this.handleChange} placeholder="Board title..." />
                        
 
-                                <div className="change-img-container flex space-between">
-
+                                <div className="change-img-container flex space-between control-img">
                                     <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
                                     <button>Create board</button>
                                     <span className="change-img" onClick={() => { this.changeImg(1) }}>{'>'}</span>

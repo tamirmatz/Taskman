@@ -64,7 +64,8 @@
         .change-img{
             border-radius: 20%;
             padding: 3px;
-            background-color: rgba(255, 255, 255, 0.637);
+            // background-color: rgba(255, 255, 255, 0.637);
+            font-weight: bold;
             cursor: pointer;
             &:hover{
                 background-color: rgba(255, 255, 255, 0.747);
@@ -72,5 +73,10 @@
         
     
     }
+}
+
+.control-img{
+    position: relative;
+    top: 3rem;
 }
 

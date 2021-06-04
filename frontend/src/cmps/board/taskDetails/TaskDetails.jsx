@@ -15,6 +15,8 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 
 // import {TaskTitle} from '../taskDetails/TaskTitle';
 
+
+
 class _TaskDetails extends Component {
     state = {
         group: null,
@@ -31,6 +33,20 @@ class _TaskDetails extends Component {
         this.addClassName();
         this.setState({ ...this.state, group, task })
     }
+
+
+
+    //Destroyed the check list! don't use it! -tamir&naav- <3
+
+    // componentDidUpdate(prevProps) {
+    //     if (this.props !== prevProps) {
+    //         const { boardId, taskId, groupId } = this.props.match.params;
+    //         const board = { ...this.props.board };
+    //         const group = boardService.getGroupById(board, groupId);
+    //         const task = boardService.getTaskById(group, taskId);
+    //         this.setState({ ...this.state, group:group, task: task })
+    //     }
+    // }
 
 
     addClassName() {
@@ -76,6 +92,10 @@ class _TaskDetails extends Component {
         this.props.update(copyBoard)
     }
 
+    updateState = (task) => {
+        this.setState({ task })
+    }
+
     updateTaskState = (task) => {
         this.setState({ task })
     }
@@ -93,7 +113,6 @@ class _TaskDetails extends Component {
         const { task } = { ...this.state }
         // const task = JSON.parse(JSON.stringify(this.state.task))
         task.checklists.splice(checklistIdx, 1)
-        // this.setState({task})
         this.setState({ task }, this.updateTask)
     }
 
@@ -293,7 +312,7 @@ class _TaskDetails extends Component {
                     {task.imgUrl && <img className="details-img" src={task.imgUrl}/> }
                     {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3 ">
                         {task.checklists.map((checklist, idx) => {
-                            return <CheckList key={checklist.id} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                            return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
                         })}
                     </ul>}
 
@@ -343,6 +362,7 @@ class _TaskDetails extends Component {
                     group={this.state.group}
                     onAddCheckList={this.onAddCheckList}
                     moveTask={this.moveTask}
+                    updateState= {() => {this.updateState()}}
                 />
             </section>
         )

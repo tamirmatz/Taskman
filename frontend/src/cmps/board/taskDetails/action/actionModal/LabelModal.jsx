@@ -25,7 +25,11 @@ class _LabelModal extends Component {
                     </div>
                     <div className="action-content">
                         <ul>
+<<<<<<< HEAD
                             {labels.map((label) => <LabelTask key={label.id} label={label} />)}
+=======
+                            {labels.map(label => <LabelTask key={label.id} label={label} />)}
+>>>>>>> b9a9d82cec1103119597a074eb715f5417cb003d
                         </ul>
                     </div>
                 </div>
