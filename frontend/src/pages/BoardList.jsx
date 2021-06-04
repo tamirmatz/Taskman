@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { remove, add, query } from '../store/actions/boardsAction.js';
 import { MiniBoard } from '../cmps/board/MiniBoard'
+import { utilService } from '../services/generalService/utilService.js'
 import p0 from '../assets/img/background/0.jpg'
 import p1 from '../assets/img/background/1.jpg'
 import p2 from '../assets/img/background/2.jpg'
@@ -34,15 +35,12 @@ class _BoardList extends Component {
     }
     componentDidMount() {
         this.props.query()
-
-    }
-    componentDidUpdate(){
-        // this.props.query()
     }
 
     onCreateBoard = () => {
         const { title, backgrounds, backgroundId } = this.state.newBoard
         this.props.add(title, backgrounds[backgroundId])
+        this.props.query()
     }
 
     changeImg = (num) => {
@@ -53,7 +51,7 @@ class _BoardList extends Component {
                 ...prevState.newBoard,
                 backgroundId: backgroundId + num,
             }
-        }), console.log(this.state.newBoard.backgroundId))
+        }))
     }
 
     handleChange = ({ target }) => {
@@ -70,8 +68,7 @@ class _BoardList extends Component {
 
 
     render() {
-        const boards = this.props.boards
-        console.log(boards);
+        const { boards } = this.props
         return (
             <section className=" w-100 flex column center content-center pad-3">
                 <h1 className="fam-1">Choose Your Board List</h1>
@@ -83,13 +80,13 @@ class _BoardList extends Component {
                             this.onCreateBoard()
                         }}>
                             <input type="text" name="title" onChange={this.handleChange} placeholder="Board title..." />
-                       
 
-                                <div className="change-img-container flex space-between control-img">
-                                    <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
-                                    <button>Create board</button>
-                                    <span className="change-img" onClick={() => { this.changeImg(1) }}>{'>'}</span>
-                                </div>
+
+                            <div className="change-img-container flex space-between control-img">
+                                <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
+                                <button>Create board</button>
+                                <span className="change-img" onClick={() => { this.changeImg(1) }}>{'>'}</span>
+                            </div>
                         </form>
                     </section>
                     {!boards && <h1 >No boards to show</h1>}
