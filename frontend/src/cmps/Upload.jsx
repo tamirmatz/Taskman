@@ -4,7 +4,9 @@ import { cloudinaryService } from '../services/generalService/cloudinaryService'
 export class Upload extends Component {
   state = {
     imgUrl: null,
-    height: 200,
+    minHeight: 300,
+    maxHeight: 200,
+    height: 'auto',
     width: 200,
     isUploading: false
   }

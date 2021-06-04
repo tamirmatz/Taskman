@@ -9,7 +9,7 @@ import { BsImage, BsArrowRight } from 'react-icons/bs'
 import { LabelModal } from './actionModal/LabelModal';
 import { MembersModal } from './actionModal/MembersModal'
 import { DueDateModal } from './actionModal/DueDateModal'
-import { MoveMdodal } from './actionModal/MoveModal'
+import { MoveModal } from './actionModal/MoveModal'
 import { CopyModal } from './actionModal/CopyModal'
 import { withRouter } from "react-router";
 
@@ -46,30 +46,30 @@ class _ActionList extends Component {
 
                         <li className="label-wrap" onClick={() => this.props.openOverlay('label-wrap-modal')}>
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</div>
-                            <LabelModal toggleModal={() => { this.props.toggleModal() }} />
+                            <LabelModal toggleModal={() => { this.props.toggleModal() }} updateState= {() => {this.props.updateState()}}/>
                         </li>
 
                         <ul className="members-wrap">
-                            <li className="btn-action w-100 " onClick={() => { this.props.toggleModal('members-wrap-modal') }}><FiUsers />Members</li>
+                            <li className="btn-action w-100 " onClick={() => { this.props.toggleModal('members-wrap-modal') }}><FiUsers className="action-icon" />Members</li>
                             <MembersModal isMemberChecked={this.props.isMemberChecked} onAddMemberToTask={this.props.onAddMemberToTask} toggleModal={() => { this.props.toggleModal() }} />
                         </ul>
 
                         <li className="duedate-wrap">
-                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClockCircle />DueDate</div>
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClockCircle className="action-icon" />DueDate</div>
                             <DueDateModal onSaveDueDate={this.props.onSaveDueDate} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
 
-                        <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare />Checklist</li>
-                        <li className="btn-action"><BsImage />Image</li>
+                        <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare className="action-icon" />Checklist</li>
+                        <li className="btn-action"><BsImage className="action-icon"/>Image</li>
                         <li className="move-wrap">
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('move-wrap-modal') }}><BsArrowRight />Move</div>
-                            <MoveMdodal moveTask={this.props.moveTask} group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
+                            <MoveModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
                         <li className="copy-wrap">
-                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy />Copy</div>
-                            <CopyModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy className="action-icon" />Copy</div>
+                            <CopyModal className="action-icon" group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
                         </li>
-                        <li onClick={() => { this.props.onDeleteTask() }} className="btn-action btn-delete"><AiOutlineDelete />Delete</li>
+                        <li onClick={() => { this.props.onDeleteTask() }} className="btn-action btn-delete"><AiOutlineDelete className="action-icon" />Delete</li>
                     </ul>
                 </div>
             </div>
