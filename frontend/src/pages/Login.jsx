@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Upload } from '../cmps/Upload'
+import LoginPic from '../assets/img/login.svg'
 import {
   loadUsers,
   removeUser,
@@ -173,6 +174,7 @@ class _Login extends Component {
 
         {(!loggedInUser && toggleLogin) && loginSection}
         {(!loggedInUser && !toggleLogin) && signupSection}
+          {/* <LoginPic/> */}
       </div>
     )
   }
