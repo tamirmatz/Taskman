@@ -7,60 +7,87 @@ import { BsCheckBox } from 'react-icons/bs'
 
 export class CheckList extends Component {
     state = {
-        checklist: this.props.checklist
+        // checklist: this.props.checklist,
+        todo: {
+            txt: ''
+        }
     }
 
-    handleChangeCheckList = ({ target }) => {
-        const field = target.name
-        const value = target.value
-        this.setState(prevState => ({
-            checklist: {
-                ...prevState.checklist,
-                [field]: value,
+    handleChange = ({ target }) => {
+        const { value, name, type, checked } = target
+        const computed = {
+            value,
+            name
+        }
+
+        type === 'checkbox' && (computed.value = checked)
+        const checklistCopy = { ...this.props.checklist }
+
+        return {
+            todos: (idx) => {
+                checklistCopy.todos[idx][computed.name] = computed.value
+                this.props.updateChecklist(checklistCopy)
+            },
+            todo: () => {
+                this.setState(({ todo }) => ({ todo: { ...todo, [computed.name]: computed.value } }))
+            },
+            checklistTitle: () => {
+                checklistCopy[computed.name] = computed.value
+                this.props.updateChecklist(checklistCopy)
             }
-        }), () => {
-            const checklists = this.props.checklists.slice()
-            checklists.splice(this.props.idx, 1, { ...this.state.checklist, [field]: value })
-            this.props.handleChange({ target: { name: 'checklists', 'value': checklists } })
-        })
+        }
     }
 
-    handleChangeTodos = async ({ target }, idx, isRemove = false) => {
-        if (isRemove) {
-            const todos = this.props.checklist.todos.slice()
-            todos.splice(idx, 1)
-            await this.handleChangeCheckList({ target: { name: 'todos', 'value': todos } })
+    handleChangeTodos = ({ target }, idx) => {
+        const { value, name, type, checked } = target
+        const computed = {
+            value,
+            name
         }
-        else {
-            if (idx !== -1) {
-                let value = target.type === 'checkbox' ? target.checked : target.value;
-                const field = target.name
-                const todos = this.props.checklist.todos.slice()
-                todos.splice(idx, 1, { ...this.state.checklist.todos[idx], [field]: value })
-                await this.handleChangeCheckList({ target: { name: 'todos', 'value': todos } })
-            }
-            else {
-                const value = target[0].value
-                if (!value) return
-                const todos = this.props.checklist.todos.slice()
-                todos.push({ txt: value, id: utilService.makeId(), isDone: false })
-                await this.handleChangeCheckList({ target: { name: 'todos', 'value': todos } })
-            }
-        }
-        this.props.updateTask()
+
+        type === 'checkbox' && (computed.value = checked)
+        const checklistCopy = { ...this.props.checklist }
+
+        checklistCopy.todos[idx][computed.name] = computed.value
+        this.props.updateChecklist(checklistCopy)
+    }
+
+    onRemoveTodo = (idx) => {
+        const checklistCopy = { ...this.props.checklist }
+        checklistCopy.todos.splice(idx, 1)
+        this.props.updateChecklist(checklistCopy)
+    }
+
+    onSubmit = (ev) => {
+        ev.preventDefault()
+        // const todos = this.props.checklist.todos.slice()
+        const checklistCopy = { ...this.props.checklist }
+        const todo = { ...this.state.todo, id: utilService.makeId(), isDone: false }
+        checklistCopy.todos.push(todo)
+        this.setState({ todo: { txt: '' } })
+        this.props.updateChecklist(checklistCopy)
     }
 
     render() {
-        const { checklist } = this.state
+        const { checklist } = this.props
         // if (!checklist) return <div>loading...</div>
         return (
             <li>
                 <div className="flex space-between center">
                     <div className="flex center desc-header">
                         <BsCheckBox />
-                        <input onBlur={this.props.updateTask} type="text" value={checklist.title} name="title" className="input-details fam-1 font-m fw-2" onChange={this.handleChangeCheckList} />
+                        <input
+                            onBlur={this.props.updateTask}
+                            type="text"
+                            value={checklist.title}
+                            name="title"
+                            className="input-details fam-1 font-m fw-2"
+                            onChange={ev => this.handleChange(ev).checklistTitle()}
+                        />
                     </div>
-                    <div onClick={() => { this.props.onRemoveCheckList(this.props.idx) }} className="btn-del-chacklist font-m cur-pointer">Delete</div>
+                    <div onClick={() => {
+                        this.props.onRemoveCheckList(this.props.idx)
+                    }} className="btn-del-chacklist font-m cur-pointer">Delete</div>
                 </div>
                 <div className="margin-content">
                     {checklist.todos.length > 0 && <CheckListStatus checklist={checklist} />}
@@ -68,24 +95,40 @@ export class CheckList extends Component {
                         {checklist.todos.map((todo, idx) => {
                             return <li key={todo.id} className="flex space-between">
                                 <div>
-                                    <input type="checkbox" name="isDone" checked={todo.isDone} onChange={(ev) => {
-                                        this.handleChangeTodos(ev, idx)
-                                    }
-                                    } />
-                                    <input className={`input-details ${todo.isDone && "done-todo"}`} type="text" name="txt" value={todo.txt} onChange={(ev) => {
-                                        this.handleChangeTodos(ev, idx)
-                                    }} />
+                                    <input
+                                        type="checkbox"
+                                        name="isDone"
+                                        checked={todo.isDone}
+                                        onChange={(ev) => {
+                                            this.handleChange(ev).todos(idx)
+                                        }
+                                        } />
+                                    <input
+                                        className={`input-details ${todo.isDone && "done-todo"}`}
+                                        type="text"
+                                        name="txt"
+                                        value={todo.txt}
+                                        onChange={(ev) => this.handleChange(ev).todos(idx)}
+                                    />
                                 </div>
-                                <span className="" onClick={() => {
-                                    this.handleChangeTodos({}, idx, true)
-                                }}><RiDeleteBin6Line className="trash-todo"/></span>
+                                <span className=""
+                                    onClick={() => { this.onRemoveTodo(idx) }}
+                                >
+                                    <RiDeleteBin6Line className="trash-todo" /></span>
                             </li>
                         })}
-                        <form onSubmit={(ev) => {
+                        <form onSubmit={this.onSubmit}/* {(ev) => {
                             ev.preventDefault()
                             this.handleChangeTodos(ev, -1)
-                        }}>
-                            <input type="text" className="input-details mb-1" placeholder="+ Add Todo" />
+                        }} */>
+                            <input
+                                type="text"
+                                className="input-details mb-1"
+                                placeholder="+ Add Todo"
+                                name="txt"
+                                value={this.state.todo.txt}
+                                onChange={ev => this.handleChange(ev).todo()}
+                            />
                         </form>
                     </ul>
                 </div>

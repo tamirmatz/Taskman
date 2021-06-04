@@ -23,9 +23,16 @@ class _LabelModal extends Component {
                         <h1 className="fam-1 font-1 ">Label</h1>
                         <span className="cur-pointer fam-1 font-1 bold" onClick={() => { this.props.toggleModal('label-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
+<<<<<<< HEAD
                     <div className="action-content h-100 flex center">
                         <ul className="h-100 w-100 flex column space-evenly center">
                             {labels.map((label) => <LabelTask key={label.id} label={label} updateTask={this.props.updateTask} />)}
+=======
+                    <div className="action-content">
+                        <ul>
+                            {labels.map(label => <LabelTask key={label.id} label={label} />)}
+>>>>>>> 
+
                         </ul>
                     </div>
                 </div>
