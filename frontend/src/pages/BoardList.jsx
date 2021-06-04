@@ -31,23 +31,16 @@ class _BoardList extends Component {
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg',
 
             ]
-        },
-        boards: []
+        }
     }
-   async componentDidMount() {
-       await this.props.query()
-        this.setState({ boards: this.props.board }, console.log(this.state.boards))
-
+    componentDidMount() {
+        this.props.query()
     }
-    // componentDidUpdate(){
-    //     this.props.query()
-    // }
 
-    onCreateBoard = async () => {
+    onCreateBoard = () => {
         const { title, backgrounds, backgroundId } = this.state.newBoard
-        let boards = { ...this.state.boards }
-        await this.props.add(title, backgrounds[backgroundId])
-        this.setState({ boards: this.props.boards })
+        this.props.add(title, backgrounds[backgroundId])
+        this.props.query()
     }
 
     changeImg = (num) => {
@@ -58,7 +51,7 @@ class _BoardList extends Component {
                 ...prevState.newBoard,
                 backgroundId: backgroundId + num,
             }
-        }), console.log(this.state.newBoard.backgroundId))
+        }))
     }
 
     handleChange = ({ target }) => {
@@ -75,9 +68,7 @@ class _BoardList extends Component {
 
 
     render() {
-        const { boards } = this.state
-        if (utilService.isFalse(boards)) return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
-        console.log(boards);
+        const { boards } = this.props
         return (
             <section className=" w-100 flex column center content-center pad-3">
                 <h1 className="fam-1">Choose Your Board List</h1>
