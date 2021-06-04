@@ -341,6 +341,10 @@
 
 /* WIDTH */
 
+.w-auto{
+    width: auto;
+}
+
 .w-100 {
     width: 100%;
 }
@@ -548,6 +552,10 @@ font-w2{
 
 .bg-main{
     background: #9931fb;
+}
+
+.bg-inherit{
+    background: inherit;
 }
 
 

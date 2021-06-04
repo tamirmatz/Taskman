@@ -13,6 +13,9 @@ export class BoardNavbar extends Component {
         members: this.props.board.members
     }
 
+    deleteBoard = () => {
+        console.log('delete');
+    }
 
     onAddMemberToBoard = (addedMember) => {
         const { members } = this.state
@@ -61,27 +64,28 @@ export class BoardNavbar extends Component {
         const { board, onUpdate } = this.props
         if (!board) return <div>Loading...</div>
         return (
-            <nav className="board-navbar flex space-between font-1 c-white fam-1 mb-03">
+            <nav className="board-navbar flex space-between font-1 c-white fam-1">
                 <ul className="left-bar flex center space-evenly ">
-                    <li className="btn-board"><RiDashboardLine />Board<MdKeyboardArrowDown /></li>
-                    <li className="btn-board "><AiOutlineStar /></li>
-                    <li className="btn-board bold"><form onSubmit={(ev) => {
-                        ev.preventDefault()
-                        this.onChangeBoardName(ev)
-                    }}>
-                        <input type="text"
-                            className="app-input nav-board-input bold font-m lh-20 c-white"
-                            name="title"
-                            onChange={this.handleChange}
-                            value={this.state.title}
-                            onBlur={this.onChangeBoardName}
-                            maxLength = {13}
-                        />
-                    </form></li>
-                    <li className="btn-board">Visiblity</li>
-                    <ul className="members-wrap">
+                    <li className="btn-board btn-board-navbar"><RiDashboardLine />Board<MdKeyboardArrowDown /></li>
+                    <li className="btn-board bold input-navbar">
+                        <div onClick={(ev) => {
+                            ev.preventDefault()
+                            this.onChangeBoardName(ev)
+                        }}>
+                            <input type="text"
+                                className="app-input nav-board-input bold font-m lh-20 c-white "
+                                name="title"
+                                onChange={this.handleChange}
+                                value={this.state.title}
+                                onBlur={this.onChangeBoardName}
+                            />
+                        </div>
+                    </li>
+                    <li className="btn-board btn-board-navbar"><AiOutlineStar /></li>
+                    <li className="btn-board btn-board-navbar">Visiblity</li>
+                    <ul className="members-wrap ">
                         <li
-                            className="btn-board "
+                            className="btn-board btn-board-navbar"
                             onClick={() => { this.toggleModal('board-members-wrap-modal') }}>
                             Invite
                         </li>
@@ -92,10 +96,10 @@ export class BoardNavbar extends Component {
                             toggleModal={() => { this.toggleModal() }}
                         />
                     </ul>
-                    <li className="btn-board" ><MembersBoard /></li>
+                    <li className="btn-board bg-inherit" ><MembersBoard /></li>
                 </ul>
                 <ul className="right-bar flex center">
-                    <li className="btn-board">Show-menu</li>
+                    <li className="btn-board btn-board-navbar" onClick={() => this.deleteBoard()}>Delete Board</li>
                 </ul>
             </nav>
         )

@@ -38,6 +38,11 @@ class _Board extends Component {
         socketService.terminate()
     }
 
+    initStyle = (board) => {
+        const styleApp = { backgroundImage: board.style ? "url(" + board.style + ")" : 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg' }
+        document.querySelector('.app').style = styleApp;
+    }
+
 
     onUpdate = (updateBoard) => {
         console.log(updateBoard)
@@ -110,14 +115,15 @@ class _Board extends Component {
         // loading ui
         // this.props.loading();
         // if(this.props.isLoading) return <h1 className="w-100 h-100 flex center content-center">Loading...</h1>
-        if (this.props.isLoading) return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
 
+        if (this.props.isLoading) return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
+        this.initStyle(board);
 
         return (
             <DragDropContext
                 onDragEnd={this.onDragEnd}
             >
-                <section style={{ backgroundImage: board.style ? "url(" + board.style + ")" : 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg' }} className="board flex column w-100 animate__animated animate__fadeInRight ">
+                <div className="board flex column  animate__animated animate__fadeInRight ">
                     <BoardNavbar users={this.props.users} board={board} updateBoard={this.onUpdate} />
 
                     <div className="board-list flex w-100 "
@@ -139,7 +145,7 @@ class _Board extends Component {
                                             key={group.id}
                                             board={board}
                                             group={group}
-                                            updateBoard={this.onUpdate} 
+                                            updateBoard={this.onUpdate}
                                         />)}
                                     {provided.placeholder}
                                 </ul>
@@ -164,7 +170,7 @@ class _Board extends Component {
                             </ModalWrapper>}>
                         </Route>
                     </Switch>
-                </section>
+                </div>
             </DragDropContext>
         )
     }
