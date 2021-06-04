@@ -71,7 +71,7 @@ class _TaskPreview extends Component {
                             {task.imgUrl && <img className="preview-img" src={task.imgUrl}/> }
                                 <div className="task-preview flex column">
                                     {/* <Link to={`/board/${board._id}/${task.id}`}> */}
-                                    <span className="cur-pointer fam-1 font-s bold flex d-none " onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
+                                    <span className="cur-pointer fam-1 font-s bold flex d-none " onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose className="preview-icon" /></span>
                                     {utilService.isFalse(task.labelIds) &&
                                                 <div className="labels-container flex  wrap" onClick={(ev) => {
                                                     ev.stopPropagation();
@@ -101,20 +101,24 @@ class _TaskPreview extends Component {
 
 
                                         <h1 className="task-title fam-1 font-m">{task.title}</h1>
-                                        <div className="task-mini-details flex w-100 content-start  gap-xs fam-1 c-stand">
-                                            {/* {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member => { return <UserPreview key={member._id} user={member} /> }).splice(0, 3)}</small>} */}
-                                            {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots /></small>}
-                                            {utilService.isFalse(task.checklists) && <div className={`flex row center ${boardService.checklistPreview(task).isDone && "done-preview"}`}>
-                                                <BsCheckBox />
+                                        <div className="task-mini-details flex row-reverse w-100 space-between gap-xs fam-1 c-stand center">
+                                            <div>
+                                            {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member => { return <UserPreview key={member._id} user={member} /> }).splice(0, 3)}</small>}
+                                            </div>
+                                            <div className="flex">
+                                            {utilService.isFalse(task.comments) && <small className="flex center"><FaRegCommentDots className="preview-icon" /></small>}
+                                            {utilService.isFalse(task.checklists) && <div className={`preview-icon flex row center ${boardService.checklistPreview(task).isDone && "done-preview"}`}>
+                                                <BsCheckBox className="preview-icon" />
                                                 <small>{boardService.checklistPreview(task).str}</small>
                                             </div>}
-                                            {task.dueDate && <div className={`flex row center ${this.dueDateDonePreview(task)}`}>
-                                                <AiOutlineClockCircle />
+                                            {task.dueDate && <div className={`preview-icon flex row center ${this.dueDateDonePreview(task)}`}>
+                                                <AiOutlineClockCircle className="preview-icon" />
                                                 <small>
                                                     { utilService.getFormattedDate(task.dueDate) }
                                                 </small>
                                             </div>}
-                                            {task.description && <small className="flex center"><GrTextAlignFull /></small>}
+                                            {task.description && <small className="flex center"><GrTextAlignFull className="preview-icon" /></small>}
+                                            </div>
                                         </div>
                                     </Link>
                                 </div>

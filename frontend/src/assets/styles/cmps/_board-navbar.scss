@@ -1,18 +1,51 @@
 .board-navbar{
-    height: 3rem;
-    background: rgba(255, 255, 255, 0.493);
-    border-radius: 4px;
     width: 100%;
+    height: auto;
+    padding: 4px 4px 4px 4px;
+    
 }
 
+.btn-board{
+
+}
+
+.left-bar{
+    flex: 0 1 ;
+}
+
+.input-navbar{
+    background: rgba(255, 255, 255, 0.493);
+    height: 32px;
+    border-radius: 3px;
+    min-width: 8rem;
+    width: auto;
+    padding-left: 8px;
+    margin: 0 2px 0 2px;
+}
+
+
+
+.btn-board-navbar{
+    background: rgba(255, 255, 255, 0.493);
+    height: 32px;
+    border-radius: 3px;
+    padding: 0 12px;
+    margin: 0 2px 0 2px;
+}
 
 .board-navbar input{
     font-size: 1rem;
-    width: 9rem;
+    padding: 0;
 }
 
+li.btn-board{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
 
 input.nav-board-input:focus{
-    color: #333;
-    padding: 4px;
+    color: #fff;
+    background-color: inherit;
 }
