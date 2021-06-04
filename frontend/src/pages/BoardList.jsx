@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { remove, add, query } from '../store/actions/boardsAction.js';
 import { MiniBoard } from '../cmps/board/MiniBoard'
+import { utilService } from '../services/generalService/utilService.js'
 import p0 from '../assets/img/background/0.jpg'
 import p1 from '../assets/img/background/1.jpg'
 import p2 from '../assets/img/background/2.jpg'
@@ -30,19 +31,23 @@ class _BoardList extends Component {
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg',
 
             ]
-        }
+        },
+        boards: []
     }
-    componentDidMount() {
-        this.props.query()
+   async componentDidMount() {
+       await this.props.query()
+        this.setState({ boards: this.props.board }, console.log(this.state.boards))
 
     }
-    componentDidUpdate(){
-        // this.props.query()
-    }
+    // componentDidUpdate(){
+    //     this.props.query()
+    // }
 
-    onCreateBoard = () => {
+    onCreateBoard = async () => {
         const { title, backgrounds, backgroundId } = this.state.newBoard
-        this.props.add(title, backgrounds[backgroundId])
+        let boards = { ...this.state.boards }
+        await this.props.add(title, backgrounds[backgroundId])
+        this.setState({ boards: this.props.boards })
     }
 
     changeImg = (num) => {
@@ -70,7 +75,8 @@ class _BoardList extends Component {
 
 
     render() {
-        const boards = this.props.boards
+        const { boards } = this.state
+        if (utilService.isFalse(boards)) return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
         console.log(boards);
         return (
             <section className=" w-100 flex column center content-center pad-3">
@@ -83,13 +89,13 @@ class _BoardList extends Component {
                             this.onCreateBoard()
                         }}>
                             <input type="text" name="title" onChange={this.handleChange} placeholder="Board title..." />
-                       
 
-                                <div className="change-img-container flex space-between control-img">
-                                    <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
-                                    <button>Create board</button>
-                                    <span className="change-img" onClick={() => { this.changeImg(1) }}>{'>'}</span>
-                                </div>
+
+                            <div className="change-img-container flex space-between control-img">
+                                <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
+                                <button>Create board</button>
+                                <span className="change-img" onClick={() => { this.changeImg(1) }}>{'>'}</span>
+                            </div>
                         </form>
                     </section>
                     {!boards && <h1 >No boards to show</h1>}

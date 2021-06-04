@@ -36,7 +36,9 @@ function isFalse(el) {
 }
 
 function formatNewTask(task) {
-    return { id: makeId(), description: '', comments: [], checklists: [], members: [], ...task }
+  const id = makeId()
+  console.log(id)
+    return { id, description: '', comments: [], checklists: [], members: [], ...task }
 }
 
 function formatNewGroup(group) {

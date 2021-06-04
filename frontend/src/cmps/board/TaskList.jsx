@@ -55,8 +55,9 @@ export class TaskList extends Component {
         const copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, group.id)
         copyBoard.groups[groupIdx].tasks.push(utilService.formatNewTask(this.state.task))
-        this.props.updateBoard(copyBoard)
+        console.log(this.state.task)
         this.setState({ task: EMPTY_TASK })
+        this.props.updateBoard(copyBoard)
     }
 
     toggleModal = (className) => {
