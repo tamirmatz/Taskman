@@ -38,6 +38,12 @@ class _Board extends Component {
         socketService.terminate()
     }
 
+    favBoard = () => {
+        let board = { ...this.props.board }
+        board.isFavorite = board.isFavorite ? false : true;
+        this.props.update(board)
+    }
+
 
     onUpdate = (updateBoard) => {
         console.log(updateBoard)
@@ -56,7 +62,7 @@ class _Board extends Component {
         }))
     }
 
-    removeBoard=()=>{
+    removeBoard = () => {
         this.props.remove(this.props.board._id)
         this.props.history.push('/board')
     }
@@ -122,7 +128,7 @@ class _Board extends Component {
                 onDragEnd={this.onDragEnd}
             >
                 <div style={{ backgroundImage: board.style ? "url(" + board.style + ")" : 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg' }} className="board flex column  animate__animated animate__fadeInRight ">
-                    <BoardNavbar removeBoard={this.removeBoard} users={this.props.users} board={board} updateBoard={this.onUpdate} />
+                    <BoardNavbar favBoard={this.favBoard} removeBoard={this.removeBoard} users={this.props.users} board={board} updateBoard={this.onUpdate} />
 
                     <div className="board-list flex w-100 "
 
@@ -143,7 +149,7 @@ class _Board extends Component {
                                             key={group.id}
                                             board={board}
                                             group={group}
-                                            updateBoard={this.onUpdate} 
+                                            updateBoard={this.onUpdate}
                                         />)}
                                     {provided.placeholder}
                                 </ul>

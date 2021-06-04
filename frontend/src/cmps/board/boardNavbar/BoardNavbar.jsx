@@ -4,6 +4,7 @@ import { RiDashboardLine } from 'react-icons/ri'
 import { AiOutlineStar } from 'react-icons/ai'
 import { Component } from 'react';
 import { BoardMembersModal } from './BoardMembersModal'
+import {AiFillStar} from 'react-icons/ai'
 
 
 
@@ -79,7 +80,10 @@ export class BoardNavbar extends Component {
                             />
                         </div>
                     </li>
-                    <li className="btn-board btn-board-navbar"><AiOutlineStar /></li>
+                    <li className="btn-board btn-board-navbar" onClick={this.props.favBoard}>
+                       {!board.isFavorite && <AiOutlineStar />}
+                       {board.isFavorite && <AiFillStar/>}
+                    </li>
                     <li className="btn-board btn-board-navbar">Visiblity</li>
                     <ul className="members-wrap ">
                         <li
