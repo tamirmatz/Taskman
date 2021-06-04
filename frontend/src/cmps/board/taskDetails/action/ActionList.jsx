@@ -46,7 +46,7 @@ class _ActionList extends Component {
 
                         <li className="label-wrap" onClick={() => this.props.openOverlay('label-wrap-modal')}>
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</div>
-                            <LabelModal toggleModal={() => { this.props.toggleModal() }} updateState= {() => {this.props.updateState()}}/>
+                            <LabelModal toggleModal={() => { this.props.toggleModal() }} updateTask={this.props.updateTask}/>
                         </li>
 
                         <ul className="members-wrap">
@@ -60,7 +60,14 @@ class _ActionList extends Component {
                         </li>
 
                         <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare className="action-icon" />Checklist</li>
+
+
+
                         <li className="btn-action"><BsImage className="action-icon"/>Image</li>
+
+
+
+
                         <li className="move-wrap">
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('move-wrap-modal') }}><BsArrowRight />Move</div>
                             <MoveModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />

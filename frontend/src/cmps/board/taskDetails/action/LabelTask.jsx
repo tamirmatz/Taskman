@@ -9,7 +9,7 @@ import { boardService } from '../../../../services/boardService';
 class _LabelTask extends Component {
     state = {
         isDisable: true,
-        title: this.props.label.title ? this.props.label.title:'',
+        titleLabel: this.props.label.title ? this.props.label.title : '',
         task: null,
         group: null
     }
@@ -33,7 +33,7 @@ class _LabelTask extends Component {
 
     }
 
-    toggleLabel(labelId) {
+    toggleLabel(labelId, nameInput) {
         const { task, group } = this.state;
         const board = { ...this.props.board };
         if (!task.labelIds) {
@@ -45,10 +45,11 @@ class _LabelTask extends Component {
         } else task.labelIds.push(labelId)
         const updateBoard = boardService.updateTaskAtBoard(board, group, task);
         this.props.update(updateBoard)
+        this.props.updateTask(task);
     }
 
-    toggleDisable() {
-        console.log(this.state.isDisable);
+    toggleDisable(nameInput) {
+        document.querySelector(`.${nameInput}`).disabled = !(document.querySelector(`.${nameInput}`).disabled); 
         this.setState({
             isDisable: !this.state.isDisable
         })
@@ -64,19 +65,21 @@ class _LabelTask extends Component {
 
     handleChange = ({ target }) => {
         const value = target.value;
-        this.setState({...this.state,
-            title: value
+        this.setState({
+            ...this.state,
+            titleLabel: value
         });
         const label = this.props.label;
-        label.title = this.state.title;
+        label.title = this.state.titleLabel;
         this.updateLabelBoard(label);
     }
 
     updateLabelBoard = () => {
         const { board, label } = this.props;
         const idx = board.labels.findIndex(currLabel => currLabel.id === label.id);
-        board.labels.splice(idx,1, label);
+        board.labels.splice(idx, 1, label);
         this.props.update(board);
+
     };
 
     render() {
@@ -86,20 +89,23 @@ class _LabelTask extends Component {
         if (task) {
             className = this.borderLabel(task, label.id);
         }
-
+        const nameInput = `label-${label.id}`
         return (
-            <div className="label flex gap-2" data-label={label.id}>
-                <input
-                    type="text"
-                    name="title"
-                    value={this.state.title}
-                    style={{ background: `${label.color}` }}
-                    className={`label-input label-${label.id} ${this.state.isDisable} ${className} cur-pointer`}
-                    onChange={this.handleChange}
-                    onClick={() => this.toggleLabel(label.id)}
-                    maxLength = {13}
-                />
-                <span onClick={() => { this.toggleDisable() }} className="edit-label"><FiEdit2 /> </span>
+            <div className="label flex center space-between w-100 h-20" data-label={label.id}>
+                <div className={`wrap-label ${className} w-90`} onClick={() => this.toggleLabel(label.id, nameInput)}
+                >
+                    <input
+                        type="text"
+                        name={nameInput}
+                        value={this.state.title}
+                        style={{ background: `${label.color}` }}
+                        className={`label-input ${nameInput} ${this.state.isDisable}  cur-pointer`}
+                        onChange={this.handleChange}
+                        maxLength={13}
+                        disabled
+                    />
+                </div>
+                    <span onClick={() => { this.toggleDisable(nameInput) }} className="edit-label"><FiEdit2 /> </span>
             </div>
         )
     }

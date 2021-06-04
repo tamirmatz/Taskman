@@ -91,9 +91,18 @@ class _TaskDetails extends Component {
         copyBoard = this.addActivity(copyBoard,txt)
         this.props.update(copyBoard)
     }
+    
+    updateTaskLabel= (updateTask) => {
+        console.log('prevLabel: ',this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
+        const task  = this.state.task;
+        task.labelIds = updateTask.labelIds;
+        console.log('Label: ',this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
+    }
 
-    updateState = (task) => {
-        this.setState({ task })
+    onSaveDueDate = (date) => {
+        const { task } = this.state;
+        task.dueDate = date
+        this.updateTask()
     }
 
     updateTaskState = (task) => {
@@ -139,6 +148,7 @@ class _TaskDetails extends Component {
     onSaveDueDate = (date) => {
         const { task } = this.state;
         task.dueDate = date
+        
         this.updateTask()
     }
 
@@ -222,6 +232,8 @@ class _TaskDetails extends Component {
         // this.props.history.push(`/board/${copyBoard._id}`)
     }
 
+
+
     render() {
         const { task } = this.state;
         const { board, loggedInUser } = this.props
@@ -284,7 +296,7 @@ class _TaskDetails extends Component {
                                         )
                                     }
                                 })}
-                                {task.labelIds && <span onClick={() => { this.toggleModal('label-wrap-modal'); this.openOverlay(); }} className="details-label bold flex center pad-xs mb-03 bg-btn btn-act cur-pointer">+</span>}
+                                {task.labelIds && task.labelIds.length > 0 && <span onClick={() => { this.toggleModal('label-wrap-modal'); this.openOverlay(); }} className="details-label bold flex center pad-xs mb-03 bg-btn btn-act cur-pointer">+</span>}
                             </ul>
                         </div>
                         {task.dueDate && <div className="task-duedate flex center column">
@@ -362,7 +374,8 @@ class _TaskDetails extends Component {
                     group={this.state.group}
                     onAddCheckList={this.onAddCheckList}
                     moveTask={this.moveTask}
-                    updateState= {() => {this.updateState()}}
+                    updateTask = {this.updateTaskLabel}
+
                 />
             </section>
         )
