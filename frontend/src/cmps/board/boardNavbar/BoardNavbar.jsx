@@ -13,9 +13,7 @@ export class BoardNavbar extends Component {
         members: this.props.board.members
     }
 
-    deleteBoard = () => {
-        console.log('delete');
-    }
+
 
     onAddMemberToBoard = (addedMember) => {
         const { members } = this.state
@@ -99,7 +97,7 @@ export class BoardNavbar extends Component {
                     <li className="btn-board bg-inherit" ><MembersBoard /></li>
                 </ul>
                 <ul className="right-bar flex center">
-                    <li className="btn-board btn-board-navbar" onClick={() => this.deleteBoard()}>Delete Board</li>
+                    <li className="btn-board btn-board-navbar" onClick={() => this.props.removeBoard()}>Delete Board</li>
                 </ul>
             </nav>
         )

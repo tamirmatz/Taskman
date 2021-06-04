@@ -37,7 +37,7 @@ class _BoardList extends Component {
         this.props.query()
     }
 
-    onCreateBoard = () => {
+    onCreateBoard = async () => {
         const { title, backgrounds, backgroundId } = this.state.newBoard
         this.props.add(title, backgrounds[backgroundId])
         this.props.query()

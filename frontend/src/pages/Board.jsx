@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { remove, add, loadBoard, update, setBoard } from '../store/actions/boardsAction.js';
+import { add, loadBoard, update, setBoard, remove } from '../store/actions/boardsAction.js';
 import { loading } from '../store/actions/systemAction';
 import { loadUsers } from '../store/actions/userActions.js'
 import React, { Component } from 'react'
@@ -56,6 +56,10 @@ class _Board extends Component {
         }))
     }
 
+    removeBoard=()=>{
+        this.props.remove(this.props.board._id)
+        this.props.history.push('/board')
+    }
 
 
     removeClassName() {
@@ -118,7 +122,7 @@ class _Board extends Component {
                 onDragEnd={this.onDragEnd}
             >
                 <div style={{ backgroundImage: board.style ? "url(" + board.style + ")" : 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg' }} className="board flex column  animate__animated animate__fadeInRight ">
-                    <BoardNavbar users={this.props.users} board={board} updateBoard={this.onUpdate} />
+                    <BoardNavbar removeBoard={this.removeBoard} users={this.props.users} board={board} updateBoard={this.onUpdate} />
 
                     <div className="board-list flex w-100 "
 
