@@ -12,7 +12,7 @@ import { DueDateModal } from './actionModal/DueDateModal'
 import { MoveModal } from './actionModal/MoveModal'
 import { CopyModal } from './actionModal/CopyModal'
 import { withRouter } from "react-router";
-import {Upload} from '../../../Upload'
+import { Upload } from '../../../Upload'
 
 
 class _ActionList extends Component {
@@ -30,7 +30,7 @@ class _ActionList extends Component {
     componentDidUpdate(prevProps) {
     }
 
-    closeDetails = () =>{
+    closeDetails = () => {
         const boardId = this.props.match.params.boardId;
         this.props.history.push(`/board/${boardId}`)
     }
@@ -45,8 +45,9 @@ class _ActionList extends Component {
                     <ul className="action-menu flex column w-100 clean-list font-m pad-0 fw-2">
 
                         <li className="label-wrap" onClick={() => this.props.openOverlay('label-wrap-modal')}>
-                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline className="action-icon" />Labels</div>
-                            <LabelModal toggleModal={() => { this.props.toggleModal() }} />
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</div>
+                            <LabelModal toggleModal={() => { this.props.toggleModal() }} updateTaskLabel={this.props.updateTaskLabel}
+                                task={task} />
                         </li>
 
                         <ul className="members-wrap">
@@ -60,7 +61,7 @@ class _ActionList extends Component {
                         </li>
 
                         <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare className="action-icon" />Checklist</li>
-                        <li onClick={(ev)=> {ev.stopPropagation()}} className="no-modal-action"><Upload addImgToTask={this.props.addImgToTask} /></li>
+                        <li onClick={(ev) => { ev.stopPropagation() }} className="no-modal-action"><Upload addImgToTask={this.props.addImgToTask} /></li>
                         <li className="move-wrap">
                             <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('move-wrap-modal') }}><BsArrowRight />Move</div>
                             <MoveModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
