@@ -43,9 +43,9 @@ class _LabelTask extends Component {
         if (labelIdx > -1) {
             task.labelIds.splice(labelIdx, 1)
         } else task.labelIds.push(labelId)
-        const updateBoard = boardService.updateTaskAtBoard(board, group, task);
-        this.props.update(updateBoard)
-        this.props.updateTask(task);
+        this.props.updateTaskLabel(task)
+        // const updateBoard = boardService.updateTaskAtBoard(board, group, task);
+        // this.props.update(updateBoard)
     }
 
     toggleDisable(nameInput) {
@@ -70,26 +70,28 @@ class _LabelTask extends Component {
             titleLabel: value
         });
         const label = this.props.label;
-        label.title = this.state.titleLabel;
+        label.title = target.value;
         this.updateLabelBoard(label);
     }
 
-    updateLabelBoard = () => {
-        const { board, label } = this.props;
+    updateLabelBoard = (label) => {
+        const { board } = this.props;
         const idx = board.labels.findIndex(currLabel => currLabel.id === label.id);
         board.labels.splice(idx, 1, label);
         this.props.update(board);
-
     };
 
     render() {
+        const task = this.props.task;
+        if(!task) return <h1>lodaing...</h1>
         const { label } = this.props;
-        const { task } = this.state;
         let className;
         if (task) {
             className = this.borderLabel(task, label.id);
         }
-        const nameInput = `label-${label.id}`
+        const nameInput = `label-${label.id}`;
+        console.log(label);
+        console.log(task);
         return (
             <div className="label flex center space-between w-100 h-20" data-label={label.id}>
                 <div className={`wrap-label ${className} w-90`} onClick={() => this.toggleLabel(label.id, nameInput)}
@@ -97,7 +99,7 @@ class _LabelTask extends Component {
                     <input
                         type="text"
                         name={nameInput}
-                        value={this.state.title}
+                        value={this.state.titleLabel}
                         style={{ background: `${label.color}` }}
                         className={`label-input ${nameInput} ${this.state.isDisable}  cur-pointer`}
                         onChange={this.handleChange}

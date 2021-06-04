@@ -40,11 +40,7 @@ class _TaskDetails extends Component {
 
     // componentDidUpdate(prevProps) {
     //     if (this.props !== prevProps) {
-    //         const { boardId, taskId, groupId } = this.props.match.params;
-    //         const board = { ...this.props.board };
-    //         const group = boardService.getGroupById(board, groupId);
-    //         const task = boardService.getTaskById(group, taskId);
-    //         this.setState({ ...this.state, group:group, task: task })
+    //         console.log('props change');
     //     }
     // }
 
@@ -55,12 +51,12 @@ class _TaskDetails extends Component {
 
     addActivity = (board, txt = '') => {
         const { loggedInUser } = this.props
-        const task = {...this.state.task}
+        const task = { ...this.state.task }
         const activity = `${loggedInUser.fullname}${txt}`
         const copyboard = JSON.parse(JSON.stringify(board))
         // board.activities = []
-        copyboard.activities.unshift({id: utilService.makeId(), txt:activity, createdAt: Date.now(), byMember: loggedInUser, task })
-        console.log('board after',copyboard.activities)
+        copyboard.activities.unshift({ id: utilService.makeId(), txt: activity, createdAt: Date.now(), byMember: loggedInUser, task })
+        console.log('board after', copyboard.activities)
         console.log('copy board', copyboard)
         return copyboard;
     }
@@ -88,7 +84,7 @@ class _TaskDetails extends Component {
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         const taskIdx = boardService.getTaskIdxById(this.state.group, this.state.task.id)
         copyBoard.groups[groupIdx].tasks[taskIdx] = this.state.task
-        copyBoard = this.addActivity(copyBoard,txt)
+        copyBoard = this.addActivity(copyBoard, txt)
         this.props.update(copyBoard)
     }
     
@@ -96,6 +92,7 @@ class _TaskDetails extends Component {
         console.log('prevLabel: ',this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
         const task  = this.state.task;
         task.labelIds = updateTask.labelIds;
+        this.updateTask()
         console.log('Label: ',this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
     }
 
@@ -118,11 +115,17 @@ class _TaskDetails extends Component {
             this.updateTask('Added Checklist')
         })
     }
+
     onRemoveCheckList = (checklistIdx) => {
         const { task } = { ...this.state }
         // const task = JSON.parse(JSON.stringify(this.state.task))
         task.checklists.splice(checklistIdx, 1)
         this.setState({ task }, this.updateTask)
+    }
+
+    onUpdateChecklist = (checklist) => {
+        this.state.task.checklists.map(cl => cl.id === checklist.id ? checklist : cl)
+        this.setState({ task: { ...this.state.task } }, this.updateTask)
     }
 
     onDeleteTask = () => {
@@ -144,6 +147,7 @@ class _TaskDetails extends Component {
         else task.members.push(addedMember)
         this.updateTask()
     }
+
 
     onSaveDueDate = (date) => {
         const { task } = this.state;
@@ -180,6 +184,12 @@ class _TaskDetails extends Component {
     }
     openOverlay = () => {
         this.setState({ ...this.state, overlay: 'details-overlay' });
+    }
+
+    addImgToTask = (imgUrl) => {
+        const { task } = this.state;
+        task.imgUrl = imgUrl
+        this.updateTask()
     }
 
 
@@ -321,10 +331,21 @@ class _TaskDetails extends Component {
                             <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details margin-content" onChange={this.handleChange} />
                         </form>
                     </section>
-                    {task.imgUrl && <img className="details-img" src={task.imgUrl}/> }
+                    {task.imgUrl && <img className="details-img" src={task.imgUrl} />}
                     {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3 ">
                         {task.checklists.map((checklist, idx) => {
-                            return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
+                            return <CheckList
+                                key={checklist.id}
+                                onRemoveCheckList={this.onRemoveCheckList}
+                                updateChecklist={this.onUpdateChecklist}
+                                idx={idx}
+                                checklists={task.checklists}
+                                handleChange={this.handleChange}
+                                updateTask={this.updateTask}
+                                checklist={checklist}
+                                updateTaskState={this.updateTaskState}
+                                task={task}
+                            />
                         })}
                     </ul>}
 
@@ -374,8 +395,10 @@ class _TaskDetails extends Component {
                     group={this.state.group}
                     onAddCheckList={this.onAddCheckList}
                     moveTask={this.moveTask}
-                    updateTask = {this.updateTaskLabel}
-
+                    updateState={() => { this.updateState() }}
+                    updateTask={this.updateTask}
+                    addImgToTask={this.addImgToTask}
+                    updateTaskLabel={this.updateTaskLabel}
                 />
             </section>
         )
