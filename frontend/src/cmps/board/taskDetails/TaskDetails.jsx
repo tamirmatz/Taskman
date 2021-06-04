@@ -38,15 +38,15 @@ class _TaskDetails extends Component {
 
     //Destroyed the check list! don't use it! -tamir&naav- <3
 
-    componentDidUpdate(prevProps) {
-        if (this.props !== prevProps) {
-            const { boardId, taskId, groupId } = this.props.match.params;
-            const board = { ...this.props.board };
-            const group = boardService.getGroupById(board, groupId);
-            const task = boardService.getTaskById(group, taskId);
-            this.setState({ ...this.state, group:group, task: task })
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props !== prevProps) {
+    //         const { boardId, taskId, groupId } = this.props.match.params;
+    //         const board = { ...this.props.board };
+    //         const group = boardService.getGroupById(board, groupId);
+    //         const task = boardService.getTaskById(group, taskId);
+    //         this.setState({ ...this.state, group:group, task: task })
+    //     }
+    // }
 
 
     addClassName() {
