@@ -33,8 +33,10 @@
         resize: none;
         &:focus{
             outline: none;
-            border: 1px solid rgb(70, 155, 211);
+            border: 2px solid #0079bf;
+            cursor: auto;
         }
+        cursor: pointer;
     }
     form{
         margin: 0 0;
@@ -42,6 +44,17 @@
     textarea{
         height: 5rem;
         font-size: 1rem;
+        background-color: rgba(9,30,66,.04);
+        padding: 8px;
+        &:focus{
+            background-color: whitesmoke;
+
+        }
+
+        &:hover{
+            background: rgba(9,30,66,.08);
+        }
+        transition: .2s
     }
     .task-title{
         align-items: center;
@@ -216,4 +229,8 @@ input.label-input.true.border.cur-pointer {
         width: 50vw;
         margin-bottom: 20px;
     }
+}
+
+.action-icon{
+    color:rgb(66, 82, 110);
 }

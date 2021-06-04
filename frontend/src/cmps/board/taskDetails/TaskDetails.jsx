@@ -53,6 +53,18 @@ class _TaskDetails extends Component {
         document.querySelector('.board').classList.add('max-screen');
     };
 
+    addActivity = (board, txt = '') => {
+        const { loggedInUser } = this.props
+        const task = {...this.state.task}
+        const activity = `${loggedInUser.fullname}${txt}`
+        const copyboard = JSON.parse(JSON.stringify(board))
+        // board.activities = []
+        copyboard.activities.unshift({id: utilService.makeId(), txt:activity, createdAt: Date.now(), byMember: loggedInUser, task })
+        console.log('board after',copyboard.activities)
+        console.log('copy board', copyboard)
+        return copyboard;
+    }
+
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
@@ -69,13 +81,14 @@ class _TaskDetails extends Component {
         // ..handling code goes here...
     };
 
-
-    updateTask = () => {
+    updateTask = (txt) => {
+        console.log('here')
         if (!this.state.task.title) return;
-        const copyBoard = { ...this.props.board };
+        let copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         const taskIdx = boardService.getTaskIdxById(this.state.group, this.state.task.id)
         copyBoard.groups[groupIdx].tasks[taskIdx] = this.state.task
+        copyBoard = this.addActivity(copyBoard,txt)
         this.props.update(copyBoard)
     }
 
@@ -92,11 +105,13 @@ class _TaskDetails extends Component {
             task.checklists = [];
         }
         task.checklists.push({ id: utilService.makeId(), title: 'Checklist', todos: [] })
-        this.setState({ task }, this.updateTask)
-
+        this.setState({ task }, () => {
+            this.updateTask('Added Checklist')
+        })
     }
     onRemoveCheckList = (checklistIdx) => {
-        const { task } = this.state
+        const { task } = { ...this.state }
+        // const task = JSON.parse(JSON.stringify(this.state.task))
         task.checklists.splice(checklistIdx, 1)
         this.setState({ task }, this.updateTask)
     }
@@ -195,6 +210,18 @@ class _TaskDetails extends Component {
         this.updateTask()
     }
 
+    moveTask = (moveTo) => {
+        if (moveTo !== this.state.group.id) {
+            const copyBoard = { ...this.props.board }
+            copyBoard.groups[boardService.getGroupIdxById(copyBoard, this.state.group.id)].tasks.splice(
+                boardService.getTaskIdxById(this.state.group, this.state.task.id), 1)
+            copyBoard.groups[moveTo].tasks.push(this.state.task)
+            this.setState({ group: copyBoard.groups[moveTo] })
+            this.props.update(copyBoard)
+        }
+        // this.props.history.push(`/board/${copyBoard._id}`)
+    }
+
     render() {
         const { task } = this.state;
         const { board, loggedInUser } = this.props
@@ -282,6 +309,7 @@ class _TaskDetails extends Component {
                             <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details margin-content" onChange={this.handleChange} />
                         </form>
                     </section>
+                    {task.imgUrl && <img className="details-img" src={task.imgUrl}/> }
                     {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3 ">
                         {task.checklists.map((checklist, idx) => {
                             return <CheckList key={idx} onRemoveCheckList={this.onRemoveCheckList} idx={idx} checklists={task.checklists} handleChange={this.handleChange} updateTask={this.updateTask} checklist={checklist} updateTaskState={this.updateTaskState} task={task} />
@@ -293,27 +321,27 @@ class _TaskDetails extends Component {
                             <FaRegCommentDots /><label>Comments</label>
                         </div>
                         <div className="new-comment flex center content-gap">
-                                <UserPreview user={loggedInUser} />
-                                <form onSubmit={(ev) => {
-                                    ev.preventDefault()
-                                    this.onSendComment(ev.target[0].value)
-                                }}>
-                                    <input className="comment-input" placeholder="Write a comment..." name="txt">
-                                    </input>
-                                    <button className="btn-send-comment">Send</button>
-                                </form>
+                            <UserPreview user={loggedInUser} />
+                            <form onSubmit={(ev) => {
+                                ev.preventDefault()
+                                this.onSendComment(ev.target[0].value)
+                            }}>
+                                <input className="comment-input" placeholder="Write a comment..." name="txt">
+                                </input>
+                                <button className="btn-send-comment">Send</button>
+                            </form>
                         </div>
-                                
+
                         {task.comments && <ul className="comments clean-list">
                             {task.comments.map((comment, idx) => {
                                 return <li className="full-comment flex column">
                                     <div className="flex space-between">
-                                        <div className="content-gap flex center"> 
-                                        <UserPreview user={comment.byMember} />
-                                        <div className="commenter-name">{comment.byMember.fullname}</div>
-                                        <small>{utilService.timeAgo(comment.createdAt)}</small>
+                                        <div className="content-gap flex center">
+                                            <UserPreview user={comment.byMember} />
+                                            <div className="commenter-name">{comment.byMember.fullname}</div>
+                                            <small>{utilService.timeAgo(comment.createdAt)}</small>
                                         </div>
-                                    <div className='btn-del-comment' onClick={() => { this.onRemoveComment(idx) }}><RiDeleteBin6Line/></div>
+                                        <div className='btn-del-comment' onClick={() => { this.onRemoveComment(idx) }}><RiDeleteBin6Line /></div>
                                     </div>
                                     <div className="comment-gap">
                                         <p className="comment-txt ">{comment.txt}</p>
@@ -333,6 +361,7 @@ class _TaskDetails extends Component {
                     task={task}
                     group={this.state.group}
                     onAddCheckList={this.onAddCheckList}
+                    moveTask={this.moveTask}
                     updateState= {() => {this.updateState()}}
                 />
             </section>
