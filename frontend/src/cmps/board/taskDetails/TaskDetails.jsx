@@ -168,7 +168,7 @@ class _TaskDetails extends Component {
             currModal.classList.remove('d-none');
         }
     }
-    openOverlay = (className) => {
+    openOverlay = () => {
         this.setState({ ...this.state, overlay: 'details-overlay' });
     }
 
