@@ -68,6 +68,7 @@ class _TaskPreview extends Component {
                     >
                         <div className="wrap-list-task br-3">
                             <div className="wrap-task-prev">
+                            {task.imgUrl && <img className="preview-img" src={task.imgUrl}/> }
                                 <div className="task-preview flex column">
                                     {/* <Link to={`/board/${board._id}/${task.id}`}> */}
                                     <span className="cur-pointer fam-1 font-s bold flex d-none " onClick={() => { this.onRemoveTask(task.id) }}><AiOutlineClose /></span>
