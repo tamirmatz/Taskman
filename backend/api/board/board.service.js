@@ -22,7 +22,7 @@ async function query() {
 async function getById(boardId) {
     try {
         const collection = await dbService.getCollection('board')
-        const board = await collection.findOne({ '_id': ObjectId(boardId) })        
+        const board = await collection.findOne({ '_id': ObjectId(boardId) })
         return board
     } catch {
         console.log('err');
@@ -39,11 +39,11 @@ async function remove(boardId) {
     }
 }
 
-async function add(board,loggedInUser) {
+async function add(board, loggedInUser) {
     console.log('in add')
     try {
-        const boardToAdd = _createInittialBoard(board,loggedInUser)
-        console.log('board to add',boardToAdd)
+        const boardToAdd = _createInittialBoard(board, loggedInUser)
+        console.log('board to add', boardToAdd)
         const collection = await dbService.getCollection('board')
         console.log()
         collection.insertOne(boardToAdd)
@@ -53,15 +53,25 @@ async function add(board,loggedInUser) {
     }
 }
 
-async function update(board) {        
+async function update(board, activity) {
     try {
-       // board._id=ObjectId(board._id)
-       const boardToUpdate = JSON.parse(JSON.stringify(board))
-       boardToUpdate._id = ObjectId(board._id)
-        const collection = await dbService.getCollection('board')        
+        // board._id=ObjectId(board._id)
+        const boardToUpdate = JSON.parse(JSON.stringify(board))        
+        boardToUpdate._id = ObjectId(board._id)
+        console.log('activity: ', activity)
+        const collection = await dbService.getCollection('board')
         await collection.updateOne({ '_id': boardToUpdate._id },
-         { $set: boardToUpdate }
-         )
+        {
+            $push: {
+                'activities': { $each: [activity], $position: 0 }
+            },
+            $set: boardToUpdate
+        },
+        
+        );
+        
+        
+        console.log('boardToUpdate',boardToUpdate)
         return boardToUpdate;
     } catch (err) {
         console.log('err');
@@ -70,7 +80,7 @@ async function update(board) {
 
 
 
-function _createInittialBoard({title,style},loggedInUser) {
+function _createInittialBoard({ title, style }, loggedInUser) {
     console.log('in create board')
     const board = {
         // "_id": utilService.makeId(),
@@ -84,44 +94,44 @@ function _createInittialBoard({title,style},loggedInUser) {
         "style": style.background,
         "labels": [
             {
-                "id" : "l101",
-                "title" : "tamir!!!!!!!!",
-                "color" : "red"
-            }, 
-            {
-                "id" : "l102",
-                "title" : "morani",
-                "color" : "green"
-            }, 
-            {
-                "id" : "l103",
-                "title" : "Done",
-                "color" : "blue"
-            }, 
-            {
-                "id" : "l104",
-                "title" : "Ready",
-                "color" : "purple"
-            }, 
-            {
-                "id" : "l105",
-                "title" : "mor",
-                "color" : "pink"
-            }, 
-            {
-                "id" : "l106",
-                "title" : "qa",
-                "color" : "gray"
-            }, 
-            {
-                "id" : "l107",
-                "title" : "tamir",
-                "color" : "orange"
+                "id": "l101",
+                "title": "tamir!!!!!!!!",
+                "color": "red"
             },
             {
-                "id" : "l108",
-                "title" : "tamir",
-                "color" : "#333"
+                "id": "l102",
+                "title": "morani",
+                "color": "green"
+            },
+            {
+                "id": "l103",
+                "title": "Done",
+                "color": "blue"
+            },
+            {
+                "id": "l104",
+                "title": "Ready",
+                "color": "purple"
+            },
+            {
+                "id": "l105",
+                "title": "mor",
+                "color": "pink"
+            },
+            {
+                "id": "l106",
+                "title": "qa",
+                "color": "gray"
+            },
+            {
+                "id": "l107",
+                "title": "tamir",
+                "color": "orange"
+            },
+            {
+                "id": "l108",
+                "title": "tamir",
+                "color": "#333"
             }
         ],
         "members": [
@@ -132,7 +142,7 @@ function _createInittialBoard({title,style},loggedInUser) {
             }
         ],
         "groups": [
-          
+
         ],
         "activities": []
     }

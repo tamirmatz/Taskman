@@ -49,17 +49,18 @@ class _TaskDetails extends Component {
         document.querySelector('.board').classList.add('max-screen');
     };
 
-    addActivity = (board, txt = '') => {
+    createActivity = (txt = '') => {
         const { loggedInUser } = this.props
         const task = { ...this.state.task }
-        const activity = `${loggedInUser.fullname} ${txt}`
-        const activities = board.activities
-        activities.unshift({ id: utilService.makeId(), txt: activity, createdAt: Date.now(), byMember: loggedInUser, task })
-        board.activities = activities
-        console.log('activitis',activities)
-        const copyboard = {...board}
-        console.log('board',board)
-        return board;
+        const activityTxt = `${loggedInUser.fullname} ${txt}`
+
+        return {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            byMember: loggedInUser,
+            txt: activityTxt,
+            task
+        };
     }
 
     handleChange = ({ target }) => {
@@ -79,28 +80,27 @@ class _TaskDetails extends Component {
     };
 
     updateTask = (txt) => {
-        console.log('here')
+        console.log('here',txt)
         if (!this.state.task.title) return;
         let copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         const taskIdx = boardService.getTaskIdxById(this.state.group, this.state.task.id)
         copyBoard.groups[groupIdx].tasks[taskIdx] = this.state.task
-        copyBoard = this.addActivity(copyBoard, txt)
-        this.props.update(copyBoard)
+        this.props.update(copyBoard, this.createActivity(txt))
     }
 
     updateTaskLabel = (updateTask) => {
         console.log('prevLabel: ', this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
         const task = this.state.task;
         task.labelIds = updateTask.labelIds;
-        this.updateTask()
+        this.updateTask('updated label')
         console.log('Label: ', this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
     }
 
     onSaveDueDate = (date) => {
         const { task } = this.state;
         task.dueDate = date
-        this.updateTask()
+        this.updateTask('saved duedate')
     }
 
     updateTaskState = (task) => {
@@ -113,7 +113,7 @@ class _TaskDetails extends Component {
         }
         task.checklists.push({ id: utilService.makeId(), title: 'Checklist', todos: [] })
         this.setState({ task }, () => {
-            this.updateTask('Added Checklist')
+            this.updateTask('added checklist')
         })
     }
 
@@ -121,12 +121,12 @@ class _TaskDetails extends Component {
         const { task } = { ...this.state }
         // const task = JSON.parse(JSON.stringify(this.state.task))
         task.checklists.splice(checklistIdx, 1)
-        this.setState({ task }, this.updateTask)
+        this.setState({ task }, () => { this.updateTask('removed a checklist') })
     }
 
     onUpdateChecklist = (checklist) => {
-        this.state.task.checklists.map(cl => cl.id === checklist.id ? checklist : cl)
-        this.setState({ task: { ...this.state.task } }, this.updateTask)
+        this.state.task.checklists = this.state.task.checklists.map(cl => cl.id === checklist.id ? checklist : cl)
+        this.setState({ task: { ...this.state.task } }, () => { this.updateTask('updated checklist') })
     }
 
     onDeleteTask = () => {
@@ -141,12 +141,18 @@ class _TaskDetails extends Component {
 
     onAddMemberToTask = (addedMember) => {
         const { task } = this.state;
+        let str = ''
         const memberIdx = task.members.findIndex(member => member._id === addedMember._id)
         if (memberIdx !== -1) {
             task.members.splice(memberIdx, 1)
+            str = `removed ${addedMember.fullname} from task`
         }
-        else task.members.push(addedMember)
-        this.updateTask()
+        else {
+            task.members.push(addedMember)
+            str = `added ${addedMember.fullname} to task`
+        }
+        console.log('str',str)
+        this.updateTask(str)
     }
 
 
@@ -154,7 +160,7 @@ class _TaskDetails extends Component {
         const { task } = this.state;
         task.dueDate = date
 
-        this.updateTask()
+        this.updateTask('added a due date')
     }
 
     isMemberChecked = (memberCheck) => {
@@ -169,7 +175,8 @@ class _TaskDetails extends Component {
     isDueDateDone = (val) => {
         const { task } = this.state;
         task.isDone = val
-        this.updateTask()
+        let str = val ? 'marked task as done' : 'marked task as not completed'
+        this.updateTask(str)
     }
 
     toggleModal = (className) => {
@@ -190,7 +197,7 @@ class _TaskDetails extends Component {
     addImgToTask = (imgUrl) => {
         const { task } = this.state;
         task.imgUrl = imgUrl
-        this.updateTask()
+        this.updateTask('added image to task')
     }
 
 
@@ -222,13 +229,13 @@ class _TaskDetails extends Component {
         const { loggedInUser } = this.props
         const { task } = this.state;
         task.comments.unshift({ id: utilService.makeId(), txt, createdAt: Date.now(), byMember: loggedInUser })
-        this.updateTask()
+        this.updateTask(`commented on "${task.title}"`)
     }
 
     onRemoveComment = (commentIdx) => {
         const { task } = this.state;
         task.comments.splice(commentIdx, 1)
-        this.updateTask()
+        this.updateTask(`removed a comment from "${task.title}"`)
     }
 
     moveTask = (moveTo) => {
@@ -250,13 +257,15 @@ class _TaskDetails extends Component {
         const { board, loggedInUser } = this.props
         if (!task) return <h1>Loading...</h1>
         return (
-            <section className={`task-details w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
-                onClick={(ev) => { this.closeOverlay(ev) }}>
+            <section
+                className={`task-details w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
+                onClick={(ev) => { this.closeOverlay(ev) }}
+            >
                 <div className="info-task flex column w-79 h-100 content-start">
                     {/* Title */}
                     <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
                         ev.preventDefault()
-                        this.updateTask()
+                        this.updateTask('updated task name')
                     }}>
                         <div className="task-title flex center h-33">
                             <label
@@ -264,7 +273,7 @@ class _TaskDetails extends Component {
                                 className="font-3 flex center w-100">
                                 <BsCardChecklist />
                                 <input
-                                    onBlur={this.updateTask}
+                                    onBlur={() => this.updateTask('updated checklist name')}
                                     type="text"
                                     autoComplete="off"
                                     value={task.title}
@@ -327,10 +336,10 @@ class _TaskDetails extends Component {
                         </div>
                         <form onSubmit={(ev) => {
                             ev.preventDefault()
-                            this.updateTask()
+                            this.updateTask('changed task description')
                         }}>
 
-                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="input-details w-90 margin-content fam-1" onChange={this.handleChange} />
+                            <textarea placeholder="Add a description for this task..." onBlur={() => this.updateTask('changed task description')} type="textArea" value={task.description} name="description" className="input-details w-90 margin-content fam-1" onChange={this.handleChange} />
                         </form>
                     </section>
                     {task.imgUrl && <img className="details-img" src={task.imgUrl} />}
@@ -361,7 +370,7 @@ class _TaskDetails extends Component {
                                 ev.preventDefault()
                                 this.onSendComment(ev.target[0].value)
                             }}>
-                                <input autoComplete="off" type="text" className="comment-input" placeholder="Write a comment..." name="txt"/>
+                                <input autoComplete="off" type="text" className="comment-input" placeholder="Write a comment..." name="txt" />
                                 <button className="btn-send-comment">Send</button>
                             </form>
                         </div>

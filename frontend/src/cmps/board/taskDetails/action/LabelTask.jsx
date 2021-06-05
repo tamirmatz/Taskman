@@ -90,8 +90,6 @@ class _LabelTask extends Component {
             className = this.borderLabel(task, label.id);
         }
         const nameInput = `label-${label.id}`;
-        console.log(label);
-        console.log(task);
         return (
             <div className="label flex center space-between w-100 h-20" data-label={label.id}>
                 <div className={`wrap-label ${className} w-90`} onClick={() => this.toggleLabel(label.id, nameInput)}

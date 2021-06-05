@@ -7,7 +7,8 @@ export const utilService = {
     isFalse,
     formatNewGroup,
     getFormattedDate,
-    timeAgo
+    timeAgo,
+    deepClone
   }
 
 function delay(ms = 1500) {
@@ -58,6 +59,9 @@ const MONTH_NAMES = [
     return `${ month.slice(0,3) } ${ day }`;
   }
   
+  function deepClone(el){
+    return JSON.parse(JSON.stringify(el))
+  }
   
   // --- Main function
   function timeAgo(dateParam) {
