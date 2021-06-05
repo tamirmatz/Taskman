@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {UserPreview} from '../cmps/board/UserPreview' 
 import { RiCheckboxMultipleBlankLine } from 'react-icons/ri'
+import { IoIosNotificationsOutline } from 'react-icons/io'
+import { VscAdd } from 'react-icons/vsc'
 
 
 class _AppHeader extends Component {
@@ -50,8 +52,8 @@ class _AppHeader extends Component {
             <nav className="main-nav w-20 flex space-evenly c-danger">
                 {loggedInUser && (
                     <nav className="main-nav w-20 flex center space-evenly c-danger gap-1">
-                        <NavLink to="/board" className="btn-boards">+</NavLink>
-                        <NavLink to="/login" className="btn-boards">Notfication</NavLink>
+                        <NavLink to="/board" className="icon-boards"><VscAdd className="add-icon-nav" /></NavLink>
+                        <NavLink to="/login" className="icon-boards" style={{width: '1000px'}}><IoIosNotificationsOutline/></NavLink>
                     </nav>
                 )}
                 {loggedInUser && (<NavLink to="/login" className="btn-board"><UserPreview user={loggedInUser}/></NavLink>)}

@@ -30,16 +30,15 @@
     font-family: 'Faster One', cursive;
     // color: var(--spanColor);
 }
-.main-nav a{
-    font-size: 1.1rem;
-    font-weight: 500;
-}
+
 a.btn-boards:hover{
     color: #fff;
 }
 
 
 .btn-boards{
+    font-size: 14px;
+    font-weight: 700;
     border-radius: 3px;
     border: 0;
     text-decoration: none;
@@ -58,7 +57,32 @@ a.btn-boards:hover{
     transition: 0.2s;
 }
 
-.btn-boards:hover{
+.icon-boards{
+    border-radius: 3px;
+    border: 0;
+    text-decoration: none;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: none;
+    color: #ffffff;
+    display: flex;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 4px 0 0;
+    padding: 0 4px 0 4px;
+    white-space: nowrap;
+    justify-content: center;
+    transition: 0.2s;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.add-icon-nav{
+    color: whitesmoke;
+}
+
+.btn-boards:hover,.icon-boards:hover{
     background-color: rgba(255, 255, 255, 0.445);
 }
 
