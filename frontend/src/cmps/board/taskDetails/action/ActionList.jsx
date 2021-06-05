@@ -38,7 +38,7 @@ class _ActionList extends Component {
         const { task } = this.state
         if (!task) return <h1>Loading...</h1>
         return (
-            <div className="menu-task flex column w-40 content-start right">
+            <div className="menu-task flex column w-50 content-start right">
                 <div className="close-details fam-2 font-1 bold pad-1 cur-pointer" onClick={() => this.closeDetails()}>X</div>
                 <div className="details-action flex column center pad-1 w-80">
                     <label htmlFor="actions" className="font-m pb-3">ACTIONS</label>

@@ -251,7 +251,7 @@ class _TaskDetails extends Component {
         return (
             <section className={`task-details w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
                 onClick={(ev) => { this.closeOverlay(ev) }}>
-                <div className="info-task flex column w-70 h-100 content-start">
+                <div className="info-task flex column w-79 h-100 content-start">
                     {/* Title */}
                     <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
                         ev.preventDefault()
@@ -328,7 +328,7 @@ class _TaskDetails extends Component {
                             this.updateTask()
                         }}>
 
-                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="w-90 input-details margin-content" onChange={this.handleChange} />
+                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="input-details w-90 margin-content" onChange={this.handleChange} />
                         </form>
                     </section>
                     {task.imgUrl && <img className="details-img" src={task.imgUrl} />}
