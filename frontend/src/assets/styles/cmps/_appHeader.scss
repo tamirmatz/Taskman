@@ -7,8 +7,8 @@
     max-height: 40px;
     overflow: hidden;
     box-sizing: border-box;
-    padding: 4px 10px;
-    background-color: #026aa7;
+    padding: 4px 6px;
+    background-color: #026ba700;
     // background-color: rgba(0, 0, 0, 0.32);
 }
 
@@ -57,7 +57,7 @@ a.btn-boards:hover{
     transition: 0.2s;
 }
 
-.icon-boards{
+.icon-header{
     border-radius: 3px;
     border: 0;
     text-decoration: none;
@@ -80,6 +80,9 @@ a.btn-boards:hover{
 
 .add-icon-nav{
     color: whitesmoke;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 .btn-boards:hover,.icon-boards:hover{
@@ -92,4 +95,30 @@ a.btn-boards:hover{
 
 .app-header-logo:hover{
     color: #ffffffd0;
+}
+.boards-list-btn{
+    padding:  0 8px;
+}
+
+.boards-list-btn span{
+    background: initial;
+}
+
+span.icon-boards{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 0;
+    padding: 0 4px 0 0;
+}
+
+.search-input::placeholder{
+    color: #fff;
+}
+
+.icon-search{
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    padding: 0 4px 0 0;
 }
