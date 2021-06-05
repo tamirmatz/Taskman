@@ -58,7 +58,6 @@ async function update(board, activity) {
         // board._id=ObjectId(board._id)
         const boardToUpdate = JSON.parse(JSON.stringify(board))        
         boardToUpdate._id = ObjectId(board._id)
-        console.log('activity: ', activity)
         const collection = await dbService.getCollection('board')
         await collection.updateOne({ '_id': boardToUpdate._id },
         {

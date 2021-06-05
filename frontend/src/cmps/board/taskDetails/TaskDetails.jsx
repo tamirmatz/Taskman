@@ -16,7 +16,6 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 // import {TaskTitle} from '../taskDetails/TaskTitle';
 
 
-
 class _TaskDetails extends Component {
     state = {
         group: null,
@@ -24,6 +23,8 @@ class _TaskDetails extends Component {
         onFocus: false,
         overlay: false
     }
+    elModalRef = React.createRef()
+    _isMounted = React.createRef(false)
 
     componentDidMount() {
         const { boardId, taskId, groupId } = this.props.match.params;
@@ -31,10 +32,25 @@ class _TaskDetails extends Component {
         const group = boardService.getGroupById(board, groupId);
         const task = boardService.getTaskById(group, taskId);
         this.addClassName();
+        document.body.classList.add('noscroll')
         this.setState({ ...this.state, group, task })
     }
 
+    componentWillUnmount() {
+        document.body.classList.remove('noscroll')
+    }
 
+    componentDidUpdate() {
+        // modalPos.top = `calc(55% + ${(this.elModalRef.current.clientHeight
+        //     - this.props.overlayHeight)/2}px)`
+        // console.log('modalPos: ', modalPos)
+        // if (this._isMounted.current) {
+
+        // } else {
+        //     console.log('is mounted false')
+        //     this._isMounted.current = true
+        // }
+    }
 
     //Destroyed the check list! don't use it! -tamir&naav- <3
 
@@ -43,7 +59,6 @@ class _TaskDetails extends Component {
     //         console.log('props change');
     //     }
     // }
-
 
     addClassName() {
         document.querySelector('.board').classList.add('max-screen');
@@ -80,7 +95,7 @@ class _TaskDetails extends Component {
     };
 
     updateTask = (txt) => {
-        console.log('here',txt)
+        console.log('here', txt)
         if (!this.state.task.title) return;
         let copyBoard = { ...this.props.board };
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
@@ -108,6 +123,7 @@ class _TaskDetails extends Component {
     }
 
     onAddCheckList = (task) => {
+       
         if (!task.checklists) {
             task.checklists = [];
         }
@@ -151,7 +167,7 @@ class _TaskDetails extends Component {
             task.members.push(addedMember)
             str = `added ${addedMember.fullname} to task`
         }
-        console.log('str',str)
+        console.log('str', str)
         this.updateTask(str)
     }
 
@@ -258,8 +274,12 @@ class _TaskDetails extends Component {
         if (!task) return <h1>Loading...</h1>
         return (
             <section
-                className={`task-details w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
-                onClick={(ev) => { this.closeOverlay(ev) }}
+                ref={this.elModalRef}
+                className={`task-details modal w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
+                onClick={(ev) => {
+                    ev.stopPropagation()
+                    this.closeOverlay(ev)
+                }}
             >
                 <div className="info-task flex column w-79 h-100 content-start">
                     {/* Title */}

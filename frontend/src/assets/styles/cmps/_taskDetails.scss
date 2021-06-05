@@ -5,8 +5,14 @@
     top:0;
     right:0;
     left:0;
+    overflow-y: auto;
     backdrop-filter: blur(3px);
     background-color: rgba($color: #000000, $alpha: 0.6);
+    .modal {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
 }
 
 .task-list-title{
