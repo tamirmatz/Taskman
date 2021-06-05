@@ -19,7 +19,7 @@ class _BoardList extends Component {
         newBoard: {
             title: '',
             backgroundId: 0,
-            backgrounds: [
+            backgrounds: ['',
                 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg',
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671389/backrounds/0_jflqwf.jpg',
                 'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671416/backrounds/1_gavwov.jpg',

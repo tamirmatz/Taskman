@@ -32,8 +32,8 @@ class _Board extends Component {
         socketService.emit('add member', boardId)
         this.removeClassName();
         const board = await boardService.getById(boardId)
-        document.querySelector('body').style.backgroundImage = `url(${board.style})`
-        document.querySelector('.app-header').style.backgroundColor = `rgba(0, 0, 0, 0.32)`
+        document.querySelector('body').style.background = board.style ? `url(${board.style})` : 'rgb(0, 121, 191)'
+        document.querySelector('.app-header').style.backgroundColor = `rgba(0, 0, 0, 0.15)`
     }
 
     componentWillUnmount() {
