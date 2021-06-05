@@ -328,7 +328,7 @@ class _TaskDetails extends Component {
                             this.updateTask()
                         }}>
 
-                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="input-details w-90 margin-content" onChange={this.handleChange} />
+                            <textarea placeholder="Add a description for this task..." onBlur={this.updateTask} type="textArea" value={task.description} name="description" className="input-details w-90 margin-content fam-1" onChange={this.handleChange} />
                         </form>
                     </section>
                     {task.imgUrl && <img className="details-img" src={task.imgUrl} />}
