@@ -80,6 +80,7 @@ export class CheckList extends Component {
                             onBlur={this.props.updateTask}
                             type="text"
                             value={checklist.title}
+                            autoComplete="off"
                             name="title"
                             className="input-details fam-1 font-m fw-2"
                             onChange={ev => this.handleChange(ev).checklistTitle()}
@@ -107,6 +108,7 @@ export class CheckList extends Component {
                                         className={`input-details ${todo.isDone && "done-todo"}`}
                                         type="text"
                                         name="txt"
+                                        autoComplete="off"
                                         value={todo.txt}
                                         onChange={(ev) => this.handleChange(ev).todos(idx)}
                                     />
@@ -124,6 +126,7 @@ export class CheckList extends Component {
                             <input
                                 type="text"
                                 className="input-details mb-1"
+                                autoComplete="off"
                                 placeholder="+ Add Todo"
                                 name="txt"
                                 value={this.state.todo.txt}

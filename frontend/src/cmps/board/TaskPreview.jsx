@@ -50,7 +50,7 @@ class _TaskPreview extends Component {
         else return ''
      }
     render() {
-        const { board, index, task, updateBoard, groupId } = this.props
+        const { board, index, task, group, groupId } = this.props
         const isLabelOpen = this.props.isLabelOpen;
         return <Draggable
             draggableId={task.id}
@@ -100,7 +100,7 @@ class _TaskPreview extends Component {
                                     <Link to={`/board/${board._id}/${groupId}/${task.id}`}>
 
 
-                                        <h1 className="task-title fam-1 font-m">{task.title}</h1>
+                                        <h1 style={{color:group.color?group.color:'#333'}} className="task-title fam-1 font-m">{task.title}</h1>
                                         <div className="task-mini-details flex row-reverse w-100 space-between gap-xs fam-1 c-stand center">
                                             <div>
                                             {utilService.isFalse(task.members) && <small className="flex center">{task.members.map(member => { return <UserPreview key={member._id} user={member} /> }).splice(0, 3)}</small>}

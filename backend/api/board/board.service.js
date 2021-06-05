@@ -83,6 +83,46 @@ function _createInittialBoard({title,style},loggedInUser) {
         },
         "style": style.background,
         "labels": [
+            {
+                "id" : "l101",
+                "title" : "tamir!!!!!!!!",
+                "color" : "red"
+            }, 
+            {
+                "id" : "l102",
+                "title" : "morani",
+                "color" : "green"
+            }, 
+            {
+                "id" : "l103",
+                "title" : "Done",
+                "color" : "blue"
+            }, 
+            {
+                "id" : "l104",
+                "title" : "Ready",
+                "color" : "purple"
+            }, 
+            {
+                "id" : "l105",
+                "title" : "mor",
+                "color" : "pink"
+            }, 
+            {
+                "id" : "l106",
+                "title" : "qa",
+                "color" : "gray"
+            }, 
+            {
+                "id" : "l107",
+                "title" : "tamir",
+                "color" : "orange"
+            },
+            {
+                "id" : "l108",
+                "title" : "tamir",
+                "color" : "#333"
+            }
         ],
         "members": [
             {

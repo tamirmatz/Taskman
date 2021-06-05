@@ -266,6 +266,7 @@ class _TaskDetails extends Component {
                                 <input
                                     onBlur={this.updateTask}
                                     type="text"
+                                    autoComplete="off"
                                     value={task.title}
                                     name="title"
                                     className="input-details title-task-input"
@@ -360,8 +361,7 @@ class _TaskDetails extends Component {
                                 ev.preventDefault()
                                 this.onSendComment(ev.target[0].value)
                             }}>
-                                <input className="comment-input" placeholder="Write a comment..." name="txt">
-                                </input>
+                                <input autoComplete="off" type="text" className="comment-input" placeholder="Write a comment..." name="txt"/>
                                 <button className="btn-send-comment">Send</button>
                             </form>
                         </div>

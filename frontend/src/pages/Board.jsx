@@ -165,12 +165,12 @@ class _Board extends Component {
 
                             )}
                         </Droppable>
-                        <div className="group add-group flex">
+                        <div className=" flex">
                             <form onSubmit={(ev) => {
                                 ev.preventDefault()
                                 this.onAddGroup()
                             }}>
-                                <input className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
+                                <input autoComplete="off" className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
                             </form>
                         </div>
                     </div>
