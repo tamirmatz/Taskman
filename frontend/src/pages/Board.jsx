@@ -20,7 +20,7 @@ class _Board extends Component {
         group: EMPTY_GROUP,
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const { boardId } = this.props.match.params
         this.props.loadBoard(boardId);
         this.props.loadUsers();
@@ -31,11 +31,16 @@ class _Board extends Component {
         })
         socketService.emit('add member', boardId)
         this.removeClassName();
+        const board = await boardService.getById(boardId)
+        document.querySelector('body').style.backgroundImage = `url(${board.style})`
+        document.querySelector('.app-header').style.backgroundColor = `rgba(0, 0, 0, 0.32)`
     }
 
     componentWillUnmount() {
         socketService.off('updated board', this.props.setBoard)
         socketService.terminate()
+        document.querySelector('body').style.backgroundImage = `linear-gradient(to bottom right,#f0e3fc,#dff2fe,#daf5f7,#e0f6ea,#eef4e0)`
+        document.querySelector('.app-header').style.backgroundColor = `#026aa7`
     }
 
     favBoard = () => {
@@ -127,7 +132,9 @@ class _Board extends Component {
             <DragDropContext
                 onDragEnd={this.onDragEnd}
             >
-                <div style={{ backgroundImage: board.style ? "url(" + board.style + ")" : 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg' }} className="board flex column  animate__animated animate__fadeInRight ">
+                <div style={{}}
+                    // {{backgroundImage: board.style ? "url(" + board.style + ")" : 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg' }} 
+                    className="board flex column  animate__animated animate__fadeInRight ">
                     <BoardNavbar favBoard={this.favBoard} removeBoard={this.removeBoard} users={this.props.users} board={board} updateBoard={this.onUpdate} />
 
                     <div className="board-list flex w-100 "

@@ -42,20 +42,20 @@ class _AppHeader extends Component {
         return <header className={className}>
             {loggedInUser && (
                 <nav className="main-nav w-20 flex center space-between c-danger h-100">
-                    <NavLink to="/board" className="btn-board btn-boards flex center gap-xs w-40"><RiCheckboxMultipleBlankLine/>Boards</NavLink>
-                    <NavLink to="/login" className="btn-board">Jump to...</NavLink>
+                    <NavLink to="/board" className="btn-boards btn-boards flex center gap-xs w-40"><RiCheckboxMultipleBlankLine/>Boards</NavLink>
+                    <NavLink to="/login" className="btn-boards">Jump to...</NavLink>
                 </nav>
             )}
-            <div className="logo font-5 ps-2"><Link to={`/`}><span className="logo-span">T</span>askman</Link></div>
+            <div className="logo font-5 ps-2 "><Link to={`/`} className="app-header-logo"><span className="logo-span">T</span>askman</Link></div>
             <nav className="main-nav w-20 flex space-evenly c-danger">
                 {loggedInUser && (
                     <nav className="main-nav w-20 flex center space-evenly c-danger gap-1">
-                        <NavLink to="/board" className="btn-board">+</NavLink>
-                        <NavLink to="/login" className="btn-board">Notfication</NavLink>
+                        <NavLink to="/board" className="btn-boards">+</NavLink>
+                        <NavLink to="/login" className="btn-boards">Notfication</NavLink>
                     </nav>
                 )}
                 {loggedInUser && (<NavLink to="/login" className="btn-board"><UserPreview user={loggedInUser}/></NavLink>)}
-                {!loggedInUser && (<NavLink to="/login" className="btn-board">Login</NavLink>)}
+                {!loggedInUser && (<NavLink to="/login" className="btn-boards">Login</NavLink>)}
             </nav>
         </header>
     }
