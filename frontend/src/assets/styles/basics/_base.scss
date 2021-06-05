@@ -25,7 +25,8 @@ body {
     font-size: rem(18px);
     margin: 0;
     background-image: linear-gradient(to bottom right,#f0e3fc,#dff2fe,#daf5f7,#e0f6ea,#eef4e0);
-
+    background-repeat: no-repeat;
+    background-size: cover;
     // line-height: 20px;
 }
 
@@ -54,3 +55,4 @@ input{
     min-width: 1rem;
     width: auto;
 }
+

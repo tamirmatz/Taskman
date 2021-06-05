@@ -33,7 +33,7 @@ export class Home extends Component {
       <div className="home-page flex column fam-1 ">
         <div className="flex row-reverse mt-5 space-evenly ">
           <div className="align-center flex column ">
-              <div className="c-stand  marg-2 ps-2 font-xl"><span className="logo-span">T</span>askman</div>
+              <div className="c-stand  marg-2 ps-2 font-xl"><span className="logo-span main-color">T</span>askman</div>
               <h1 className="fam-1 fs30 bold ">Task management</h1>
               <h2 className="fam-1 fs30 bold">The <span className="main-color">easiest</span> way. </h2>
               <Link to="/board/60b8a57c6845c04afc9a425a"><button class="btn-hover color-3">Try it now!</button></Link>
