@@ -75,6 +75,7 @@ export class BoardNavbar extends Component {
                                 className="app-input nav-board-input bold font-m lh-20 c-white "
                                 name="title"
                                 onChange={this.handleChange}
+                                autoComplete="off"
                                 value={this.state.title}
                                 onBlur={this.onChangeBoardName}
                             />

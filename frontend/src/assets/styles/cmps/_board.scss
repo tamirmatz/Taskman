@@ -18,9 +18,10 @@
 }
 
 .add-group{
-    width: 270px;
+    width: 272px;
+    margin: 0 4px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.877);
+    background: #ffffff3d;
     border-radius: 3px;
     border: none;
     outline: none;
@@ -29,6 +30,10 @@
     cursor: pointer;
     opacity: 0.9;
 }
+
+// .add-group input{
+//     background-color: transparent;
+// }
 
 .add-group:focus{
     background: #fff;
@@ -39,7 +44,7 @@
 }
 
 .add-group::placeholder{
-    color: #333;
+    color: rgb(255, 255, 255);
     padding: 6px 8px;
     font-size: 1rem;
 }

@@ -14,6 +14,13 @@ class _GroupModal extends Component {
         this.setState({ group: this.props.group })
     }
 
+    changeGroupColor(color){
+        const copyBoard={...this.props.board}
+        const groupIdx=boardService.getGroupIdxById(copyBoard, this.state.group.id)
+        copyBoard.groups[groupIdx].color=color
+        this.props.update(copyBoard)
+    }
+
     componentDidUpdate(prevProps) {
 
     }
@@ -44,7 +51,9 @@ class _GroupModal extends Component {
                             <ul >
                                 <li onClick={() => { this.AddTask() }} className="font-2 fam-1 pad-1 li-btn flex center">Add Task...</li>
                                 <li onClick={() => { this.removeList(groupId) }} className="font-2 fam-1 pad-1 flex center li-btn">Remove List...</li>
-                                <h1>Label of color!!!</h1>
+                                <li className="group-colors font-2 fam-1 pad-1 flex center">
+                                   { this.props.board.labels.map(label=><div onClick={()=>{this.changeGroupColor(label.color)}} class="group-label" style={{backgroundColor:label.color}}></div>)    }
+                                </li>
                             </ul>
                         </ul>
                     </div>

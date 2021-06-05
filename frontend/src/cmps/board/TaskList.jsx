@@ -88,8 +88,9 @@ export class TaskList extends Component {
                             this.updateGroup()
 
                         }}>
-                            <div className="group-title w-100 flex center space-between pb-2">
+                            <div style={{ backgroundColor: group.color ? group.color : 'transparent' }} className="group-title w-100 flex center space-between pb-2">
                                 <input
+                                    autoComplete="off"
                                     className="app-input font-w2 font-m lh-20 "
                                     onBlur={this.updateGroup}
                                     type="text"
@@ -99,16 +100,16 @@ export class TaskList extends Component {
                                 />
                                 <div className="group-menu" >
                                     <div className="btn" onMouseDown={(ev) => {
-                                            if(ev.button == 0){
-                                                this.toggleModal(`${this.state.group.id}`)
-                                            }
+                                        if (ev.button == 0) {
+                                            this.toggleModal(`${this.state.group.id}`)
                                         }
+                                    }
                                     }
                                     >...</div>
                                     <GroupModal
-                                     toggleModal={() => {this.toggleModal()}} 
-                                     group={group}
-                                     />
+                                        toggleModal={() => { this.toggleModal() }}
+                                        group={group}
+                                    />
                                 </div>
                             </div>
                         </form>
@@ -130,6 +131,7 @@ export class TaskList extends Component {
                                                     groupId={group.id}
                                                     updateBoard={updateBoard}
                                                     task={task}
+                                                    group={group}
                                                 />
                                             ))}
                                             {!utilService.isFalse(group.tasks) && <h1 className="task-title fam-1 font-m">No tasks to show</h1>}
@@ -143,7 +145,7 @@ export class TaskList extends Component {
                                 this.onAddTask()
                                 console.log(ev)
                             }}>
-                                <input className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a card" name="title" onChange={this.handleChange} />
+                                <input autoComplete="off" className="add-task" value={this.state.task.title} type="text" placeholder="+ Add a card" name="title" onChange={this.handleChange} />
                             </form>
                         </div>
                     </li>
