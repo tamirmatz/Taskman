@@ -52,13 +52,14 @@ class _TaskDetails extends Component {
     addActivity = (board, txt = '') => {
         const { loggedInUser } = this.props
         const task = { ...this.state.task }
-        const activity = `${loggedInUser.fullname}${txt}`
-        const copyboard = JSON.parse(JSON.stringify(board))
-        // board.activities = []
-        copyboard.activities.unshift({ id: utilService.makeId(), txt: activity, createdAt: Date.now(), byMember: loggedInUser, task })
-        console.log('board after', copyboard.activities)
-        console.log('copy board', copyboard)
-        return copyboard;
+        const activity = `${loggedInUser.fullname} ${txt}`
+        const activities = board.activities
+        activities.unshift({ id: utilService.makeId(), txt: activity, createdAt: Date.now(), byMember: loggedInUser, task })
+        board.activities = activities
+        console.log('activitis',activities)
+        const copyboard = {...board}
+        console.log('board',board)
+        return board;
     }
 
     handleChange = ({ target }) => {
@@ -87,13 +88,13 @@ class _TaskDetails extends Component {
         copyBoard = this.addActivity(copyBoard, txt)
         this.props.update(copyBoard)
     }
-    
-    updateTaskLabel= (updateTask) => {
-        console.log('prevLabel: ',this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
-        const task  = this.state.task;
+
+    updateTaskLabel = (updateTask) => {
+        console.log('prevLabel: ', this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
+        const task = this.state.task;
         task.labelIds = updateTask.labelIds;
         this.updateTask()
-        console.log('Label: ',this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
+        console.log('Label: ', this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
     }
 
     onSaveDueDate = (date) => {
@@ -152,7 +153,7 @@ class _TaskDetails extends Component {
     onSaveDueDate = (date) => {
         const { task } = this.state;
         task.dueDate = date
-        
+
         this.updateTask()
     }
 
@@ -367,7 +368,7 @@ class _TaskDetails extends Component {
 
                         {task.comments && <ul className="comments clean-list">
                             {task.comments.map((comment, idx) => {
-                                return <li className="full-comment flex column">
+                                return <li key={comment.id} className="full-comment flex column">
                                     <div className="flex space-between">
                                         <div className="content-gap flex center">
                                             <UserPreview user={comment.byMember} />
