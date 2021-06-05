@@ -32,14 +32,16 @@ class _Board extends Component {
         socketService.emit('add member', boardId)
         this.removeClassName();
         const board = await boardService.getById(boardId)
-        document.querySelector('body').style.background = board.style ? `url(${board.style})` : 'rgb(0, 121, 191)'
+        document.body.style.background = board.style ? `url(${board.style})` : 'rgb(0, 121, 191)'
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundSize = "cover";
         document.querySelector('.app-header').style.backgroundColor = `rgba(0, 0, 0, 0.15)`
     }
 
     componentWillUnmount() {
         socketService.off('updated board', this.props.setBoard)
         socketService.terminate()
-        document.querySelector('body').style.backgroundImage = `linear-gradient(to bottom right,#f0e3fc,#dff2fe,#daf5f7,#e0f6ea,#eef4e0)`
+        document.body.style.backgroundImage = `linear-gradient(to bottom right,#f0e3fc,#dff2fe,#daf5f7,#e0f6ea,#eef4e0)`
         document.querySelector('.app-header').style.backgroundColor = `#026aa7`
     }
 
