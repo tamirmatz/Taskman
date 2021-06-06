@@ -4,15 +4,6 @@ import { Link } from 'react-router-dom'
 import { remove, add, query } from '../store/actions/boardsAction.js';
 import { MiniBoard } from '../cmps/board/MiniBoard'
 import { utilService } from '../services/generalService/utilService.js'
-import p0 from '../assets/img/background/0.jpg'
-import p1 from '../assets/img/background/1.jpg'
-import p2 from '../assets/img/background/2.jpg'
-import p3 from '../assets/img/background/3.jpg'
-import p4 from '../assets/img/background/4.jpg'
-import p5 from '../assets/img/background/5.jpg'
-import p6 from '../assets/img/background/6.jpg'
-import p7 from '../assets/img/background/7.jpg'
-import { Board } from './Board.jsx';
 
 class _BoardList extends Component {
     state = {
