@@ -89,7 +89,7 @@ class _AppHeader extends Component {
                             <div onClick={(ev) => {
                                 ev.preventDefault()
                                 this.onChangeBoardName(ev)
-                            }} className="flex center">
+                            }} className="jump-to flex center">
                                 <input type="text"
                                     className="app-input  font-m lh-20 c-white search-input-text fam-1 "
                                     name="search"
