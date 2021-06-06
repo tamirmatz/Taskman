@@ -1,4 +1,5 @@
 import { MembersBoard } from '../MembersBoard';
+import { add, loadBoard, update, setBoard, remove } from '../../../store/actions/boardsAction.js';
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { RiDashboardLine } from 'react-icons/ri'
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
@@ -7,11 +8,14 @@ import { BoardMembersModal } from './BoardMembersModal'
 import { InfoBoardModal } from './InfoBoardModal'
 import { BsCalendar } from 'react-icons/bs'
 import { BiBarChartAlt2 } from 'react-icons/bi'
+import { connect } from 'react-redux'
+import { utilService } from '../../../services/generalService/utilService.js';
+import { UserPreview } from '../UserPreview.jsx';
 
 
 
 
-export class BoardNavbar extends Component {
+class _BoardNavbar extends Component {
     state = {
         displayBoard: this.props.displayBoard,
         title: this.props.board.title,
@@ -171,9 +175,50 @@ export class BoardNavbar extends Component {
                 </ul>
                 <ul className="right-bar flex center">
                     <li className="btn-board btn-board-navbar bg-board-btn" onClick={() => this.props.removeBoard()}>Delete Board</li>
+                    <li onClick={() => { this.props.onToggleActivities() }} className="btn-board btn-board-navbar bg-board-btn ">...
+                    </li>
+                    <div className="board-menu flex column">
+                    <h1 className="center-self">Menu</h1>
+                    <ul>
+                        {
+                         board.activities &&  board.activities.map(activity => {
+                                if(!activity) return
+                                return <li key={activity.id} className="full-activty flex column">
+                                    <div className="flex space-between">
+                                        <div className="content-gap flex center">
+                                            <UserPreview user={activity.byMember} />
+                                            <div className="commenter-name">{activity.byMember.fullname}</div>
+                                            <small>{utilService.timeAgo(activity.createdAt)}</small>
+                                        </div>
+                                    </div>
+                                    <div className="comment-gap">
+                                        <p className="comment-txt ">{activity.txt}</p>
+                                    </div>
+                                </li>
+
+                            })}
+                    </ul>
+                    </div>
                 </ul>
             </nav>
         )
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        board: state.boardModule.board,
+        loggedInUser: state.userModule.loggedInUser,
+
+    }
+}
+
+const mapDispatchToProps = {
+    remove,
+    add,
+    loadBoard,
+    update,
+    setBoard
+}
+
+export const BoardNavbar = connect(mapStateToProps, mapDispatchToProps)(_BoardNavbar)

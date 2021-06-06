@@ -399,7 +399,7 @@ class _TaskDetails extends Component {
                         {task.comments && <ul className="comments clean-list">
                             {task.comments.map((comment, idx) => {
                                 return <li key={comment.id} className="full-comment flex column">
-                                    <div className="flex space-between">
+                                    <div className="flex space-between center">
                                         <div className="content-gap flex center">
                                             <UserPreview user={comment.byMember} />
                                             <div className="commenter-name">{comment.byMember.fullname}</div>
@@ -414,6 +414,7 @@ class _TaskDetails extends Component {
                             })}
                             {
                                 board.activities.map(activity => {
+                                    if(!activity) return
                                     if (task.id === activity.task.id && counter < 10) {
                                         counter++
                                         return <li key={activity.id} className="full-comment flex column">
