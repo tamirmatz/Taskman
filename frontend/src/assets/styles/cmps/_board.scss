@@ -1,8 +1,7 @@
 .board{
     overflow-x: hidden;
-    min-height: 92vh;
     padding: 2px;
-    height: auto;
+    overflow-y: hidden;
     opacity: 0.9;
     width: auto ;
     display: flex;
@@ -15,7 +14,9 @@
 
 .board-list{
     overflow-x: scroll;
+    overflow-y: hidden;
     flex-grow: 1;
+    height: 82vh;
 }
 
 .groups{
