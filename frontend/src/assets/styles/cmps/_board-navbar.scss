@@ -5,20 +5,27 @@
     
 }
 
-.btn-board{
-
-}
 
 .left-bar{
     flex: 0 1 ;
 }
 
 .input-navbar{
+    background: inherit;
+    border: none;
+    outline: none;
+    border-radius: 3px;
     height: 32px;
     border-radius: 3px;
     padding-left: 8px;
     margin: 0 2px 0 2px;
+    width: auto;
 }
+
+.input-navbar:focus{
+    border-radius: 6px;
+}
+
 
 .bg-board-btn{
     background-color: rgba(255, 255, 255, 0.151);
@@ -45,18 +52,10 @@ li.btn-board{
     cursor: pointer;
 }
 
-input.nav-board-input:focus{
-    color: #fff;
-    background-color: inherit;
-}
-
-.input-board-title{
-    width: 5rem;
-}
-
 .board-btn-divider{
     float: left;
     height: 16px;
     border-left: 1px solid  #ffffff3d;
     margin: 8px 8px 12px 4px
 }
+

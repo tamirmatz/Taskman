@@ -130,18 +130,20 @@ export class BoardNavbar extends Component {
 
                     </ul>
 
-                    <li className="btn-board bold input-navbar input-board-title">
+                    <li className="btn-board bold ps-xxs">
                         <div onClick={(ev) => {
                             ev.preventDefault()
                             this.onChangeBoardName(ev)
                         }}>
                             <input type="text"
-                                className="app-input nav-board-input bold font-m lh-20 c-white "
+                                className="app-input bold font-m lh-20 c-white title-nav-input "
                                 name="title"
                                 onChange={this.handleChange}
                                 autoComplete="off"
                                 value={this.state.title}
                                 onBlur={this.onChangeBoardName}
+                                minLength={2}
+                                maxLength={13}
                             />
                         </div>
                     </li>
