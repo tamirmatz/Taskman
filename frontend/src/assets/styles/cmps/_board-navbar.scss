@@ -1,7 +1,7 @@
 .board-navbar{
     width: 100%;
     height: auto;
-    padding: 0px 2px 4px 2px;
+    padding: 0px 2px 8px 2px;
     
 }
 
@@ -14,15 +14,15 @@
 }
 
 .input-navbar{
-    background-color: rgba(255, 255, 255, 0.2);
     height: 32px;
     border-radius: 3px;
-    min-width: 8rem;
-    width: auto;
     padding-left: 8px;
     margin: 0 2px 0 2px;
 }
 
+.bg-board-btn{
+    background-color: rgba(255, 255, 255, 0.151);
+}
 
 
 .btn-board-navbar{
@@ -48,4 +48,15 @@ li.btn-board{
 input.nav-board-input:focus{
     color: #fff;
     background-color: inherit;
+}
+
+.input-board-title{
+    width: 5rem;
+}
+
+.board-btn-divider{
+    float: left;
+    height: 16px;
+    border-left: 1px solid  #ffffff3d;
+    margin: 8px 8px 12px 4px
 }

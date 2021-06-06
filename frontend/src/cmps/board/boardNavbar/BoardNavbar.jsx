@@ -63,10 +63,14 @@ export class BoardNavbar extends Component {
         const { board, onUpdate } = this.props
         if (!board) return <div>Loading...</div>
         return (
-            <nav className="board-navbar flex space-between font-1 c-white fam-1">
+            <nav className="board-navbar flex space-between font-m c-white fam-1">
                 <ul className="left-bar flex center space-evenly ">
-                    <li className="btn-board btn-board-navbar bg-btn"><RiDashboardLine />Board<MdKeyboardArrowDown /></li>
-                    <li className="btn-board bold input-navbar bg-btn">
+                    <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly">
+                        <span className="ps-xxs flex center"><RiDashboardLine /></span>
+                        Board<MdKeyboardArrowDown />
+                        </li>
+                    
+                    <li className="btn-board bold input-navbar input-board-title">
                         <div onClick={(ev) => {
                             ev.preventDefault()
                             this.onChangeBoardName(ev)
@@ -81,14 +85,17 @@ export class BoardNavbar extends Component {
                             />
                         </div>
                     </li>
-                    <li className="btn-board btn-board-navbar bg-btn" onClick={this.props.favBoard}>
+                    <li className="btn-board btn-board-navbar bg-board-btn" onClick={this.props.favBoard}>
                        {!board.isFavorite && <AiOutlineStar />}
                        {board.isFavorite && <AiFillStar/>}
                     </li>
-                    <li className="btn-board btn-board-navbar bg-btn">Visiblity</li>
+                    <span className="board-btn-divider"></span>
+                    <li className="btn-board btn-board-navbar bg-board-btn">Visiblity</li>
+                    <span className="board-btn-divider"></span>
+                    <li className="btn-board bg-inherit" ><MembersBoard /></li>
                     <ul className="members-wrap ">
                         <li
-                            className="btn-board btn-board-navbar bg-btn"
+                            className="btn-board btn-board-navbar bg-board-btn"
                             onClick={() => { this.toggleModal('board-members-wrap-modal') }}>
                             Invite
                         </li>
@@ -99,10 +106,9 @@ export class BoardNavbar extends Component {
                             toggleModal={() => { this.toggleModal() }}
                         />
                     </ul>
-                    <li className="btn-board bg-inherit" ><MembersBoard /></li>
                 </ul>
                 <ul className="right-bar flex center">
-                    <li className="btn-board btn-board-navbar bg-btn" onClick={() => this.props.removeBoard()}>Delete Board</li>
+                    <li className="btn-board btn-board-navbar bg-board-btn" onClick={() => this.props.removeBoard()}>Delete Board</li>
                 </ul>
             </nav>
         )

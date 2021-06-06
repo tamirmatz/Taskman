@@ -35,14 +35,15 @@ class _Board extends Component {
         document.body.style.background = board.style ? `url(${board.style})` : 'rgb(0, 121, 191)'
         document.body.style.backgroundRepeat = "no-repeat";
         document.body.style.backgroundSize = "cover";
-        document.querySelector('.app-header').style.backgroundColor = `rgba(0, 0, 0, 0.15)`
+        document.querySelector('.app-header').style.backgroundColor = `rgba(0, 0, 0, 0.15)`;
+
     }
 
     componentWillUnmount() {
         socketService.off('updated board', this.props.setBoard)
         socketService.terminate()
         document.body.style.backgroundImage = `linear-gradient(to bottom right,#f0e3fc,#dff2fe,#daf5f7,#e0f6ea,#eef4e0)`
-        document.querySelector('.app-header').style.backgroundColor = `#026aa7`
+        document.querySelector('.app-header').style.backgroundColor = `#1c1c1c4f`
     }
 
     favBoard = () => {
@@ -134,8 +135,7 @@ class _Board extends Component {
             <DragDropContext
                 onDragEnd={this.onDragEnd}
             >
-                <div style={{}}
-                    // {{backgroundImage: board.style ? "url(" + board.style + ")" : 'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg' }} 
+                <div 
                     className="board flex column  animate__animated animate__fadeInRight ">
                     <BoardNavbar favBoard={this.favBoard} removeBoard={this.removeBoard} users={this.props.users} board={board} updateBoard={this.onUpdate} />
 

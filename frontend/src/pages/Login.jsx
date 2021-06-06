@@ -56,6 +56,7 @@ class _Login extends Component {
     ev.preventDefault()
     try {
       this.props.login({ username: this.state.loginCred.username, password: this.state.loginCred.password })
+      document.querySelector('.app-header').classList.add('bg-header-board');
       this.props.history.push('/board')
 
       this.setState({ loginCred: { username: '', password: '' } })
@@ -82,6 +83,7 @@ class _Login extends Component {
   doLogout = () => {
     this.props.logout()
     this.props.history.push('/')
+    document.querySelector('.app-header').classList.remove('bg-header-board');
   }
   render() {
     let signupSection = (

@@ -123,6 +123,10 @@
     align-items: flex-end;
 }
 
+.row{
+    flex-direction: row;
+}
+
 .row-reverse{
     flex-direction: row-reverse;
 }
@@ -317,6 +321,21 @@
     border-radius: 8px;
 }
 /* PADDING-SIDE */
+
+.ps-xxs{
+    padding: 0 0.2rem;
+}
+
+
+.ps-xs{
+    padding: 0 0.5rem;
+}
+
+
+.ps-s{
+    padding: 0 0.7rem;
+}
+
 .ps-1{
     padding: 0 1rem;
 }
@@ -452,6 +471,11 @@
 
 
 /* font size */
+
+.font-xxs{
+    font-size: 0.3rem;
+}
+
 
 .font-xs{
     font-size: 0.5rem;
