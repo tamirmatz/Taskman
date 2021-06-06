@@ -3,9 +3,10 @@ import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { UserPreview } from '../cmps/board/UserPreview'
 import { RiCheckboxMultipleBlankLine } from 'react-icons/ri'
-import { IoIosNotificationsOutline } from 'react-icons/io'
+import { IoIosNotificationsOutline, IoAppsSharp } from 'react-icons/io'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { VscAdd } from 'react-icons/vsc'
+import { VscAdd, VscHome } from 'react-icons/vsc'
+import { MdApps } from 'react-icons/md'
 
 
 class _AppHeader extends Component {
@@ -58,39 +59,57 @@ class _AppHeader extends Component {
 
         return <header className={className}>
             {loggedInUser && (
-                <nav className="main-nav flex center space-between c-danger h-100">
-                    <NavLink to="/board" className="btn-boards boards-list-btn boards btn-boards flex center">
-                        <span className="icon-boards">
-                            <RiCheckboxMultipleBlankLine />
-                        </span>
-                        <span className="">Boards</span>
-                    </NavLink>
-                    <li className="btn-board bold input-navbar flex center">
-                        <div onClick={(ev) => {
-                            ev.preventDefault()
-                            this.onChangeBoardName(ev)
-                        }}>
-                            <input type="text"
-                                className="app-input nav-board-input bold font-m lh-20 c-white search-input fam-1"
-                                name="search"
-                                onChange={this.handleChange}
-                                autoComplete="off"
-                                value={this.state.title}
-                                onBlur={this.onChangeBoardName}
-                                placeholder={`Jump to...`}
-                            />
-                            <span className="icon-search"><AiOutlineSearch/></span>
-                        </div>
-                    </li>
+                <nav className="main-nav flex center space-between w-57">
+                    <ul className="flex center">
+
+                        <NavLink to="/" className="icon-header bg-btn">
+                            <MdApps className="add-icon-nav" /></NavLink>
+
+                        <NavLink to="/boards" className="icon-header bg-btn">
+                            <VscHome className="add-icon-nav" /></NavLink>
+
+
+                        <NavLink to="/board" className="btn-boards boards-list-btn boards btn-boards flex center bg-btn">
+                            <span className="icon-boards bold">
+                                <RiCheckboxMultipleBlankLine />
+                            </span>
+                            <span className="">Boards</span>
+                        </NavLink>
+                        <li className=" input-navbar flex center search-input bg-btn">
+                            <div onClick={(ev) => {
+                                ev.preventDefault()
+                                this.onChangeBoardName(ev)
+                            }} className="flex center">
+                                <input type="text"
+                                    className="app-input nav-board-input  font-m lh-20 c-white search-input fam-1 "
+                                    name="search"
+                                    onChange={this.handleChange}
+                                    autoComplete="off"
+                                    value={this.state.title}
+                                    onBlur={this.onChangeBoardName}
+                                    placeholder={`Jump to...`}
+                                />
+                                <span className="icon-search flex center"><AiOutlineSearch /></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div className="logo font-5">
+                        <Link to={`/`} className="app-header-logo">
+                            <span className="logo-span">T</span>askman
+                </Link>
+                    </div>
                 </nav>
             )}
-            <div className="logo font-5 ps-2 "><Link to={`/`} className="app-header-logo"><span className="logo-span">T</span>askman</Link></div>
-            <nav className="main-nav flex space-evenly c-danger">
+
+
+            <nav className="main-nav flex space-evenly">
                 {loggedInUser && (
-                    <nav className="main-nav flex center space-evenly c-danger">
-                        <NavLink to="/board" className="icon-header">
-                            <VscAdd className="add-icon-nav" /></NavLink>
-                        <NavLink to="/login" className="icon-header" ><IoIosNotificationsOutline /></NavLink>
+                    <nav className="main-nav flex center space-evenly">
+                        <NavLink to="/board" className="icon-header bg-btn">
+                            <VscAdd className="add-icon-nav" />
+                        </NavLink>
+                        <NavLink to="/login" className="icon-header bg-btn" ><IoIosNotificationsOutline />
+                        </NavLink>
                     </nav>
                 )}
                 {loggedInUser && (<NavLink to="/login" className="btn-board"><UserPreview user={loggedInUser} /></NavLink>)}

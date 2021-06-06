@@ -65,8 +65,8 @@ export class BoardNavbar extends Component {
         return (
             <nav className="board-navbar flex space-between font-1 c-white fam-1">
                 <ul className="left-bar flex center space-evenly ">
-                    <li className="btn-board btn-board-navbar"><RiDashboardLine />Board<MdKeyboardArrowDown /></li>
-                    <li className="btn-board bold input-navbar">
+                    <li className="btn-board btn-board-navbar bg-btn"><RiDashboardLine />Board<MdKeyboardArrowDown /></li>
+                    <li className="btn-board bold input-navbar bg-btn">
                         <div onClick={(ev) => {
                             ev.preventDefault()
                             this.onChangeBoardName(ev)
@@ -81,14 +81,14 @@ export class BoardNavbar extends Component {
                             />
                         </div>
                     </li>
-                    <li className="btn-board btn-board-navbar" onClick={this.props.favBoard}>
+                    <li className="btn-board btn-board-navbar bg-btn" onClick={this.props.favBoard}>
                        {!board.isFavorite && <AiOutlineStar />}
                        {board.isFavorite && <AiFillStar/>}
                     </li>
-                    <li className="btn-board btn-board-navbar">Visiblity</li>
+                    <li className="btn-board btn-board-navbar bg-btn">Visiblity</li>
                     <ul className="members-wrap ">
                         <li
-                            className="btn-board btn-board-navbar"
+                            className="btn-board btn-board-navbar bg-btn"
                             onClick={() => { this.toggleModal('board-members-wrap-modal') }}>
                             Invite
                         </li>
@@ -102,7 +102,7 @@ export class BoardNavbar extends Component {
                     <li className="btn-board bg-inherit" ><MembersBoard /></li>
                 </ul>
                 <ul className="right-bar flex center">
-                    <li className="btn-board btn-board-navbar" onClick={() => this.props.removeBoard()}>Delete Board</li>
+                    <li className="btn-board btn-board-navbar bg-btn" onClick={() => this.props.removeBoard()}>Delete Board</li>
                 </ul>
             </nav>
         )
