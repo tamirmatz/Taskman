@@ -1,19 +1,31 @@
 import { MembersBoard } from '../MembersBoard';
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { RiDashboardLine } from 'react-icons/ri'
-import { AiOutlineStar } from 'react-icons/ai'
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 import { Component } from 'react';
 import { BoardMembersModal } from './BoardMembersModal'
-import {AiFillStar} from 'react-icons/ai'
+import { InfoBoardModal } from './InfoBoardModal'
+import { BsCalendar } from 'react-icons/bs'
+import { BiBarChartAlt2 } from 'react-icons/bi'
+
 
 
 
 export class BoardNavbar extends Component {
     state = {
+        displayBoard: this.props.displayBoard,
         title: this.props.board.title,
         members: this.props.board.members
     }
 
+    componentDidMount() {
+        this.setState({
+            ...this.state,
+            displayBoard: this.props.displayBoard,
+            title: this.props.board.title,
+            members: this.props.board.members
+        })
+    }
 
 
     onAddMemberToBoard = (addedMember) => {
@@ -59,17 +71,65 @@ export class BoardNavbar extends Component {
         const value = target.value
         this.setState({ [field]: value })
     }
+
     render() {
-        const { board, onUpdate } = this.props
+        const { board, onUpdate } = this.props;
+        const displayBoard = this.props.displayBoard
         if (!board) return <div>Loading...</div>
         return (
-            <nav className="board-navbar flex space-between font-m c-white fam-1">
+            <nav className="board-navbar flex space-between font-m c-white fam-1 ">
                 <ul className="left-bar flex center space-evenly ">
-                    <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly">
-                        <span className="ps-xxs flex center"><RiDashboardLine /></span>
-                        Board<MdKeyboardArrowDown />
-                        </li>
-                    
+                    <ul className="display-option">
+                        {displayBoard === 'board' &&
+                            <div className="board-option">
+                                <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner" onClick={() => { this.toggleModal('info-board-wrap-modal') }}>
+                                    <span className="ps-xxs flex center"><RiDashboardLine /></span>
+                                Board
+                                <span className="font-2 flex right">
+                                        <MdKeyboardArrowDown />
+                                    </span>
+                                </li>
+                                <InfoBoardModal
+                                    toggleModal={() => { this.toggleModal() }}
+                                    changeDisplay={this.props.changeDisplay}
+                                />
+                            </div>
+                        }
+
+                        {displayBoard === 'dashboard' &&
+                            <div className="board-option">
+                                <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner" onClick={() => { this.toggleModal('info-board-wrap-modal') }}>
+                                    <span className="ps-xxs flex center"><BiBarChartAlt2 /></span>
+                                Dashboard
+                                <span className="font-2 flex right">
+                                        <MdKeyboardArrowDown />
+                                    </span>
+                                    <InfoBoardModal
+                                        toggleModal={() => { this.toggleModal() }}
+                                        changeDisplay={this.props.changeDisplay}
+                                    />
+                                </li>
+                            </div>
+                        }
+
+                        {displayBoard === 'calendar' &&
+                            <div className="board-option">
+                                <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner" onClick={() => { this.toggleModal('info-board-wrap-modal') }}>
+                                    <span className="ps-xxs flex center"><BsCalendar /></span>
+                                    Calendar
+                                    <span className="font-2 flex right">
+                                        <MdKeyboardArrowDown />
+                                    </span>
+                                </li>
+                                <InfoBoardModal
+                                    toggleModal={() => { this.toggleModal() }}
+                                    changeDisplay={this.props.changeDisplay}
+                                />
+                            </div>
+                        }
+
+                    </ul>
+
                     <li className="btn-board bold input-navbar input-board-title">
                         <div onClick={(ev) => {
                             ev.preventDefault()
@@ -86,8 +146,8 @@ export class BoardNavbar extends Component {
                         </div>
                     </li>
                     <li className="btn-board btn-board-navbar bg-board-btn" onClick={this.props.favBoard}>
-                       {!board.isFavorite && <AiOutlineStar />}
-                       {board.isFavorite && <AiFillStar/>}
+                        {!board.isFavorite && <AiOutlineStar />}
+                        {board.isFavorite && <AiFillStar />}
                     </li>
                     <span className="board-btn-divider"></span>
                     <li className="btn-board btn-board-navbar bg-board-btn">Visiblity</li>

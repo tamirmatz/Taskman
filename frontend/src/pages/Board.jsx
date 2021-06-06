@@ -12,12 +12,15 @@ import { boardService } from '.././services/boardService.js'
 import { utilService } from '../services/generalService/utilService.js'
 import { socketService } from '../services/generalService/socketService.js'
 import { ModalWrapper } from '../cmps/shared/ModalWrapper.jsx';
+import {Dashboard} from './Dashboard';
+import {Calendar} from './calendar';
 
 const EMPTY_GROUP = { title: '' }
 
 class _Board extends Component {
     state = {
         group: EMPTY_GROUP,
+        displayBoard: 'board'
     }
 
     async componentDidMount() {
@@ -36,7 +39,6 @@ class _Board extends Component {
         document.body.style.backgroundRepeat = "no-repeat";
         document.body.style.backgroundSize = "cover";
         document.querySelector('.app-header').style.backgroundColor = `rgba(0, 0, 0, 0.15)`;
-
     }
 
     componentWillUnmount() {
@@ -120,6 +122,10 @@ class _Board extends Component {
         this.props.history.push(`/board/${this.props.board._id}`)
 
     }
+
+    changeDisplay = (changeDisplay) => {
+        this.setState({ ...this.state, displayBoard: changeDisplay })
+    }
     render() {
         const { board } = this.props;
         if (!board) {
@@ -128,52 +134,63 @@ class _Board extends Component {
         // loading ui
         // this.props.loading();
         // if(this.props.isLoading) return <h1 className="w-100 h-100 flex center content-center">Loading...</h1>
-        if (this.props.isLoading) return <div className="loader w-100 h-100 flex center content-center">Loading...</div>
+        if (this.props.isLoading) return <div className="loader w-100 h-100 flex left content-center">Loading...</div>
 
-
+        const displayBoard = this.state.displayBoard;
         return (
             <DragDropContext
                 onDragEnd={this.onDragEnd}
             >
-                <div 
+                <div
                     className="board flex column  animate__animated animate__fadeInRight ">
-                    <BoardNavbar favBoard={this.favBoard} removeBoard={this.removeBoard} users={this.props.users} board={board} updateBoard={this.onUpdate} />
-
-                    <div className="board-list flex w-100 "
-
-                    >
-                        <Droppable droppableId={board._id}
-                            direction="horizontal"
-                            type="group"
+                    <BoardNavbar
+                        favBoard={this.favBoard}
+                        removeBoard={this.removeBoard}
+                        users={this.props.users}
+                        board={board}
+                        updateBoard={this.onUpdate}
+                        changeDisplay={this.changeDisplay}
+                        displayBoard={displayBoard}
+                    />
+                    {displayBoard === 'board' && (
+                        <div className="board-list flex w-100 "
                         >
-                            {provided => (
-                                <ul
-                                    className="groups clean-list flex "
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}
-                                >
-                                    {board && board.groups.map((group, idx) =>
-                                        <TaskList
-                                            index={idx}
-                                            key={group.id}
-                                            board={board}
-                                            group={group}
-                                            updateBoard={this.onUpdate}
-                                        />)}
-                                    {provided.placeholder}
-                                </ul>
+                            <Droppable droppableId={board._id}
+                                direction="horizontal"
+                                type="group"
+                            >
+                                {provided => (
+                                    <ul
+                                        className="groups clean-list flex "
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        {board && board.groups.map((group, idx) =>
+                                            <TaskList
+                                                index={idx}
+                                                key={group.id}
+                                                board={board}
+                                                group={group}
+                                                updateBoard={this.onUpdate}
+                                            />)}
+                                        {provided.placeholder}
+                                    </ul>
 
-                            )}
-                        </Droppable>
-                        <div className=" flex">
-                            <form onSubmit={(ev) => {
-                                ev.preventDefault()
-                                this.onAddGroup()
-                            }}>
-                                <input autoComplete="off" className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
-                            </form>
+                                )}
+                            </Droppable>
+                            <div className=" flex">
+                                <form onSubmit={(ev) => {
+                                    ev.preventDefault()
+                                    this.onAddGroup()
+                                }}>
+                                    <input autoComplete="off" className="add-group" value={this.state.group.title} type="text" placeholder="+ Add another list" name="title" onChange={this.handleChange} />
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    )}
+                    {displayBoard === 'dashboard' && <Dashboard/>}
+                    {displayBoard === 'calendar' && <Calendar/>}
+                    
 
                     <Switch>
                         <Route
