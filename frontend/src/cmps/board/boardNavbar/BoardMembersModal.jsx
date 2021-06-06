@@ -23,8 +23,8 @@ class _BoardMembersModal extends Component {
         const members  = this.props.users;
         return <div className="action-modal board-members-wrap-modal d-none p-abs flex">
             <ModalAction>
-                <div className="board-members-modal p-abs flex column pad-1 bg-white c-stand z-1 br-3 mt-1">
-                    <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 mb-1">
+                <div className="board-members-modal p-abs flex column bg-white c-stand z-1 br-3 pad-05">
+                    <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 ">
                         <h1 className="fam-1 font-1 ">Members</h1>
                         <span className="cur-pointer fam-1 font-m bold" onClick={() => { this.props.toggleModal('board-members-wrap-modal') }}><AiOutlineClose /></span>
                     </div>

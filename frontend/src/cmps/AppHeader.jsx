@@ -7,11 +7,14 @@ import { IoIosNotificationsOutline, IoAppsSharp } from 'react-icons/io'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { VscAdd, VscHome } from 'react-icons/vsc'
 import { MdApps } from 'react-icons/md'
+import { FiAlertCircle } from 'react-icons/fi'
+
 
 
 class _AppHeader extends Component {
     state = {
         loggedInUser: null,
+        loginPage: false,
         search: ''
     }
 
@@ -20,9 +23,11 @@ class _AppHeader extends Component {
             loggedInUser: this.props.loggedInUser
         })
         if (this.props.loggedInUser) {
-            document.querySelector('.app-header').classList.remove('home')
+            document.querySelector('.app-header').classList.remove('home-menu')
+            document.querySelector('.btn-login').classList.remove('btn-login')
         } else {
-            document.querySelector('.app-header').classList.add('home')
+            document.querySelector('.app-header').classList.add('home-menu')
+            document.querySelector('.btn-login').classList.add('btn-login')
         }
     }
 
@@ -32,9 +37,9 @@ class _AppHeader extends Component {
                 loggedInUser: this.props.loggedInUser
             });
             if (this.props.loggedInUser) {
-                document.querySelector('.app-header').classList.remove('home')
+                document.querySelector('.app-header').classList.remove('row')
             } else {
-                document.querySelector('.app-header').classList.add('home')
+                document.querySelector('.app-header').classList.add('row-reverse')
             }
         }
     }
@@ -52,10 +57,15 @@ class _AppHeader extends Component {
         this.setState({ [field]: value })
     }
 
+    toggleLoginPage() {
+        this.setState({
+            ...this.state, loginPage: !this.state.loginPage
+        })
+    }
     render() {
         // const { loggedInUser } = this.props;
         let className = "app-header flex space-between center fam-1 font-s c-white signin";
-        const { loggedInUser } = this.state;
+        const { loggedInUser, loginPage } = this.state;
 
         return <header className={className}>
             {loggedInUser && (
@@ -69,7 +79,7 @@ class _AppHeader extends Component {
                             <VscHome className="add-icon-nav" /></NavLink>
 
 
-                        <NavLink to="/board" className="btn-boards boards-list-btn boards btn-boards flex center bg-btn">
+                        <NavLink to="/board" className="btn-boards boards-list-btn  flex center bg-btn">
                             <span className="icon-boards bold">
                                 <RiCheckboxMultipleBlankLine />
                             </span>
@@ -106,14 +116,35 @@ class _AppHeader extends Component {
                 {loggedInUser && (
                     <nav className="main-nav flex center space-evenly">
                         <NavLink to="/board" className="icon-header bg-btn">
-                            <VscAdd className="add-icon-nav" />
+                            <span className="small-icon flex center">
+                                <VscAdd/>
+                            </span>
                         </NavLink>
-                        <NavLink to="/login" className="icon-header bg-btn" ><IoIosNotificationsOutline />
+                        <NavLink to="/login" className="icon-header bg-btn" >
+                            <span className="small-icon flex center">
+                                <FiAlertCircle />
+                            </span>
                         </NavLink>
+                        <NavLink to="/login" className="icon-header bg-btn bg-danger" >
+                            <span className="small-icon alert-icon flex center">
+                                <IoIosNotificationsOutline />
+                            </span>
+                        </NavLink>
+
                     </nav>
                 )}
                 {loggedInUser && (<NavLink to="/login" className="btn-board"><UserPreview user={loggedInUser} /></NavLink>)}
-                {!loggedInUser && (<NavLink to="/login" className="btn-boards">Login</NavLink>)}
+
+                {(!loggedInUser && !loginPage) && (
+                    <div className="home-menu" onClick={() => { this.toggleLoginPage() }}>
+                        <NavLink to="/login" className="btn-login">Login</NavLink>
+                    </div>
+                )}
+                {(!loggedInUser && loginPage) && (
+                    <div className="home-menu" onClick={() => { this.toggleLoginPage() }}>
+                        <NavLink to="/" className="btn-login">Home</NavLink>
+                    </div>
+                )}
             </nav>
         </header>
     }
