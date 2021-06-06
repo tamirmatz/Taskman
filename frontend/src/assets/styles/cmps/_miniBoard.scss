@@ -4,6 +4,7 @@
     background: rgb(0, 121, 191) no-repeat center/cover ;
     transition: 0.3s;
     border-radius: 5px;
+    box-shadow: 5px 5px 5px 1px #b9b3b3
 }
 .title-miniBoard{
     transform: scale(1.1);
@@ -40,7 +41,7 @@
         text-align:center;
         border: none;
         background-size: 300% 100%;
-        border-radius: 50px;
+        border-radius: 4px;
         transition: all .4s ease-in-out;
     }
     button:hover {
@@ -51,11 +52,10 @@
         outline: none;
     }
         button {
-            background-image: linear-gradient(to right, #667EEA, #764BA2, #6B8DD6, #8E37D7);
+            background-image: linear-gradient(to right, #667EEA, #5f6691, #6B8DD6, #88b3f5);
             box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
         }
         .change-img{
-            border-radius: 20%;
             padding: 3px;
             // background-color: rgba(255, 255, 255, 0.637);
             font-weight: bold;
@@ -67,7 +67,7 @@
 }
 .control-img{
     position: relative;
-    top: 3rem;
+    top: 4rem;
 }
 .favBoard{
     box-shadow: 0px 0px 5px 5px #1473aa85;
