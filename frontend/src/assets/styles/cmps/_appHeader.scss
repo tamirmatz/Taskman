@@ -170,3 +170,33 @@ span.icon-boards{
 .bg-danger{
     background: #eb5a46;
 }
+
+.search-input-box{
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    height: 32px;
+    border-radius: 3px;
+    padding-left: 2px;
+    margin: 0 2px 0 2px;
+}
+
+.search-input-text{
+    height: 16px;
+    padding: 8px 32px 8px 8px;
+    max-width: 155px;
+}
+
+.search-input-text::placeholder{
+    color: #fff;
+}
+
+.search-input-box{
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    height: 32px;
+    border-radius: 3px;
+    padding-left: 2px;
+    margin: 0 2px 0 2px;
+}
