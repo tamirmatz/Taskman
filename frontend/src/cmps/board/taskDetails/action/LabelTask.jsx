@@ -92,7 +92,7 @@ class _LabelTask extends Component {
         const nameInput = `label-${label.id}`;
         return (
             <div className="label flex center space-between w-100 h-20" data-label={label.id}>
-                <div className={`wrap-label ${className} w-90`} onClick={() => this.toggleLabel(label.id, nameInput)}
+                <div className={`wrap-label ${className} w-85`} onClick={() => this.toggleLabel(label.id, nameInput)}
                 >
                     <input
                         type="text"
@@ -105,7 +105,7 @@ class _LabelTask extends Component {
                         disabled
                     />
                 </div>
-                    <span onClick={() => { this.toggleDisable(nameInput) }} className="edit-label"><FiEdit2 /> </span>
+                    <span onClick={() => { this.toggleDisable(nameInput) }} className="edit-label ps-1"><FiEdit2 /> </span>
             </div>
         )
     }
