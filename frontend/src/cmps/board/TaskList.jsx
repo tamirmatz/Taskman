@@ -101,7 +101,7 @@ export class TaskList extends Component {
                                 <div className="group-menu" >
                                     <div className="btn" onMouseDown={(ev) => {
                                         if (ev.button == 0) {
-                                            this.toggleModal(`${this.state.group.id}`)
+                                            this.toggleModal(`g-${this.state.group.id}`)
                                         }
                                     }
                                     }

@@ -21,7 +21,6 @@ class _ChartLabelsTasks extends Component {
         })
     }
 
-
     mapLabelsTask = (labels, tasks) => {
 
         const mapObj = {};
