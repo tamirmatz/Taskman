@@ -14,12 +14,31 @@ import { UserPreview } from '../UserPreview.jsx';
 
 
 
-
 class _BoardNavbar extends Component {
     state = {
         displayBoard: this.props.displayBoard,
         title: this.props.board.title,
-        members: this.props.board.members
+        members: this.props.board.members,
+        backgrounds: ['',
+            'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671389/backrounds/0_jflqwf.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671416/backrounds/1_gavwov.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991464/backrounds/images_nnscac.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991434/backrounds/ded84385480090c3464352f152dbc0c8_bzdu9x.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991432/backrounds/508751_bftz6u.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991426/backrounds/wp4676582_rhnghy.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991421/backrounds/Eb3zqm9WsAIalyT_sdypqq.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991411/backrounds/wallpapersden.com_cool-4k-pattern_3840x2160_ag3xac.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991393/backrounds/wp5633980_gb2sub.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991348/backrounds/65c7d4a8f34de11f9414ce49b847e56a_bvwpgt.gif',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991338/backrounds/Vaporwave-4K-Wallpapers_mmacwb.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991315/backrounds/thor-stormbreaker-minimalist-wallpaper_goxnts.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671401/backrounds/2_gstip0.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671404/backrounds/4_ly2zj7.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671430/backrounds/6_mi6wun.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg',
+        ],
+        isActivities:true
     }
 
     componentDidMount() {
@@ -53,6 +72,10 @@ class _BoardNavbar extends Component {
         else return ''
     }
 
+    toggleActivities=()=>{
+        this.setState({isActivities:!this.state.isActivities})
+    }
+
     toggleModal = (className) => {
         const modals = document.querySelectorAll('.action-modal');
         const currModal = document.querySelector(`.${className}`);
@@ -67,6 +90,15 @@ class _BoardNavbar extends Component {
     onChangeBoardName = () => {
         const board = this.props.board
         board.title = this.state.title
+        this.props.updateBoard(board)
+    }
+
+    onChangeBg = (url) => {
+        const board = this.props.board
+        board.style = url
+        document.body.style.background = board.style ? `url(${board.style})` : 'rgb(0, 121, 191)'
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundSize = "cover";
         this.props.updateBoard(board)
     }
 
@@ -176,26 +208,40 @@ class _BoardNavbar extends Component {
                     <li onClick={() => { this.props.onToggleActivities() }} className="btn-board btn-board-navbar bg-board-btn ">...
                     </li>
                     <div className="board-menu flex column">
-                    <h1 className="center-self">Menu</h1>
-                    <ul>
-                        {
-                         board.activities &&  board.activities.map(activity => {
-                                if(!activity) return
-                                return <li key={activity.id} className="full-activty flex column">
-                                    <div className="flex space-between">
-                                        <div className="content-gap flex center">
-                                            <UserPreview user={activity.byMember} />
-                                            <div className="commenter-name">{activity.byMember.fullname}</div>
-                                            <small>{utilService.timeAgo(activity.createdAt)}</small>
-                                        </div>
-                                    </div>
-                                    <div className="comment-gap">
-                                        <p className="comment-txt ">{activity.txt}</p>
-                                    </div>
-                                </li>
+                        <div className="flex mb-06 space-between">
+                            <h1 className="center-self">Menu</h1>
+                            <button className="menu-btn" onClick={this.toggleActivities}>{this.state.isActivities ? 'Backgrounds':'Activities'}</button>
+                        </div>
 
-                            })}
-                    </ul>
+                        <ul>
+                            {
+                               this.state.isActivities&& board.activities && board.activities.map(activity => {
+                                    if (!activity) return
+                                    return <li key={activity.id} className="full-activty flex column">
+                                        <div className="flex space-between">
+                                            <div className="content-gap flex center">
+                                                <UserPreview user={activity.byMember} />
+                                                <div className="commenter-name">{activity.byMember.fullname}</div>
+                                                <small>{utilService.timeAgo(activity.createdAt)}</small>
+                                            </div>
+                                        </div>
+                                        <div className="comment-gap">
+                                            <p className="comment-txt ">{activity.txt}</p>
+                                        </div>
+                                    </li>
+
+                                })
+
+                            }
+                        </ul>
+                        <ul className="flex column align-center gap-1">
+                            {
+                              !this.state.isActivities&&  this.state.backgrounds.map((background) => {
+                                    return <li onClick={() => { this.onChangeBg(background) }} className={"miniBoard cur-pointer flex center content-center"} style={{ backgroundImage: "url(" + background + ")" }}>
+
+                                    </li>
+                                })
+                            }</ul>
                     </div>
                 </ul>
             </nav>
