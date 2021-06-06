@@ -276,7 +276,7 @@ class _TaskDetails extends Component {
         return (
                 <section
                     ref={this.elModalRef}
-                    className={`task-details modal w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
+                    className={`task-details modal w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay} `}
                     onClick={(ev) => {
                         ev.stopPropagation()
                         this.closeOverlay(ev)

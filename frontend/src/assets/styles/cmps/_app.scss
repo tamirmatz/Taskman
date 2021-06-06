@@ -1,24 +1,14 @@
 .app{
     -webkit-text-size-adjust: 100%;
+    // position: absolute;
+    // width: 100vw;
+    // min-height: 100vh ;
 }
 
 .app-main{  
     min-height: 93vh;
     padding: 0;
 }
-
-.max-screen{
-    min-height: 100vh;
-    height: auto;
-    // overflow-y: hidden;
-
-}
-
-input{
-    min-width: 6rem;
-    width: auto;
-}
-
 
 input.app-input{
     background: inherit;
