@@ -45,7 +45,7 @@ class _Board extends Component {
         socketService.off('updated board', this.props.setBoard)
         socketService.terminate()
         document.body.style.backgroundImage = `linear-gradient(to bottom right,#f0e3fc,#dff2fe,#daf5f7,#e0f6ea,#eef4e0)`
-        document.querySelector('.app-header').style.backgroundColor = `#1c1c1c4f`
+        document.querySelector('.app-header').style.backgroundColor = `#026AA7`
     }
 
     favBoard = () => {
