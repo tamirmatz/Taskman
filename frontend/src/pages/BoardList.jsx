@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { remove, add, query } from '../store/actions/boardsAction.js';
 import { MiniBoard } from '../cmps/board/MiniBoard'
 import { utilService } from '../services/generalService/utilService.js'
-
 class _BoardList extends Component {
     state = {
         newBoard: {
@@ -34,13 +33,11 @@ class _BoardList extends Component {
     componentDidMount() {
         this.props.query()
     }
-
     onCreateBoard = async () => {
         const { title, backgrounds, backgroundId } = this.state.newBoard
         this.props.add(title, backgrounds[backgroundId])
         this.props.query()
     }
-
     changeImg = (num) => {
         const { backgroundId, backgrounds } = this.state.newBoard
         if (backgroundId + num === backgrounds.length || backgroundId + num === -1) num = 0
@@ -51,11 +48,9 @@ class _BoardList extends Component {
             }
         }))
     }
-
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
-
         this.setState(prevState => ({
             newBoard: {
                 ...prevState.newBoard,
@@ -63,30 +58,18 @@ class _BoardList extends Component {
             }
         }))
     }
-
-
     render() {
         const { boards } = this.props
         return (
             <section className=" w-100 flex column center content-center pad-3">
                 <h1 className="fam-1 fs30 mb-2">Choose Your Board...</h1>
                 <div className="boards-gallery flex h-40 w-100 gap-2 wrap">
-                    {boards && boards.map(board => {
-                        if (board.isFavorite)
-                            return <Link key={board._id} to={`board/${board._id}`}><MiniBoard board={board} /></Link>
-                    })}
-                    {boards && boards.map(board => {
-                        if (!board.isFavorite)
-                            return <Link key={board._id} to={`board/${board._id}`}><MiniBoard board={board} /></Link>
-                    })}
                     <section className={"miniBoard flex center content-center"} style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
                         <form className="add-board" onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onCreateBoard()
                         }}>
                             <input type="text" name="title" onChange={this.handleChange} placeholder="Board title..." />
-
-
                             <div className="change-img-container flex space-between control-img">
                                 <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
                                 <button>Create board</button>
@@ -94,13 +77,20 @@ class _BoardList extends Component {
                             </div>
                         </form>
                     </section>
+                    {boards && boards.map(board => {
+                        if (board.isFavorite)
+                        return <Link key={board._id} to={`board/${board._id}`}><MiniBoard board={board} /></Link>
+                    })}
+                    {boards && boards.map(board => {
+                        if (!board.isFavorite)
+                        return <Link key={board._id} to={`board/${board._id}`}><MiniBoard board={board} /></Link>
+                    })}
                     {!boards && <h1 >No boards to show</h1>}
                 </div>
             </section>
         )
     }
 }
-
 const mapStateToProps = state => {
     return {
         boards: state.boardModule.boards

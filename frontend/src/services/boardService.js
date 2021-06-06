@@ -18,7 +18,9 @@ export const boardService = {
     checklistPreview,
     getTaskIdxById,
     checklistPrecent,
-    updateTaskAtBoard
+    updateTaskAtBoard,
+    getTasks,
+    
 }
 
 
@@ -39,12 +41,10 @@ function remove(boardId) {
 }
 
 async function add(title, background) {
-    console.log(title, background)
     // const newBoard = _createBoard()
     // const savedBoard = storageService.post(STORAGE_KEY, newBoard)
     // return savedBoard
     const board = { title, style: { background } }
-    console.log(board)
     const res = await httpService.post(`board`, board)
     return res
 }
@@ -119,25 +119,13 @@ function updateTaskAtBoard(board, group, updateTask) {
     return updateBoard;
 }
 
-function getTypeMap(boardId) {
-    return getById(boardId)
-        .then(board => {
-            var taskPerPerson = board.members.slice()
-            board.groups.forEach(group => {
-                group.tasks.forEach(task => {
-                    board.members.forEach(member => {
-                        task.members.forEach(taskMember => {
-                            
-                        })
-                    })
-                })
-
-            })
-            // return toys.reduce((acc, board) => {
-            //     const { type } = board
-            //     if (!acc[type]) acc[type] = 0
-            //     acc[type] += 1
-            //     return acc
-            // }, {})
-        })
+function getTasks(groups) {
+    console.log(groups);
+    const tasks = [];
+    groups.forEach( group => {
+        group.tasks.forEach(task => {
+            tasks.push(task);
+        });
+    })
+    return tasks;
 }

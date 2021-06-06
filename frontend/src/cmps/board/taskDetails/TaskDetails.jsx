@@ -274,186 +274,187 @@ class _TaskDetails extends Component {
         const { board, loggedInUser } = this.props
         if (!task) return <h1>Loading...</h1>
         return (
-            <section
-                ref={this.elModalRef}
-                className={`task-details modal w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
-                onClick={(ev) => {
-                    ev.stopPropagation()
-                    this.closeOverlay(ev)
-                }}
-            >
-                <div className="info-task flex column w-79 h-100 content-start">
-                    {/* Title */}
-                    <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
-                        ev.preventDefault()
-                        this.updateTask('updated task name')
-                    }}>
-                        <div className="task-title flex center h-33">
-                            <label
-                                htmlFor="title"
-                                className="font-3 flex center w-100">
-                                <BsCardChecklist />
-                                <input
-                                    onBlur={() => this.updateTask('updated checklist name')}
-                                    type="text"
-                                    autoComplete="off"
-                                    value={task.title}
-                                    name="title"
-                                    className="input-details title-task-input"
-                                    onChange={this.handleChange}
-                                />
-                            </label>
-                        </div>
-                        <h3 className="task-list-title fam-1 font-2 left-self h-20 center">in list{' '}
-                            <span className="t-decor">{this.state.group.title}</span>
-                        </h3>
-                    </form>
-
-                    <section className="info-task flex wrap gap-1 center mb-1">
-                        <div className="task-members">
-                            {task.members.length > 0 && <h3 className="font-s fw-1 fam-1 left-self c-lead">MEMBERS</h3>}
-                            <ul className="flex center gap-xs">
-                                {task.members.map(member => {
-                                    return <UserPreview key={member._id} user={member} />
-                                })}
-                                {task.members.length > 0 &&
-                                    <span onClick={() => { this.toggleModal('members-wrap-modal'); this.openOverlay() }} className="btn-act  user-preview flex center content-center font-m bg-btn cur-pointer ">+</span>}
-                            </ul>
-                        </div>
-                        <div className="task-labels flex column center wrap">
-                            {(task.labelIds && task.labelIds.length > 0) && <h3 className="font-s fw-1 fam-1 left-self c-lead">LABELS</h3>}
-                            <ul className="flex center wrap">
-                                {task.labelIds && task.labelIds.map(labelId => {
-                                    const label = board.labels.find(label => {
-                                        return label.id === labelId;
-                                    })
-                                    if (label) {
-                                        return (
-                                            <div
-                                                key={label.id}
-                                                className={`details-label bold flex center pad-xs mb-03`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}
-                                            >
-                                                {label.title}
-                                            </div>
-                                        )
-                                    }
-                                })}
-                                {task.labelIds && task.labelIds.length > 0 && <span onClick={() => { this.toggleModal('label-wrap-modal'); this.openOverlay(); }} className="details-label bold flex center pad-xs mb-03 bg-btn btn-act cur-pointer">+</span>}
-                            </ul>
-                        </div>
-                        {task.dueDate && <div className="task-duedate flex center column">
-                            <h3 className="font-s fw-1 fam-1 left-self c-lead">DUE DATE</h3>
-                            <div className="flex">
-                                <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} checked={task.isDone} type="checkbox" />
-                                <p>{Intl.DateTimeFormat('IL-il').format(task.dueDate)}</p>
-                                {task.isDone && <div className="complete-duedate">complete</div>}
-                            </div>
-                        </div>}
-                    </section>
-
-                    <section className="desc-section">
-                        <div className="desc-header flex row mb-1">
-                            <GrTextAlignFull /><label>Description</label>
-                        </div>
-                        <form onSubmit={(ev) => {
+                <section
+                    ref={this.elModalRef}
+                    className={`task-details modal w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
+                    onClick={(ev) => {
+                        ev.stopPropagation()
+                        this.closeOverlay(ev)
+                    }}
+                >
+                    <div className="info-task flex column w-79 h-100 content-start">
+                        {/* Title */}
+                        <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
                             ev.preventDefault()
-                            this.updateTask('changed task description')
+                            this.updateTask('updated task name')
                         }}>
-
-                            <textarea placeholder="Add a description for this task..." onBlur={() => this.updateTask('changed task description')} type="textArea" value={task.description} name="description" className="input-details w-90 margin-content fam-1" onChange={this.handleChange} />
+                            <div className="task-title flex center h-33">
+                                <label
+                                    htmlFor="title"
+                                    className="font-3 flex center w-100">
+                                    <BsCardChecklist />
+                                    <input
+                                        onBlur={() => this.updateTask('updated checklist name')}
+                                        type="text"
+                                        autoComplete="off"
+                                        value={task.title}
+                                        name="title"
+                                        className="input-details title-task-input"
+                                        onChange={this.handleChange}
+                                    />
+                                </label>
+                            </div>
+                            <h3 className="task-list-title fam-1 font-2 left-self h-20 center">in list{' '}
+                                <span className="t-decor">{this.state.group.title}</span>
+                            </h3>
                         </form>
-                    </section>
-                    {task.imgUrl && <img className="details-img" src={task.imgUrl} />}
-                    {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3 ">
-                        {task.checklists.map((checklist, idx) => {
-                            return <CheckList
-                                key={checklist.id}
-                                onRemoveCheckList={this.onRemoveCheckList}
-                                updateChecklist={this.onUpdateChecklist}
-                                idx={idx}
-                                checklists={task.checklists}
-                                handleChange={this.handleChange}
-                                updateTask={this.updateTask}
-                                checklist={checklist}
-                                updateTaskState={this.updateTaskState}
-                                task={task}
-                            />
-                        })}
-                    </ul>}
-
-                    <section className="comment-section">
-                        <div className="desc-header flex row mb-1">
-                            <FaRegCommentDots /><label>Comments</label>
-                        </div>
-                        <div className="new-comment flex center content-gap">
-                            <UserPreview user={loggedInUser} />
+    
+                        <section className="info-task flex wrap gap-1 center mb-1">
+                            <div className="task-members">
+                                {task.members.length > 0 && <h3 className="font-s fw-1 fam-1 left-self c-lead">MEMBERS</h3>}
+                                <ul className="flex center gap-xs">
+                                    {task.members.map(member => {
+                                        return <UserPreview key={member._id} user={member} />
+                                    })}
+                                    {task.members.length > 0 &&
+                                        <span onClick={() => { this.toggleModal('members-wrap-modal'); this.openOverlay() }} className="btn-act  user-preview flex center content-center font-m bg-btn cur-pointer ">+</span>}
+                                </ul>
+                            </div>
+                            <div className="task-labels flex column center wrap">
+                                {(task.labelIds && task.labelIds.length > 0) && <h3 className="font-s fw-1 fam-1 left-self c-lead">LABELS</h3>}
+                                <ul className="flex center wrap">
+                                    {task.labelIds && task.labelIds.map(labelId => {
+                                        const label = board.labels.find(label => {
+                                            return label.id === labelId;
+                                        })
+                                        if (label) {
+                                            return (
+                                                <div
+                                                    key={label.id}
+                                                    className={`details-label bold flex center pad-xs mb-03`} onClick={() => { this.toggleModal('label-wrap-modal') }} style={{ backgroundColor: label.color }}
+                                                >
+                                                    {label.title}
+                                                </div>
+                                            )
+                                        }
+                                    })}
+                                    {task.labelIds && task.labelIds.length > 0 && <span onClick={() => { this.toggleModal('label-wrap-modal'); this.openOverlay(); }} className="details-label bold flex center pad-xs mb-03 bg-btn btn-act cur-pointer">+</span>}
+                                </ul>
+                            </div>
+                            {task.dueDate && <div className="task-duedate flex center column">
+                                <h3 className="font-s fw-1 fam-1 left-self c-lead">DUE DATE</h3>
+                                <div className="flex">
+                                    <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} checked={task.isDone} type="checkbox" />
+                                    <p>{Intl.DateTimeFormat('IL-il').format(task.dueDate)}</p>
+                                    {task.isDone && <div className="complete-duedate">complete</div>}
+                                </div>
+                            </div>}
+                        </section>
+    
+                        <section className="desc-section">
+                            <div className="desc-header flex row mb-1">
+                                <GrTextAlignFull /><label>Description</label>
+                            </div>
                             <form onSubmit={(ev) => {
                                 ev.preventDefault()
-                                this.onSendComment(ev.target[0].value)
+                                this.updateTask('changed task description')
                             }}>
-                                <input autoComplete="off" type="text" className="comment-input" placeholder="Write a comment..." name="txt" />
-                                <button className="btn-send-comment">Send</button>
+    
+                                <textarea placeholder="Add a description for this task..." onBlur={() => this.updateTask('changed task description')} type="textArea" value={task.description} name="description" className="input-details w-90 margin-content fam-1" onChange={this.handleChange} />
                             </form>
-                        </div>
-
-                        {task.comments && <ul className="comments clean-list">
-                            {task.comments.map((comment, idx) => {
-                                return <li key={comment.id} className="full-comment flex column">
-                                    <div className="flex space-between center">
-                                        <div className="content-gap flex center">
-                                            <UserPreview user={comment.byMember} />
-                                            <div className="commenter-name">{comment.byMember.fullname}</div>
-                                            <small>{utilService.timeAgo(comment.createdAt)}</small>
-                                        </div>
-                                        <div className='btn-del-comment' onClick={() => { this.onRemoveComment(idx) }}><RiDeleteBin6Line /></div>
-                                    </div>
-                                    <div className="comment-gap">
-                                        <p className="comment-txt ">{comment.txt}</p>
-                                    </div>
-                                </li>
+                        </section>
+                        {task.imgUrl && <img className="details-img" src={task.imgUrl} />}
+                        {utilService.isFalse(task.checklists) && <ul className="todos clean-list mb-3 ">
+                            {task.checklists.map((checklist, idx) => {
+                                return <CheckList
+                                    key={checklist.id}
+                                    onRemoveCheckList={this.onRemoveCheckList}
+                                    updateChecklist={this.onUpdateChecklist}
+                                    idx={idx}
+                                    checklists={task.checklists}
+                                    handleChange={this.handleChange}
+                                    updateTask={this.updateTask}
+                                    checklist={checklist}
+                                    updateTaskState={this.updateTaskState}
+                                    task={task}
+                                />
                             })}
-                            {
-                                board.activities.map(activity => {
-                                    if(!activity) return
-                                    if (task.id === activity.task.id && counter < 10) {
-                                        counter++
-                                        return <li key={activity.id} className="full-comment flex column">
-                                            <div className="flex space-between">
-                                                <div className="content-gap flex center">
-                                                    <UserPreview user={activity.byMember} />
-                                                    <div className="commenter-name">{activity.byMember.fullname}</div>
-                                                    <small>{utilService.timeAgo(activity.createdAt)}</small>
-                                                </div>
-                                            </div>
-                                            <div className="comment-gap">
-                                                <p className="comment-txt ">{activity.txt}</p>
-                                            </div>
-                                        </li>
-                                    }
-                                })}
                         </ul>}
-                    </section>
-                </div>
-                <ActionList
-                    openOverlay={() => { this.openOverlay() }}
-                    onSaveDueDate={this.onSaveDueDate}
-                    onDeleteTask={this.onDeleteTask}
-                    toggleModal={this.toggleModal}
-                    isMemberChecked={this.isMemberChecked}
-                    onAddMemberToTask={this.onAddMemberToTask}
-                    task={task}
-                    group={this.state.group}
-                    onAddCheckList={this.onAddCheckList}
-                    moveTask={this.moveTask}
-                    updateState={() => { this.updateState() }}
-                    updateTask={this.updateTask}
-                    addImgToTask={this.addImgToTask}
-                    updateTaskLabel={this.updateTaskLabel}
-                />
-            </section>
-        )
+    
+                        <section className="comment-section">
+                            <div className="desc-header flex row mb-1">
+                                <FaRegCommentDots /><label>Comments</label>
+                            </div>
+                            <div className="new-comment flex center content-gap">
+                                <UserPreview user={loggedInUser} />
+                                <form onSubmit={(ev) => {
+                                    ev.preventDefault()
+                                    this.onSendComment(ev.target[0].value)
+                                }}>
+                                    <input autoComplete="off" type="text" className="comment-input" placeholder="Write a comment..." name="txt" />
+                                    <button className="btn-send-comment">Send</button>
+                                </form>
+                            </div>
+    
+                            {task.comments && <ul className="comments clean-list">
+                                {task.comments.map((comment, idx) => {
+                                    return <li key={comment.id} className="full-comment flex column">
+                                        <div className="flex space-between center">
+                                            <div className="content-gap flex center">
+                                                <UserPreview user={comment.byMember} />
+                                                <div className="commenter-name">{comment.byMember.fullname}</div>
+                                                <small>{utilService.timeAgo(comment.createdAt)}</small>
+                                            </div>
+                                            <div className='btn-del-comment' onClick={() => { this.onRemoveComment(idx) }}><RiDeleteBin6Line /></div>
+                                        </div>
+                                        <div className="comment-gap">
+                                            <p className="comment-txt ">{comment.txt}</p>
+                                        </div>
+                                    </li>
+                                })}
+                                {
+                                    board.activities.map(activity => {
+                                        if(!activity) return
+                                        if (task.id === activity.task.id && counter < 10) {
+                                            counter++
+                                            return <li key={activity.id} className="full-comment flex column">
+                                                <div className="flex space-between">
+                                                    <div className="content-gap flex center">
+                                                        <UserPreview user={activity.byMember} />
+                                                        <div className="commenter-name">{activity.byMember.fullname}</div>
+                                                        <small>{utilService.timeAgo(activity.createdAt)}</small>
+                                                    </div>
+                                                </div>
+                                                <div className="comment-gap">
+                                                    <p className="comment-txt ">{activity.txt}</p>
+                                                </div>
+                                            </li>
+                                        }
+                                    })}
+                            </ul>}
+                        </section>
+                    </div>
+                    <ActionList
+                        openOverlay={() => { this.openOverlay() }}
+                        onSaveDueDate={this.onSaveDueDate}
+                        onDeleteTask={this.onDeleteTask}
+                        toggleModal={this.toggleModal}
+                        isMemberChecked={this.isMemberChecked}
+                        onAddMemberToTask={this.onAddMemberToTask}
+                        task={task}
+                        group={this.state.group}
+                        onAddCheckList={this.onAddCheckList}
+                        moveTask={this.moveTask}
+                        updateState={() => { this.updateState() }}
+                        updateTask={this.updateTask}
+                        addImgToTask={this.addImgToTask}
+                        updateTaskLabel={this.updateTaskLabel}
+                    />
+                </section>
+            )
+        }
     }
-}
+
 
 const mapStateToProps = state => {
     return {

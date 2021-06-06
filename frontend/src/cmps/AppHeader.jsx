@@ -85,13 +85,13 @@ class _AppHeader extends Component {
                             </span>
                             <span className="">Boards</span>
                         </NavLink>
-                        <li className=" input-navbar flex center search-input bg-btn">
+                        <li className="flex center search-input-box bg-btn ">
                             <div onClick={(ev) => {
                                 ev.preventDefault()
                                 this.onChangeBoardName(ev)
-                            }} className="flex center">
+                            }} className="jump-to flex center">
                                 <input type="text"
-                                    className="app-input nav-board-input  font-m lh-20 c-white search-input fam-1 "
+                                    className="app-input  font-m lh-20 c-white search-input-text fam-1 "
                                     name="search"
                                     onChange={this.handleChange}
                                     autoComplete="off"
@@ -99,7 +99,7 @@ class _AppHeader extends Component {
                                     onBlur={this.onChangeBoardName}
                                     placeholder={`Jump to...`}
                                 />
-                                <span className="icon-search flex center"><AiOutlineSearch /></span>
+                                <span className="icon-search flex center content-end"><AiOutlineSearch /></span>
                             </div>
                         </li>
                     </ul>

@@ -39,7 +39,7 @@ class _GroupModal extends Component {
         const group = this.state.group;
         if (!group) return <h1>Loading...</h1>
         const groupId = group.id;
-        return <div className={`action-modal group-wrap-modal ${groupId} d-none p-abs flex`}>
+        return <div className={`action-modal group-wrap-modal g-${groupId} d-none p-abs flex`}>
             <ModalAction>
                 <div className="group-modal p-abs flex column pad-07 c-stand z-1 br-3">
                     <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 mb-1">
@@ -52,7 +52,7 @@ class _GroupModal extends Component {
                                 <li onClick={() => { this.AddTask() }} className="font-2 fam-1 pad-1 li-btn flex center">Add Task...</li>
                                 <li onClick={() => { this.removeList(groupId) }} className="font-2 fam-1 pad-1 flex center li-btn">Remove List...</li>
                                 <li className="group-colors font-2 fam-1 pad-1 flex center">
-                                   { this.props.board.labels.map(label=><div onClick={()=>{this.changeGroupColor(label.color)}} class="group-label" style={{backgroundColor:label.color}}></div>)    }
+                                   { this.props.board.labels.map(label=><div onClick={()=>{this.changeGroupColor(label.color)}} className="group-label" style={{backgroundColor:label.color}}></div>)    }
                                 </li>
                             </ul>
                         </ul>

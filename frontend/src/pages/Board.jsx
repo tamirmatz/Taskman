@@ -60,7 +60,6 @@ class _Board extends Component {
 
 
     onUpdate = (updateBoard) => {
-        console.log(updateBoard)
         this.props.update(updateBoard)
     }
 
@@ -111,7 +110,6 @@ class _Board extends Component {
             const sourceListName = copyBoard.groups[sourceListIdx].title
             const destinationListName = copyBoard.groups[destinationListIdx].title
             activity.txt = `has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
-            console.log(activity.txt)
         }
         else {
             const list = copyBoard.groups.splice(source.index, 1)
