@@ -22,14 +22,20 @@ class _ChartMembersTasks extends Component {
     }
 
     mapMembersTask = (members,tasks) => {
-        console.log(tasks);
-        console.log(members);
+
         const mapObj = {};
         members.forEach( member => {
+            mapObj[`${member.fullname}`] = 0;
+            console.log(mapObj);
             tasks.forEach( task => {
-                
+                task.members.forEach( currMember => {
+                    if(currMember.fullname === member.fullname){
+                        mapObj[`${member.fullname}`]++;
+                    }
+                })
             })
         });
+        return mapObj;
         
     }
     
@@ -39,29 +45,28 @@ class _ChartMembersTasks extends Component {
         if(!tasks || !members) return <h1>Loading...</h1>
         const mapMembersTask = this.mapMembersTask(members,tasks);
         const data = {
-            // labels: Object.keys(mpp),
-            labels: ['avi' ,'moshe'],
+            labels: Object.keys(mapMembersTask),
             datasets: [
                 {
                     label: 'Task per Member',
-                    // data: Object.values(boardMap),
-                    data: [12,5,14],
+                    data: Object.values(mapMembersTask),
 
                     backgroundColor: [
                         'rgba(54, 162, 80, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
+                        'rgba(255, 38, 86, 0.2)',
+
                     ],
                     borderColor: [
                         'rgba(54, 162, 80, 1)',
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)',
                     ],
-                    borderWidth: 4,
+                    borderWidth: 2,
                 },
             ],
         };
-        console.log('data',data)
         return (
             <div className="category-chart">
                 <Pie data={data} />

@@ -21,36 +21,38 @@ class _ChartGroupsTasks extends Component {
         })
     }
 
+    mapGroupTask = (groups, tasks) => {
 
+        const mapObj = {};
+        if (groups && tasks) {
+            groups.forEach(group => {
+                mapObj[`${group.title}`] = group.tasks.length;
+            });
+            return mapObj;
+        }
+    }
 
     render() {
-        const {tasks, groups} = this.state;
-        if(!tasks || !groups) return <h1>Loading...</h1>
-        const mapGroups = utilService.mapArrayToObject(groups);
-        console.log(mapGroups);
+        const { tasks, groups } = this.state;
+        if (!tasks || !groups) return <h1>Loading...</h1>
+        const mapGroupTask = this.mapGroupTask(groups, tasks);
+        const backgroundColor = utilService.randColor(mapGroupTask.length);
         const data = {
-            labels: Object.keys(mapGroups),
+            labels: Object.keys(mapGroupTask),
             datasets: [
                 {
                     label: 'Task per Member',
-                    // data: Object.values(boardMap),
-                    data: [12,5,14],
-
-                    backgroundColor: [
-                        'rgba(54, 162, 80, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                    ],
+                    data: Object.values(mapGroupTask),
+                    backgroundColor: backgroundColor,
                     borderColor: [
                         'rgba(54, 162, 80, 1)',
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)',
                     ],
-                    borderWidth: 4,
+                    borderWidth: 1,
                 },
             ],
         };
-        console.log('data',data)
         return (
             <div className="category-chart">
                 <Pie data={data} />
