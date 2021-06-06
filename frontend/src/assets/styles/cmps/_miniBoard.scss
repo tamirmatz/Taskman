@@ -5,25 +5,19 @@
     transition: 0.3s;
     border-radius: 5px;
 }
-
 .title-miniBoard{
     transform: scale(1.1);
     color: var(--mainColor);
     color: whitesmoke;
 }
-
 .boards-gallery{
     justify-content: center;
     align-items: center;
 }
-
-
 .miniBoard:hover{
     transform: scale(1.1);
     opacity:  0.9;
 }
-
-
 .add-board{
     display: flex;
     flex-direction: column;
@@ -36,11 +30,9 @@
        background-color: rgba(245, 245, 245, 0.863);
     }
 }
-
 .change-img-container{
     button {
         width: 6.5rem;
-
         font-weight: 600;
         color: #fff;
         cursor: pointer;
@@ -51,19 +43,15 @@
         border-radius: 50px;
         transition: all .4s ease-in-out;
     }
-    
     button:hover {
         background-position: 100% 0;
         transition: all .4s ease-in-out;
     }
-    
     button:focus {
         outline: none;
     }
-    
-
         button {
-            background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+            background-image: linear-gradient(to right, #667EEA, #764BA2, #6B8DD6, #8E37D7);
             box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
         }
         .change-img{
@@ -75,16 +63,12 @@
             &:hover{
                 background-color: rgba(255, 255, 255, 0.747);
             }
-        
-    
     }
 }
-
 .control-img{
     position: relative;
     top: 3rem;
 }
-
 .favBoard{
     box-shadow: 0px 0px 5px 5px #1473aa85;
 }
