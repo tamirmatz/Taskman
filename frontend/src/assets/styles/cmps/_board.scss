@@ -1,4 +1,5 @@
 .board{
+    overflow-x: hidden;
     min-height: 92vh;
     padding: 2px;
     height: auto;
@@ -15,6 +16,10 @@
 .board-list{
     overflow-x: scroll;
     flex-grow: 1;
+}
+
+.groups{
+    // overflow-x:scroll;
 }
 
 .add-group{

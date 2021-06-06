@@ -20,17 +20,24 @@ class _BoardList extends Component {
             title: '',
             backgroundId: 0,
             backgrounds: ['',
-                'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671389/backrounds/0_jflqwf.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671416/backrounds/1_gavwov.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671401/backrounds/2_gstip0.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671395/backrounds/3_mqwgkk.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671404/backrounds/4_ly2zj7.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671550/backrounds/5_g7oe20.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671430/backrounds/6_mi6wun.jpg',
-                'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg',
-
-            ]
+            'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671389/backrounds/0_jflqwf.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671416/backrounds/1_gavwov.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991464/backrounds/images_nnscac.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991434/backrounds/ded84385480090c3464352f152dbc0c8_bzdu9x.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991432/backrounds/508751_bftz6u.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991426/backrounds/wp4676582_rhnghy.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991421/backrounds/Eb3zqm9WsAIalyT_sdypqq.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991411/backrounds/wallpapersden.com_cool-4k-pattern_3840x2160_ag3xac.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991393/backrounds/wp5633980_gb2sub.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991348/backrounds/65c7d4a8f34de11f9414ce49b847e56a_bvwpgt.gif',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991338/backrounds/Vaporwave-4K-Wallpapers_mmacwb.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622991315/backrounds/thor-stormbreaker-minimalist-wallpaper_goxnts.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671401/backrounds/2_gstip0.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671404/backrounds/4_ly2zj7.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671430/backrounds/6_mi6wun.jpg',
+            'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg',
+        ]
         }
     }
     componentDidMount() {

@@ -40,7 +40,7 @@ export class Home extends Component {
           </div>
           <img className="main-img w-50" src={MainImg}/>
         </div>
-        <div className="features flex row space-between">
+        <div className="features lh-20 flex row space-between">
           <div className="feature flex column">
             <div className="feature-txt flex column">
             <h3 className="fam-1 bold">All the tools your team needs</h3>
