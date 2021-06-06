@@ -90,7 +90,7 @@ class _AppHeader extends Component {
                                 ev.preventDefault()
                                 this.onChangeBoardName(ev)
                             }} className="flex center">
-                                <input type="text"
+                                {/* <input type="text"
                                     className="app-input nav-board-input  font-m lh-20 c-white search-input fam-1 "
                                     name="search"
                                     onChange={this.handleChange}
@@ -98,7 +98,7 @@ class _AppHeader extends Component {
                                     value={this.state.title}
                                     onBlur={this.onChangeBoardName}
                                     placeholder={`Jump to...`}
-                                />
+                                /> */}
                                 <span className="icon-search flex center"><AiOutlineSearch /></span>
                             </div>
                         </li>
