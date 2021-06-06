@@ -183,8 +183,8 @@ span.icon-boards{
 
 .search-input-text{
     height: 16px;
-    padding: 8px 30px 8px 8px;
-    width: 250px;
+    padding: 8px 32px 8px 8px;
+    max-width: 155px;
 }
 
 .search-input-text::placeholder{

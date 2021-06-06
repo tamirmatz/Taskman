@@ -9,7 +9,8 @@ export const utilService = {
   getFormattedDate,
   timeAgo,
   deepClone,
-  getIsOverflowY
+  getIsOverflowY,
+  mapArrayToObject
 }
 
 function delay(ms = 1500) {
@@ -39,7 +40,6 @@ function isFalse(el) {
 
 function formatNewTask(task) {
   const id = makeId()
-  console.log(id)
   return { id, description: '', comments: [], checklists: [], members: [], ...task }
 }
 
@@ -104,4 +104,9 @@ function timeAgo(dateParam) {
 function getIsOverflowY(height, { clientY },el =document.documentElement) {
   const diff = height + clientY - el.clientHeight    
   return diff > 0 ? diff : false
+}
+
+
+function mapArrayToObject(arr){
+  return Object.assign({}, arr);
 }

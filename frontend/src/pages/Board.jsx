@@ -56,7 +56,6 @@ class _Board extends Component {
 
 
     onUpdate = (updateBoard) => {
-        console.log(updateBoard)
         this.props.update(updateBoard)
     }
 
@@ -107,7 +106,6 @@ class _Board extends Component {
             const sourceListName = copyBoard.groups[sourceListIdx].title
             const destinationListName = copyBoard.groups[destinationListIdx].title
             activity.txt = `has moved ${task[0].title} from ${sourceListName} to ${destinationListName}`
-            console.log(activity.txt)
         }
         else {
             const list = copyBoard.groups.splice(source.index, 1)
@@ -142,7 +140,7 @@ class _Board extends Component {
                 onDragEnd={this.onDragEnd}
             >
                 <div
-                    className="board flex column  animate__animated animate__fadeInRight ">
+                    className="board flex column animate__animated animate__fadeInRight ">
                     <BoardNavbar
                         favBoard={this.favBoard}
                         removeBoard={this.removeBoard}

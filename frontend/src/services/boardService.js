@@ -18,7 +18,8 @@ export const boardService = {
     checklistPreview,
     getTaskIdxById,
     checklistPrecent,
-    updateTaskAtBoard
+    updateTaskAtBoard,
+    getTypeMap
 }
 
 
@@ -133,11 +134,6 @@ function getTypeMap(boardId) {
                 })
 
             })
-            // return toys.reduce((acc, board) => {
-            //     const { type } = board
-            //     if (!acc[type]) acc[type] = 0
-            //     acc[type] += 1
-            //     return acc
-            // }, {})
+
         })
 }
