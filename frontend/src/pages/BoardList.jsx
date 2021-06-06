@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { remove, add, query } from '../store/actions/boardsAction.js';
 import { MiniBoard } from '../cmps/board/MiniBoard'
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
 import { utilService } from '../services/generalService/utilService.js'
 import p0 from '../assets/img/background/0.jpg'
 import p1 from '../assets/img/background/1.jpg'
@@ -81,7 +82,9 @@ class _BoardList extends Component {
                         if (!board.isFavorite)
                             return <Link key={board._id} to={`board/${board._id}`}><MiniBoard board={board} /></Link>
                     })}
-                    <section className={"miniBoard flex center content-center"} style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
+                    {!boards && <h1 >No boards to show</h1>}
+                </div>
+                    <section className={"create-board flex center content-center"} style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
                         <form className="add-board" onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onCreateBoard()
@@ -90,14 +93,12 @@ class _BoardList extends Component {
 
 
                             <div className="change-img-container flex space-between control-img">
-                                <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
+                                <span className="change-img" onClick={() => { this.changeImg(-1) }}><AiOutlineArrowLeft/></span>
                                 <button>Create board</button>
-                                <span className="change-img" onClick={() => { this.changeImg(1) }}>{'>'}</span>
+                                <span className="change-img" onClick={() => { this.changeImg(1) }}>< AiOutlineArrowRight /></span>
                             </div>
                         </form>
                     </section>
-                    {!boards && <h1 >No boards to show</h1>}
-                </div>
             </section>
         )
     }
