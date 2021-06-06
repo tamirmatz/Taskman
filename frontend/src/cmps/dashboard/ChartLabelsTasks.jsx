@@ -53,9 +53,7 @@ class _ChartLabelsTasks extends Component {
 
         labels.forEach( label => {
             backgroundColorDashboard.push(label.color);
-            backgroundColorBorder.push(utilService.hexToRGB(label.color, 0.5))
         })
-        console.log(backgroundColorBorder);
         const data = {
             labels: Object.keys(mapLabelsTask),
             datasets: [
@@ -64,8 +62,12 @@ class _ChartLabelsTasks extends Component {
                     data: Object.values(mapLabelsTask),
 
                     backgroundColor: backgroundColorDashboard,
-                    borderColor: backgroundColorBorder,
-                    borderWidth: 1,
+                    borderColor: [
+                        'rgba(54, 162, 80, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 2,
                 },
             ],
         };

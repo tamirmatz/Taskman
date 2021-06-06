@@ -36,7 +36,7 @@ class _ChartGroupsTasks extends Component {
         const { tasks, groups } = this.state;
         if (!tasks || !groups) return <h1>Loading...</h1>
         const mapGroupTask = this.mapGroupTask(groups, tasks);
-        const backgroundColor = utilService.randColor(mapGroupTask.length);
+        const backgroundColor = utilService.randColor(Object.keys(mapGroupTask).length);
         const data = {
             labels: Object.keys(mapGroupTask),
             datasets: [
