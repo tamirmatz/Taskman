@@ -1,6 +1,8 @@
 import { utilService } from './generalService/utilService.js'
 import { storageService } from './generalService/asyncStorageService.js'
-import {httpService} from '../services/generalService/httpService.js'
+import { httpService } from '../services/generalService/httpService.js'
+import { BsBookmarkDash } from 'react-icons/bs';
+import { Board } from '../pages/Board.jsx';
 
 window.storageService = storageService;
 
@@ -37,21 +39,18 @@ function remove(boardId) {
 }
 
 async function add(title, background) {
-    console.log(title,background)
+    console.log(title, background)
     // const newBoard = _createBoard()
     // const savedBoard = storageService.post(STORAGE_KEY, newBoard)
     // return savedBoard
-    const board = {title ,style:{background}}
+    const board = { title, style: { background } }
     console.log(board)
     const res = await httpService.post(`board`, board)
     return res
 }
 
-async function update(board) {
-    // return storageService.put(STORAGE_KEY, board)
-    board.activities = []
-    
-    const res = await httpService.put(`board/${board._id}`, board)
+async function update(board, activity) {
+    const res = await httpService.put(`board/${board._id}`, { board, activity })
     return res
 
 }
@@ -86,36 +85,59 @@ function checklistPreview(task) {
     });
     if (doneTodos === allTodos && allTodos) isDone = true;
     const str = `${doneTodos}/${allTodos}`
-    const res = { str, isDone}
+    const res = { str, isDone }
     return res
 }
 
-function checklistPrecent(checklist){
+function checklistPrecent(checklist) {
     let doneTodos = 0;
     checklist.todos.forEach(todo => {
-        if(todo.isDone) doneTodos++
+        if (todo.isDone) doneTodos++
     })
-    const precent = (doneTodos / checklist.todos.length) * 100 
-    
+    const precent = (doneTodos / checklist.todos.length) * 100
+
     return precent
 }
 
-function _updateTaskAtGroup(group, updateTask){
-    const idx = group.tasks.findIndex( task => {
+function _updateTaskAtGroup(group, updateTask) {
+    const idx = group.tasks.findIndex(task => {
         task.id = updateTask.id;
     })
     group.tasks.splice(idx, 1, updateTask);
     return group;
 }
 
-function _updateGroupAtBoard( board ,updateGroup){
+function _updateGroupAtBoard(board, updateGroup) {
     const idx = getGroupIdxById(board, updateGroup.id)
     board.groups[idx] = updateGroup;
     return board;
 }
 
-function updateTaskAtBoard(board,group, updateTask){
-    const updateGroup =  _updateTaskAtGroup(group, updateTask);
+function updateTaskAtBoard(board, group, updateTask) {
+    const updateGroup = _updateTaskAtGroup(group, updateTask);
     const updateBoard = _updateGroupAtBoard(board, updateGroup);
     return updateBoard;
+}
+
+function getTypeMap(boardId) {
+    return getById(boardId)
+        .then(board => {
+            var taskPerPerson = board.members.slice()
+            board.groups.forEach(group => {
+                group.tasks.forEach(task => {
+                    board.members.forEach(member => {
+                        task.members.forEach(taskMember => {
+                            
+                        })
+                    })
+                })
+
+            })
+            // return toys.reduce((acc, board) => {
+            //     const { type } = board
+            //     if (!acc[type]) acc[type] = 0
+            //     acc[type] += 1
+            //     return acc
+            // }, {})
+        })
 }

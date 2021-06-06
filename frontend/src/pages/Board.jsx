@@ -196,7 +196,7 @@ class _Board extends Component {
                         <Route
                             path={'/board/:boardId/:groupId/:taskId'}
                             render={(props) => <ModalWrapper onClick={this.onCloseDetails}>
-                                <TaskDetails {...props} />
+                                <TaskDetails overlayHeight={538} {...props} />
                             </ModalWrapper>}>
                         </Route>
                     </Switch>

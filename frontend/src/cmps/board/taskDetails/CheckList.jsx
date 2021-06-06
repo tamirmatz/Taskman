@@ -32,6 +32,7 @@ export class CheckList extends Component {
                 this.setState(({ todo }) => ({ todo: { ...todo, [computed.name]: computed.value } }))
             },
             checklistTitle: () => {
+                console.log('checklistCopy: ', checklistCopy)
                 checklistCopy[computed.name] = computed.value
                 this.props.updateChecklist(checklistCopy)
             }

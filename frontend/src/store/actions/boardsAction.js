@@ -1,5 +1,6 @@
 import { boardService } from '../../services/boardService'
 import { socketService } from '../../services/generalService/socketService'
+import { utilService } from '../../services/generalService/utilService'
 
 export function query() { // Action Creator
     return async dispatch => {
@@ -52,17 +53,21 @@ export function remove(boardId) {
 }
 
 
-export function update(board) {
+export function update(board,activity) {
     // Action Creator
     return async dispatch => {
         try {      
-            const updatedBoard = await boardService.update(board)
-            socketService.emit('update board',updatedBoard)
+            const copyBoard = utilService.deepClone(board)
+            copyBoard.activities.unshift(activity)
             const action = {
                 type: 'UPDATE_BOARD',
-                updatedBoard
+                updatedBoard: copyBoard
             }
             dispatch(action)
+
+            delete board.activities
+            socketService.emit('update board',copyBoard)
+            const updatedBoard = await boardService.update(board,activity)
         } catch (err){
             console.log('BoardActions: err in update board', err)
         }
