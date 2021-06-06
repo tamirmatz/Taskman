@@ -76,3 +76,56 @@
 /* Handle on hover */
 .board-list::-webkit-scrollbar-thumb:hover {
 }
+
+.board-screen{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: none;
+}
+
+body.activities-open .board-screen {
+    display: block;
+}
+
+.board-menu{
+    color: black;
+    position: fixed;
+    flex-direction: column;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 330px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 9px 10px 23px 0px rgba(0, 0, 0, 0.92);
+    transform: translateX(100%);
+    transition: transform .6s;
+    z-index: 1;
+    overflow-y: scroll;
+    border-radius: 3px;
+    small{
+        font-size: .75rem;
+        margin-left: 4px;
+    }
+
+    .full-activty{
+        margin-bottom: 15px;
+    }
+
+    h1{
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
+
+body.activities-open .board-menu {
+    transform: translateX(0);
+}

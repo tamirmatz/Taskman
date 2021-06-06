@@ -12,8 +12,8 @@ import { boardService } from '.././services/boardService.js'
 import { utilService } from '../services/generalService/utilService.js'
 import { socketService } from '../services/generalService/socketService.js'
 import { ModalWrapper } from '../cmps/shared/ModalWrapper.jsx';
-import {Dashboard} from './Dashboard';
-import {Calendar} from './calendar';
+import { Dashboard } from './Dashboard';
+import { Calendar } from './calendar';
 
 const EMPTY_GROUP = { title: '' }
 
@@ -21,6 +21,10 @@ class _Board extends Component {
     state = {
         group: EMPTY_GROUP,
         displayBoard: 'board'
+    }
+
+    onToggleActivities = () => {
+        document.body.classList.toggle('activities-open');
     }
 
     async componentDidMount() {
@@ -143,6 +147,7 @@ class _Board extends Component {
             >
                 <div
                     className="board flex column  animate__animated animate__fadeInRight ">
+                    <div className="board-screen" onClick={this.onToggleActivities}></div>
                     <BoardNavbar
                         favBoard={this.favBoard}
                         removeBoard={this.removeBoard}
@@ -151,6 +156,7 @@ class _Board extends Component {
                         updateBoard={this.onUpdate}
                         changeDisplay={this.changeDisplay}
                         displayBoard={displayBoard}
+                        onToggleActivities={this.onToggleActivities}
                     />
                     {displayBoard === 'board' && (
                         <div className="board-list flex w-100 "
@@ -188,9 +194,9 @@ class _Board extends Component {
                             </div>
                         </div>
                     )}
-                    {displayBoard === 'dashboard' && <Dashboard/>}
-                    {displayBoard === 'calendar' && <Calendar/>}
-                    
+                    {displayBoard === 'dashboard' && <Dashboard />}
+                    {displayBoard === 'calendar' && <Calendar />}
+
 
                     <Switch>
                         <Route
