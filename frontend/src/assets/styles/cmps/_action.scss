@@ -35,6 +35,9 @@
 }
 
 .label-wrap-modal{
+    position: absolute;
+    right: 0rem;
+    z-index: 3;
     width: 18rem;
     height: 20rem;
 }
@@ -45,6 +48,9 @@
 }
 
 .members-wrap-modal{
+    position: absolute;
+    right: 0rem;
+    z-index: 3;
     width: 18rem;
     height: 15rem;
 }
@@ -55,7 +61,10 @@
 }
 
 .duedate-wrap-modal{
-    width: 18rem;
+    position: absolute;
+    right: 0rem;
+    z-index: 3;
+    width: 15rem;
     height: 12rem;
 }
 
@@ -66,18 +75,18 @@
 
 .move-wrap-modal{
     position: absolute;
-    top: 17rem;
-    right: -13rem;
+    right: 0rem;
+    z-index: 3;
     width: 15rem;
-    height: 14rem;
+    height: 9rem;
 }
 
 .copy-wrap-modal{
     position: absolute;
-    top: 14rem;
-    right: -13rem;
+    right: 0rem;
+    z-index: 3;
     width: 15rem;
-    height: 14rem;
+    height: 10rem;
 }
 
 .copy-modal{
@@ -139,28 +148,41 @@ li.btn-delete:hover{
 }
 
 .info-board-modal{
-    width: 8.5rem;
-    padding: 1rem;
-    height: 10rem;
+    width: 120px;
+    padding: 4px;
+    height: auto;
     z-index: 5;
-    background: #333;
-    color: ivory;
+    background: rgb(255, 255, 255);
+    color: rgb(41, 41, 41);
+    margin-inline-start: 2px ;
+    border: 2px solid #555
+
 }
 
 .info-board-modal li{
     display: flex;
-    justify-content: flex-start;
+    justify-content: start;
     gap: 4px;
     align-items: center;
     cursor: pointer;
-    margin: 0 4px 4px 0;
     line-height: 22px;
-    color: ivory;
-    padding: 0 4px 4px 0;
+    color: rgb(59, 59, 59);
+    padding: 0 12px 6px 8px;
+    border-top: 1px solid rgb(167, 87, 192);
+    width: 120px;
 }
 
 
-.info-board-modal li:hover{
+.info-board-modal li:first-child{
     line-height: 22px;
-    border-bottom: 1px solid #fff;
+    border-top:none;
+}
+
+.info-board-modal li:hover{
+    opacity: 0.8;
+    color: rgb(73, 30, 114)
+}
+
+.close-details{
+    align-self: flex-end;
 }
