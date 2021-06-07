@@ -35,6 +35,9 @@
 }
 
 .label-wrap-modal{
+    position: absolute;
+    right: 0rem;
+    z-index: 3;
     width: 18rem;
     height: 20rem;
 }
@@ -45,6 +48,9 @@
 }
 
 .members-wrap-modal{
+    position: absolute;
+    right: 0rem;
+    z-index: 3;
     width: 18rem;
     height: 15rem;
 }
@@ -55,7 +61,10 @@
 }
 
 .duedate-wrap-modal{
-    width: 18rem;
+    position: absolute;
+    right: 0rem;
+    z-index: 3;
+    width: 15rem;
     height: 12rem;
 }
 
@@ -66,18 +75,18 @@
 
 .move-wrap-modal{
     position: absolute;
-    top: 17rem;
-    right: -13rem;
+    right: 0rem;
+    z-index: 3;
     width: 15rem;
-    height: 14rem;
+    height: 9rem;
 }
 
 .copy-wrap-modal{
     position: absolute;
-    top: 14rem;
-    right: -13rem;
+    right: 0rem;
+    z-index: 3;
     width: 15rem;
-    height: 14rem;
+    height: 10rem;
 }
 
 .copy-modal{
@@ -163,4 +172,7 @@ li.btn-delete:hover{
 .info-board-modal li:hover{
     line-height: 22px;
     border-bottom: 1px solid #fff;
+}
+.close-details{
+    align-self: flex-end;
 }
