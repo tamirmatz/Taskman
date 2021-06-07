@@ -139,6 +139,7 @@ class _Board extends Component {
         if (this.props.isLoading) return <div className="loader w-100 h-100 flex left content-center">Loading...</div>
 
         const displayBoard = this.state.displayBoard;
+        console.log(board.labels);
         return (
             <DragDropContext
                 onDragEnd={this.onDragEnd}
@@ -228,3 +229,5 @@ const mapDispatchToProps = {
     // loading
 }
 export const Board = connect(mapStateToProps, mapDispatchToProps)(_Board)
+
+

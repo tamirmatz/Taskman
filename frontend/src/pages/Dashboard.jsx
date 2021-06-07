@@ -25,7 +25,7 @@ class _Dashboard extends Component {
         const groups = board.groups;
         const membersBoard = board.members;
         const labelsBoard = board.labels;
-        
+
         this.setState({
             ...this.state,
             board: board,
@@ -39,19 +39,28 @@ class _Dashboard extends Component {
     componentDidUpdate(prevProps) {
 
     }
-    checkDataExist (){
-        const {board, groups, tasks, membersBoard, labelsBoard} = this.state;
+    checkDataExist() {
+        const { board, groups, tasks, membersBoard, labelsBoard } = this.state;
         return board && groups && tasks && membersBoard && labelsBoard;
     }
 
     render() {
-        const {board, groups, tasks, membersBoard, labelsBoard} = this.state;
-        if(!this.checkDataExist()) return <h1>Loading...</h1>
-        return <div className="dashboard w-100 h-100 flex column center space-between">
-            <div className="w-100 flex space-evenly pad-1">
-                <ChartMembersTasks membersBoard={membersBoard} tasks={tasks}/>
-                <ChartLabelsTasks labelsBoard={labelsBoard} tasks={tasks}/>
-                <ChartGroupsTasks groups={groups} tasks={tasks}/>
+        const { board, groups, tasks, membersBoard, labelsBoard } = this.state;
+        if (!this.checkDataExist()) return <h1>Loading...</h1>
+        return <div className="dashboard w-100 h-100 flex column center space-between pb-1">
+            <div className="w-100 flex space-evenly ">
+                <div className="dashboard flex column center content-center">
+                    <p className="font-1 fam-1 c-white">Tasks Per Staff</p>
+                    <ChartMembersTasks membersBoard={membersBoard} tasks={tasks} />
+                </div>
+                <div className="dashboard flex column center content-center">
+                    <p className="font-1 fam-1 c-white">Tasks Per Label</p>
+                    <ChartLabelsTasks labelsBoard={labelsBoard} tasks={tasks} />
+                </div>
+                <div className="dashboard flex column center content-center">
+                    <p className="font-1 fam-1 c-white">Tasks Per Groups</p>
+                    <ChartGroupsTasks groups={groups} tasks={tasks} />
+                </div>
             </div>
             <div className="w-100 flex space-evenly">
 
