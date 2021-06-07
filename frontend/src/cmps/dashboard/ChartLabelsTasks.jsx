@@ -62,11 +62,9 @@ class _ChartLabelsTasks extends Component {
 
                     backgroundColor: backgroundColorDashboard,
                     borderColor: [
-                        'rgba(54, 162, 80, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
+                        '#95a5a6',
                     ],
-                    borderWidth: 2,
+                    borderWidth: 0.5,
                 },
             ],
         };

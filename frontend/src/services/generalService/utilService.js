@@ -140,22 +140,25 @@ function hexToRGB(h, isPct) {
 
 function randColor(count) {
 
-  var colorArray = [[], '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
-    '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
-    '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
-    '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
-    '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC',
-    '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
-    '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680',
-    '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
-    '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
-    '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+  var colorArray = [
+    ['rgba(85, 239, 196,0.5)', 'rgba(0, 184, 148,1.0)'],
+    ['rgba(129, 236, 236,0.5)','rgba(0, 206, 201,1.0)'],
+    ['rgba(116, 185, 255,0.5)','rgba(9, 132, 227,1.0)'],
+    ['rgba(162, 155, 254,0.5)','rgba(108, 92, 231,1.0)'],
+    ['rgba(223, 230, 233,0.5)','rgba(178, 190, 195,1.0)'],
+    ['rgba(255, 234, 167,0.5)','rgba(253, 203, 110,1.0)'],
+    ['rgba(250, 177, 160,0.5)','rgba(225, 112, 85,1.0)'],
+    ['rgba(255, 118, 117, 0.5)','rgba(214, 48, 49,1.0)'],
+    ['rgba(253, 121, 168,0.5)','rgba(232, 67, 147,1.0)'],
+    ['rgba(99, 110, 114,0.5)','rgba(45, 52, 54,1.0)'],
+  ];
   const colors = [];
   let randNum;
   for (let index = 0; index < count; index++) {
-    randNum = this.getRandomInt(1, 59);
+    randNum = this.getRandomInt(1, colorArray.length);
     console.log(randNum);
     colors.push(colorArray[randNum])
+    colorArray.splice(randNum,1)
   }
 
   return colors
