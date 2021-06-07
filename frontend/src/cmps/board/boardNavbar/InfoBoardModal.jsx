@@ -17,13 +17,10 @@ class _InfoBoardModal extends Component {
         const { board } = this.props;
         return <div className="action-modal info-board-wrap-modal d-none p-abs flex">
             <ModalAction>
-                <div className="info-board-modal p-abs flex column pad-1 bg-white c-stand z-1 br-3 h-100">
-                    <div className="header-modal font-1 fam-1 fw-2 flex center space-between gap-5 w-100 mb-1">
-                        <h1 className="fam-1 font-m ">Option</h1>
-                        <span className="cur-pointer fam-1 font-m bold" onClick={() => { this.props.toggleModal() }}><AiOutlineClose /></span>
-                    </div>
+                <div className="info-board-modal p-abs flex column center bg-white c-stand z-1 br-3 h-50">
+                    <span className="cur-pointer fam-1 font-m bold flex w-100 content-end" onClick={() => { this.props.toggleModal() }}><AiOutlineClose /></span>
                     <div className="action-content font-m ">
-                        <ul className="flex column space-evenly h-100">
+                        <ul className="flex column h-100 w-100">
                             <li
                                 onClick={() => { this.props.changeDisplay('board') }}>
                                 <RiDashboardLine />Board
