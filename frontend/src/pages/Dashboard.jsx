@@ -53,8 +53,8 @@ class _Dashboard extends Component {
                     <p className="font-3 fam-1 c-white mb-1">Tasks Per Label</p>
                     <ChartLabelsTasks labelsBoard={labelsBoard} tasks={tasks} />
                 </li>
-                <li className="dashboard flex column center content-center">
-                    <p className="font-3 fam-1 c-white mb-1">Tasks Per Staff</p>
+                <li className="dashboard flex column center content-center w-70 h-100 member-chart">
+                    <p className="font-3 fam-1 c-white mb-1">Tasks Per Worker</p>
                     <ChartMembersTasks membersBoard={membersBoard} tasks={tasks} />
                 </li>
                 <li className="dashboard flex column center content-center">

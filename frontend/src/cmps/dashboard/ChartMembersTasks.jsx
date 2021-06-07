@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Bar     } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import {utilService} from '../../services/generalService/utilService'
 
@@ -56,18 +56,32 @@ class _ChartMembersTasks extends Component {
             labels: Object.keys(mapMembersTask),
             datasets: [
                 {
-                    label: 'Task per Member',
+                    label: '',
                     data: Object.values(mapMembersTask),
-
                     backgroundColor: backgroundColor,
                     borderColor: borderColor,
-                    borderWidth: 2,
+                    borderWidth: 0.5,
                 },
             ],
         };
+
+        const options = {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          };
+
+          
+
         return (
             <div className="category-chart">
-                <Pie data={data} />
+                <Bar data={data} />
             </div>
         )
     }

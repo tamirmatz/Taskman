@@ -64,7 +64,7 @@ class _ChartLabelsTasks extends Component {
                     borderColor: [
                         '#95a5a6',
                     ],
-                    borderWidth: 2,
+                    borderWidth: 0.5,
                 },
             ],
         };
