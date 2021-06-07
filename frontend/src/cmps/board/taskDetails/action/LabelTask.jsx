@@ -91,8 +91,8 @@ class _LabelTask extends Component {
         }
         const nameInput = `label-${label.id}`;
         return (
-            <div className="label flex center space-between w-100 h-20" data-label={label.id}>
-                <div className={`wrap-label ${className} w-85`} onClick={() => this.toggleLabel(label.id, nameInput)}
+            <div className="label flex center space-between w-100 pad-s h-20" data-label={label.id}>
+                <div className={`wrap-label ${className} w-90`} onClick={() => this.toggleLabel(label.id, nameInput)}
                 >
                     <input
                         type="text"

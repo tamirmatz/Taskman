@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Bar     } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import {utilService} from '../../services/generalService/utilService'
 
@@ -44,32 +44,44 @@ class _ChartMembersTasks extends Component {
         const {tasks, members} = this.state;
         if(!tasks || !members) return <h1>Loading...</h1>
         const mapMembersTask = this.mapMembersTask(members,tasks);
+        const backgroundColor = [];
+        const borderColor = [];
+
+        utilService.randColor(Object.keys(mapMembersTask).length).forEach( color => {
+            backgroundColor.push(color[0]);
+            borderColor.push(color[1]);
+        });
+
         const data = {
             labels: Object.keys(mapMembersTask),
             datasets: [
                 {
-                    label: 'Task per Member',
+                    label: '',
                     data: Object.values(mapMembersTask),
-
-                    backgroundColor: [
-                        'rgba(54, 162, 80, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(255, 38, 86, 0.2)',
-
-                    ],
-                    borderColor: [
-                        'rgba(54, 162, 80, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                    ],
-                    borderWidth: 2,
+                    backgroundColor: backgroundColor,
+                    borderColor: borderColor,
+                    borderWidth: 0.5,
                 },
             ],
         };
+
+        const options = {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          };
+
+          
+
         return (
             <div className="category-chart">
-                <Pie data={data} />
+                <Bar data={data} />
             </div>
         )
     }

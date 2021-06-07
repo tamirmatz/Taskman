@@ -14,8 +14,19 @@ export function query() { // Action Creator
 }
 
 export function loadBoard(boardId) { // Action Creator
+
     return async dispatch => {
-        const board = await boardService.getById(boardId)
+        const board = await boardService.getById(boardId);
+        board.labels = [
+            {id: "l101", title: "Tamir", color: "#fc5c65"},
+            {id: "l102", title: "Nadav", color: "#fd9644"},
+            {id: "l103", title: "Harel", color: "#fed330"},
+            {id: "l104", title: "Done", color: "#26de81"},
+            {id: "l105", title: "Help", color: "#45aaf2"},
+            {id: "l106", title: "QA", color: "#4b7bec"},
+            {id: "l107", title: "UI", color: "#a55eea"},
+            {id: "l108", title: "Dev", color: "#778ca3"},
+            ]
         const action = {
             type: 'SET_BOARD',
             board

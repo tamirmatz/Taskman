@@ -54,3 +54,28 @@
     padding-top: 3rem;
     width: 10rem
 }
+
+@media only screen and (max-width: 750px) {
+    .homepage-hero{
+        flex-direction: column;
+        // margin: auto;
+    }
+
+    .main-img{
+        margin: auto;
+        width: 80%;
+    }
+
+    .features{
+        flex-direction: column;
+        margin-top: 5vh;
+    }
+}
+
+@media only screen and (max-width: 555px) {
+    .main-img{
+        margin: auto;
+        width: 90%;
+    }
+
+}

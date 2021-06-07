@@ -1,17 +1,15 @@
 let localLoggedinUser = null
 if (sessionStorage.loggedinUser) localLoggedinUser = JSON.parse(sessionStorage.loggedinUser)
 const defUser = {
-  "_id": "u101",
-  "fullname": "Abi Abambi",
+  "_id": "60b8a7f7f2ba7731f277d924",
   "username": "abi@ababmi.com",
+  "fullname": "Tamir Matz",
+  "email" : "tamirmatz@gmail.com",
   "password": "aBambi123",
-  "imgUrl": "http://some-img.jpg",
-  "mentions": [{
-    "id": "m101",
-    "boardId": "m101",
-    "taskId": "t101"
-  }]
+  "imgUrl":"https://res.cloudinary.com/dxsv4c229/image/upload/v1622708295/download_rjc2b5.jpg",
 }
+
+
 const initialState = {
   loggedInUser: defUser,
   users: []
