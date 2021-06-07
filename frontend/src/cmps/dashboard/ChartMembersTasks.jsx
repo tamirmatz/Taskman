@@ -44,6 +44,14 @@ class _ChartMembersTasks extends Component {
         const {tasks, members} = this.state;
         if(!tasks || !members) return <h1>Loading...</h1>
         const mapMembersTask = this.mapMembersTask(members,tasks);
+        const backgroundColor = [];
+        const borderColor = [];
+
+        utilService.randColor(Object.keys(mapMembersTask).length).forEach( color => {
+            backgroundColor.push(color[0]);
+            borderColor.push(color[1]);
+        });
+
         const data = {
             labels: Object.keys(mapMembersTask),
             datasets: [
@@ -51,18 +59,8 @@ class _ChartMembersTasks extends Component {
                     label: 'Task per Member',
                     data: Object.values(mapMembersTask),
 
-                    backgroundColor: [
-                        'rgba(54, 162, 80, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(255, 38, 86, 0.2)',
-
-                    ],
-                    borderColor: [
-                        'rgba(54, 162, 80, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                    ],
+                    backgroundColor: backgroundColor,
+                    borderColor: borderColor,
                     borderWidth: 2,
                 },
             ],
