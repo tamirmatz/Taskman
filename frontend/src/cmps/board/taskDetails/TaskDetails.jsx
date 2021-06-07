@@ -40,6 +40,18 @@ class _TaskDetails extends Component {
         document.body.classList.remove('noscroll')
     }
 
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.board !== this.props.board) {
+    //         const { boardId, taskId, groupId } = this.props.match.params;
+    //         const board = { ...this.props.board };
+    //         const group = boardService.getGroupById(board, groupId);
+    //         const task = boardService.getTaskById(group, taskId);
+    //         this.setState({ group, task }, this.props.query)
+    //     }
+   
+    // }
+
+
     componentDidUpdate() {
         // modalPos.top = `calc(55% + ${(this.elModalRef.current.clientHeight
         //     - this.props.overlayHeight)/2}px)`
@@ -97,10 +109,10 @@ class _TaskDetails extends Component {
     updateTask = (txt) => {
         console.log('here', txt)
         if (!this.state.task.title) return;
-        let copyBoard = { ...this.props.board };
+        let copyBoard = utilService.deepClone(this.props.board) ;
         const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
         const taskIdx = boardService.getTaskIdxById(this.state.group, this.state.task.id)
-        copyBoard.groups[groupIdx].tasks[taskIdx] = this.state.task
+        copyBoard.groups[groupIdx].tasks[taskIdx] = utilService.deepClone(this.state.task)
         this.props.update(copyBoard, this.createActivity(txt))
     }
 
@@ -276,7 +288,7 @@ class _TaskDetails extends Component {
         return (
                 <section
                     ref={this.elModalRef}
-                    className={`task-details modal w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay}`}
+                    className={`task-details modal w-50 flex bg-modal c-stand fam-1 pad-1 ${this.state.overlay} `}
                     onClick={(ev) => {
                         ev.stopPropagation()
                         this.closeOverlay(ev)
@@ -415,7 +427,7 @@ class _TaskDetails extends Component {
                                 {
                                     board.activities.map(activity => {
                                         if(!activity) return
-                                        if (task.id === activity.task.id && counter < 10) {
+                                        if (task.id === activity.task.id && counter < 3) {
                                             counter++
                                             return <li key={activity.id} className="full-comment flex column">
                                                 <div className="flex space-between">

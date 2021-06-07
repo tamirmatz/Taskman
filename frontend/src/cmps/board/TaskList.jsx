@@ -115,7 +115,7 @@ export class TaskList extends Component {
                         </form>
                         <div className="wrap-task-list">
 
-                            <div className="task-list flex column center content-center">
+                            <div className="task-list flex column center content-end">
                                 <Droppable
                                     droppableId={group.id}
                                     type='task'>
