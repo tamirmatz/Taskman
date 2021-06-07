@@ -24,11 +24,11 @@ export class CheckList extends Component {
         const checklistCopy = { ...this.props.checklist }
 
         return {
-            todos: (idx) => {
+            updateTodo: (idx) => {
                 checklistCopy.todos[idx][computed.name] = computed.value
                 this.props.updateChecklist(checklistCopy)
             },
-            todo: () => {
+            addTodo: () => {
                 this.setState(({ todo }) => ({ todo: { ...todo, [computed.name]: computed.value } }))
             },
             checklistTitle: () => {
@@ -37,20 +37,6 @@ export class CheckList extends Component {
                 this.props.updateChecklist(checklistCopy)
             }
         }
-    }
-
-    handleChangeTodos = ({ target }, idx) => {
-        const { value, name, type, checked } = target
-        const computed = {
-            value,
-            name
-        }
-
-        type === 'checkbox' && (computed.value = checked)
-        const checklistCopy = { ...this.props.checklist }
-
-        checklistCopy.todos[idx][computed.name] = computed.value
-        this.props.updateChecklist(checklistCopy)
     }
 
     onRemoveTodo = (idx) => {
@@ -102,7 +88,7 @@ export class CheckList extends Component {
                                         name="isDone"
                                         checked={todo.isDone}
                                         onChange={(ev) => {
-                                            this.handleChange(ev).todos(idx)
+                                            this.handleChange(ev).updateTodo(idx)
                                         }
                                         } />
                                     <input
@@ -111,7 +97,7 @@ export class CheckList extends Component {
                                         name="txt"
                                         autoComplete="off"
                                         value={todo.txt}
-                                        onChange={(ev) => this.handleChange(ev).todos(idx)}
+                                        onChange={(ev) => this.handleChange(ev).updateTodo(idx)}
                                     />
                                 </div>
                                 <span className=""
@@ -131,7 +117,7 @@ export class CheckList extends Component {
                                 placeholder="+ Add Todo"
                                 name="txt"
                                 value={this.state.todo.txt}
-                                onChange={ev => this.handleChange(ev).todo()}
+                                onChange={ev => this.handleChange(ev).addTodo()}
                             />
                         </form>
                     </ul>
