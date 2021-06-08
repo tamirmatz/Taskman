@@ -31,16 +31,16 @@ export class Home extends Component {
   render() {
     return (
       <div className="home-page flex column fam-1 ">
-        <div className="flex row-reverse mt-5 space-evenly ">
-          <div className="align-center flex column ">
-              <div className="c-stand  marg-2 ps-2 font-xl"><span className="logo-span main-color">T</span>askman</div>
+        <div className="homepage-hero flex mt-5 space-evenly ">
+          <div className="align-center center justify-center flex column ">
+              <div className="c-stand  marg-1 ps-2 font-xl"><span className="logo-span main-color">T</span>askman</div>
               <h1 className="fam-1 fs30 bold ">Task management</h1>
               <h2 className="fam-1 fs30 bold">The <span className="main-color">easiest</span> way. </h2>
               <Link to="/board/60b8a57c6845c04afc9a425a"><button class="btn-hover color-3">Try it now!</button></Link>
           </div>
           <img className="main-img w-50" src={MainImg}/>
         </div>
-        <div className="features lh-20 flex row space-between">
+        <div className="features lh-20 flex space-between">
           <div className="feature flex column">
             <div className="feature-txt flex column">
             <h3 className="fam-1 bold">All the tools your team needs</h3>
