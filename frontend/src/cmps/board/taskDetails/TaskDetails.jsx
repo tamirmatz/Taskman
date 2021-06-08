@@ -390,8 +390,9 @@ class _TaskDetails extends Component {
                                 <form onSubmit={(ev) => {
                                     ev.preventDefault()
                                     this.onSendComment(ev.target[0].value)
+                                    ev.target[0].value = ''
                                 }}>
-                                    <input autoComplete="off" type="text" className="comment-input" placeholder="Write a comment..." name="txt" />
+                                    <input autoComplete="off" type="text" className="comment-input" placeholder="Write a comment..." name="txt-comments" />
                                     <button className="btn-send-comment">Send</button>
                                 </form>
                             </div>
