@@ -91,7 +91,7 @@ export class TaskList extends Component {
                             <div style={{ backgroundColor: group.color ? group.color : 'transparent' }} className="group-title w-100 flex center space-between pb-2">
                                 <input
                                     autoComplete="off"
-                                    className="app-input font-w2 font-m lh-20 "
+                                    className="app-input lh-20 "
                                     onBlur={this.updateGroup}
                                     type="text"
                                     value={this.state.group.title}

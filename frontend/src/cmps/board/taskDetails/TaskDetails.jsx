@@ -14,6 +14,7 @@ import { UserPreview } from '../UserPreview.jsx';
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { socketService } from '../../../services/generalService/socketService.js'
 
+
 // import {TaskTitle} from '../taskDetails/TaskTitle';
 
 
@@ -24,7 +25,8 @@ class _TaskDetails extends Component {
         onFocus: false,
         overlay: false,
         isComments: true,
-        commentInputVal: ''
+        commentInputVal: '',
+        saveComment: false
     }
     elModalRef = React.createRef()
     _isMounted = React.createRef(false)
@@ -285,6 +287,17 @@ class _TaskDetails extends Component {
     }
 
     handelCommentChange = ({ target }) => {
+        console.log(target.value.length);
+        if (target.value.length !== undefined && target.value.length > 0) {
+            this.setState({
+                ...this.state, saveComment: true,
+            })
+        }
+        else {
+            this.setState({
+                ...this.state, saveComment: false,
+            })
+        }
         const value = target.value
         this.setState({ commentInputVal: value })
     }
@@ -319,7 +332,7 @@ class _TaskDetails extends Component {
             >
                 <div className="info-task flex column w-79 h-100 content-start">
                     {/* Title */}
-                    <form className="task-title flex column content-start pb-2 w-100" onSubmit={(ev) => {
+                    <form className="task-title flex column content-start pb-2 w-100 pad-0" onSubmit={(ev) => {
                         ev.preventDefault()
                         this.updateTask('updated task name')
                     }}>
@@ -339,12 +352,12 @@ class _TaskDetails extends Component {
                                 />
                             </label>
                         </div>
-                        <h3 className="task-list-title fam-1 font-2 left-self h-20 center">in list{' '}
+                        <h3 className="task-list-title fam-1 font-2 left-self h-20 center pad-0">in list{' '}
                             <span className="t-decor">{this.state.group.title}</span>
                         </h3>
                     </form>
 
-                    <section className="info-task flex wrap gap-1 center mb-1">
+                    <section className="info-task flex wrap gap-1 center mb-1 pad-0">
                         <div className="task-members">
                             {task.members.length > 0 && <h3 className="font-s fw-1 fam-1 left-self c-lead">MEMBERS</h3>}
                             <ul className="flex center gap-xs">
@@ -379,14 +392,14 @@ class _TaskDetails extends Component {
                         {task.dueDate && <div className="task-duedate flex center column">
                             <h3 className="font-s fw-1 fam-1 left-self c-lead">DUE DATE</h3>
                             <div className="flex">
-                                <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} checked={task.isDone} type="checkbox" />
+                                <input onChange={(ev) => { this.isDueDateDone(ev.target.checked) }} checked={task.isDone} type="checkbox" className="mar-l-0"/>
                                 <p>{Intl.DateTimeFormat('IL-il').format(task.dueDate)}</p>
                                 {task.isDone && <div className="complete-duedate">complete</div>}
                             </div>
                         </div>}
                     </section>
 
-                    <section className="desc-section">
+                    <section className="desc-section pad-0">
                         <div className="desc-header flex row mb-1">
                             <GrTextAlignFull /><label>Description</label>
                         </div>
@@ -416,35 +429,48 @@ class _TaskDetails extends Component {
                         })}
                     </ul>}
 
-                    <section className="comment-section">
+                    <section className="comment-section pad-0">
                         <div className="desc-header center space-between flex row mb-1">
-                            <div className=" desc-header flex align-center mar-0 center-self row"> <FaRegCommentDots /><label>{isComments ? 'Comments' : 'Activities'}</label> </div>
-                            <span className="btn-del-chacklist font-m cur-pointer" onClick={this.onToggleComments}>{!isComments ? 'Comments' : 'Activities'}</span>
+                            <div className=" desc-header flex align-center mar-0 center-self row "> <FaRegCommentDots /><label>{isComments ? 'Comments' : 'Activities'}</label> </div>
+                            <span className="btn-del-chacklist font-m cur-pointer pad-0 mar-0" onClick={this.onToggleComments}>{!isComments ? 'Comments' : 'Activities'}</span>
                         </div>
                         <div className="new-comment flex center content-gap">
                             <UserPreview user={loggedInUser} />
                             <form onSubmit={(ev) => {
                                 ev.preventDefault()
                                 this.onSendComment(ev.target[0].value)
+                                ev.target[0].value = ''
                             }}>
-                                <input autoComplete="off" onChange={this.handelCommentChange} type="text" value={this.state.commentInputVal} className="comment-input" placeholder="Write a comment..." name="txt" />
-                                <button className="btn-send-comment">Send</button>
+                                <input autoComplete="off"
+                                    onChange={this.handelCommentChange}
+                                    type="text"
+                                    value={this.state.commentInputVal}
+                                    className="comment-input"
+                                    placeholder="Write a comment..."
+                                    name="txt"
+
+                                />
+                                {this.state.saveComment && <button className="btn-send-comment">Send</button>}
+
                             </form>
                         </div>
 
-                        {task.comments && <ul className="comments clean-list">
+                        {task.comments && <ul className="comments clean-list flex column content-center wrap  ">
                             {isComments && task.comments.map((comment, idx) => {
                                 return <li key={comment.id} className="full-comment flex column">
-                                    <div className="flex space-between center">
+                                    <div className="flex space-between baseline">
                                         <div className="content-gap flex center">
                                             <UserPreview user={comment.byMember} />
-                                            <div className="commenter-name">{comment.byMember.fullname}</div>
-                                            <small>{utilService.timeAgo(comment.createdAt)}</small>
+                                            <div className="flex baseline">
+                                                <div className="commenter-name">{comment.byMember.fullname}</div>
+                                                <small>{utilService.timeAgo(comment.createdAt)}</small>
+                                            </div>
                                         </div>
-                                        <div className='btn-del-comment' onClick={() => { this.onRemoveComment(idx) }}><RiDeleteBin6Line /></div>
                                     </div>
-                                    <div className="comment-gap">
-                                        <p className="comment-txt ">{comment.txt}</p>
+                                    <div className="comment-gap flex space-between center">
+                                        <p className="comment-txt flex wrap ">{comment.txt}</p>
+                                        <div className='btn-del-comment' onClick={() => { this.onRemoveComment(idx) }}><RiDeleteBin6Line /></div>
+
                                     </div>
                                 </li>
                             })}

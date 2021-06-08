@@ -77,14 +77,14 @@ class _BoardList extends Component {
         return (
             <section className=" w-100 flex column center content-center pad-3">
                 <h1 className="fam-1 fs30 mb-2">Choose Your Board...</h1>
-                <input type="text" onChange={this.handleChangeFilter} className="board-filter" placeholder="Search board" />
-                <div className="boards-gallery flex h-40 w-100 gap-2 wrap">
+                <input type="text" onChange={this.handleChangeFilter} className="board-filter" placeholder="Search board..." />
+                <div className="boards-gallery flex h-40 w-100 gap-3 wrap">
                     <section className={"miniBoard flex center content-center"} style={{ backgroundImage: "url(" + this.state.newBoard.backgrounds[this.state.newBoard.backgroundId] + ")" }}>
                         <form className="add-board" onSubmit={(ev) => {
                             ev.preventDefault()
                             this.onCreateBoard()
                         }}>
-                            <input type="text" name="title" onChange={this.handleChange} placeholder="Board title..." />
+                            <input type="text" name="title" autoComplete="off" onChange={this.handleChange} placeholder="Board title..." />
                             <div className="change-img-container flex space-between control-img">
                                 <span className="change-img" onClick={() => { this.changeImg(-1) }}>{'<'}</span>
                                 <button>Create board</button>

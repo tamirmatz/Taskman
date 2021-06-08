@@ -12,7 +12,9 @@ import { DueDateModal } from './actionModal/DueDateModal'
 import { MoveModal } from './actionModal/MoveModal'
 import { CopyModal } from './actionModal/CopyModal'
 import { withRouter } from "react-router";
-import { Upload } from '../../../Upload'
+import { Upload } from '../../../Upload';
+import { GrClose } from 'react-icons/gr';
+
 
 
 class _ActionList extends Component {
@@ -41,7 +43,7 @@ class _ActionList extends Component {
             <div className="menu-task flex column w-50 content-start ps-1">
                 <div className="details-action flex column w-100">
                     <div className="close-details fam-2 font-1 bold cur-pointer mb-2" onClick={() => this.closeDetails()}>
-                        X
+                        <GrClose/>
                     </div>
                     <label htmlFor="actions" className="font-m pb-3 ps-2 mb-1">ACTIONS</label>
                 </div>

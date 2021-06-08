@@ -5,7 +5,7 @@ import { RiDashboardLine } from 'react-icons/ri'
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 import { Component } from 'react';
 import { BoardMembersModal } from './BoardMembersModal'
-import { InfoBoardModal } from './InfoBoardModal'
+// import { InfoBoardModal } from './InfoBoardModal'
 import { BsCalendar } from 'react-icons/bs'
 import { BiBarChartAlt2 } from 'react-icons/bi'
 import { connect } from 'react-redux'
@@ -38,7 +38,7 @@ class _BoardNavbar extends Component {
             'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671430/backrounds/6_mi6wun.jpg',
             'https://res.cloudinary.com/dxsv4c229/image/upload/v1622671421/backrounds/7_oivv0t.jpg',
         ],
-        isActivities:true
+        isActivities: true
     }
 
     componentDidMount() {
@@ -72,8 +72,8 @@ class _BoardNavbar extends Component {
         else return ''
     }
 
-    toggleActivities=()=>{
-        this.setState({isActivities:!this.state.isActivities})
+    toggleActivities = () => {
+        this.setState({ isActivities: !this.state.isActivities })
     }
 
     toggleModal = (className) => {
@@ -110,6 +110,7 @@ class _BoardNavbar extends Component {
 
     render() {
         const { board, onUpdate } = this.props;
+        console.log(this.props);
         const displayBoard = this.props.displayBoard
         if (!board) return <div>Loading...</div>
         return (
@@ -118,37 +119,25 @@ class _BoardNavbar extends Component {
                     <ul className="display-option">
                         {displayBoard === 'board' &&
                             <div className="board-option">
-                                <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner" onClick={() => { this.toggleModal('info-board-wrap-modal') }}>
-                                    <span className="ps-xxs flex center"><RiDashboardLine /></span>
-                                Board
-                                <span className="font-2 flex right">
-                                        <MdKeyboardArrowDown />
-                                    </span>
+                                <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner"
+                                    onClick={() => { this.props.changeDisplay('dashboard')}}>
+                                    <span className="ps-xxs flex center">< BiBarChartAlt2/></span>
+                                Dashboard
                                 </li>
-                                <InfoBoardModal
-                                    toggleModal={() => { this.toggleModal() }}
-                                    changeDisplay={this.props.changeDisplay}
-                                />
                             </div>
                         }
 
                         {displayBoard === 'dashboard' &&
                             <div className="board-option">
-                                <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner" onClick={() => { this.toggleModal('info-board-wrap-modal') }}>
-                                    <span className="ps-xxs flex center"><BiBarChartAlt2 /></span>
-                                Dashboard
-                                <span className="font-2 flex right">
-                                        <MdKeyboardArrowDown />
-                                    </span>
-                                    <InfoBoardModal
-                                        toggleModal={() => { this.toggleModal() }}
-                                        changeDisplay={this.props.changeDisplay}
-                                    />
+                                <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner"
+                                    onClick={() => { this.props.changeDisplay('board') }}>
+                                    <span className="ps-xxs flex center"><RiDashboardLine /></span>
+                                    Board
                                 </li>
                             </div>
                         }
 
-                        {displayBoard === 'calendar' &&
+                        {/* {displayBoard === 'calendar' &&
                             <div className="board-option">
                                 <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner" onClick={() => { this.toggleModal('info-board-wrap-modal') }}>
                                     <span className="ps-xxs flex center"><BsCalendar /></span>
@@ -162,7 +151,7 @@ class _BoardNavbar extends Component {
                                     changeDisplay={this.props.changeDisplay}
                                 />
                             </div>
-                        }
+                        } */}
 
                     </ul>
 
@@ -212,12 +201,12 @@ class _BoardNavbar extends Component {
                     <div className="board-menu flex column">
                         <div className="flex mb-06 space-between">
                             <h1 className="center-self">Menu</h1>
-                            <button className="menu-btn" onClick={this.toggleActivities}>{this.state.isActivities ? 'Backgrounds':'Activities'}</button>
+                            <button className="menu-btn" onClick={this.toggleActivities}>{this.state.isActivities ? 'Backgrounds' : 'Activities'}</button>
                         </div>
 
                         <ul>
                             {
-                               this.state.isActivities&& board.activities && board.activities.map(activity => {
+                                this.state.isActivities && board.activities && board.activities.map(activity => {
                                     if (!activity) return
                                     return <li key={activity.id} className="full-activty flex column">
                                         <div className="flex space-between">
@@ -238,7 +227,7 @@ class _BoardNavbar extends Component {
                         </ul>
                         <ul className="flex column align-center gap-1">
                             {
-                              !this.state.isActivities&&  this.state.backgrounds.map((background) => {
+                                !this.state.isActivities && this.state.backgrounds.map((background) => {
                                     return <li onClick={() => { this.onChangeBg(background) }} className={"miniBoard cur-pointer flex center content-center"} style={{ backgroundImage: "url(" + background + ")" }}>
 
                                     </li>

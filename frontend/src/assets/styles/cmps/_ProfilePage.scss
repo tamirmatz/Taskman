@@ -26,8 +26,19 @@
     .user-email{
         font-size: 1rem;
     }
-
+    .btn-logout{
+        width: 60px;
+        height: 30px;
+        background-color: rgb(255, 103, 103);
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    .btn-logout:hover{
+        opacity: 0.9;
+    }
 }
+
 @media only screen and (max-width: 550px) {
     .user-details-container{
 
@@ -37,7 +48,7 @@
         }
         img{
               border-radius: 50%;
-             max-width: 400px;
+             width: 400px;
              height: auto;
         }
     }

@@ -12,7 +12,6 @@
 
 .task-list-title{
         font-size: 1.125rem;
-        padding: 2px;
         line-height: 24px;
         letter-spacing: .2px;
         font-weight: 500;
@@ -193,12 +192,15 @@ input.label-input.true.border.cur-pointer {
     }
 
     p.comment-txt{
-        padding: 2px 8px;
+        width: 471px;
+        padding: 6px 10px 6px 4px;
         background-color: #fff;
         border-radius: 3px;
         font-size: 14px;
         letter-spacing: .2px;
         word-wrap: break-word;
+        border: 1px solid #c7c7c7;
+        
     }
     .btn-del-comment{
         cursor: pointer;
@@ -210,7 +212,7 @@ input.label-input.true.border.cur-pointer {
         border-radius: 4px;
         padding: 4px 6px;
         font-size: 14px;
-        height: 25px;
+        height: 30px;
         cursor: pointer;
         border: none;
         color: #fff;
@@ -222,14 +224,16 @@ input.label-input.true.border.cur-pointer {
     .full-comment{
         margin-bottom: 20px;
         align-items: flex-start;
+        
     }
     .comment-input{
-        height: 25px;
+        margin-top: 8px;
+        height: 30px;
         width: 471px;
         margin-left: 5px;
         margin-right: 3px;
         border-radius: 5px;
-        border: none;
+        border: 1px solid #c7c7c7;
         padding: 10px;
     }
 
@@ -237,6 +241,11 @@ input.label-input.true.border.cur-pointer {
         height: 3vh;
         width: 600px;
         margin-bottom: 20px;
+    }
+
+    .commenter-name{
+        font-size: 16px;
+        font-weight: 500;
     }
 }
 

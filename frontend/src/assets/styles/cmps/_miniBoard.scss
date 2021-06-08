@@ -1,6 +1,6 @@
 .miniBoard{
-    width: 14rem;
-    height: 8rem;
+    width: 20rem;
+    height: 10rem;
     background: rgb(0, 121, 191) no-repeat center/cover ;
     transition: 0.3s;
     border-radius: 5px;
@@ -24,16 +24,24 @@
     flex-direction: column;
     gap: 10px;
     input{
-       flex-basis: 80%;
-       padding:5px;
+    //    flex-basis: 80%;
+    
+       padding:8px;
        border-radius: 3px;
        border-width: 1px;
-       background-color: rgba(245, 245, 245, 0.863);
+       height: 40px;
+       background-color: rgba(245, 245, 245, 0.432);
+       color: #172b4d;
+       font-weight: 600;
+       font-size: 16px;
+    }
+    input::placeholder{
+        color: #172b4d;
     }
 }
 .change-img-container{
     button {
-        width: 6.5rem;
+        width: 12rem;
         font-weight: 600;
         color: #fff;
         cursor: pointer;
@@ -60,6 +68,8 @@
             // background-color: rgba(255, 255, 255, 0.637);
             font-weight: bold;
             cursor: pointer;
+            margin: 0 5px;
+            font-size: 20px;
             &:hover{
                 background-color: rgba(255, 255, 255, 0.747);
             }
@@ -67,14 +77,14 @@
 }
 .control-img{
     position: relative;
-    top: 4rem;
+    top: 4.6rem;
 }
 .favBoard{
     box-shadow: 0px 0px 5px 5px #075eff85;
 }
 
 .board-filter{
-    width: 30%;
+    width: 300px;
     margin-bottom: 40px;
     height: 40px;
     font-size: 20px;
