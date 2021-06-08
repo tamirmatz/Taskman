@@ -20,13 +20,18 @@ export const boardService = {
     checklistPrecent,
     updateTaskAtBoard,
     getTasks,
-    
+
 }
 
 
-function query() {
+async function query(filterBy = '') {
     // return storageService.query(STORAGE_KEY)
-    return httpService.get('board')
+    try {
+        return httpService.get('board', filterBy)
+    } catch (err) {
+        console.log('error in query');
+        throw err
+    }
 }
 
 function getById(boardId) {
@@ -122,7 +127,7 @@ function updateTaskAtBoard(board, group, updateTask) {
 function getTasks(groups) {
     console.log(groups);
     const tasks = [];
-    groups.forEach( group => {
+    groups.forEach(group => {
         group.tasks.forEach(task => {
             tasks.push(task);
         });

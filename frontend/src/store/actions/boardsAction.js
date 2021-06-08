@@ -2,9 +2,9 @@ import { boardService } from '../../services/boardService'
 import { socketService } from '../../services/generalService/socketService'
 import { utilService } from '../../services/generalService/utilService'
 
-export function query() { // Action Creator
+export function query(filterByTitle = '') { // Action Creator
     return async dispatch => {
-        const boards = await boardService.query()
+        const boards = await boardService.query(filterByTitle)
         const action = {
             type: 'SET_BOARDS',
             boards
