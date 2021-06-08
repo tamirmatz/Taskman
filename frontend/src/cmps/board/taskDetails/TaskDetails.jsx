@@ -34,6 +34,7 @@ class _TaskDetails extends Component {
     _isMounted = React.createRef(false)
 
     componentDidMount() {
+        console.log('asdsadas');
         const { boardId, taskId, groupId } = this.props.match.params;
         const board = { ...this.props.board };
         const group = boardService.getGroupById(board, groupId);
@@ -83,9 +84,14 @@ class _TaskDetails extends Component {
         };
     }
 
-    onToggleComments = () => {
-        debugger
-        this.setState({ isComments: !this.state.isComments })
+
+    toggleComments = () => {
+        const isComments = !this.state.isComments;
+        console.log(isComments);
+        console.log(this.state);
+        this.setState({ onFocus: !this.state.onFocus },()=>{console.log(this.state.isComments)})
+        console.log(this.state);
+        this.setState({ isComments },()=>{console.log(this.state.isComments)})
     }
 
     handleChange = ({ target }) => {
@@ -300,6 +306,7 @@ class _TaskDetails extends Component {
         var counter = 0;
         const { task, isComments } = this.state;
         const { board, loggedInUser } = this.props
+        console.log(isComments);
         if (!task) return <h1>Loading...</h1>
         return (
             <section
@@ -419,7 +426,9 @@ class _TaskDetails extends Component {
                         <section className="comment-section pad-0">
                             <div className="desc-header center space-between flex row mb-1">
                                 <div className=" desc-header flex align-center mar-0 center-self row "> <FaRegCommentDots /><label>{isComments ? 'Comments' : 'Activities'}</label> </div>
-                                <span className="btn-del-chacklist font-m cur-pointer pad-0 mar-0" onClick={this.onToggleComments}>{!isComments ? 'Comments' : 'Activities'}</span>
+                                <span className="btn-del-chacklist font-m cur-pointer pad-0 mar-0"
+                                    onClick={() => { this.toggleComments() }}
+                                >{!isComments ? 'Comments' : 'Activities'}</span>
                             </div>
                             <div className="new-comment flex center content-gap">
                                 <UserPreview user={loggedInUser} />
