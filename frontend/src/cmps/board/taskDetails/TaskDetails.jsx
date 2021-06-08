@@ -26,7 +26,7 @@ class _TaskDetails extends Component {
         task: null,
         onFocus: false,
         overlay: false,
-        isComments: true,
+        isComments: false,
         commentInputVal: '',
         saveComment: false
     }
@@ -34,6 +34,7 @@ class _TaskDetails extends Component {
     _isMounted = React.createRef(false)
 
     componentDidMount() {
+        
         console.log('asdsadas');
         const { boardId, taskId, groupId } = this.props.match.params;
         const board = { ...this.props.board };
@@ -58,13 +59,21 @@ class _TaskDetails extends Component {
         socketService.terminate()
     }
 
-
-
-
-    componentDidUpdate() {
-
+    componentDidUpdate(prevProps, prevState) {
+        
+        if (prevState !== this.state) {
+            
+            console.log('aa');
+        }
+        console.log(this.state);
+        
+        // console.log('prev state', prevState);
+        // console.log('state', this.state);
+        // 
     }
-
+    toggleComments = () => {
+        // this.setState({...this.state ,isComments : !this.state.isComments})
+    }
 
     addClassName() {
         document.querySelector('.board').classList.add('max-screen');
@@ -85,14 +94,6 @@ class _TaskDetails extends Component {
     }
 
 
-    toggleComments = () => {
-        const isComments = !this.state.isComments;
-        console.log(isComments);
-        console.log(this.state);
-        this.setState({ onFocus: !this.state.onFocus },()=>{console.log(this.state.isComments)})
-        console.log(this.state);
-        this.setState({ isComments },()=>{console.log(this.state.isComments)})
-    }
 
     handleChange = ({ target }) => {
         const field = target.name
@@ -234,7 +235,7 @@ class _TaskDetails extends Component {
 
 
     closeOverlay = (ev) => {
-        // debugger
+        // 
         if (!ev.target.classList.contains('btn-action') && !ev.target.classList.contains('btn-act')) {
             if (ev.target.offsetParent !== undefined && ev.target.offsetParent.classList[0] !== undefined && (ev.target.offsetParent.classList[0] === 'task-details' || ev.target.offsetParent.classList[0] === 'base-overlay')) {
                 const modals = document.querySelectorAll('.action-modal');
@@ -246,8 +247,6 @@ class _TaskDetails extends Component {
 
             }
         }
-        // this.setState({ ...this.state, overlay: '' });
-        // if(ev.target.classList.contain('btn-action'))
     }
 
     onAddLabelTask = (labelId) => {
@@ -297,7 +296,6 @@ class _TaskDetails extends Component {
             this.setState({ group: copyBoard.groups[moveTo] })
             this.props.update(copyBoard)
         }
-        // this.props.history.push(`/board/${copyBoard._id}`)
     }
 
 
@@ -347,8 +345,8 @@ class _TaskDetails extends Component {
                         <GrClose />
                     </div>
                 </div>
-                <div className="details-main flex">
 
+                <div className="details-main flex">
                     <div className="info-task flex column w-79 h-100 content-start">
 
                         <section className="info-task flex wrap gap-1 center mb-1 pad-0">
@@ -427,7 +425,9 @@ class _TaskDetails extends Component {
                             <div className="desc-header center space-between flex row mb-1">
                                 <div className=" desc-header flex align-center mar-0 center-self row "> <FaRegCommentDots /><label>{isComments ? 'Comments' : 'Activities'}</label> </div>
                                 <span className="btn-del-chacklist font-m cur-pointer pad-0 mar-0"
-                                    onClick={() => { this.toggleComments() }}
+                                    onClick={
+                                        this.toggleComments
+                                    }
                                 >{!isComments ? 'Comments' : 'Activities'}</span>
                             </div>
                             <div className="new-comment flex center content-gap">
