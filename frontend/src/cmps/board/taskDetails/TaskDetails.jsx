@@ -84,6 +84,7 @@ class _TaskDetails extends Component {
     }
 
     onToggleComments = () => {
+        debugger
         this.setState({ isComments: !this.state.isComments })
     }
 
@@ -426,7 +427,7 @@ class _TaskDetails extends Component {
                                     ev.preventDefault()
                                     this.onSendComment(ev.target[0].value)
                                     ev.target[0].value = ''
-                                }} className="form-comment flex baseline wrap">
+                                }} className="form-comment flex baseline ">
                                     <input autoComplete="off"
                                         onChange={this.handelCommentChange}
                                         type="text"
@@ -437,7 +438,6 @@ class _TaskDetails extends Component {
 
                                     />
                                     {this.state.saveComment && <button className="btn-send-comment">Send</button>}
-
                                 </form>
                             </div>
 
