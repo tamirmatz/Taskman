@@ -6,7 +6,6 @@ import { remove, add, loadBoard, update, setBoard } from '../../../store/actions
 import onClickOutside from "react-onclickoutside";
 import { BsCardChecklist } from 'react-icons/bs'
 import { GrClose,GrTextAlignFull } from 'react-icons/gr'
-
 import { FaRegCommentDots } from 'react-icons/fa'
 import { utilService } from '../../../services/generalService/utilService.js';
 import { CheckList } from './CheckList';
@@ -14,7 +13,7 @@ import { ActionList } from './action/ActionList';
 import { UserPreview } from '../UserPreview.jsx';
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { socketService } from '../../../services/generalService/socketService.js'
-// import {TaskTitle} from '../taskDetails/TaskTitle';
+
 class _TaskDetails extends Component {
     state = {
         group: null,
@@ -34,7 +33,6 @@ class _TaskDetails extends Component {
         const task = boardService.getTaskById(group, taskId);
         this.addClassName();
         this.props.loadBoard(boardId);
-        // this.props.loadUsers();
         document.body.classList.add('noscroll')
         this.setState({ ...this.state, group, task })
         socketService.setup()
@@ -49,31 +47,7 @@ class _TaskDetails extends Component {
         socketService.off('updated board', this.props.setBoard)
         socketService.terminate()
     }
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.board !== this.props.board) {
-    //         const { boardId, taskId, groupId } = this.props.match.params;
-    //         const board = { ...this.props.board };
-    //         const group = boardService.getGroupById(board, groupId);
-    //         const task = boardService.getTaskById(group, taskId);
-    //         this.setState({ group, task }, this.props.query)
-    //     }
-    // }
-    componentDidUpdate() {
-        // modalPos.top = `calc(55% + ${(this.elModalRef.current.clientHeight
-        //     - this.props.overlayHeight)/2}px)`
-        // console.log('modalPos: ', modalPos)
-        // if (this._isMounted.current) {
-        // } else {
-        //     console.log('is mounted false')
-        //     this._isMounted.current = true
-        // }
-    }
-    //Destroyed the check list! don't use it! -tamir&naav- <3
-    // componentDidUpdate(prevProps) {
-    //     if (this.props !== prevProps) {
-    //         console.log('props change');
-    //     }
-    // }
+
     addClassName() {
         document.querySelector('.board').classList.add('max-screen');
     };
