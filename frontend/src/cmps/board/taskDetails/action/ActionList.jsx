@@ -13,7 +13,6 @@ import { MoveModal } from './actionModal/MoveModal'
 import { CopyModal } from './actionModal/CopyModal'
 import { withRouter } from "react-router";
 import { Upload } from '../../../Upload';
-import { GrClose } from 'react-icons/gr';
 
 
 
@@ -41,41 +40,46 @@ class _ActionList extends Component {
         if (!task) return <h1>Loading...</h1>
         return (
             <div className="menu-task flex column w-50 content-start ps-1">
-                <div className="details-action flex column w-100">
-                    <div className="close-details fam-2 font-1 bold cur-pointer mb-2" onClick={() => this.closeDetails()}>
-                        <GrClose/>
-                    </div>
+                <div className="details-action flex column w-100 ">
                     <label htmlFor="actions" className="font-m pb-3 ps-2 mb-1">ACTIONS</label>
                 </div>
                 <ul className="action-menu flex column w-100 clean-list font-m pad-0 fw-2">
+                    <div className="line1">
+                        <li className="label-wrap" onClick={() => this.props.openOverlay('label-wrap-modal')}>
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</div>
+                            <LabelModal toggleModal={() => { this.props.toggleModal() }} updateTaskLabel={this.props.updateTaskLabel}
+                                task={task} />
+                        </li>
+                        <li className="members-wrap">
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('members-wrap-modal') }}><FiUsers className="action-icon" />Members</div>
+                            <MembersModal isMemberChecked={this.props.isMemberChecked} onAddMemberToTask={this.props.onAddMemberToTask} toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
 
-                    <li className="label-wrap" onClick={() => this.props.openOverlay('label-wrap-modal')}>
-                        <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('label-wrap-modal') }}><MdLabelOutline />Labels</div>
-                        <LabelModal toggleModal={() => { this.props.toggleModal() }} updateTaskLabel={this.props.updateTaskLabel}
-                            task={task} />
-                    </li>
+                    </div>
+                    <div className="line2">
+                        <li className="duedate-wrap">
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClockCircle className="action-icon" />DueDate</div>
+                            <DueDateModal onSaveDueDate={this.props.onSaveDueDate} toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
 
-                    <ul className="members-wrap">
-                        <li className="btn-action w-100 " onClick={() => { this.props.toggleModal('members-wrap-modal') }}><FiUsers className="action-icon" />Members</li>
-                        <MembersModal isMemberChecked={this.props.isMemberChecked} onAddMemberToTask={this.props.onAddMemberToTask} toggleModal={() => { this.props.toggleModal() }} />
-                    </ul>
+                        <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare className="action-icon" />Checklist</li>
+                    </div>
+                    <div className="line3">
+                        <li onClick={(ev) => { ev.stopPropagation() }} className="no-modal-action"><Upload addImgToTask={this.props.addImgToTask} /></li>
+                        <li className="move-wrap">
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('move-wrap-modal') }}><BsArrowRight />Move</div>
+                            <MoveModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
+                    </div>
+                    <div className="line4">
+                        <li className="copy-wrap">
+                            <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy className="action-icon" />Copy</div>
+                            <CopyModal className="action-icon" group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
+                        </li>
+                        <li onClick={() => { this.props.onDeleteTask() }} className="btn-action btn-delete"><AiOutlineDelete className="action-icon" />Delete
+                        </li>
 
-                    <li className="duedate-wrap">
-                        <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('duedate-wrap-modal') }}><AiOutlineClockCircle className="action-icon" />DueDate</div>
-                        <DueDateModal onSaveDueDate={this.props.onSaveDueDate} toggleModal={() => { this.props.toggleModal() }} />
-                    </li>
-
-                    <li onClick={() => { this.props.onAddCheckList(task) }} className="btn-action"><AiOutlineCheckSquare className="action-icon" />Checklist</li>
-                    <li onClick={(ev) => { ev.stopPropagation() }} className="no-modal-action"><Upload addImgToTask={this.props.addImgToTask} /></li>
-                    <li className="move-wrap">
-                        <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('move-wrap-modal') }}><BsArrowRight />Move</div>
-                        <MoveModal group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
-                    </li>
-                    <li className="copy-wrap">
-                        <div className="btn-action w-100 " onClick={() => { this.props.toggleModal('copy-wrap-modal') }}><BiCopy className="action-icon" />Copy</div>
-                        <CopyModal className="action-icon" group={this.props.group} task={task} toggleModal={() => { this.props.toggleModal() }} />
-                    </li>
-                    <li onClick={() => { this.props.onDeleteTask() }} className="btn-action btn-delete"><AiOutlineDelete className="action-icon" />Delete</li>
+                    </div>
                 </ul>
             </div>
         )

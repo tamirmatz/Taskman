@@ -1,3 +1,7 @@
+.menu-task{
+    position: relative;
+    top: -1rem;
+}
 .details-overlay{
     position: relative;
     background-color: #e6e6e6;
@@ -183,6 +187,3 @@ li.btn-delete:hover{
     color: rgb(73, 30, 114)
 }
 
-.close-details{
-    align-self: flex-end;
-}
