@@ -123,6 +123,10 @@
     align-items: flex-end;
 }
 
+.baseline{
+    align-items: baseline;
+}
+
 .row{
     flex-direction: row;
 }
@@ -377,6 +381,20 @@
 }
 .w-90 {
     width: 95.5%;
+}
+.w-91{
+    width: 90%;
+}
+.w-80{
+    width: 80%;
+}
+
+.w-85{
+    width: 85%;
+}
+
+.w-95{
+    width: 80%;
 }
 .w-79{
     width: 80%;
@@ -720,4 +738,8 @@ a{
 
  .t-decor{
     text-decoration: underline;
+ }
+
+ .mar-l-0{
+    margin-inline-start: 0px ;
  }
