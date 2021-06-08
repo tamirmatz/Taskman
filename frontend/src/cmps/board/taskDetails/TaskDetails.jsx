@@ -411,7 +411,7 @@ class _TaskDetails extends Component {
                             <div className="desc-header center space-between flex row mb-1">
                                 <div className=" desc-header flex align-center mar-0 center-self row "> <FaRegCommentDots /><label>{isComments ? 'Comments' : 'Activities'}</label> </div>
                                 <span className="btn-del-chacklist font-m cur-pointer pad-0 mar-0"
-                                    onClick={this.toggleComments}
+                                    onClick={this.onToggleComments}
                                 >{!isComments ? 'Comments' : 'Activities'}</span>
                             </div>
                             <div className="new-comment flex center content-gap">
