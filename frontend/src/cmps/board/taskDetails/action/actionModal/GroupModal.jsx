@@ -14,10 +14,11 @@ class _GroupModal extends Component {
         this.setState({ group: this.props.group })
     }
 
-    changeGroupColor(color){
-        const copyBoard={...this.props.board}
-        const groupIdx=boardService.getGroupIdxById(copyBoard, this.state.group.id)
-        copyBoard.groups[groupIdx].color=color
+    changeGroupColor(color) {
+        const copyBoard = { ...this.props.board }
+        const groupIdx = boardService.getGroupIdxById(copyBoard, this.state.group.id)
+        copyBoard.groups[groupIdx].color = (copyBoard.groups[groupIdx].color === color) ? '' : color;
+        this.setState({group:copyBoard.groups[groupIdx]})
         this.props.update(copyBoard)
     }
 
@@ -32,7 +33,7 @@ class _GroupModal extends Component {
     removeList = (groupId) => {
         const copyBoard = { ...this.props.board }
         const groupIdx = boardService.getGroupIdxById(copyBoard, groupId)
-        copyBoard.groups.splice(groupIdx,1)
+        copyBoard.groups.splice(groupIdx, 1)
         this.props.update(copyBoard)
     }
     render() {
@@ -52,7 +53,10 @@ class _GroupModal extends Component {
                                 <li onClick={() => { this.AddTask() }} className="font-2 fam-1 pad-1 li-btn flex center">Add Task...</li>
                                 <li onClick={() => { this.removeList(groupId) }} className="font-2 fam-1 pad-1 flex center li-btn">Remove List...</li>
                                 <li className="group-colors font-2 fam-1 pad-1 flex center">
-                                   { this.props.board.labels.map(label=><div onClick={()=>{this.changeGroupColor(label.color)}} className="group-label" style={{backgroundColor:label.color}}></div>)    }
+                                    {this.props.board.labels.map(label => <div onClick={() => { this.changeGroupColor(label.color) }} className="group-label" style={{
+                                        backgroundColor: label.color, height: group.color === label.color ? '38px' : '32px',
+                                        width: group.color === label.color ? '38px' : '32px'
+                                    }}></div>)}
                                 </li>
                             </ul>
                         </ul>
