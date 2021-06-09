@@ -133,7 +133,7 @@ class _AppHeader extends Component {
 
                     </nav>
                 )}
-                {loggedInUser && (<NavLink to="/login" className="btn-board"><UserPreview user={loggedInUser} /></NavLink>)}
+                {loggedInUser && (<NavLink to={`/user/${loggedInUser._id}`} className="btn-board"><UserPreview user={loggedInUser} /></NavLink>)}
 
                 {(!loggedInUser && !loginPage) && (
                     <div className="home-menu" onClick={() => { this.toggleLoginPage() }}>

@@ -9,10 +9,15 @@ module.exports = {
     add
 }
 
-async function query() {
+async function query(filterByTitle = '') {
     try {
+        console.log('filterByTitle',filterByTitle);
         const collection = await dbService.getCollection('board')
         var boards = await collection.find().toArray()
+        if (filterByTitle[0] && filterByTitle!=={}) {
+            boards = boards.filter(board => board.title.toLowerCase().includes(filterByTitle[0].toLowerCase()))
+            console.log('here');
+        }        
         return boards
     } catch {
         console.log('err');
@@ -56,21 +61,21 @@ async function add(board, loggedInUser) {
 async function update(board, activity) {
     try {
         // board._id=ObjectId(board._id)
-        const boardToUpdate = JSON.parse(JSON.stringify(board))        
+        const boardToUpdate = JSON.parse(JSON.stringify(board))
         boardToUpdate._id = ObjectId(board._id)
         const collection = await dbService.getCollection('board')
         await collection.updateOne({ '_id': boardToUpdate._id },
-        {
-            $push: {
-                'activities': { $each: [activity], $position: 0 }
+            {
+                $push: {
+                    'activities': { $each: [activity], $position: 0 }
+                },
+                $set: boardToUpdate
             },
-            $set: boardToUpdate
-        },
-        
+
         );
-        
-        
-        console.log('boardToUpdate',boardToUpdate)
+
+
+        console.log('boardToUpdate', boardToUpdate)
         return boardToUpdate;
     } catch (err) {
         console.log('err');

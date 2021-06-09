@@ -2,7 +2,9 @@ const boardService = require('./board.service')
 const socketService = require('../../services/socket.service')
 async function getBoards(req, res) {
     try {
-        const boards = await boardService.query()
+        const filterByTitle = req.query
+        console.log('req',req);
+        const boards = await boardService.query(filterByTitle)
         res.send(boards)
     } catch {
         res.status(500).send({ err: 'Failed to get boards' })

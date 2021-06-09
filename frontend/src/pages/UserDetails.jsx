@@ -2,10 +2,23 @@ import React, { Component } from 'react'
 import { Upload } from '../cmps/Upload'
 import ProfileImg from '../assets/img/profilePic.jpg'
 import { userService } from '../services/userService.js'
+import { connect } from 'react-redux'
+import {
+  loadUsers,
+  removeUser,
+  login,
+  logout,
+  signup
+} from '../store/actions/userActions'
 
-export class UserDetails extends Component {
+class _UserDetails extends Component {
   state = {
     user: null
+  }
+  doLogout = () => {
+    this.props.logout()
+    this.props.history.push('/')
+    document.querySelector('.app-header').classList.remove('bg-header-board');
   }
   async componentDidMount() {
     const user = await userService.getById(this.props.match.params.userId)
@@ -32,6 +45,7 @@ export class UserDetails extends Component {
             <span className="user-fullname">{fullname}</span>
             <span className="user-username">@{username}</span>
             <span className="user-email">{email}</span>
+            {_id === this.props.loggedInUser._id && <button className="btn-logout" onClick={() => this.doLogout()}>Logout</button>}
           </div>
         </div>
         {/* <Upload /> */}
@@ -40,4 +54,18 @@ export class UserDetails extends Component {
     )
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    users: state.userModule.users,
+    loggedInUser: state.userModule.loggedInUser,
+    isLoading: state.systemModule.isLoading
+  }
+}
+const mapDispatchToProps = {
+  login,
+  logout,
+  signup,
+  removeUser,
+  loadUsers,
+}
+export const UserDetails = connect(mapStateToProps, mapDispatchToProps)(_UserDetails)

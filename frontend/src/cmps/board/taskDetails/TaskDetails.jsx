@@ -5,20 +5,14 @@ import { boardService } from '../../../services/boardService.js'
 import { remove, add, loadBoard, update, setBoard } from '../../../store/actions/boardsAction.js';
 import onClickOutside from "react-onclickoutside";
 import { BsCardChecklist } from 'react-icons/bs'
-import { GrTextAlignFull } from 'react-icons/gr'
+import { GrClose,GrTextAlignFull } from 'react-icons/gr'
 import { FaRegCommentDots } from 'react-icons/fa'
 import { utilService } from '../../../services/generalService/utilService.js';
 import { CheckList } from './CheckList';
 import { ActionList } from './action/ActionList';
 import { UserPreview } from '../UserPreview.jsx';
 import { RiDeleteBin6Line } from 'react-icons/ri'
-import { socketService } from '../../../services/generalService/socketService.js';
-import { GrClose } from 'react-icons/gr';
-
-
-
-// import {TaskTitle} from '../taskDetails/TaskTitle';
-
+import { socketService } from '../../../services/generalService/socketService.js'
 
 class _TaskDetails extends Component {
     state = {
@@ -26,23 +20,19 @@ class _TaskDetails extends Component {
         task: null,
         onFocus: false,
         overlay: false,
-        isComments: false,
+        isComments: true,
         commentInputVal: '',
         saveComment: false
     }
     elModalRef = React.createRef()
     _isMounted = React.createRef(false)
-
     componentDidMount() {
-        
-        console.log('asdsadas');
         const { boardId, taskId, groupId } = this.props.match.params;
         const board = { ...this.props.board };
         const group = boardService.getGroupById(board, groupId);
         const task = boardService.getTaskById(group, taskId);
         this.addClassName();
         this.props.loadBoard(boardId);
-        // this.props.loadUsers();
         document.body.classList.add('noscroll')
         this.setState({ ...this.state, group, task })
         socketService.setup()
@@ -52,38 +42,19 @@ class _TaskDetails extends Component {
         })
         socketService.emit('add member', boardId)
     }
-
     componentWillUnmount() {
         document.body.classList.remove('noscroll')
         socketService.off('updated board', this.props.setBoard)
         socketService.terminate()
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        
-        if (prevState !== this.state) {
-            
-            console.log('aa');
-        }
-        console.log(this.state);
-        
-        // console.log('prev state', prevState);
-        // console.log('state', this.state);
-        // 
-    }
-    toggleComments = () => {
-        // this.setState({...this.state ,isComments : !this.state.isComments})
-    }
-
     addClassName() {
         document.querySelector('.board').classList.add('max-screen');
     };
-
     createActivity = (txt = '') => {
         const { loggedInUser } = this.props
         const task = { ...this.state.task }
         const activityTxt = `${loggedInUser.fullname} ${txt}`
-
         return {
             id: utilService.makeId(),
             createdAt: Date.now(),
@@ -92,13 +63,12 @@ class _TaskDetails extends Component {
             task
         };
     }
-
-
-
+    onToggleComments = () => {
+        this.setState({ isComments: !this.state.isComments })
+    }
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
-
         this.setState(prevState => ({
             task: {
                 ...prevState.task,
@@ -106,11 +76,9 @@ class _TaskDetails extends Component {
             }
         }))
     }
-
     handleClickOutside = evt => {
         // ..handling code goes here...
     };
-
     updateTask = (txt) => {
         console.log('here', txt)
         if (!this.state.task.title) return;
@@ -120,7 +88,6 @@ class _TaskDetails extends Component {
         copyBoard.groups[groupIdx].tasks[taskIdx] = utilService.deepClone(this.state.task)
         this.props.update(copyBoard, this.createActivity(txt))
     }
-
     updateTaskLabel = (updateTask) => {
         console.log('prevLabel: ', this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
         const task = this.state.task;
@@ -128,19 +95,15 @@ class _TaskDetails extends Component {
         this.updateTask('updated label')
         console.log('Label: ', this.state.task.labelIds, 'updateLabel: ', updateTask.labelIds);
     }
-
     onSaveDueDate = (date) => {
         const { task } = this.state;
         task.dueDate = date
         this.updateTask('saved duedate')
     }
-
     updateTaskState = (task) => {
         this.setState({ task })
     }
-
     onAddCheckList = (task) => {
-
         if (!task.checklists) {
             task.checklists = [];
         }
@@ -149,19 +112,16 @@ class _TaskDetails extends Component {
             this.updateTask('added checklist')
         })
     }
-
     onRemoveCheckList = (checklistIdx) => {
         const { task } = { ...this.state }
         // const task = JSON.parse(JSON.stringify(this.state.task))
         task.checklists.splice(checklistIdx, 1)
         this.setState({ task }, () => { this.updateTask('removed a checklist') })
     }
-
     onUpdateChecklist = (checklist) => {
         this.state.task.checklists = this.state.task.checklists.map(cl => cl.id === checklist.id ? checklist : cl)
         this.setState({ task: { ...this.state.task } }, () => { this.updateTask('updated checklist') })
     }
-
     onDeleteTask = () => {
         const { boardId } = this.props.match.params;
         const copyboard = this.props.board
@@ -171,7 +131,6 @@ class _TaskDetails extends Component {
         this.props.update(copyboard)
         this.props.history.push(`/board/${boardId}`)
     }
-
     onAddMemberToTask = (addedMember) => {
         const { task } = this.state;
         let str = ''
@@ -187,15 +146,11 @@ class _TaskDetails extends Component {
         console.log('str', str)
         this.updateTask(str)
     }
-
-
     onSaveDueDate = (date) => {
         const { task } = this.state;
         task.dueDate = date
-
         this.updateTask('added a due date')
     }
-
     isMemberChecked = (memberCheck) => {
         const { task } = this.state;
         const memberIdx = task.members.findIndex(member => member._id === memberCheck._id)
@@ -204,14 +159,12 @@ class _TaskDetails extends Component {
         }
         else return ''
     }
-
     isDueDateDone = (val) => {
         const { task } = this.state;
         task.isDone = val
         let str = val ? 'marked task as done' : 'marked task as not completed'
         this.updateTask(str)
     }
-
     toggleModal = (className) => {
         const modals = document.querySelectorAll('.action-modal');
         const currModal = document.querySelector(`.${className}`);
@@ -226,29 +179,25 @@ class _TaskDetails extends Component {
     openOverlay = () => {
         this.setState({ ...this.state, overlay: 'details-overlay' });
     }
-
     addImgToTask = (imgUrl) => {
         const { task } = this.state;
         task.imgUrl = imgUrl
         this.updateTask('added image to task')
     }
-
-
     closeOverlay = (ev) => {
-        // 
         if (!ev.target.classList.contains('btn-action') && !ev.target.classList.contains('btn-act')) {
-            if (ev.target.offsetParent !== undefined && ev.target.offsetParent.classList[0] !== undefined && (ev.target.offsetParent.classList[0] === 'task-details' || ev.target.offsetParent.classList[0] === 'base-overlay')) {
+            if (ev.target.offsetParent !== undefined && ev.target.offsetParent.classList[0] !== undefined && ev.target.offsetParent.classList[0] === 'task-details') {
                 const modals = document.querySelectorAll('.action-modal');
                 if (modals) {
                     modals.forEach(
                         el => el.classList.add('d-none'));
                 }
                 this.setState({ ...this.state, overlay: '' });
-
             }
         }
+        // this.setState({ ...this.state, overlay: '' });
+        // if(ev.target.classList.contain('btn-action'))
     }
-
     onAddLabelTask = (labelId) => {
         const task = this.state;
         if (!task.labels) {
@@ -256,7 +205,6 @@ class _TaskDetails extends Component {
         }
         task.labels.push(labelId);
     }
-
     onSendComment = (txt) => {
         const { loggedInUser } = this.props
         const { task } = this.state;
@@ -264,13 +212,11 @@ class _TaskDetails extends Component {
         this.setState({ commentInputVal: '' })
         this.updateTask(`commented on "${task.title}"`)
     }
-
     onRemoveComment = (commentIdx) => {
         const { task } = this.state;
         task.comments.splice(commentIdx, 1)
         this.updateTask(`removed a comment from "${task.title}"`)
     }
-
     handelCommentChange = ({ target }) => {
         console.log(target.value.length);
         if (target.value.length !== undefined && target.value.length > 0) {
@@ -286,7 +232,21 @@ class _TaskDetails extends Component {
         const value = target.value
         this.setState({ commentInputVal: value })
     }
-
+    moveTask = (moveTo) => {
+        if (moveTo !== this.state.group.id) {
+            const copyBoard = { ...this.props.board }
+            copyBoard.groups[boardService.getGroupIdxById(copyBoard, this.state.group.id)].tasks.splice(
+                boardService.getTaskIdxById(this.state.group, this.state.task.id), 1)
+            copyBoard.groups[moveTo].tasks.push(this.state.task)
+            this.setState({ group: copyBoard.groups[moveTo] })
+            this.props.update(copyBoard)
+        }
+        // this.props.history.push(`/board/${copyBoard._id}`)
+    }
+        
+        closeDetails = () => {
+            this.props.history.push(`/board/${this.props.board._id}`)
+        }
     moveTask = (moveTo) => {
         if (moveTo !== this.state.group.id) {
             const copyBoard = { ...this.props.board }
@@ -425,9 +385,7 @@ class _TaskDetails extends Component {
                             <div className="desc-header center space-between flex row mb-1">
                                 <div className=" desc-header flex align-center mar-0 center-self row "> <FaRegCommentDots /><label>{isComments ? 'Comments' : 'Activities'}</label> </div>
                                 <span className="btn-del-chacklist font-m cur-pointer pad-0 mar-0"
-                                    onClick={
-                                        this.toggleComments
-                                    }
+                                    onClick={this.onToggleComments}
                                 >{!isComments ? 'Comments' : 'Activities'}</span>
                             </div>
                             <div className="new-comment flex center content-gap">
