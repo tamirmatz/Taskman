@@ -68,7 +68,7 @@ class _Dashboard extends Component {
                         <p>Tasks:{tasks.length}</p>
                     </li>
                     <li className="flex center">
-                    <p>Complete Task:{6}</p>
+                    <p>Complete Task:{` 72%`}</p>
                     </li>
                 </ul>
             </div>

@@ -98,7 +98,6 @@ li.btn-board{
     .active-list{
         overflow-y: auto;
         padding-bottom: 8px;
-        height: 85%;
     }
 
     .menu-header{
@@ -135,4 +134,19 @@ body.activities-open .board-menu {
     .board-navbar{
         margin-bottom: 4px;
     }
+}
+
+.bg-list-wrap{
+    height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.board-bg-list{
+    height: 500%;
+    // overflow-y: scroll;
+}
+
+.bg-board{
+    width: 300px;
+    height: 900px;
 }

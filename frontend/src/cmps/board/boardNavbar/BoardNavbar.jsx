@@ -227,14 +227,16 @@ class _BoardNavbar extends Component {
 
                             }
                         </ul>
-                        <ul className="flex column align-center gap-1">
-                            {
-                                !this.state.isActivities && this.state.backgrounds.map((background) => {
-                                    return <li onClick={() => { this.onChangeBg(background) }} className={"miniBoard cur-pointer flex center content-center"} style={{ backgroundImage: "url(" + background + ")" }}>
+                        <div className="bg-list-wrap">
+                            <ul className="board-bg-list flex column align-center gap-1">
+                                {
+                                    !this.state.isActivities && this.state.backgrounds.map((background) => {
+                                        return <li onClick={() => { this.onChangeBg(background) }} className={"miniBoard cur-pointer flex center content-center"} style={{ backgroundImage: "url(" + background + ")" }}>
 
-                                    </li>
-                                })
-                            }</ul>
+                                        </li>
+                                    })
+                                }</ul>
+                        </div>
                     </div>
                 </ul>
             </nav>
