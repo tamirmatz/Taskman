@@ -29,7 +29,7 @@ class _BoardMembersModal extends Component {
                         <span className="cur-pointer fam-1 font-m bold" onClick={() => { this.props.toggleModal('board-members-wrap-modal') }}><AiOutlineClose /></span>
                     </div>
                     <div className="action-content">
-                        <ul>
+                        <ul className="member-modal-content">
                             {members.map(member => {
                                 return <li key={member._id} onClick={() => { this.props.onAddMemberToBoard(member) }} className="flex space-between member-modal center">
                                     <div className="flex center gap-xs">

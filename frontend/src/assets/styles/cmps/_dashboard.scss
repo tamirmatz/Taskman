@@ -5,9 +5,15 @@
     background: rgba(175, 175, 175, 0.466);
     font-size: 5rem;
     color: #222;
+    border-radius: 6px;
 }
 
 
 canvas{
     width: 400px;
+}
+
+.dashboard-header{
+    background: rgb(255, 255, 255);
+    height: 3.5rem;
 }

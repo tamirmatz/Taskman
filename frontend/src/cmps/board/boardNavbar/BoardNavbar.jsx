@@ -120,8 +120,8 @@ class _BoardNavbar extends Component {
                         {displayBoard === 'board' &&
                             <div className="board-option">
                                 <li className="btn-board btn-board-navbar bg-board-btn flex center space-evenly cur-poiner"
-                                    onClick={() => { this.props.changeDisplay('dashboard')}}>
-                                    <span className="ps-xxs flex center">< BiBarChartAlt2/></span>
+                                    onClick={() => { this.props.changeDisplay('dashboard') }}>
+                                    <span className="ps-xxs flex center">< BiBarChartAlt2 /></span>
                                 Dashboard
                                 </li>
                             </div>
@@ -195,25 +195,27 @@ class _BoardNavbar extends Component {
                     </ul>
                 </ul>
                 <ul className="right-bar flex center">
-                    <li className="btn-board btn-board-navbar bg-board-btn" onClick={() => this.props.removeBoard()}>Delete Board</li>
+                    <li className="btn-board btn-board-navbar bg-board-btn btn-nav-delete" onClick={() => this.props.removeBoard()}>Delete Board</li>
                     <li onClick={() => { this.props.onToggleActivities() }} className="btn-board btn-board-navbar bg-board-btn ">...
                     </li>
                     <div className="board-menu flex column">
-                        <div className="flex mb-06 space-between">
-                            <h1 className="center-self">Menu</h1>
-                            <button className="menu-btn" onClick={this.toggleActivities}>{this.state.isActivities ? 'Backgrounds' : 'Activities'}</button>
+                        <div className="header-side-bar flex mb-06 space-between">
+                            <h1 className="center-self menu-header">Menu</h1>
+                            <div className="menu-header menu-btn  mb-06 flex center content-center" onClick={this.toggleActivities}>{this.state.isActivities ? 'Backgrounds' : 'Activities'}</div>
                         </div>
 
-                        <ul>
+                        <ul className="active-list">
                             {
                                 this.state.isActivities && board.activities && board.activities.map(activity => {
                                     if (!activity) return
-                                    return <li key={activity.id} className="full-activty flex column">
-                                        <div className="flex space-between">
-                                            <div className="content-gap flex center">
-                                                <UserPreview user={activity.byMember} />
-                                                <div className="commenter-name">{activity.byMember.fullname}</div>
-                                                <small>{utilService.timeAgo(activity.createdAt)}</small>
+                                    return <li key={activity.id} className="full-activty flex column w-100">
+                                        <div className="flex baseline w-100 mb-03">
+                                            <div className="flex center w-100 space-between">
+                                                <div className="w-100 flex center">
+                                                    <UserPreview user={activity.byMember} />
+                                                    <div className="commenter-name ps-xs c-info bold">{activity.byMember.fullname}</div>
+                                                </div>
+                                                <small className="w-20 t-decor">{utilService.timeAgo(activity.createdAt)}</small>
                                             </div>
                                         </div>
                                         <div className="comment-gap">

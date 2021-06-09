@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut  } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import { utilService } from '../../services/generalService/utilService'
 
@@ -50,7 +50,7 @@ class _ChartLabelsTasks extends Component {
         const backgroundColorDashboard = [];
         const backgroundColorBorder = [];
 
-        labels.forEach( label => {
+        labels.forEach(label => {
             backgroundColorDashboard.push(label.color);
         })
         const data = {
@@ -70,7 +70,9 @@ class _ChartLabelsTasks extends Component {
         };
         return (
             <div className="category-chart">
-                <Pie data={data} />
+                <Doughnut  data={data} width={70} height={50} options={{
+                    maintainAspectRatio: false
+                }} />
             </div>
         )
     }

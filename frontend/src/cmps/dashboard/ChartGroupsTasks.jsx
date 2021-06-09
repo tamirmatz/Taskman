@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { connect } from 'react-redux';
-import {utilService} from '../../services/generalService/utilService'
+import { utilService } from '../../services/generalService/utilService';
+
 
 // import { add, loadBoard, update, setBoard, remove } from '../store/actions/boardsAction.js';
 
@@ -39,7 +40,7 @@ class _ChartGroupsTasks extends Component {
         const backgroundColor = [];
         const borderColor = [];
 
-        utilService.randColor(Object.keys(mapGroupTask).length).forEach( color => {
+        utilService.randColor(Object.keys(mapGroupTask).length).forEach(color => {
             backgroundColor.push(color[0]);
             borderColor.push(color[1]);
         });
@@ -55,9 +56,17 @@ class _ChartGroupsTasks extends Component {
                 },
             ],
         };
+        const option = {
+            maintainAspectRatio: false,
+            legend: {
+                display: false,
+            },
+        }
         return (
             <div className="category-chart">
-                <Pie data={data} />
+                <Pie data={data} width={70} height={50}
+                    options={option}
+                />
             </div>
         )
     }

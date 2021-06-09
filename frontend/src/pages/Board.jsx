@@ -144,7 +144,7 @@ class _Board extends Component {
             >
                 <div
                     className="board flex column  animate__animated animate__fadeInRight ">
-                    <div className="board-screen" onClick={this.onToggleActivities}></div>
+                    <div className="board-screen " onClick={this.onToggleActivities}></div>
                     <BoardNavbar
                         favBoard={this.favBoard}
                         removeBoard={this.removeBoard}

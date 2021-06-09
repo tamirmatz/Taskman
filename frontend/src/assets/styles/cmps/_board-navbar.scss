@@ -59,3 +59,75 @@ li.btn-board{
     border-radius: 3px;
     cursor: pointer;
 }
+
+
+
+.board-menu{
+    color: #555;
+    position: fixed;
+    flex-direction: column;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 330px;
+    padding: 20px 4px 20px 8px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 9px 10px 23px 0px rgba(0, 0, 0, 0.92);
+    transform: translateX(100%);
+    transition: transform .6s;
+    z-index: 1;
+    overflow-y: hide;
+    border-radius: 3px;
+    small{
+        font-size: .75rem;
+        margin-left: 4px;
+    }
+    
+    .full-activty{
+        margin-bottom: 15px;
+    }
+    
+    h1{
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .header-side-bar{
+        border-bottom: 1px solid #333;
+    }
+    .active-list{
+        overflow-y: auto;
+        padding-bottom: 8px;
+        height: 85%;
+    }
+
+    .menu-header{
+        margin-inline-end: 8px;
+        padding: 4px 6px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .menu-btn{
+        font-weight: 400;
+        border: 1px solid #222;
+        padding: 6px 8px;
+    }
+
+    .menu-btn:hover{
+        border: 1px solid #3498db;
+    }
+
+
+}
+
+.btn-nav-delete{
+    transition: 0.3s;
+}
+.btn-nav-delete:hover{
+    background: rgb(252, 59, 59);
+}
+
+body.activities-open .board-menu {
+    transform: translateX(0);
+}
