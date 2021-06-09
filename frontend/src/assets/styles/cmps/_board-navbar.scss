@@ -125,11 +125,12 @@ li.btn-board{
     transition: 0.3s;
 }
 .btn-nav-delete:hover{
-    background: rgb(252, 59, 59);
+    background: #eb5a46;
 }
 
 body.activities-open .board-menu {
     transform: translateX(0);
+}
 @media only screen and (max-width: 700px) {
     .board-navbar{
         margin-bottom: 4px;
